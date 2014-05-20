@@ -1,0 +1,108 @@
+2014/05/12 14:34:08 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'erp_started.tbl_migration' doesn't exist. The SQL statement executed was: SHOW FULL COLUMNS FROM `tbl_migration`.
+2014/05/20 16:30:09 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[HY000]: General error: 1005 Can't create table 'erp_started.#sql-860_af' (errno: 150). The SQL statement executed was: ALTER TABLE `tbl_detalle_compra` ADD CONSTRAINT `fk_detalle_producto` FOREIGN KEY (`producto_id`) REFERENCES `tbl_producto` (`producto_id`) ON DELETE CASCADE ON UPDATE RESTRICT.
+2014/05/20 16:30:09 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[HY000]: General error: 1005 Can't create table 'erp_started.#sql-860_af' (errno: 150). The SQL statement executed was: ALTER TABLE `tbl_detalle_compra` ADD CONSTRAINT `fk_detalle_producto` FOREIGN KEY (`producto_id`) REFERENCES `tbl_producto` (`producto_id`) ON DELETE CASCADE ON UPDATE RESTRICT' in C:\xampp\htdocs\yii\framework\db\CDbCommand.php:357
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\db\CDbCommand.php(1432): CDbCommand->execute()
+#1 C:\xampp\htdocs\yii\framework\db\CDbMigration.php(343): CDbCommand->addForeignKey('fk_detalle_prod...', 'tbl_detalle_com...', 'producto_id', 'tbl_producto', 'producto_id', 'CASCADE', 'RESTRICT')
+#2 C:\xampp\htdocs\ERP_started\protected\migrations\m140520_180921_create_detalle_compra_table.php(21): CDbMigration->addForeignKey('fk_detalle_prod...', 'tbl_detalle_com...', 'producto_id', 'tbl_producto', 'producto_id', 'CASCADE', 'RESTRICT')
+#3 C:\xampp\htdocs\yii\framework\cli\commands\MigrateCommand.php(385): m140520_180921_create_detalle_compra_table->up()
+#4 C:\xampp\htdocs\yii\framework\cli\commands\MigrateCommand.php(109): MigrateCommand->migrateUp('m140520_180921_...')
+#5 [internal function]: MigrateCommand->actionUp(Array)
+#6 C:\xampp\htdocs\yii\framework\console\CConsoleCommand.php(172): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#7 C:\xampp\htdocs\yii\framework\console\CConsoleCommandRunner.php(67): CConsoleCommand->run(Array)
+#8 C:\xampp\htdocs\yii\framework\console\CConsoleApplication.php(91): CConsoleCommandRunner->run(Array)
+#9 C:\xampp\htdocs\yii\framework\base\CApplication.php(169): CConsoleApplication->processRequest()
+#10 C:\xampp\htdocs\yii\framework\yiic.php(33): CApplication->run()
+#11 C:\xampp\htdocs\ERP_started\protected\yiic.php(7): require_once('C:\xampp\htdocs...')
+#12 {main}
+---
+2014/05/20 16:32:58 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23000]: Integrity constraint violation: 1217 Cannot delete or update a parent row: a foreign key constraint fails. The SQL statement executed was: DROP TABLE `tbl_compra`.
+2014/05/20 16:32:58 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[23000]: Integrity constraint violation: 1217 Cannot delete or update a parent row: a foreign key constraint fails. The SQL statement executed was: DROP TABLE `tbl_compra`' in C:\xampp\htdocs\yii\framework\db\CDbCommand.php:357
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\db\CDbCommand.php(1344): CDbCommand->execute()
+#1 C:\xampp\htdocs\yii\framework\db\CDbMigration.php(253): CDbCommand->dropTable('tbl_compra')
+#2 C:\xampp\htdocs\ERP_started\protected\migrations\m140520_165648_create_compras_table.php(30): CDbMigration->dropTable('tbl_compra')
+#3 C:\xampp\htdocs\yii\framework\cli\commands\MigrateCommand.php(410): m140520_165648_create_compras_table->down()
+#4 C:\xampp\htdocs\yii\framework\cli\commands\MigrateCommand.php(145): MigrateCommand->migrateDown('m140520_165648_...')
+#5 [internal function]: MigrateCommand->actionDown(Array)
+#6 C:\xampp\htdocs\yii\framework\console\CConsoleCommand.php(172): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#7 C:\xampp\htdocs\yii\framework\console\CConsoleCommandRunner.php(67): CConsoleCommand->run(Array)
+#8 C:\xampp\htdocs\yii\framework\console\CConsoleApplication.php(91): CConsoleCommandRunner->run(Array)
+#9 C:\xampp\htdocs\yii\framework\base\CApplication.php(169): CConsoleApplication->processRequest()
+#10 C:\xampp\htdocs\yii\framework\yiic.php(33): CApplication->run()
+#11 C:\xampp\htdocs\ERP_started\protected\yiic.php(7): require_once('C:\xampp\htdocs...')
+#12 {main}
+---
+2014/05/20 16:38:07 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23000]: Integrity constraint violation: 1217 Cannot delete or update a parent row: a foreign key constraint fails. The SQL statement executed was: DROP TABLE `tbl_compra`.
+2014/05/20 16:38:07 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[23000]: Integrity constraint violation: 1217 Cannot delete or update a parent row: a foreign key constraint fails. The SQL statement executed was: DROP TABLE `tbl_compra`' in C:\xampp\htdocs\yii\framework\db\CDbCommand.php:357
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\db\CDbCommand.php(1344): CDbCommand->execute()
+#1 C:\xampp\htdocs\yii\framework\db\CDbMigration.php(253): CDbCommand->dropTable('tbl_compra')
+#2 C:\xampp\htdocs\ERP_started\protected\migrations\m140520_165648_create_compras_table.php(30): CDbMigration->dropTable('tbl_compra')
+#3 C:\xampp\htdocs\yii\framework\cli\commands\MigrateCommand.php(410): m140520_165648_create_compras_table->down()
+#4 C:\xampp\htdocs\yii\framework\cli\commands\MigrateCommand.php(145): MigrateCommand->migrateDown('m140520_165648_...')
+#5 [internal function]: MigrateCommand->actionDown(Array)
+#6 C:\xampp\htdocs\yii\framework\console\CConsoleCommand.php(172): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#7 C:\xampp\htdocs\yii\framework\console\CConsoleCommandRunner.php(67): CConsoleCommand->run(Array)
+#8 C:\xampp\htdocs\yii\framework\console\CConsoleApplication.php(91): CConsoleCommandRunner->run(Array)
+#9 C:\xampp\htdocs\yii\framework\base\CApplication.php(169): CConsoleApplication->processRequest()
+#10 C:\xampp\htdocs\yii\framework\yiic.php(33): CApplication->run()
+#11 C:\xampp\htdocs\ERP_started\protected\yiic.php(7): require_once('C:\xampp\htdocs...')
+#12 {main}
+---
+2014/05/20 16:39:54 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42S01]: Base table or view already exists: 1050 Table 'tbl_detalle_compra' already exists. The SQL statement executed was: CREATE TABLE `tbl_detalle_compra` (
+	`id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	`compra_id` int(11),
+	`producto_id` int(11),
+	`cantidad` int(11),
+	`precio_unitario` decimal(10,2),
+	`subtotal` decimal(10,2),
+	`impuesto` decimal(10,2),
+	`total` decimal(10,2),
+	`lote` varchar(50),
+	`fecha_vencimiento` DATE
+) ENGINE=InnoDB.
+2014/05/20 16:39:54 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42S01]: Base table or view already exists: 1050 Table 'tbl_detalle_compra' already exists. The SQL statement executed was: CREATE TABLE `tbl_detalle_compra` (
+	`id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	`compra_id` int(11),
+	`producto_id` int(11),
+	`cantidad` int(11),
+	`precio_unitario` decimal(10,2),
+	`subtotal` decimal(10,2),
+	`impuesto` decimal(10,2),
+	`total` decimal(10,2),
+	`lote` varchar(50),
+	`fecha_vencimiento` DATE
+) ENGINE=InnoDB' in C:\xampp\htdocs\yii\framework\db\CDbCommand.php:357
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\db\CDbCommand.php(1321): CDbCommand->execute()
+#1 C:\xampp\htdocs\yii\framework\db\CDbMigration.php(228): CDbCommand->createTable('tbl_detalle_com...', Array, 'ENGINE=InnoDB')
+#2 C:\xampp\htdocs\ERP_started\protected\migrations\m140520_180921_create_detalle_compra_table.php(19): CDbMigration->createTable('tbl_detalle_com...', Array, 'ENGINE=InnoDB')
+#3 C:\xampp\htdocs\yii\framework\cli\commands\MigrateCommand.php(385): m140520_180921_create_detalle_compra_table->up()
+#4 C:\xampp\htdocs\yii\framework\cli\commands\MigrateCommand.php(109): MigrateCommand->migrateUp('m140520_180921_...')
+#5 [internal function]: MigrateCommand->actionUp(Array)
+#6 C:\xampp\htdocs\yii\framework\console\CConsoleCommand.php(172): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#7 C:\xampp\htdocs\yii\framework\console\CConsoleCommandRunner.php(67): CConsoleCommand->run(Array)
+#8 C:\xampp\htdocs\yii\framework\console\CConsoleApplication.php(91): CConsoleCommandRunner->run(Array)
+#9 C:\xampp\htdocs\yii\framework\base\CApplication.php(169): CConsoleApplication->processRequest()
+#10 C:\xampp\htdocs\yii\framework\yiic.php(33): CApplication->run()
+#11 C:\xampp\htdocs\ERP_started\protected\yiic.php(7): require_once('C:\xampp\htdocs...')
+#12 {main}
+---
+2014/05/20 16:41:33 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23000]: Integrity constraint violation: 1217 Cannot delete or update a parent row: a foreign key constraint fails. The SQL statement executed was: DROP TABLE `tbl_compra`.
+2014/05/20 16:41:33 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[23000]: Integrity constraint violation: 1217 Cannot delete or update a parent row: a foreign key constraint fails. The SQL statement executed was: DROP TABLE `tbl_compra`' in C:\xampp\htdocs\yii\framework\db\CDbCommand.php:357
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\db\CDbCommand.php(1344): CDbCommand->execute()
+#1 C:\xampp\htdocs\yii\framework\db\CDbMigration.php(253): CDbCommand->dropTable('tbl_compra')
+#2 C:\xampp\htdocs\ERP_started\protected\migrations\m140520_165648_create_compras_table.php(30): CDbMigration->dropTable('tbl_compra')
+#3 C:\xampp\htdocs\yii\framework\cli\commands\MigrateCommand.php(410): m140520_165648_create_compras_table->down()
+#4 C:\xampp\htdocs\yii\framework\cli\commands\MigrateCommand.php(145): MigrateCommand->migrateDown('m140520_165648_...')
+#5 [internal function]: MigrateCommand->actionDown(Array)
+#6 C:\xampp\htdocs\yii\framework\console\CConsoleCommand.php(172): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#7 C:\xampp\htdocs\yii\framework\console\CConsoleCommandRunner.php(67): CConsoleCommand->run(Array)
+#8 C:\xampp\htdocs\yii\framework\console\CConsoleApplication.php(91): CConsoleCommandRunner->run(Array)
+#9 C:\xampp\htdocs\yii\framework\base\CApplication.php(169): CConsoleApplication->processRequest()
+#10 C:\xampp\htdocs\yii\framework\yiic.php(33): CApplication->run()
+#11 C:\xampp\htdocs\ERP_started\protected\yiic.php(7): require_once('C:\xampp\htdocs...')
+#12 {main}
+---
