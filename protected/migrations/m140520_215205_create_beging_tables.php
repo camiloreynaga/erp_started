@@ -83,7 +83,7 @@ class m140520_215205_create_beging_tables extends CDbMigration
                 'update_user_id'=>'int(11) DEFAULT NULL',
                     ),'ENGINE=InnoDB');
             //Tabla caracteristica por producto
-             $this->createTable('tbl_producto_caracteristica', array(
+             $this->createTable('tbl_caracteristica_producto', array(
                  'id'=>'pk',
                  'producto_id'=>'int (11) NOT NULL',
                  'caracteristica_id'=>'int(11) NOT NULL',
@@ -99,9 +99,9 @@ class m140520_215205_create_beging_tables extends CDbMigration
              //producto tiene un fabricante
              $this->addForeignKey('fk_fabricante_producto', 'tbl_producto', 'fabricante_id', 'tbl_fabricante', 'id', 'CASCADE', 'RESTRICT');
              //caracteristica por producto
-             $this->addForeignKey('fk_caracteristica_producto', 'tbl_producto_caracteristica', 'caracteristica_id','tbl_caracteristica', 'id', 'CASCADE', 'RESTRICT');
+             $this->addForeignKey('fk_caracteristica_producto', 'tbl_caracteristica_producto', 'caracteristica_id','tbl_caracteristica', 'id', 'CASCADE', 'RESTRICT');
              //producto por caracteristica 
-             $this->addForeignKey('fk_producto_caracteristica', 'tbl_producto_caracteristica', 'producto_id', 'tbl_producto', 'id','CASCADE', 'RESTRICT');
+             $this->addForeignKey('fk_producto_caracteristica', 'tbl_caracteristica_producto', 'producto_id', 'tbl_producto', 'id','CASCADE', 'RESTRICT');
              
 	}
 
@@ -110,15 +110,15 @@ class m140520_215205_create_beging_tables extends CDbMigration
             $this->dropForeignKey('fk_presentacion_producto', 'tbl_producto');
             $this->dropForeignKey('fk_tipo_producto', 'tbl_producto');
             $this->dropForeignKey('fk_fabricante_producto','tbl_producto');
-            $this->dropForeignKey('fk_caracteristica_producto', 'tbl_producto_caracteristica');
-            $this->dropForeignKey('fk_producto_caracteristica', 'tbl_producto_caracteristica');
+            $this->dropForeignKey('fk_caracteristica_producto', 'tbl_caracteristica_producto');
+            $this->dropForeignKey('fk_producto_caracteristica', 'tbl_caracteristica_producto');
             
             $this->dropTable('tbl_presentacion');
             $this->dropTable('tbl_tipo_producto');
             $this->dropTable('tbl_fabricante');
             $this->dropTable('tbl_caracteristica');
             $this->dropTable('tbl_producto');
-            $this->dropTable('tbl_producto_caracteristica');
+            $this->dropTable('tbl_caracteristica_producto');
 	}
 	
 }

@@ -20,7 +20,7 @@ return array(
 			'connectionString' => 'mysql:host=localhost;dbname=erp_started',
 			'emulatePrepare' => true,
 			'username' => 'root',
-			'password' => 'adonde',
+			'password' => 'toor',
 			'charset' => 'utf8',
 		),
 		
