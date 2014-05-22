@@ -19,8 +19,8 @@ return array(
 		'db'=>array(
 			'connectionString' => 'mysql:host=localhost;dbname=erp_started',
 			'emulatePrepare' => true,
-			'username' => 'root',
-			'password' => 'toor',
+			'username' => 'admkiwi',
+			'password' => 'adonde',
 			'charset' => 'utf8',
 		),
 		
