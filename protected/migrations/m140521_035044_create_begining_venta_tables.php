@@ -31,24 +31,7 @@ class m140521_035044_create_begining_venta_tables extends CDbMigration
                 'update_time'=>'datetime DEFAULT NULL',
                 'update_user_id'=>'int(11) DEFAULT NULL',
             ),'ENGINE=InnoDB');
-            //tabla empleado
             
-            $this->createTable('tbl_empleado',array(
-                'id'=>'pk',
-                'nombre'=>'varchar(50) NOT NULL',
-                'ap_paterno'=>'varchar(50) NOT NULL',
-                'ap_materno'=>'varchar(50) DEFAULT NULL',
-                'doc_identidad'=>'varchar(10) NOT NULL',
-                'direccion'=>'varchar(100) DEFAULT NULL',
-                'telefono'=>'varchar(50)',
-                'movil'=>'varchar(50)',
-                'fecha_nacimiento'=>'date',
-                //
-                'create_time'=>'datetime DEFAULT NULL',
-                'create_user_id'=> 'int(11) DEFAULT NULL',
-                'update_time'=>'datetime DEFAULT NULL',
-                'update_user_id'=>'int(11) DEFAULT NULL',
-            ) ,'ENGINE=InnoDB');
             
             // tabla venta
             $this->createTable('tbl_venta',array(
@@ -96,19 +79,7 @@ class m140521_035044_create_begining_venta_tables extends CDbMigration
             ), 'ENGINE=InnoDB');
             
             
-           //tabla usuario
-           $this->createTable('tbl_usuario',array(
-                'id'=>'pk',
-                'username' => 'string NOT NULL',
-                'email' => 'string ',
-                'password' => 'string NOT NULL',
-                'empleado_id'=>'int(11) NOT NULL',
-                'last_login_time' => 'datetime DEFAULT NULL',
-                'create_time' => 'datetime DEFAULT NULL',
-                'create_user_id' => 'int(11) DEFAULT NULL',
-                'update_time' => 'datetime DEFAULT NULL',
-                'update_user_id' => 'int(11) DEFAULT NULL',
-           ), 'ENGINE=InnoDB');
+           
 	
            //relaciones
            
@@ -120,9 +91,7 @@ class m140521_035044_create_begining_venta_tables extends CDbMigration
             $this->addForeignKey('fk_detalle_producto_venta','tbl_detalle_venta','producto_id','tbl_producto', 'id', 'CASCADE', 'RESTRICT');
             //cuenta por pagar con compra
             $this->addForeignKey('fk_cuenta_cobrar_venta', 'tbl_cuenta_cobrar', 'venta_id', 'tbl_venta', 'id','CASCADE', 'RESTRICT');
-            //compra con comprobante
-            $this->addForeignKey('fk_venta_comprobante', 'tbl_comprobante', 'compra_venta_id', 'tbl_venta', 'id', 'CASCADE', 'RESTRICT');
-           
+            
         }
         
         
@@ -133,14 +102,14 @@ class m140521_035044_create_begining_venta_tables extends CDbMigration
             $this->dropForeignKey('fk_detalle_venta', 'tbl_detalle_venta');
             $this->dropForeignKey('fk_detalle_producto_venta', 'tbl_detalle_venta');
             $this->dropForeignKey('fk_cuenta_cobrar_venta', 'tbl_cuenta_cobrar');
-            $this->dropForeignKey('fk_venta_comprobante', 'tbl_comprobante');
+            
             
             $this->dropTable('tbl_cliente');
-            $this->dropTable('tbl_empleado');
+           
             $this->dropTable('tbl_venta');
             $this->dropTable('tbl_detalle_venta');
             $this->dropTable('tbl_cuenta_cobrar');
-            $this->dropTable('tbl_usuario');
+            
 	}
 	
 }

@@ -59,6 +59,8 @@ class m140521_051336_create_begining_almacen_tables extends CDbMigration
                 'update_user_id' => 'int(11) DEFAULT NULL',
             ),'ENGINE=InnoDB');
             
+            
+            
             //relaciones
             
             $this->addForeignKey('fk_motivo_movimiento','tbl_movimiento_almacen', 'motivo_mov_id', 'tbl_motivo_movimiento','id', 'CASCADE', 'RESTRICT');
