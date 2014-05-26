@@ -79,10 +79,6 @@ class m140520_224733_create_begining_compras_tables extends CDbMigration
             ),'ENGINE=InnoDB');
             
             
-            
-            
-            
-            
             // relaciones 
             //proveedor con compra
             $this->addForeignKey('fk_proveedor_compra', 'tbl_compra', 'proveedor_id', 'tbl_proveedor', 'id' ,'CASCADE' , 'RESTRICT');

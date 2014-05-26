@@ -143,3 +143,53 @@ Stack trace:
 #13 C:\xampp\htdocs\ERP_started\protected\yiic.php(7): require_once('C:\xampp\htdocs...')
 #14 {main}
 ---
+2014/05/26 13:59:47 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23000]: Integrity constraint violation: 1217 Cannot delete or update a parent row: a foreign key constraint fails. The SQL statement executed was: DROP TABLE `tbl_unidad_medida`.
+2014/05/26 14:04:34 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[HY000]: General error: 1025 Error on rename of '.\erp_started\tbl_producto' to '.\erp_started\#sql2-860-23' (errno: 152). The SQL statement executed was: ALTER TABLE `tbl_producto` DROP FOREIGN KEY `fk_presentacion_producto`.
+2014/05/26 14:06:05 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[HY000]: General error: 1025 Error on rename of '.\erp_started\tbl_producto' to '.\erp_started\#sql2-860-2c' (errno: 152). The SQL statement executed was: ALTER TABLE `tbl_producto` DROP FOREIGN KEY `fk_presentacion_producto`.
+2014/05/26 14:06:38 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[HY000]: General error: 1025 Error on rename of '.\erp_started\tbl_producto' to '.\erp_started\#sql2-860-2f' (errno: 152). The SQL statement executed was: ALTER TABLE `tbl_producto` DROP FOREIGN KEY `fk_presentacion_producto`.
+2014/05/26 14:08:34 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[HY000]: General error: 1025 Error on rename of '.\erp_started\tbl_producto' to '.\erp_started\#sql2-860-33' (errno: 152). The SQL statement executed was: ALTER TABLE `tbl_producto` DROP FOREIGN KEY `fk_presentacion_producto`.
+2014/05/26 14:08:55 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[HY000]: General error: 1025 Error on rename of '.\erp_started\tbl_producto' to '.\erp_started\#sql2-860-34' (errno: 152). The SQL statement executed was: ALTER TABLE `tbl_producto` DROP FOREIGN KEY `fk_presentacion_producto`.
+2014/05/26 14:09:43 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42S02]: Base table or view not found: 1051 Unknown table 'tbl_presentacion'. The SQL statement executed was: DROP TABLE `tbl_presentacion`.
+2014/05/26 14:10:22 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23000]: Integrity constraint violation: 1217 Cannot delete or update a parent row: a foreign key constraint fails. The SQL statement executed was: DROP TABLE `tbl_unidad_medida`.
+2014/05/26 14:20:39 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DEFAUL NULL,
+	`licencia_conducir` varchar(50) DEFAULT NULL,
+	`estado_gr` smallin' at line 12. The SQL statement executed was: CREATE TABLE `tbl_guia_remision` (
+	`id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	`remitente` varchar(50),
+	`serie` varchar(5),
+	`numero` varchar(10),
+	`cliente_proveedor_id` int(11),
+	`motivo_traslado` varchar(50),
+	`fecha_inicio_traslado` datetime DEFAULT NULL,
+	`transportista_id` int(11) DEFAULT NULL,
+	`punto_partida` varchar(50),
+	`punto_llegada` varchar(50),
+	`marca_placa` varchar(50) DEFAUL NULL,
+	`licencia_conducir` varchar(50) DEFAULT NULL,
+	`estado_gr` smallint(6) DEFAULT 0,
+	`create_time` datetime DEFAULT NULL,
+	`create_user_id` int(11) DEFAULT NULL,
+	`update_time` datetime DEFAULT NULL,
+	`update_user_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB.
+2014/05/26 14:29:11 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DEFAUL NULL,
+	`licencia_conducir` varchar(50) DEFAULT NULL,
+	`estado_gr` smallin' at line 12. The SQL statement executed was: CREATE TABLE `tbl_guia_remision` (
+	`id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	`remitente` varchar(50),
+	`serie` varchar(5),
+	`numero` varchar(10),
+	`cliente_proveedor_id` int(11),
+	`motivo_traslado` varchar(50),
+	`fecha_inicio_traslado` datetime DEFAULT NULL,
+	`transportista_id` int(11) DEFAULT NULL,
+	`punto_partida` varchar(50),
+	`punto_llegada` varchar(50),
+	`marca_placa` varchar(50) DEFAUL NULL,
+	`licencia_conducir` varchar(50) DEFAULT NULL,
+	`estado_gr` smallint(6) DEFAULT 0,
+	`create_time` datetime DEFAULT NULL,
+	`create_user_id` int(11) DEFAULT NULL,
+	`update_time` datetime DEFAULT NULL,
+	`update_user_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB.
