@@ -357,3 +357,82 @@ Stack trace:
 #3 {main}
 REQUEST_URI=/erp_started/index.php?r=presentacion
 ---
+2014/05/30 18:38:59 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "presentacion".' in C:\xampp\htdocs\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\CController.php(270): CController->missingAction('presentacion')
+#1 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('presentacion')
+#2 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('site/presentaci...')
+#3 C:\xampp\htdocs\yii\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\ERP_started\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/erp_started/index.php?r=site/presentacion
+HTTP_REFERER=http://localhost/erp_started/index.php?r=site/page&view=about
+---
+2014/05/30 18:39:03 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "presentacion".' in C:\xampp\htdocs\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\CController.php(270): CController->missingAction('presentacion')
+#1 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('presentacion')
+#2 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('site/presentaci...')
+#3 C:\xampp\htdocs\yii\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\ERP_started\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/erp_started/index.php?r=site/presentacion
+HTTP_REFERER=http://localhost/erp_started/index.php?r=site/presentacion
+---
+2014/05/30 18:39:18 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "presentacion".' in C:\xampp\htdocs\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\CController.php(270): CController->missingAction('presentacion')
+#1 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('presentacion')
+#2 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('site/presentaci...')
+#3 C:\xampp\htdocs\yii\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\ERP_started\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/erp_started/index.php?r=site/presentacion
+HTTP_REFERER=http://localhost/erp_started/index.php?r=site/presentacion
+---
+2014/05/30 18:39:23 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "presentacion".' in C:\xampp\htdocs\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\CController.php(270): CController->missingAction('presentacion')
+#1 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('presentacion')
+#2 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('site/presentaci...')
+#3 C:\xampp\htdocs\yii\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\ERP_started\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/erp_started/index.php?r=site/presentacion
+HTTP_REFERER=http://localhost/erp_started/index.php?r=site/presentacion
+---
+2014/05/30 18:42:28 [error] [php] Undefined index: label (C:\xampp\htdocs\ERP_started\protected\extensions\mbmenu\MbMenu.php:172)
+Stack trace:
+#0 C:\xampp\htdocs\ERP_started\protected\extensions\mbmenu\MbMenu.php(99): MbMenu->init()
+#1 C:\xampp\htdocs\yii\framework\web\CBaseController.php(147): MbMenu->init()
+#2 C:\xampp\htdocs\yii\framework\web\CBaseController.php(172): PresentacionController->createWidget()
+#3 C:\xampp\htdocs\ERP_started\protected\views\layouts\main.php(50): PresentacionController->widget()
+#4 C:\xampp\htdocs\yii\framework\web\CBaseController.php(126): require()
+#5 C:\xampp\htdocs\yii\framework\web\CBaseController.php(95): PresentacionController->renderInternal()
+#6 C:\xampp\htdocs\yii\framework\web\widgets\CContentDecorator.php(76): PresentacionController->renderFile()
+#7 C:\xampp\htdocs\yii\framework\web\widgets\CContentDecorator.php(54): CContentDecorator->decorate()
+#8 C:\xampp\htdocs\yii\framework\web\widgets\COutputProcessor.php(44): CContentDecorator->processOutput()
+#9 C:\xampp\htdocs\yii\framework\web\CBaseController.php(206): CContentDecorator->run()
+#10 C:\xampp\htdocs\yii\framework\web\CBaseController.php(300): PresentacionController->endWidget()
+#11 C:\xampp\htdocs\ERP_started\protected\views\layouts\column2.php(22): PresentacionController->endContent()
+#12 C:\xampp\htdocs\yii\framework\web\CBaseController.php(126): require()
+#13 C:\xampp\htdocs\yii\framework\web\CBaseController.php(95): PresentacionController->renderInternal()
+#14 C:\xampp\htdocs\yii\framework\web\CController.php(784): PresentacionController->renderFile()
+#15 C:\xampp\htdocs\ERP_started\protected\controllers\PresentacionController.php(128): PresentacionController->render()
+#16 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): PresentacionController->actionIndex()
+#17 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#18 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): PresentacionController->runAction()
+#19 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#20 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#21 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): PresentacionController->filterAccessControl()
+#22 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#23 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#24 C:\xampp\htdocs\yii\framework\web\CController.php(265): PresentacionController->runActionWithFilters()
+#25 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): PresentacionController->run()
+#26 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#27 C:\xampp\htdocs\yii\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#28 C:\xampp\htdocs\ERP_started\index.php(13): CWebApplication->run()
+REQUEST_URI=/erp_started/index.php?r=presentacion
+in C:\xampp\htdocs\ERP_started\protected\extensions\mbmenu\MbMenu.php (172)
+in C:\xampp\htdocs\ERP_started\protected\extensions\mbmenu\MbMenu.php (176)
+in C:\xampp\htdocs\ERP_started\protected\extensions\mbmenu\MbMenu.php (99)
