@@ -1,0 +1,114 @@
+<?php
+/* @var $this ProductoController */
+/* @var $model Producto */
+/* @var $form CActiveForm */
+?>
+
+<div class="form">
+
+<?php $form=$this->beginWidget('CActiveForm', array(
+	'id'=>'producto-form',
+	'enableAjaxValidation'=>false,
+)); ?>
+
+	<p class="note">Fields with <span class="required">*</span> are required.</p>
+
+	<?php echo $form->errorSummary($model); ?>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'nombre'); ?>
+		<?php echo $form->textField($model,'nombre',array('size'=>60,'maxlength'=>100)); ?>
+		<?php echo $form->error($model,'nombre'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'descripcion'); ?>
+		<?php echo $form->textArea($model,'descripcion',array('rows'=>6, 'cols'=>50)); ?>
+		<?php echo $form->error($model,'descripcion'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'tipo_producto_id'); ?>
+		<?php echo $form->textField($model,'tipo_producto_id'); ?>
+		<?php echo $form->error($model,'tipo_producto_id'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'presentacion_id'); ?>
+		<?php echo $form->textField($model,'presentacion_id'); ?>
+		<?php echo $form->error($model,'presentacion_id'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'unidad_medida_id'); ?>
+		<?php echo $form->textField($model,'unidad_medida_id'); ?>
+		<?php echo $form->error($model,'unidad_medida_id'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'fabricante_id'); ?>
+		<?php echo $form->textField($model,'fabricante_id'); ?>
+		<?php echo $form->error($model,'fabricante_id'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'minimo_stock'); ?>
+		<?php echo $form->textField($model,'minimo_stock'); ?>
+		<?php echo $form->error($model,'minimo_stock'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'stock'); ?>
+		<?php echo $form->textField($model,'stock'); ?>
+		<?php echo $form->error($model,'stock'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'descontinado'); ?>
+		<?php echo $form->textField($model,'descontinado'); ?>
+		<?php echo $form->error($model,'descontinado'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'precio'); ?>
+		<?php echo $form->textField($model,'precio'); ?>
+		<?php echo $form->error($model,'precio'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'observacion'); ?>
+		<?php echo $form->textArea($model,'observacion',array('rows'=>6, 'cols'=>50)); ?>
+		<?php echo $form->error($model,'observacion'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'create_time'); ?>
+		<?php echo $form->textField($model,'create_time'); ?>
+		<?php echo $form->error($model,'create_time'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'create_user_id'); ?>
+		<?php echo $form->textField($model,'create_user_id'); ?>
+		<?php echo $form->error($model,'create_user_id'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'update_time'); ?>
+		<?php echo $form->textField($model,'update_time'); ?>
+		<?php echo $form->error($model,'update_time'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'update_user_id'); ?>
+		<?php echo $form->textField($model,'update_user_id'); ?>
+		<?php echo $form->error($model,'update_user_id'); ?>
+	</div>
+
+	<div class="row buttons">
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+	</div>
+
+<?php $this->endWidget(); ?>
+
+</div><!-- form -->
