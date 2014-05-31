@@ -38,6 +38,7 @@
                                         array('label'=>'tipo producto','url'=>array('/tipoProducto')),
                                         array('label'=>'fabricante','url'=>array('/fabricante')),
                                         array('label'=>'caracteristica','url'=>array('/caracteristica')),
+                                        array('label'=>'unidad medida','url'=>array('/unidadMedida')),
                                         array('label'=>'producto','url'=>array('/producto')),
                                     
                                 

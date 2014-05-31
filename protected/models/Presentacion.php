@@ -104,4 +104,8 @@ class Presentacion extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+        
+        
+         
+      
 }

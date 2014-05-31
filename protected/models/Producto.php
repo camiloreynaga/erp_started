@@ -82,10 +82,10 @@ class Producto extends CActiveRecord
 			'tblDetalleCaractProductos' => array(self::HAS_MANY, 'TblDetalleCaractProducto', 'producto_id'),
 			'tblDetalleCompras' => array(self::HAS_MANY, 'TblDetalleCompra', 'producto_id'),
 			'tblDetalleVentas' => array(self::HAS_MANY, 'TblDetalleVenta', 'producto_id'),
-			'fabricante' => array(self::BELONGS_TO, 'TblFabricante', 'fabricante_id'),
-			'presentacion' => array(self::BELONGS_TO, 'TblPresentacion', 'presentacion_id'),
-			'tipoProducto' => array(self::BELONGS_TO, 'TblTipoProducto', 'tipo_producto_id'),
-			'unidadMedida' => array(self::BELONGS_TO, 'TblUnidadMedida', 'unidad_medida_id'),
+			'fabricante' => array(self::BELONGS_TO, 'Fabricante', 'fabricante_id'),
+			'presentacion' => array(self::BELONGS_TO, 'Presentacion', 'presentacion_id'),
+			'tipoProducto' => array(self::BELONGS_TO, 'TipoProducto', 'tipo_producto_id'),
+			'unidadMedida' => array(self::BELONGS_TO, 'UnidadMedida', 'unidad_medida_id'),
 		);
 	}
 
@@ -146,4 +146,45 @@ class Producto extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+        
+        
+         //nuevos metodos
+        //nuevos metodos
+//         public function getPresentacionOptions()
+//        {
+//             
+//            $presentacionArray=CHtml::listData($this->presentacion, 'id', 'presentacion');
+//            return $presentacionArray;
+//        }
+        
+        ///Obtiene las presentaciones disponibles
+        public function getPresentacionOptions()
+        {
+            $criteria = new CDbCriteria();
+		$criteria->order='presentacion';
+		return Presentacion::model()->findAll($criteria);
+        }
+        
+        //obtiene los tipos de productos disponibles
+        public function getTipoOptions()
+        {
+            $criteria= new CDbCriteria();
+            $criteria->order='tipo_producto';
+            return TipoProducto::model()->findAll($criteria);
+        }
+        //obtiene las unidades de medida disponibles
+        public function getUndMedidaOptions()
+        {
+            $criteria= new CDbCriteria();
+            $criteria->order='unidad_medida';
+            return UnidadMedida::model()->findAll($criteria);
+        }
+        //obtiene los fabricantes/ marcas/ laboratorios disponibles
+        public function getFabricanteOptions()
+        {
+            $criteria = new CDbCriteria();
+            $criteria->order='fabricante';
+            return Fabricante::model()->findAll($criteria);
+        }
+        
 }

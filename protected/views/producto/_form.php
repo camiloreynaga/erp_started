@@ -29,25 +29,25 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'tipo_producto_id'); ?>
-		<?php echo $form->textField($model,'tipo_producto_id'); ?>
+		<?php echo $form->dropDownList($model,'tipo_producto_id',CHtml::listData($model->getTipoOptions(),'id','tipo_producto')); ?>
 		<?php echo $form->error($model,'tipo_producto_id'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'presentacion_id'); ?>
-		<?php echo $form->textField($model,'presentacion_id'); ?>
+		<?php echo $form->dropDownList($model,'presentacion_id', CHtml::listData($model->getPresentacionOptions(),'id','presentacion'));?>
 		<?php echo $form->error($model,'presentacion_id'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'unidad_medida_id'); ?>
-		<?php echo $form->textField($model,'unidad_medida_id'); ?>
+		<?php echo $form->dropDownList($model,'unidad_medida_id',  CHtml::listData($model->getUndMedidaOptions(),'id','unidad_medida')); ?>
 		<?php echo $form->error($model,'unidad_medida_id'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'fabricante_id'); ?>
-		<?php echo $form->textField($model,'fabricante_id'); ?>
+		<?php echo $form->dropDownList($model,'fabricante_id',CHtml::listData($model->getFabricanteOptions(),'id','fabricante')); ?>
 		<?php echo $form->error($model,'fabricante_id'); ?>
 	</div>
 
