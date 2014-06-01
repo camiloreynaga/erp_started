@@ -1,16 +1,17 @@
 <?php
-
+Yii::setPathOfAlias('bootstrap', dirname(__FILE__).'/../extensions/bootstrap');
 // uncomment the following to define a path alias
 // Yii::setPathOfAlias('local','path/to/local-folder');
 
 // This is the main Web application configuration. Any writable
 // CWebApplication properties can be configured here.
 return array(
+        //'theme'=>'bootstrap',
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-	'name'=>'My Web Application',
+	'name'=>'ERP APP',
 
 	// preloading 'log' component
-	'preload'=>array('log'),
+	'preload'=>array('log','bootstrap'),
 
 	// autoloading model and component classes
 	'import'=>array(
@@ -24,8 +25,10 @@ return array(
 		'gii'=>array(
 			'class'=>'system.gii.GiiModule',
 			'password'=>'gii',
+                        
 			// If removed, Gii defaults to localhost only. Edit carefully to taste.
 			'ipFilters'=>array('127.0.0.1','::1'),
+                        'generatorPaths'=>array('bootstrap.gii'),
 		),
 		
 	),
@@ -80,6 +83,12 @@ return array(
 				*/
 			),
 		),
+                'bootstrap'=>array(
+                    'class'=>'ext.bootstrap.components.Booster',
+                    //'class'=>'path.alias.to.booster.components.Booster',
+                    'responsiveCss'=>true
+                ),
+            
 	),
 
 	// application-level parameters that can be accessed
