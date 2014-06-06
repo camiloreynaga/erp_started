@@ -32,6 +32,7 @@ $this->menu=array(
 		'stock',
 		'descontinado',
 		'precio',
+		'ventaUnd',
 		'observacion',
 		'create_time',
 		'create_user_id',

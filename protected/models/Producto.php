@@ -15,6 +15,7 @@
  * @property integer $stock
  * @property integer $descontinado
  * @property double $precio
+ * @property integer $ventaUnd
  * @property string $observacion
  * @property string $create_time
  * @property integer $create_user_id
@@ -30,6 +31,8 @@
  * @property TblPresentacion $presentacion
  * @property TblTipoProducto $tipoProducto
  * @property TblUnidadMedida $unidadMedida
+ * @property TblProductoDetalle[] $tblProductoDetalles
+ * @property TblProductoDetalle[] $tblProductoDetalles1
  */
 class Producto extends CActiveRecord
 {
@@ -86,6 +89,8 @@ class Producto extends CActiveRecord
 			'presentacion' => array(self::BELONGS_TO, 'Presentacion', 'presentacion_id'),
 			'tipoProducto' => array(self::BELONGS_TO, 'TipoProducto', 'tipo_producto_id'),
 			'unidadMedida' => array(self::BELONGS_TO, 'UnidadMedida', 'unidad_medida_id'),
+                        'productoDetalle' => array(self::HAS_MANY, 'ProductoDetalle', 'producto_id'),
+			'productoGrupo' => array(self::HAS_MANY, 'ProductoDetalle', 'producto_grupo_id'),
 		);
 	}
 
@@ -106,6 +111,7 @@ class Producto extends CActiveRecord
 			'stock' => 'Stock',
 			'descontinado' => 'Descontinado',
 			'precio' => 'Precio',
+                        'ventaUnd' => 'Venta Und',
 			'observacion' => 'Observacion',
 			'create_time' => 'Create Time',
 			'create_user_id' => 'Create User',
@@ -136,6 +142,7 @@ class Producto extends CActiveRecord
 		$criteria->compare('stock',$this->stock);
 		$criteria->compare('descontinado',$this->descontinado);
 		$criteria->compare('precio',$this->precio);
+                $criteria->compare('ventaUnd',$this->ventaUnd);
 		$criteria->compare('observacion',$this->observacion,true);
 		$criteria->compare('create_time',$this->create_time,true);
 		$criteria->compare('create_user_id',$this->create_user_id);

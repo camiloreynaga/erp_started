@@ -67,6 +67,11 @@
 	</div>
 
 	<div class="row">
+		<?php echo $form->label($model,'ventaUnd'); ?>
+		<?php echo $form->textField($model,'ventaUnd'); ?>
+	</div>
+
+	<div class="row">
 		<?php echo $form->label($model,'observacion'); ?>
 		<?php echo $form->textArea($model,'observacion',array('rows'=>6, 'cols'=>50)); ?>
 	</div>

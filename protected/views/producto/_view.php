@@ -50,6 +50,10 @@
 	<?php echo CHtml::encode($data->precio); ?>
 	<br />
 
+	<b><?php echo CHtml::encode($data->getAttributeLabel('ventaUnd')); ?>:</b>
+	<?php echo CHtml::encode($data->ventaUnd); ?>
+	<br />
+
 	<b><?php echo CHtml::encode($data->getAttributeLabel('observacion')); ?>:</b>
 	<?php echo CHtml::encode($data->observacion); ?>
 	<br />

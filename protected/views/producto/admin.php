@@ -57,6 +57,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'stock',
 		'descontinado',
 		'precio',
+		'ventaUnd',
 		'observacion',
 		'create_time',
 		'create_user_id',
