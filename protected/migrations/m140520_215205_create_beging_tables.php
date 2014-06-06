@@ -109,7 +109,7 @@ class m140520_215205_create_beging_tables extends CDbMigration
                  'id'=>'pk',
                  'producto_id'=>'int (11) NOT NULL',
                  'caracteristica_id'=>'int(11) NOT NULL',
-                 'valor'=>'text DEFAULT NULL', //Valor de la caracteristica adicional
+                 'valor'=>'varchar(50) DEFAULT NULL', //Valor de la caracteristica adicional
                  //'nonmenclatura'=>'varchar(50)',
              ),'ENGINE=InnoDB');
              
