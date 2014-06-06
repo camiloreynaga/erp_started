@@ -193,5 +193,12 @@ class Producto extends CActiveRecord
             $criteria->order='fabricante';
             return Fabricante::model()->findAll($criteria);
         }
+        //obtien las caracteristicas adicionales para un producto
+        public function getCaracteristicaOptions()
+        {
+            $criteria=new CDbCriteria();
+            $criteria->order='caracteristica';
+            return Caracteristica::model()->findAll($criteria);
+        }
         
 }
