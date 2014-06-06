@@ -2,6 +2,11 @@
 /* @var $this CaracteristicaProductoController */
 /* @var $model CaracteristicaProducto */
 /* @var $form CActiveForm */
+//Creando la variable de sesion para el arreglo de datos
+
+$_SESSION['arrayCaracteristica']=array();
+        
+
 ?>
 
 <div class="form">
@@ -32,11 +37,44 @@
 		<?php echo $form->textField($model,'valor'); ?>
 		<?php echo $form->error($model,'valor'); ?>
 	</div>
+        
+       
+        
+            
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+		<?php //echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+                <?php echo CHtml::Button('send', array(
+                    'submit'=> CController::createUrl('//caracteristicaProducto/addArray'))
+                        );
+                        ?>    
+            
+                <?php echo CHtml::ajaxSubmitButton('add',
+                        CController::createUrl('caracteristicaProducto/addArray'),
+                        array(
+                            //'data'=>
+                            'update'=>'#value_e')
+                        );
+                        ?>
+            <?php
+
+                    echo CHtml::ajaxSubmitButton(
+                        'Submit request',
+                        array('caracteristicaProducto/reqTest03'),
+                        array(
+                            'update'=>'#req_res02',
+                        )
+                        );
+?>
+
 	</div>
 
 <?php $this->endWidget(); ?>
 
 </div><!-- form -->
+
+ <div id="value_e"> 
+            <?php $this->renderPartial('_viewCaracteristicas',array('data'=>$_SESSION['arrayCaracteristica'])); ?>
+ </div>
+
+<div id="req_res02">...</div>

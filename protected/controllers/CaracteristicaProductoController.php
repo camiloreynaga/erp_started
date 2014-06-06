@@ -28,11 +28,11 @@ class CaracteristicaProductoController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('index','view','ReqTest03'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update','AddArray'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -78,8 +78,37 @@ class CaracteristicaProductoController extends Controller
 			'model'=>$model,
 		));
 	}
+        
+        public function actionAddArray()
+        {
+            if(isset($_POST['CaracteristicaProducto']))
+            {
+                $_data= array(
+                    'id'=>count($_SESSION['arrayCaracteristica']), //agregando un ID al Array
+                    'caracteristica_id'=>$_POST['CaracteristicaProducto']['caracteristica_id'],
+                    'valor'=>$_POST['CaracteristicaProducto']['valor']
+                );
+                //agregando valores recibidos desde el form a la variable de sesion
+                array_push($_SESSION['arrayCaracteristica'],$_data);
+                
+            }
+            
+            $this->renderPartial('_viewCaracteristicas',array('data'=>$_SESSION['arrayCaracteristica']),false,true);
+            //echo CHtml::encode(print_r($_SESSION['arrayCaracteristica'], true));
+        }
+        
+        public function actionReqTest03() 
+        {
+          echo CHtml::encode(print_r($_SESSION['arrayCaracteristica'], true));
+        }
 
-	/**
+        
+        public function actionDelArray($id)
+        {
+            
+        }
+
+        /**
 	 * Updates a particular model.
 	 * If update is successful, the browser will be redirected to the 'view' page.
 	 * @param integer $id the ID of the model to be updated
