@@ -48,6 +48,10 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'id',
 		'nombre',
 		'descripcion',
+                array(
+                  'name'=>'presentacion',
+                  'value'=>'$data->presentacion->presentacion'
+                ),
 		'tipo_producto_id',
 		'presentacion_id',
 		'unidad_medida_id',

@@ -20,11 +20,11 @@ $_SESSION['arrayCaracteristica']=array();
 
 	<?php echo $form->errorSummary($model); ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'producto_id'); ?>
-		<?php echo $form->textField($model,'producto_id'); ?>
-		<?php echo $form->error($model,'producto_id'); ?>
-	</div>
+<!--	<div class="row">
+		<?php // echo $form->labelEx($model,'producto_id'); ?>
+		<?php // echo $form->textField($model,'producto_id'); ?>
+		<?php // echo $form->error($model,'producto_id'); ?>
+	</div>-->
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'caracteristica_id'); ?>
@@ -44,9 +44,9 @@ $_SESSION['arrayCaracteristica']=array();
 
 	<div class="row buttons">
 		<?php //echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
-                <?php echo CHtml::Button('send', array(
-                    'submit'=> CController::createUrl('//caracteristicaProducto/addArray'))
-                        );
+                <?php // echo CHtml::Button('send', array(
+//                    'submit'=> CController::createUrl('//caracteristicaProducto/addArray'))
+//                        );
                         ?>    
             
                 <?php echo CHtml::ajaxSubmitButton('add',
@@ -58,13 +58,13 @@ $_SESSION['arrayCaracteristica']=array();
                         ?>
             <?php
 
-                    echo CHtml::ajaxSubmitButton(
-                        'Submit request',
-                        array('caracteristicaProducto/reqTest03'),
-                        array(
-                            'update'=>'#req_res02',
-                        )
-                        );
+//                    echo CHtml::ajaxSubmitButton(
+//                        'Submit request',
+//                        array('caracteristicaProducto/reqTest03'),
+//                        array(
+//                            'update'=>'#req_res02',
+//                        )
+//                        );
 ?>
 
 	</div>
@@ -74,7 +74,7 @@ $_SESSION['arrayCaracteristica']=array();
 </div><!-- form -->
 
  <div id="value_e"> 
-            <?php $this->renderPartial('_viewCaracteristicas',array('data'=>$_SESSION['arrayCaracteristica'])); ?>
+            <?php //$this->renderPartial('_viewCaracteristicas',array('data'=>$_SESSION['arrayCaracteristica'])); ?>
  </div>
 
 <div id="req_res02">...</div>

@@ -32,7 +32,7 @@ class CaracteristicaProductoController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','AddArray'),
+				'actions'=>array('create','update','AddArray','DelArray'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -78,15 +78,20 @@ class CaracteristicaProductoController extends Controller
 			'model'=>$model,
 		));
 	}
-        
+        /**
+         * Agregar un elemento al arreglo (buffer) de caracteristicas por producto
+         */
         public function actionAddArray()
         {
             if(isset($_POST['CaracteristicaProducto']))
             {
+                $_id=$_POST['CaracteristicaProducto']['caracteristica_id'];
+                $_result= Caracteristica::model()->findByPk($_id);
                 $_data= array(
                     'id'=>count($_SESSION['arrayCaracteristica']), //agregando un ID al Array
                     'caracteristica_id'=>$_POST['CaracteristicaProducto']['caracteristica_id'],
-                    'valor'=>$_POST['CaracteristicaProducto']['valor']
+                    'valor'=>$_POST['CaracteristicaProducto']['valor'],
+                    'caracteristica_text'=> $_result->caracteristica
                 );
                 //agregando valores recibidos desde el form a la variable de sesion
                 array_push($_SESSION['arrayCaracteristica'],$_data);
@@ -94,7 +99,7 @@ class CaracteristicaProductoController extends Controller
             }
             
             $this->renderPartial('_viewCaracteristicas',array('data'=>$_SESSION['arrayCaracteristica']),false,true);
-            //echo CHtml::encode(print_r($_SESSION['arrayCaracteristica'], true));
+            
         }
         
         public function actionReqTest03() 
@@ -102,10 +107,17 @@ class CaracteristicaProductoController extends Controller
           echo CHtml::encode(print_r($_SESSION['arrayCaracteristica'], true));
         }
 
-        
+        /**
+         * Quita un elemento de arreglo (buffer) de las caracterisitcas por producto
+         * @param type $id
+         */
         public function actionDelArray($id)
         {
-            
+            if(isset($id))
+            {
+                unset($_SESSION['arrayCaracteristica'][$id]);
+            }
+             $this->renderPartial('_viewCaracteristicas',array('data'=>$_SESSION['arrayCaracteristica']),false,true);
         }
 
         /**

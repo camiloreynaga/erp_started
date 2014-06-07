@@ -58,8 +58,8 @@ class CaracteristicaProducto extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'producto' => array(self::BELONGS_TO, 'TblProducto', 'producto_id'),
-			'caracteristica' => array(self::BELONGS_TO, 'TblCaracteristica', 'caracteristica_id'),
+			'producto' => array(self::BELONGS_TO, 'Producto', 'producto_id'),
+			'caracteristica' => array(self::BELONGS_TO, 'Caracteristica', 'caracteristica_id'),
 		);
 	}
 
@@ -96,4 +96,12 @@ class CaracteristicaProducto extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+        
+        
+//        public function getCaracteristica($id)
+//        {
+//            //$criteria = new CDbCriteria();
+//            //$criteria->
+//            return Caracteristica::model()->findByPk($id)
+//        }
 }
