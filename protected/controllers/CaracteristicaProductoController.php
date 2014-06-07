@@ -85,21 +85,44 @@ class CaracteristicaProductoController extends Controller
         {
             if(isset($_POST['CaracteristicaProducto']))
             {
-                $_id=$_POST['CaracteristicaProducto']['caracteristica_id'];
-                $_result= Caracteristica::model()->findByPk($_id);
+                $_id=$_POST['CaracteristicaProducto']['caracteristica_id']; // id de caracteristica
+                $_result= Caracteristica::model()->findByPk($_id); // obtiene texto de caracteristic_id
                 $_data= array(
                     'id'=>count($_SESSION['arrayCaracteristica']), //agregando un ID al Array
                     'caracteristica_id'=>$_POST['CaracteristicaProducto']['caracteristica_id'],
                     'valor'=>$_POST['CaracteristicaProducto']['valor'],
                     'caracteristica_text'=> $_result->caracteristica
                 );
-                //agregando valores recibidos desde el form a la variable de sesion
-                array_push($_SESSION['arrayCaracteristica'],$_data);
+                //validando duplicidad
                 
+                //if (array_key_exists($_id,$_SESSION['arrayCaracteristica'])==false)
+                    if($this->getDuplicado($_SESSION['arrayCaracteristica'],'caracteristica_id', $_id)==false)
+                        array_push($_SESSION['arrayCaracteristica'],$_data);//agregando valores recibidos desde el form a la variable de sesion
             }
             
             $this->renderPartial('_viewCaracteristicas',array('data'=>$_SESSION['arrayCaracteristica']),false,true);
             
+        }
+        
+        public function getDuplicado($array,$a_asociativo,$value)
+        {
+            $retorna = false;
+            
+//            for ($i=0;$i<count($array);$i++)
+//            {
+//                if ($array[$i]['caracteristica_id']===$value);
+//                $retorna=true;
+//            }
+            
+            foreach ($array as $x => $x_value )
+                {
+                    if ($value===$x_value[$a_asociativo])
+                    {
+                        $retorna= TRUE;
+                        break;
+                    }
+                }
+                return $retorna;
         }
         
         public function actionReqTest03() 

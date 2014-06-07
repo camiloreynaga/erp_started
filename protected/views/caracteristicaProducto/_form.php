@@ -74,7 +74,7 @@ $_SESSION['arrayCaracteristica']=array();
 </div><!-- form -->
 
  <div id="value_e"> 
-            <?php //$this->renderPartial('_viewCaracteristicas',array('data'=>$_SESSION['arrayCaracteristica'])); ?>
+            <?php // $this->renderPartial('_viewCaracteristicas',array('data'=>$_SESSION['arrayCaracteristica'])); ?>
  </div>
 
 <div id="req_res02">...</div>

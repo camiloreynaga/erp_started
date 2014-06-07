@@ -5,12 +5,14 @@
  * and open the template in the editor.
  */
 
-//if(empty($data))
-//    echo "Vacio";
-//else
-//{
+if(empty($data))
+{
+    
+}
+    //echo "Vacio";
+else
+{
 //    $this->widget('')
-//    echo "arreglo";
 //    foreach ($_SESSION['arrayCaracteristica'] as $x => $x_value )
 //    {
 //        echo 'id ' .$x. ", caracteristica_id=". $x_value['caracteristica_id']. " caracteristica " .$x_value['caracteristica_text']. ", valor=". $x_value['valor'];
@@ -20,7 +22,8 @@
     //echo  CHtml::encode(print_r($_SESSION['arrayCaracteristica'], true));
     
     $this->widget('zii.widgets.grid.CGridView' , array(
-        'dataProvider'=> new CArrayDataProvider($_SESSION['arrayCaracteristica']),
+        //'dataProvider'=> new CArrayDataProvider($_SESSION['arrayCaracteristica']),
+        'dataProvider'=> new CArrayDataProvider($data),
         'columns'=>array(
             array(
                 'name'=>'caracteristica',
@@ -32,6 +35,7 @@
             array(
                 'name'=>'valor',
                 'type'=>'raw',
+                //'value' => 'CHtml::textField("",$data["valor"])',
                 'value'=>'CHtml::encode($data["valor"])'
             ),
             array(
@@ -49,6 +53,6 @@
         ),
     ));
 //    
-//}
+}
     
 ?>
