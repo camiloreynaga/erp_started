@@ -1,5 +1,7 @@
 <?php
-Yii::setPathOfAlias('bootstrap', dirname(__FILE__).'/../extensions/bootstrap');
+//Yii::setPathOfAlias('bootstrap', dirname(__FILE__).'/../extensions/bootstrap');
+Yii::setPathOfAlias('booster', dirname(__FILE__).'/../extensions/booster');
+
 // uncomment the following to define a path alias
 // Yii::setPathOfAlias('local','path/to/local-folder');
 
@@ -9,9 +11,10 @@ return array(
         //'theme'=>'bootstrap',
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'ERP APP',
+        'language'=>'es',
 
 	// preloading 'log' component
-	'preload'=>array('log','bootstrap'),
+	'preload'=>array('log','booster'),
 
 	// autoloading model and component classes
 	'import'=>array(
@@ -28,7 +31,7 @@ return array(
                         
 			// If removed, Gii defaults to localhost only. Edit carefully to taste.
 			'ipFilters'=>array('127.0.0.1','::1'),
-                        'generatorPaths'=>array('bootstrap.gii'),
+                        'generatorPaths'=>array('booster.gii'),
 		),
 		
 	),
@@ -83,8 +86,8 @@ return array(
 				*/
 			),
 		),
-                'bootstrap'=>array(
-                    'class'=>'ext.bootstrap.components.Booster',
+                'booster'=>array(
+                    'class'=>'ext.booster.components.Booster',
                     //'class'=>'path.alias.to.booster.components.Booster',
                     'responsiveCss'=>true
                 ),
