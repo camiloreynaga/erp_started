@@ -1,15 +1,12 @@
 <?php
-/* @var $this PresentacionController */
-/* @var $model Presentacion */
-
 $this->breadcrumbs=array(
 	'Presentacions'=>array('index'),
 	'Create',
 );
 
 $this->menu=array(
-	array('label'=>'List Presentacion', 'url'=>array('index')),
-	array('label'=>'Manage Presentacion', 'url'=>array('admin')),
+array('label'=>'List Presentacion','url'=>array('index')),
+array('label'=>'Manage Presentacion','url'=>array('admin')),
 );
 ?>
 

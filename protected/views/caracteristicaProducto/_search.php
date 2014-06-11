@@ -1,40 +1,22 @@
-<?php
-/* @var $this CaracteristicaProductoController */
-/* @var $model CaracteristicaProducto */
-/* @var $form CActiveForm */
-?>
-
-<div class="wide form">
-
-<?php $form=$this->beginWidget('CActiveForm', array(
+<?php $form=$this->beginWidget('booster.widgets.TbActiveForm',array(
 	'action'=>Yii::app()->createUrl($this->route),
 	'method'=>'get',
 )); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'id'); ?>
-		<?php echo $form->textField($model,'id'); ?>
-	</div>
+		<?php echo $form->textFieldGroup($model,'id',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'producto_id'); ?>
-		<?php echo $form->textField($model,'producto_id'); ?>
-	</div>
+		<?php echo $form->textFieldGroup($model,'producto_id',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'caracteristica_id'); ?>
-		<?php echo $form->textField($model,'caracteristica_id'); ?>
-	</div>
+		<?php echo $form->textFieldGroup($model,'caracteristica_id',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'valor'); ?>
-		<?php echo $form->textArea($model,'valor',array('rows'=>6, 'cols'=>50)); ?>
-	</div>
+		<?php echo $form->textFieldGroup($model,'valor',array('class'=>'span5','maxlength'=>50)); ?>
 
-	<div class="row buttons">
-		<?php echo CHtml::submitButton('Search'); ?>
+	<div class="form-actions">
+		<?php $this->widget('booster.widgets.TbButton', array(
+			'buttonType' => 'submit',
+			'context'=>'primary',
+			'label'=>'Search',
+		)); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
-
-</div><!-- search-form -->

@@ -1,55 +1,28 @@
-<?php
-/* @var $this PresentacionController */
-/* @var $model Presentacion */
-/* @var $form CActiveForm */
-?>
-
-<div class="wide form">
-
-<?php $form=$this->beginWidget('CActiveForm', array(
+<?php $form=$this->beginWidget('booster.widgets.TbActiveForm',array(
 	'action'=>Yii::app()->createUrl($this->route),
 	'method'=>'get',
 )); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'id'); ?>
-		<?php echo $form->textField($model,'id'); ?>
-	</div>
+		<?php echo $form->textFieldGroup($model,'id',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'presentacion'); ?>
-		<?php echo $form->textField($model,'presentacion',array('size'=>50,'maxlength'=>50)); ?>
-	</div>
+		<?php echo $form->textFieldGroup($model,'presentacion',array('class'=>'span5','maxlength'=>50)); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'abreviatura'); ?>
-		<?php echo $form->textField($model,'abreviatura',array('size'=>50,'maxlength'=>50)); ?>
-	</div>
+		<?php echo $form->textFieldGroup($model,'abreviatura',array('class'=>'span5','maxlength'=>50)); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'create_time'); ?>
-		<?php echo $form->textField($model,'create_time'); ?>
-	</div>
+		<?php echo $form->textFieldGroup($model,'create_time',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'create_user_id'); ?>
-		<?php echo $form->textField($model,'create_user_id'); ?>
-	</div>
+		<?php echo $form->textFieldGroup($model,'create_user_id',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'update_time'); ?>
-		<?php echo $form->textField($model,'update_time'); ?>
-	</div>
+		<?php echo $form->textFieldGroup($model,'update_time',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'update_user_id'); ?>
-		<?php echo $form->textField($model,'update_user_id'); ?>
-	</div>
+		<?php echo $form->textFieldGroup($model,'update_user_id',array('class'=>'span5')); ?>
 
-	<div class="row buttons">
-		<?php echo CHtml::submitButton('Search'); ?>
+	<div class="form-actions">
+		<?php $this->widget('booster.widgets.TbButton', array(
+			'buttonType' => 'submit',
+			'context'=>'primary',
+			'label'=>'Search',
+		)); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
-
-</div><!-- search-form -->

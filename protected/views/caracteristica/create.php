@@ -1,15 +1,12 @@
 <?php
-/* @var $this CaracteristicaController */
-/* @var $model Caracteristica */
-
 $this->breadcrumbs=array(
 	'Caracteristicas'=>array('index'),
 	'Create',
 );
 
 $this->menu=array(
-	array('label'=>'List Caracteristica', 'url'=>array('index')),
-	array('label'=>'Manage Caracteristica', 'url'=>array('admin')),
+array('label'=>'List Caracteristica','url'=>array('index')),
+array('label'=>'Manage Caracteristica','url'=>array('admin')),
 );
 ?>
 

@@ -1,105 +1,48 @@
-<?php
-/* @var $this ProductoController */
-/* @var $model Producto */
-/* @var $form CActiveForm */
-?>
-
-<div class="wide form">
-
-<?php $form=$this->beginWidget('CActiveForm', array(
+<?php $form=$this->beginWidget('booster.widgets.TbActiveForm',array(
 	'action'=>Yii::app()->createUrl($this->route),
 	'method'=>'get',
 )); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'id'); ?>
-		<?php echo $form->textField($model,'id'); ?>
-	</div>
+		<?php echo $form->textFieldGroup($model,'id',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'nombre'); ?>
-		<?php echo $form->textField($model,'nombre',array('size'=>60,'maxlength'=>100)); ?>
-	</div>
+		<?php echo $form->textFieldGroup($model,'nombre',array('class'=>'span5','maxlength'=>100)); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'descripcion'); ?>
-		<?php echo $form->textArea($model,'descripcion',array('rows'=>6, 'cols'=>50)); ?>
-	</div>
+		<?php echo $form->textAreaGroup($model,'descripcion',array('rows'=>6, 'cols'=>50, 'class'=>'span8')); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'tipo_producto_id'); ?>
-		<?php echo $form->textField($model,'tipo_producto_id'); ?>
-	</div>
+		<?php echo $form->textFieldGroup($model,'tipo_producto_id',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'presentacion_id'); ?>
-		<?php echo $form->textField($model,'presentacion_id'); ?>
-	</div>
+		<?php echo $form->textFieldGroup($model,'presentacion_id',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'unidad_medida_id'); ?>
-		<?php echo $form->textField($model,'unidad_medida_id'); ?>
-	</div>
+		<?php echo $form->textFieldGroup($model,'unidad_medida_id',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'fabricante_id'); ?>
-		<?php echo $form->textField($model,'fabricante_id'); ?>
-	</div>
+		<?php echo $form->textFieldGroup($model,'fabricante_id',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'minimo_stock'); ?>
-		<?php echo $form->textField($model,'minimo_stock'); ?>
-	</div>
+		<?php echo $form->textFieldGroup($model,'minimo_stock',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'stock'); ?>
-		<?php echo $form->textField($model,'stock'); ?>
-	</div>
+		<?php echo $form->textFieldGroup($model,'stock',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'descontinado'); ?>
-		<?php echo $form->textField($model,'descontinado'); ?>
-	</div>
+		<?php echo $form->textFieldGroup($model,'descontinado',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'precio'); ?>
-		<?php echo $form->textField($model,'precio'); ?>
-	</div>
+		<?php echo $form->textFieldGroup($model,'precio',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'ventaUnd'); ?>
-		<?php echo $form->textField($model,'ventaUnd'); ?>
-	</div>
+		<?php echo $form->textFieldGroup($model,'ventaUnd',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'observacion'); ?>
-		<?php echo $form->textArea($model,'observacion',array('rows'=>6, 'cols'=>50)); ?>
-	</div>
+		<?php echo $form->textAreaGroup($model,'observacion',array('rows'=>6, 'cols'=>50, 'class'=>'span8')); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'create_time'); ?>
-		<?php echo $form->textField($model,'create_time'); ?>
-	</div>
+		<?php echo $form->textFieldGroup($model,'create_time',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'create_user_id'); ?>
-		<?php echo $form->textField($model,'create_user_id'); ?>
-	</div>
+		<?php echo $form->textFieldGroup($model,'create_user_id',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'update_time'); ?>
-		<?php echo $form->textField($model,'update_time'); ?>
-	</div>
+		<?php echo $form->textFieldGroup($model,'update_time',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'update_user_id'); ?>
-		<?php echo $form->textField($model,'update_user_id'); ?>
-	</div>
+		<?php echo $form->textFieldGroup($model,'update_user_id',array('class'=>'span5')); ?>
 
-	<div class="row buttons">
-		<?php echo CHtml::submitButton('Search'); ?>
+	<div class="form-actions">
+		<?php $this->widget('booster.widgets.TbButton', array(
+			'buttonType' => 'submit',
+			'context'=>'primary',
+			'label'=>'Search',
+		)); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
-
-</div><!-- search-form -->

@@ -1,15 +1,12 @@
 <?php
-/* @var $this FabricanteController */
-/* @var $model Fabricante */
-
 $this->breadcrumbs=array(
 	'Fabricantes'=>array('index'),
 	'Create',
 );
 
 $this->menu=array(
-	array('label'=>'List Fabricante', 'url'=>array('index')),
-	array('label'=>'Manage Fabricante', 'url'=>array('admin')),
+array('label'=>'List Fabricante','url'=>array('index')),
+array('label'=>'Manage Fabricante','url'=>array('admin')),
 );
 ?>
 

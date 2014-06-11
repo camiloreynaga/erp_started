@@ -1,15 +1,12 @@
 <?php
-/* @var $this TipoProductoController */
-/* @var $model TipoProducto */
-
 $this->breadcrumbs=array(
 	'Tipo Productos'=>array('index'),
 	'Create',
 );
 
 $this->menu=array(
-	array('label'=>'List TipoProducto', 'url'=>array('index')),
-	array('label'=>'Manage TipoProducto', 'url'=>array('admin')),
+array('label'=>'List TipoProducto','url'=>array('index')),
+array('label'=>'Manage TipoProducto','url'=>array('admin')),
 );
 ?>
 
