@@ -4740,3 +4740,27 @@ Stack trace:
 #31 {main}
 REQUEST_URI=/erp_started/index.php?r=CaracteristicaProducto/create
 ---
+2014/06/11 22:33:22 [error] [exception.CException] exception 'CException' with message 'Propiedad "CTimestampBehavior"."setUpdateOneCreate" no se encuentra definida.' in C:\xampp\htdocs\yii\framework\base\CComponent.php:173
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\YiiBase.php(220): CComponent->__set('setUpdateOneCre...', true)
+#1 C:\xampp\htdocs\yii\framework\base\CComponent.php(326): YiiBase::createComponent(Array)
+#2 C:\xampp\htdocs\yii\framework\base\CComponent.php(297): CComponent->attachBehavior('CTimestampBehav...', Array)
+#3 C:\xampp\htdocs\yii\framework\db\ar\CActiveRecord.php(388): CComponent->attachBehaviors(Array)
+#4 C:\xampp\htdocs\yii\framework\web\CActiveDataProvider.php(74): CActiveRecord::model('Empleado')
+#5 C:\xampp\htdocs\ERP_started\protected\controllers\EmpleadoController.php(130): CActiveDataProvider->__construct('Empleado')
+#6 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): EmpleadoController->actionIndex()
+#7 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#8 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#9 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#10 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#11 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#12 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#13 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#14 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#15 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('')
+#16 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('empleado/')
+#17 C:\xampp\htdocs\yii\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#18 C:\xampp\htdocs\ERP_started\index.php(13): CApplication->run()
+#19 {main}
+REQUEST_URI=/erp_started/index.php?r=empleado/
+---
