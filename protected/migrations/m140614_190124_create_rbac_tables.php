@@ -16,6 +16,18 @@ class m140614_190124_create_rbac_tables extends CDbMigration
 	// Use safeUp/safeDown to do migration with transaction
 	public function safeUp()
 	{
+            //
+//            $this->truncateTable('tbl_auth_assignment');
+//            $this->truncateTable('tbl_auth_item_child');
+//            $this->truncateTable('tbl_auth_item');
+//            $this->dropForeignKey('fk_auth_item_child_parent', 'tbl_auth_item_child');
+//            $this->dropForeignKey('fk_auth_item_child_child', 'tbl_auth_item_child');
+//            $this->dropForeignKey('fk_auth_assignment_itemname', 'tbl_auth_assignment');
+//            
+//            $this->dropTable('tbl_auth_assignment');
+//            $this->dropTable('tbl_auth_item_child');
+//            $this->dropTable('tbl_auth_item');
+            
             //create the auth item table
             $this->createTable('tbl_auth_item', array(
             'name' =>'varchar(64) NOT NULL',
@@ -53,15 +65,23 @@ class m140614_190124_create_rbac_tables extends CDbMigration
             "fk_auth_assignment_itemname","tbl_auth_assignment","itemname","tbl_auth_item","name","CASCADE","CASCADE");
             
             //the tbl_auth_assignment.userid is a reference to tbl_user.id
-            $this->addForeignKey("fk_auth_assignment_userid","tbl_auth_assignment","userid","tbl_user","id","CASCADE","CASCADE");
+            $this->addForeignKey("fk_auth_assignment_userid","tbl_auth_assignment","userid","tbl_usuario","id","CASCADE","CASCADE");
             
 	}
 
 	public function safeDown()
 	{
+             $this->dropForeignKey('fk_auth_item_child_parent', 'tbl_auth_item_child');
+            $this->dropForeignKey('fk_auth_item_child_child', 'tbl_auth_item_child');
+            $this->dropForeignKey('fk_auth_assignment_itemname', 'tbl_auth_assignment');
+            $this->dropForeignKey('fk_auth_assignment_userid', 'tbl_auth_assignment');
+            
             $this->truncateTable('tbl_auth_assignment');
             $this->truncateTable('tbl_auth_item_child');
             $this->truncateTable('tbl_auth_item');
+            
+           
+            
             $this->dropTable('tbl_auth_assignment');
             $this->dropTable('tbl_auth_item_child');
             $this->dropTable('tbl_auth_item');

@@ -86,6 +86,13 @@ return array(
 				*/
 			),
 		),
+                'authManager'=>array(
+                    'class'=>'CDbAuthManager',
+                    'connectionID'=>'db',
+                    'itemTable'=>'tbl_auth_item',
+                    'itemChildTable'=>'tbl_auth_item_child',
+                    'assignmentTable'=>'tbl_auth_assignment',
+                ),
                 'booster'=>array(
                     'class'=>'ext.booster.components.Booster',
                     //'class'=>'path.alias.to.booster.components.Booster',
