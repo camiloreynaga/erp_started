@@ -13,7 +13,7 @@
  * @property TblProducto $producto
  * @property TblCaracteristica $caracteristica
  */
-class CaracteristicaProducto extends CActiveRecord
+class CaracteristicaProducto extends Erp_startedActiveRecord//CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.

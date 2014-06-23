@@ -30,8 +30,8 @@
 		<?php $this->widget('application.extensions.mbmenu.MbMenu',array(
 			'items'=>array(
 				array('label'=>'Home', 'url'=>array('/site/index')),
-				array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
-				array('label'=>'Contact', 'url'=>array('/site/contact')),
+				//array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
+				//array('label'=>'Contact', 'url'=>array('/site/contact')),
                                 array('label'=>'Mantenimiento',
                                     'items'=>array(
                                         array('label'=>'presentacion','url'=>array('/presentacion')),
@@ -44,6 +44,18 @@
                                 
                                         ),
                                     ),
+                                array('label'=>'Sistema',
+                                        'items'=>array(
+                                            array('label'=>'proveedores','url'=>array('/proveedor')),
+                                        ),
+                                    ),
+                                array('label'=>'Operaciones',
+                                    'items'=>array(
+                                            array('label'=>'orden compra','url'=>array('/ordenCompra')),
+                                            array('label'=>''),
+                                        ),
+                                    ),
+                                   
 				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
 				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
 			),

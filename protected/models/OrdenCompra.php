@@ -18,7 +18,7 @@
  * The followings are the available model relations:
  * @property TblDetalleOrdenCompra[] $tblDetalleOrdenCompras
  */
-class OrdenCompra extends CActiveRecord
+class OrdenCompra extends Erp_startedActiveRecord//CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
@@ -47,6 +47,8 @@ class OrdenCompra extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('proveedor_id, estado, create_user_id, update_user_id', 'numerical', 'integerOnly'=>true),
+                        array('proveedor_id','required'),
+                    
 			array('codigo_unico', 'length', 'max'=>50),
 			array('fecha_orden, observaciones, create_time, update_time', 'safe'),
 			// The following rule is used by search().
@@ -63,7 +65,7 @@ class OrdenCompra extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'tblDetalleOrdenCompras' => array(self::HAS_MANY, 'TblDetalleOrdenCompra', 'orden_compra_id'),
+			'r_DetalleOrdenCompras' => array(self::HAS_MANY, 'DetalleOrdenCompra', 'orden_compra_id'),
 		);
 	}
 

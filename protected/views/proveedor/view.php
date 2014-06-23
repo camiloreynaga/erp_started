@@ -26,9 +26,17 @@ array('label'=>'Manage Proveedor','url'=>array('admin')),
 		'ciudad',
 		'telefono',
 		'linea_credito',
-		'create_time',
-		'create_user_id',
+                'create_time',
+                array(
+                  'name'=>'create_user_id',
+                  'value'=>Usuario::model()->getUsuario($model->create_user_id),
+                ),
 		'update_time',
-		'update_user_id',
+                array(
+                    'name'=>'update_user_id',
+                    'value'=>Usuario::model()->getUsuario($model->update_user_id),
+                ),
+				
+
 ),
 )); ?>

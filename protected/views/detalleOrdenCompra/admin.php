@@ -1,12 +1,12 @@
 <?php
 $this->breadcrumbs=array(
-	'Presentacions'=>array('index'),
+	'Detalle Orden Compras'=>array('index'),
 	'Manage',
 );
 
 $this->menu=array(
-array('label'=>'List Presentacion','url'=>array('index')),
-array('label'=>'Create Presentacion','url'=>array('create')),
+array('label'=>'List DetalleOrdenCompra','url'=>array('index')),
+array('label'=>'Create DetalleOrdenCompra','url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -15,7 +15,7 @@ $('.search-form').toggle();
 return false;
 });
 $('.search-form form').submit(function(){
-$.fn.yiiGridView.update('presentacion-grid', {
+$.fn.yiiGridView.update('detalle-orden-compra-grid', {
 data: $(this).serialize()
 });
 return false;
@@ -23,7 +23,7 @@ return false;
 ");
 ?>
 
-<h1>Manage Presentacions</h1>
+<h1>Manage Detalle Orden Compras</h1>
 
 <p>
 	You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>
@@ -39,18 +39,21 @@ return false;
 </div><!-- search-form -->
 
 <?php $this->widget('booster.widgets.TbGridView',array(
-'id'=>'presentacion-grid',
+'id'=>'detalle-orden-compra-grid',
 'dataProvider'=>$model->search(),
 'filter'=>$model,
 'columns'=>array(
 		'id',
-		'presentacion',
-		'abreviatura',
-		//'create_time',
-		//'create_user_id',
-		//'update_time',
+		'orden_compra_id',
+		'cotizacion_id',
+		'producto_id',
+		'cantidad',
+		'observacion',
 		/*
-		'update_user_id',
+		'precio_unitario',
+		'subtotal',
+		'impuesto',
+		'total',
 		*/
 array(
 'class'=>'booster.widgets.TbButtonColumn',

@@ -18,19 +18,19 @@
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('tipo_producto_id')); ?>:</b>
-	<?php echo CHtml::encode($data->tipoProducto->tipo_producto); ?>
+	<?php echo CHtml::encode($data->r_tipoProducto->tipo_producto); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('presentacion_id')); ?>:</b>
-	<?php echo CHtml::encode($data->presentacion->presentacion); ?>
+	<?php echo CHtml::encode($data->r_presentacion->presentacion); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('unidad_medida_id')); ?>:</b>
-	<?php echo CHtml::encode($data->unidadMedida->unidad_medida); ?>
+	<?php echo CHtml::encode($data->r_unidadMedida->unidad_medida); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('fabricante_id')); ?>:</b>
-	<?php echo CHtml::encode($data->fabricante->fabricante); ?>
+	<?php echo CHtml::encode($data->r_fabricante->fabricante); ?>
 	<br />
 
 	<?php /*

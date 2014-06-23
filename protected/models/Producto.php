@@ -13,7 +13,7 @@
  * @property integer $fabricante_id
  * @property integer $minimo_stock
  * @property integer $stock
- * @property integer $descontinado
+ * @property integer $descontinuado
  * @property double $precio
  * @property integer $ventaUnd
  * @property string $observacion
@@ -34,7 +34,7 @@
  * @property TblProductoDetalle[] $tblProductoDetalles
  * @property TblProductoDetalle[] $tblProductoDetalles1
  */
-class Producto extends CActiveRecord
+class Producto extends Erp_startedActiveRecord// CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
@@ -63,13 +63,13 @@ class Producto extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('nombre', 'required'),
-			array('tipo_producto_id, presentacion_id, unidad_medida_id, fabricante_id, minimo_stock, stock, descontinado, create_user_id, update_user_id', 'numerical', 'integerOnly'=>true),
+			array('tipo_producto_id, presentacion_id, unidad_medida_id, fabricante_id, minimo_stock, stock, descontinuado, create_user_id, update_user_id', 'numerical', 'integerOnly'=>true),
 			array('precio', 'numerical'),
 			array('nombre', 'length', 'max'=>100),
 			array('descripcion, observacion, create_time, update_time', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, nombre, descripcion, tipo_producto_id, presentacion_id, unidad_medida_id, fabricante_id, minimo_stock, stock, descontinado, precio, observacion, create_time, create_user_id, update_time, update_user_id', 'safe', 'on'=>'search'),
+			array('id, nombre, descripcion, tipo_producto_id, presentacion_id, unidad_medida_id, fabricante_id, minimo_stock, stock, descontinuado, precio, observacion, create_time, create_user_id, update_time, update_user_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -81,16 +81,16 @@ class Producto extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'tblCaracteristicaProductos' => array(self::HAS_MANY, 'TblCaracteristicaProducto', 'producto_id'),
-			'tblDetalleCaractProductos' => array(self::HAS_MANY, 'TblDetalleCaractProducto', 'producto_id'),
-			'tblDetalleCompras' => array(self::HAS_MANY, 'TblDetalleCompra', 'producto_id'),
-			'tblDetalleVentas' => array(self::HAS_MANY, 'TblDetalleVenta', 'producto_id'),
-			'fabricante' => array(self::BELONGS_TO, 'Fabricante', 'fabricante_id'),
-			'presentacion' => array(self::BELONGS_TO, 'Presentacion', 'presentacion_id'),
-			'tipoProducto' => array(self::BELONGS_TO, 'TipoProducto', 'tipo_producto_id'),
-			'unidadMedida' => array(self::BELONGS_TO, 'UnidadMedida', 'unidad_medida_id'),
-                        'productoDetalle' => array(self::HAS_MANY, 'ProductoDetalle', 'producto_id'),
-			'productoGrupo' => array(self::HAS_MANY, 'ProductoDetalle', 'producto_grupo_id'),
+			'r_CaracteristicaProductos' => array(self::HAS_MANY, 'CaracteristicaProducto', 'producto_id'),
+			'r_DetalleCaractProductos' => array(self::HAS_MANY, 'DetalleCaractProducto', 'producto_id'),
+			'r_DetalleCompras' => array(self::HAS_MANY, 'DetalleCompra', 'producto_id'),
+			'r_DetalleVentas' => array(self::HAS_MANY, 'DetalleVenta', 'producto_id'),
+			'r_fabricante' => array(self::BELONGS_TO, 'Fabricante', 'fabricante_id'),
+			'r_presentacion' => array(self::BELONGS_TO, 'Presentacion', 'presentacion_id'),
+			'r_tipoProducto' => array(self::BELONGS_TO, 'TipoProducto', 'tipo_producto_id'),
+			'r_unidadMedida' => array(self::BELONGS_TO, 'UnidadMedida', 'unidad_medida_id'),
+                        'r_productoDetalle' => array(self::HAS_MANY, 'ProductoDetalle', 'producto_id'),
+			'r_productoGrupo' => array(self::HAS_MANY, 'ProductoDetalle', 'producto_grupo_id'),
 		);
 	}
 
@@ -109,7 +109,7 @@ class Producto extends CActiveRecord
 			'fabricante_id' => 'Fabricante',
 			'minimo_stock' => 'Minimo Stock',
 			'stock' => 'Stock',
-			'descontinado' => 'Descontinado',
+			'descontinuado' => 'Descontinuado',
 			'precio' => 'Precio',
                         'ventaUnd' => 'Venta Und',
 			'observacion' => 'Observacion',
@@ -140,7 +140,7 @@ class Producto extends CActiveRecord
 		$criteria->compare('fabricante_id',$this->fabricante_id);
 		$criteria->compare('minimo_stock',$this->minimo_stock);
 		$criteria->compare('stock',$this->stock);
-		$criteria->compare('descontinado',$this->descontinado);
+		$criteria->compare('descontinuado',$this->descontinuado);
 		$criteria->compare('precio',$this->precio);
                 $criteria->compare('ventaUnd',$this->ventaUnd);
 		$criteria->compare('observacion',$this->observacion,true);

@@ -18,7 +18,7 @@
  * The followings are the available model relations:
  * @property TblEmpleado $empleado
  */
-class Usuario extends CActiveRecord
+class Usuario extends Erp_startedActiveRecord//CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
@@ -148,5 +148,13 @@ class Usuario extends CActiveRecord
         {
         return $this->hashPassword($password)===$this->password;
         }
-        
+        /**
+         * retorna el username del usuario
+         * @param type $id
+         * @return type
+         */
+        public function getUsuario($id)
+        {
+           return isset($id) ?$this->findByPk($id)->username : 'Unknow';
+        }
 }

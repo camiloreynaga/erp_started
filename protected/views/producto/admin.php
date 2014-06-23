@@ -44,11 +44,35 @@ return false;
 'filter'=>$model,
 'columns'=>array(
 		'id',
-		'nombre',
+		
+                array(
+                    'name'=>'nombre',
+                    'header'=>'Producto',
+                    //'value'=>'$data->r_Producto'
+                ),
 		'descripcion',
-		'tipo_producto_id',
-		'presentacion_id',
-		'unidad_medida_id',
+		array(
+                    'name'=>'tipo_producto_id',
+                    'header'=>'Tipo Producto',
+                    'value'=>'$data->r_tipoProducto->tipo_producto',
+                ),
+                array(
+                    'name'=>'presentacion_id',
+                    'header'=>'Presentación',
+                    'value'=>'$data->r_presentacion->presentacion'
+                ),
+                array(
+                    'name'=>'unidad_medida_id',
+                    'header'=>'Medida',
+                    'value'=>'$data->r_unidadMedida->unidad_medida'
+                ),
+                array(
+                    'name'=>'fabricante_id',
+                    'header'=>'Laboratorio',
+                    'value'=>'$data->r_fabricante->fabricante'
+                ),
+    
+		
 		/*
 		'fabricante_id',
 		'minimo_stock',
@@ -62,8 +86,8 @@ return false;
 		'update_time',
 		'update_user_id',
 		*/
-array(
-'class'=>'booster.widgets.TbButtonColumn',
-),
-),
+        array(
+            'class'=>'booster.widgets.TbButtonColumn',
+        ),
+    ),
 )); ?>

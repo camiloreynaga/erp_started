@@ -14,7 +14,7 @@
  * The followings are the available model relations:
  * @property TblProducto[] $tblProductos
  */
-class Fabricante extends CActiveRecord
+class Fabricante extends Erp_startedActiveRecord//CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
@@ -60,7 +60,7 @@ class Fabricante extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'tblProductos' => array(self::HAS_MANY, 'TblProducto', 'fabricante_id'),
+			'r_Productos' => array(self::HAS_MANY, 'Producto', 'fabricante_id'),
 		);
 	}
 

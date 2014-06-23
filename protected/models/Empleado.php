@@ -69,7 +69,7 @@ class Empleado extends Erp_startedActiveRecord//CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'tblUsuarios' => array(self::HAS_MANY, 'TblUsuario', 'empleado_id'),
+			'r_Usuarios' => array(self::HAS_MANY, 'Usuario', 'empleado_id'),
 		);
 	}
 

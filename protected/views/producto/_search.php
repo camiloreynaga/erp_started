@@ -21,7 +21,7 @@
 
 		<?php echo $form->textFieldGroup($model,'stock',array('class'=>'span5')); ?>
 
-		<?php echo $form->textFieldGroup($model,'descontinado',array('class'=>'span5')); ?>
+		<?php echo $form->textFieldGroup($model,'descontinuado',array('class'=>'span5')); ?>
 
 		<?php echo $form->textFieldGroup($model,'precio',array('class'=>'span5')); ?>
 

@@ -20,7 +20,7 @@
  * The followings are the available model relations:
  * @property TblCompra[] $tblCompras
  */
-class Proveedor extends CActiveRecord
+class Proveedor extends Erp_startedActiveRecord//CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
@@ -69,7 +69,8 @@ class Proveedor extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'tblCompras' => array(self::HAS_MANY, 'TblCompra', 'proveedor_id'),
+			'tblCompras' => array(self::HAS_MANY, 'Compra', 'proveedor_id'),
+                        'r_ordenCompra'=>array(self::HAS_MANY,'OrdenCompra','proveedor_id'),
 		);
 	}
 
@@ -80,8 +81,8 @@ class Proveedor extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'nombre_rz' => 'Nombre Rz',
-			'ruc' => 'Ruc',
+			'nombre_rz' => 'Nombre / Razon Social',
+			'ruc' => 'RUC',
 			'contacto' => 'Contacto',
 			'direccion' => 'Direccion',
 			'ciudad' => 'Ciudad',

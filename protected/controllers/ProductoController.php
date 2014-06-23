@@ -32,7 +32,7 @@ class ProductoController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update','search'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -141,6 +141,24 @@ class ProductoController extends Controller
 		$this->render('admin',array(
 			'model'=>$model,
 		));
+	}
+        
+        /*
+         * función para hacer una busqueda asincronica de productos
+         */
+        public function actionSearch()
+	{
+		$model=new Producto('search');
+		//$model->unsetAttributes();  // clear any default values
+                
+                if(isset($_GET['id']))
+                    $model->descontinuado=0;
+		if(isset($_GET['Producto']))
+			$model->attributes=$_GET['Producto'];
+                print_r($_GET['Producto']);
+                $this->renderPartial('_gridSearch',array(
+                        'producto'=>$model,
+                ));
 	}
 
 	/**

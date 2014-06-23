@@ -25,8 +25,14 @@ array('label'=>'Manage Usuario','url'=>array('admin')),
 		'empleado_id',
 		'last_login_time',
 		'create_time',
-		'create_user_id',
+                array(
+                  'name'=>'create_user_id',
+                  'value'=>Usuario::model()->getUsuario($model->create_user_id),
+                ),
 		'update_time',
-		'update_user_id',
+                array(
+                    'name'=>'update_user_id',
+                    'value'=>Usuario::model()->getUsuario($model->update_user_id),
+                ),
 ),
 )); ?>

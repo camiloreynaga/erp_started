@@ -21,8 +21,15 @@ array('label'=>'Manage Fabricante','url'=>array('admin')),
 		'id',
 		'fabricante',
 		'create_time',
-		'create_user_id',
+		
+                array(
+                  'name'=>'create_user_id',
+                  'value'=>Usuario::model()->getUsuario($model->create_user_id),
+                ),
 		'update_time',
-		'update_user_id',
+                array(
+                    'name'=>'update_user_id',
+                    'value'=>Usuario::model()->getUsuario($model->update_user_id),
+                ),
 ),
 )); ?>

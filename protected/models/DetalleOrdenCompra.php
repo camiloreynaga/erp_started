@@ -1,24 +1,29 @@
 <?php
 
 /**
- * This is the model class for table "tbl_producto_detalle".
+ * This is the model class for table "tbl_detalle_orden_compra".
  *
- * The followings are the available columns in table 'tbl_producto_detalle':
+ * The followings are the available columns in table 'tbl_detalle_orden_compra':
  * @property integer $id
- * @property integer $producto_grupo_id
+ * @property integer $orden_compra_id
+ * @property integer $cotizacion_id
  * @property integer $producto_id
  * @property integer $cantidad
+ * @property string $observacion
+ * @property string $precio_unitario
+ * @property string $subtotal
+ * @property string $impuesto
+ * @property string $total
  *
  * The followings are the available model relations:
- * @property TblProducto $producto
- * @property TblProducto $productoGrupo
+ * @property OrdenCompra $ordenCompra
  */
-class ProductoDetalle extends CActiveRecord
+class DetalleOrdenCompra extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
-	 * @return ProductoDetalle the static model class
+	 * @return DetalleOrdenCompra the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -30,7 +35,7 @@ class ProductoDetalle extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'tbl_producto_detalle';
+		return 'tbl_detalle_orden_compra';
 	}
 
 	/**
@@ -41,10 +46,12 @@ class ProductoDetalle extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('producto_grupo_id, producto_id, cantidad', 'numerical', 'integerOnly'=>true),
+			array('orden_compra_id, cotizacion_id, producto_id, cantidad', 'numerical', 'integerOnly'=>true),
+			array('precio_unitario, subtotal, impuesto, total', 'length', 'max'=>10),
+			array('observacion', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, producto_grupo_id, producto_id, cantidad', 'safe', 'on'=>'search'),
+			array('id, orden_compra_id, cotizacion_id, producto_id, cantidad, observacion, precio_unitario, subtotal, impuesto, total', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -56,8 +63,8 @@ class ProductoDetalle extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'r_producto' => array(self::BELONGS_TO, 'Producto', 'producto_id'),
-			'r_productoGrupo' => array(self::BELONGS_TO, 'Producto', 'producto_grupo_id'),
+			'r_ordenCompra' => array(self::BELONGS_TO, 'OrdenCompra', 'orden_compra_id'),
+                        'r_producto'=>array(self::BELONGS_TO,'Producto','producto_id'),
 		);
 	}
 
@@ -68,9 +75,15 @@ class ProductoDetalle extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'producto_grupo_id' => 'Producto Grupo',
+			'orden_compra_id' => 'Orden Compra',
+			'cotizacion_id' => 'Cotizacion',
 			'producto_id' => 'Producto',
 			'cantidad' => 'Cantidad',
+			'observacion' => 'Observacion',
+			'precio_unitario' => 'Precio Unitario',
+			'subtotal' => 'Subtotal',
+			'impuesto' => 'Impuesto',
+			'total' => 'Total',
 		);
 	}
 
@@ -86,9 +99,15 @@ class ProductoDetalle extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('producto_grupo_id',$this->producto_grupo_id);
+		$criteria->compare('orden_compra_id',$this->orden_compra_id);
+		$criteria->compare('cotizacion_id',$this->cotizacion_id);
 		$criteria->compare('producto_id',$this->producto_id);
 		$criteria->compare('cantidad',$this->cantidad);
+		$criteria->compare('observacion',$this->observacion,true);
+		$criteria->compare('precio_unitario',$this->precio_unitario,true);
+		$criteria->compare('subtotal',$this->subtotal,true);
+		$criteria->compare('impuesto',$this->impuesto,true);
+		$criteria->compare('total',$this->total,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
