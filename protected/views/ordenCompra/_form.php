@@ -11,31 +11,33 @@
 
 	<?php //echo $form->textFieldGroup($model,'fecha_orden',array('class'=>'span5')); ?>
 
-	<?php echo $form->textFieldGroup($model,'proveedor_id',array('class'=>'span5')); ?>
+	<?php //echo $form->textFieldGroup($model,'proveedor_id',array('class'=>'span5')); ?>
 
-	<?php echo $form->textAreaGroup($model,'observaciones',array('rows'=>6, 'cols'=>50, 'class'=>'span8')); ?>
-
-<?php /*echo $form->select2Group(
+	
+<?php echo $form->select2Group(
 			$model,
 			'proveedor_id',
+                      
 			array(
 				'wrapperHtmlOptions' => array(
 					'class' => 'col-sm-5',
 				),
 				'widgetOptions' => array(
-				'asDropDownList' => true,
+                                    
+                                    'asDropDownList' => true,
                                     'data'      => CHtml::listData (Proveedor::model()->findAll(), "id","nombre_rz"),
 					'options' => array(
-						//'tags' => array('clever', 'is', 'better', 'clevertech'),
-						//'placeholder' => 'type clever, or is, or just type!',
-						// 'width' => '40%', 
-						//'tokenSeparators' => array(',', ' ')
-					)
+						'placeholder' =>'Seleccione Proveedor', 
+                                                'width' => '40%', 
+						'tokenSeparators' => array(',', ' ')
+					),
 				)
 			)
 		);
-*/
+
 ?>
+<?php echo $form->textAreaGroup($model,'observaciones',array('rows'=>6, 'cols'=>50, 'class'=>'span8')); ?>
+
 
 	<?php //echo $form->textFieldGroup($model,'estado',array('class'=>'span5')); ?>
 
@@ -70,23 +72,23 @@
     <?php $model_proveedor= new Proveedor();// Proveedor::model();?>
 
 <?php 
-/*
 
- $this->widget('booster.widgets.TbSelect2' ,array(
-                    'name'      => 'group_id_list',
-                    'asDropDownList' => true,
-                    'data'      => CHtml::listData ($model_proveedor->findAll(), "id","nombre_rz"),
-                    //'val'       => implode(",",$model_proveedor->nombre_rz), //$model->filter_groups),
-                    
-                  'options' => array(
-                        //'placeholder'=>'Please make a selection',    
-                       'width' => "60%",
-                        //'tokenSeparators' => array(',', ' '),
-                    ),
-                  'htmlOptions' => array (
-                       //'multiple'  => 'multiple',
-                    ),
-              ));*/
+
+// $this->widget('booster.widgets.TbSelect2' ,array(
+//                    'name'      => 'group_id_list',
+//                    'asDropDownList' => true,
+//                    'data'      => CHtml::listData ($model_proveedor->findAll(), "id","nombre_rz"),
+//                    //'val'       => implode(",",$model_proveedor->nombre_rz), //$model->filter_groups),
+//                    
+//                  'options' => array(
+//                        'placeholder'=>'Please make a selection',    
+//                       'width' => "60%",
+//                        //'tokenSeparators' => array(',', ' '),
+//                    ),
+//                  'htmlOptions' => array (
+//                       //'multiple'  => 'multiple',
+//                    ),
+//              ));
  
  ?>
 
@@ -94,23 +96,23 @@
 
     <?php 
     
-    $model_proveedor= new Proveedor();// Proveedor::model();
-    $this->widget('booster.widgets.TbGridView',array(
-            'id'=>'proveedor-grid',
-            'dataProvider'=>$model_proveedor->search(),
-            'filter'=>$model_proveedor,//$model,
-            'ajaxUrl'=>array('Proveedor/Search'),
-            'columns'=>array(
-                            'id',
-                            'nombre_rz',
-                            'ruc',
-                            'direccion',
-                            'ciudad',
-            array(
-            'class'=>'booster.widgets.TbButtonColumn',
-            ),
-        ),
-    )); 
+//    $model_proveedor= new Proveedor();// Proveedor::model();
+//    $this->widget('booster.widgets.TbGridView',array(
+//            'id'=>'proveedor-grid',
+//            'dataProvider'=>$model_proveedor->search(),
+//            'filter'=>$model_proveedor,//$model,
+//            'ajaxUrl'=>array('Proveedor/Search'),
+//            'columns'=>array(
+//                            'id',
+//                            'nombre_rz',
+//                            'ruc',
+//                            'direccion',
+//                            'ciudad',
+//            array(
+//            'class'=>'booster.widgets.TbButtonColumn',
+//            ),
+//        ),
+//    )); 
     
     
   

@@ -1,16 +1,11 @@
-<?php
-/* @var $this ProductoController */
-/* @var $data Producto */
-?>
-
 <div class="view">
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('id')); ?>:</b>
-	<?php echo CHtml::link(CHtml::encode($data->id), array('view', 'id'=>$data->id)); ?>
+		<b><?php echo CHtml::encode($data->getAttributeLabel('id')); ?>:</b>
+	<?php echo CHtml::link(CHtml::encode($data->id),array('view','id'=>$data->id)); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('nombre')); ?>:</b>
-	<?php echo CHtml::link(CHtml::encode($data->nombre),array('view', 'id'=>$data->id)); ?>
+	<?php echo CHtml::encode($data->nombre); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('descripcion')); ?>:</b>
@@ -18,19 +13,19 @@
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('tipo_producto_id')); ?>:</b>
-	<?php echo CHtml::encode($data->r_tipoProducto->tipo_producto); ?>
+	<?php echo CHtml::encode($data->tipo_producto_id); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('presentacion_id')); ?>:</b>
-	<?php echo CHtml::encode($data->r_presentacion->presentacion); ?>
+	<?php echo CHtml::encode($data->presentacion_id); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('unidad_medida_id')); ?>:</b>
-	<?php echo CHtml::encode($data->r_unidadMedida->unidad_medida); ?>
+	<?php echo CHtml::encode($data->unidad_medida_id); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('fabricante_id')); ?>:</b>
-	<?php echo CHtml::encode($data->r_fabricante->fabricante); ?>
+	<?php echo CHtml::encode($data->fabricante_id); ?>
 	<br />
 
 	<?php /*
@@ -42,8 +37,8 @@
 	<?php echo CHtml::encode($data->stock); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('descontinado')); ?>:</b>
-	<?php echo CHtml::encode($data->descontinado); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('descontinuado')); ?>:</b>
+	<?php echo CHtml::encode($data->descontinuado); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('precio')); ?>:</b>

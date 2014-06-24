@@ -201,4 +201,12 @@ class Producto extends Erp_startedActiveRecord// CActiveRecord
             return Caracteristica::model()->findAll($criteria);
         }
         
+        public function getProductos()
+        {
+            $criteria= new CDbCriteria();
+            $criteria->condition='descontinuado=0';
+            //$criteria->
+              return $this->model()->findAll($criteria);      
+        }
+        
 }

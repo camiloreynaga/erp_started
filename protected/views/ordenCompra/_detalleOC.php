@@ -11,11 +11,12 @@
 //$producto = new Producto('search');// Producto();//
 //$producto->descontinuado=0;
 
-$producto=new Producto('search'); //Producto::model();//
+$producto=Producto::model();//new Producto(); //
 $producto->descontinuado=0;
         
 
-$this->widget('zii.widgets.grid.CGridView',array(
+//$this->widget('zii.widgets.grid.CGridView',array(
+$this->widget('booster.widgets.TbGridView',array(    
         'id'=>'producto-grid',
         'dataProvider'=>  $producto->search(),
         'filter'=>$producto,
@@ -62,16 +63,16 @@ $this->widget('zii.widgets.grid.CGridView',array(
                array(         // display a column with "view", "update" and "delete" buttons
                 'class'=>'CButtonColumn',
                 'template'=>'{add}',
-//                'buttons'=>array(
-//                    'add'=>array(
-//                        'label'=>'Agregar',
-//                        'url'=> '$this->grid->controller->createUrl("ordenCompra/addItem", array("idItem"=>$data->id,"idOrdenCompra"=>'.$orden_compra->id.'))',
-//                        'click'=>'function(){addItem($(this).attr("href")); $("#cru-dialog").dialog("open");  return false;}',
-//                        //'click'=>'$("#cru-dialog").dialog("open");  return false;}',
-//                        //'click'=>'addItem()'
-//                        
-//                        )
-//                    )
+                'buttons'=>array(
+                    'add'=>array(
+                        'label'=>'Agregar',
+                        'url'=> '$this->grid->controller->createUrl("ordenCompra/addItem", array("idItem"=>$data->id,"idOrdenCompra"=>'.$orden_compra->id.'))',
+                        'click'=>'function(){addItem($(this).attr("href")); $("#cru-dialog").dialog("open");  return false;}',
+                        //'click'=>'$("#cru-dialog").dialog("open");  return false;}',
+                        //'click'=>'addItem()'
+                        
+                        )
+                    )
                 ),
             )
         ));

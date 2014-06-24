@@ -158,9 +158,14 @@ class OrdenCompraController extends Controller
     public function actionAgregarDetalle($id)
 	{
 		$orden_compra=  OrdenCompra::model()->findByPk($id);
-		$this->render('_detalleOC',array(
-			'orden_compra'=>$orden_compra
-			));
+                $detalleOC= new DetalleOrdenCompra();
+                $detalleOC->orden_compra_id=$orden_compra->id;
+		//$this->render('_detalleOC',array(
+		//	'orden_compra'=>$orden_compra
+                $this->render('//detalleOrdenCompra/_form',array(
+                   'model'=> $detalleOC
+                ));
+		//	));
 	}
     /**
     * Returns the data model based on the primary key given in the GET variable.
