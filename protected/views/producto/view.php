@@ -19,21 +19,48 @@ array('label'=>'Manage Producto','url'=>array('admin')),
 'data'=>$model,
 'attributes'=>array(
 		'id',
-		'nombre',
-		'descripcion',
-		'tipo_producto_id',
-		'presentacion_id',
-		'unidad_medida_id',
-		'fabricante_id',
+		array(
+                    'name'=>'nombre',
+                    'value'=>$model->nombre
+                ),
+                array(
+                    'name'=>'descripcion',
+                    'value'=>$model->descripcion
+                ),
+		array(
+                    'name'=>'tipo_producto_id',
+                    'value'=>$model->r_tipoProducto->tipo_producto,
+                ),
+		array(
+                  'name'=> 'presentacion_id',
+                   'value'=>$model->r_presentacion->presentacion
+                ),
+		array(
+                    'name'=>'unidad_medida_id',
+                    'value'=>$model->r_unidadMedida->unidad_medida
+                ),
+		array(
+                    'name'=>'fabricante_id',
+                    'value'=>$model->r_fabricante->fabricante
+                ),
 		'minimo_stock',
 		'stock',
-		'descontinuado',
+		array(
+                    'name'=>'descontinuado',
+                    'value'=>$model->descontinuado==0?'NO':'SI'
+                ),
 		'precio',
 		'ventaUnd',
 		'observacion',
 		'create_time',
-		'create_user_id',
+		array(
+                  'name'=>'create_user_id',
+                  'value'=>Usuario::model()->getUsuario($model->create_user_id),
+                ),
 		'update_time',
-		'update_user_id',
+                array(
+                    'name'=>'update_user_id',
+                    'value'=>Usuario::model()->getUsuario($model->update_user_id),
+                ),
 ),
 )); ?>

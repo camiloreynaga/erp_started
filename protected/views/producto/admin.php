@@ -55,6 +55,20 @@ return false;
                     'name'=>'tipo_producto_id',
                     'header'=>'Tipo Producto',
                     'value'=>'$data->r_tipoProducto->tipo_producto',
+//                    'filter'=> $this->widget(
+//                        'booster.widgets.TbSelect2',
+//                            array(
+//                                    'name' => 'tipo_producto',
+//                                    'asDropDownList' => true,
+//                                        'data'      => CHtml::listData(Producto::model()->getTipoOptions(),'id','tipo_producto'),
+//                                            'options' => array(
+//                                                    //'tags' => array('clever', 'is', 'better', 'clevertech'),
+//                                                    'placeholder' => 'eliga por favor.',
+//                                                    /* 'width' => '40%', */
+//                                                    //'tokenSeparators' => array(',', ' ')
+//                                            )
+//                            )
+//                    ),
                 ),
                 array(
                     'name'=>'presentacion_id',

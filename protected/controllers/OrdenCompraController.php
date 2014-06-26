@@ -31,7 +31,7 @@ class OrdenCompraController extends Controller
             'users'=>array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-            'actions'=>array('create','update','addItem','agregarDetalle','aprobar','delete','deleteItem'),
+            'actions'=>array('create','update','ajaxAddItem','addItem','agregarDetalle','aprobar','delete','deleteItem','editCantidad'),
             'users'=>array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -75,6 +75,9 @@ class OrdenCompraController extends Controller
             if($model->save())
             //$this->redirect(array('view','id'=>$model->id));
                 $this->redirect(array('AgregarDetalle','id'=>$model->id));
+//                $this->redirect('//detalleOrdenCompra/_form',array(
+//                   'model'=> $detalleOC
+//                ));
         }
 
         $this->render('create',array(
@@ -115,11 +118,11 @@ class OrdenCompraController extends Controller
     {
         if(Yii::app()->request->isPostRequest)
         {
-            $model=$this->loadModel($id); //CR
-            $model->deleteDetaills(); //CR
-            $model->delete(); //CR
+            //$model=$this->loadModel($id); //CR
+            //$model->deleteDetaills(); //CR
+            //$model->delete(); //CR
             // we only allow deletion via POST request
-            //$this->loadModel($id)->delete(); //codigo original
+            $this->loadModel($id)->delete(); //codigo original
 
             // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
             if(!isset($_GET['ajax']))
@@ -157,16 +160,28 @@ class OrdenCompraController extends Controller
     
     public function actionAgregarDetalle($id)
 	{
-		$orden_compra=  OrdenCompra::model()->findByPk($id);
-                $detalleOC= new DetalleOrdenCompra();
-                $detalleOC->orden_compra_id=$orden_compra->id;
-		//$this->render('_detalleOC',array(
-		//	'orden_compra'=>$orden_compra
-                $this->render('//detalleOrdenCompra/_form',array(
-                   'model'=> $detalleOC
-                ));
-		//	));
-	}
+		//$orden_compra=  OrdenCompra::model()->findByPk($id);
+                //$detalleOC= new DetalleOrdenCompra();
+                //$detalleOC->orden_compra_id=$id;
+//		$this->render('_detalleOC',array(
+        
+                $itemOrden= new DetalleOrdenCompra();
+                $itemOrden->orden_compra_id=$id;
+                //$itemOrden->setScenario('create');
+//                 if(isset($_POST['DetalleOrdenCompra']))
+//                    {
+//                 $itemOrden->attributes=$_POST['DetalleOrdenCompra'];
+//                 $itemOrden->orden_compra_id=$id;
+//                 $itemOrden->subtotal=$itemOrden->precio_unitario*$itemOrden->cantidad;
+//                 //$compraItem->cantidad_disponible=$compraItem->cantidad;//agregando la cantidad disponible
+//                 $itemOrden->impuesto=$itemOrden->subtotal*((int)Yii::app()->params['impuesto']*0.01);
+//                 $itemOrden->total=$itemOrden->subtotal+$itemOrden->impuesto;
+//                    if($itemOrden->save())
+//                        echo'guardado';
+//                    }
+                $this->redirect(array('/DetalleOrdenCompra/create','pid'=>$id));
+                //$this->render('_formDetalleOC',array('orden_compra'=>$itemOrden));
+        }
     /**
     * Returns the data model based on the primary key given in the GET variable.
     * If the data model is not found, an HTTP exception will be raised.
@@ -193,6 +208,61 @@ class OrdenCompraController extends Controller
         }
     }
     
+    public function actionAjaxAddItem($id)//
+    {
+        //$orden_compra= OrdenCompra::model()->findByPk($id);
+        $itemOrden= new DetalleOrdenCompra();
+        $itemOrden->setScenario('create');
+         if(isset($_POST['DetalleOrdenCompra']))
+            {
+             $itemOrden->attributes=$_POST['DetalleOrdenCompra'];
+             $itemOrden->orden_compra_id=$id;
+             $itemOrden->subtotal=$itemOrden->precio_unitario*$itemOrden->cantidad;
+             //$compraItem->cantidad_disponible=$compraItem->cantidad;//agregando la cantidad disponible
+             $itemOrden->impuesto=$itemOrden->subtotal*((int)Yii::app()->params['impuesto']*0.01);
+             $itemOrden->total=$itemOrden->subtotal+$itemOrden->impuesto;
+                if($itemOrden->save())
+                {
+//                         echo CJSON::encode(array(
+//                                'status'=>'success', 
+//                                'div'=>"Producto agregado correctamente."
+//                                ));
+//                            exit;
+                }
+                    
+                    //$this->renderpartial('_formDetalleOC',array('orden_compra'=>$itemOrden),false,false);
+                else
+                {
+                    //$this->renderpart
+                    
+                    $this->renderPartial('_formDetalleOC',array('orden_compra'=>$itemOrden),false,false);
+                    
+//                    echo CJSON::encode(array(
+//                        'status'=>'failure', 
+//                        'div'=>$this->renderPartial('_formDetalleOC',array('orden_compra'=>$itemOrden),true,true)));
+//                    exit;
+                }
+                
+               
+            }
+            //$this->render('_formDetalleOC',array('orden_compra'=>$orden_compra));
+            
+            // $this->render('_viewItemOc',array('orden_compra_id'=>$id),false,true);
+            //$this->renderPartial('_viewItemOc',array('orden_compra_id'=>$id),false,true);
+            
+    }
+    
+    /*
+     * Edita la columna Cantidad de la grilla 
+     */
+    public function actionEditCantidad()
+    {
+         Yii::import('booster.components.TbEditableSaver');
+        $es = new TbEditableSaver('DetalleOrdenCompra');
+         $es->update();
+    
+    }
+
     public function actionAgregarItem($id)
 	{
 		$model=new DetalleOrdenCompra;

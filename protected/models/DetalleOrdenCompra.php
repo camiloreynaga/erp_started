@@ -47,6 +47,7 @@ class DetalleOrdenCompra extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('orden_compra_id, cotizacion_id, producto_id, cantidad', 'numerical', 'integerOnly'=>true),
+                        array('producto_id,cantidad','required'),
 			array('precio_unitario, subtotal, impuesto, total', 'length', 'max'=>10),
 			array('observacion', 'safe'),
 			// The following rule is used by search().
@@ -108,7 +109,8 @@ class DetalleOrdenCompra extends CActiveRecord
 		$criteria->compare('subtotal',$this->subtotal,true);
 		$criteria->compare('impuesto',$this->impuesto,true);
 		$criteria->compare('total',$this->total,true);
-
+                //$criteria->order('id');
+                $criteria->order= 'id DESC';
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));

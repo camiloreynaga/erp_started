@@ -6,6 +6,9 @@ class DetalleOrdenCompraController extends Controller
         * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
         * using two-column layout. See 'protected/views/layouts/column2.php'.
         */
+    
+        private $_ordenCompra = null;
+    
         public $layout='//layouts/column2';
 
         /**
@@ -15,7 +18,8 @@ class DetalleOrdenCompraController extends Controller
         {
             return array(
             'accessControl', // perform access control for CRUD operations
-            );
+            'OrdenCompraContext + create index admin',
+                );
         }
 
         /**
@@ -31,7 +35,7 @@ class DetalleOrdenCompraController extends Controller
                 'users'=>array('*'),
                 ),
                 array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions'=>array('create','update'),
+                'actions'=>array('create','update','editCantidad'),
                 'users'=>array('@'),
                 ),
                 array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -62,20 +66,33 @@ class DetalleOrdenCompraController extends Controller
         public function actionCreate()
         {
             $model=new DetalleOrdenCompra;
-
+            $model->orden_compra_id=  $this->_ordenCompra->id;
             // Uncomment the following line if AJAX validation is needed
             // $this->performAjaxValidation($model);
 
             if(isset($_POST['DetalleOrdenCompra']))
             {
-            $model->attributes=$_POST['DetalleOrdenCompra'];
-            if($model->save())
-            $this->redirect(array('view','id'=>$model->id));
+                $model->attributes=$_POST['DetalleOrdenCompra'];
+                    if($model->save())
+                    {
+                        echo CJSON::encode(array(
+                                'status'=>'success', 
+                                ));
+                           Yii::app()->end();// exit;
+                    }   
+                    else {
+                            $error = CActiveForm::validate($model);
+                                        if($error!='[]')
+                                            echo $error;
+                                        Yii::app()->end();
+                    }
             }
-
-            $this->render('create',array(
-            'model'=>$model,
-            ));
+            else
+                {
+                    $this->render('create',array(
+                'model'=>$model,
+                ));
+            }
         }
 
         /**
@@ -101,6 +118,16 @@ class DetalleOrdenCompraController extends Controller
             'model'=>$model,
             ));
         }
+        
+        public function actionEditCantidad()
+    {
+         //$model= DetalleOrdenCompra::model();
+
+         //Yii::import('path.to.editable.EditableSaver');
+         Yii::import('booster.components.TbEditableSaver');
+        $es = new TbEditableSaver('DetalleOrdenCompra');
+         $es->update();
+    }
 
         /**
         * Deletes a particular model.
@@ -172,5 +199,52 @@ class DetalleOrdenCompraController extends Controller
         echo CActiveForm::validate($model);
         Yii::app()->end();
         }
+        }
+        
+        public function filterOrdenCompraContext($filterChain)
+        {
+            //set the project identifier based on either the GET or POST input
+            //request variables, since we allow both types for our actions
+            
+            $OrdenCompra_Id=null;
+            if (isset($_GET['pid']))
+                $OrdenCompra_Id=$_GET['pid'];
+            else
+                if (isset ($_POST['pid']))
+                    $OrdenCompra_Id=$_POST['pid'];
+                
+                $this->loadOrdenCompra($OrdenCompra_Id);
+                
+                //complete the running of other filters and execute the requested action
+                $filterChain->run();
+
+        }
+        /**
+        * Returns the project model instance to which this issue belongs
+        */
+        public function getOrdenCompra()
+        {
+            return $this->_ordenCompra;
+            
+        }
+        
+        /**
+        * Protected method to load the associated Project model class
+        * @project_id the primary identifier of the associated Project
+        * @return object the Project data model based on the primary key
+        */
+        protected function loadOrdenCompra($oc_id)
+        {
+            //if the project property is null, create it based on input id 
+            if($this->_ordenCompra===null)
+            {
+                $this->_ordenCompra=  OrdenCompra::model()->findByPk($oc_id);
+                if ($this->_ordenCompra===null)
+                {
+                throw new CHttpException(404,'The requested project does not exist.');
+                }
+            }
+            
+            return $this->_ordenCompra;
         }
 }

@@ -41,7 +41,7 @@ class CaracteristicaProducto extends Erp_startedActiveRecord//CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('caracteristica_id', 'required'),//producto_id,
+			array('caracteristica_id,valor', 'required'),//producto_id,
 			array('producto_id, caracteristica_id', 'numerical', 'integerOnly'=>true),
 			array('valor', 'safe'),
 			// The following rule is used by search().

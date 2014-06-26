@@ -47,7 +47,16 @@ return false;
 		'orden_compra_id',
 		'cotizacion_id',
 		'producto_id',
-		'cantidad',
+		 array(
+                            'name' => 'cantidad',
+                            'header' => 'Cantidad',
+                            'class' => 'booster.widgets.TbEditableColumn',
+                            'headerHtmlOptions' => array('style' => 'width:200px'),
+                            'editable' => array(
+                                'type' => 'text',
+                                'url' => $this->createUrl('DetalleOrdenCompra/editCantidad')
+                            )
+                        ),
 		'observacion',
 		/*
 		'precio_unitario',

@@ -5,7 +5,7 @@
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('nombre')); ?>:</b>
-	<?php echo CHtml::encode($data->nombre); ?>
+	<?php echo CHtml::link(CHtml::encode($data->nombre),array('view', 'id'=>$data->id));  ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('descripcion')); ?>:</b>
@@ -13,19 +13,19 @@
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('tipo_producto_id')); ?>:</b>
-	<?php echo CHtml::encode($data->tipo_producto_id); ?>
+	<?php echo CHtml::encode($data->r_tipoProducto->tipo_producto); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('presentacion_id')); ?>:</b>
-	<?php echo CHtml::encode($data->presentacion_id); ?>
+	<?php echo CHtml::encode($data->r_presentacion->presentacion); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('unidad_medida_id')); ?>:</b>
-	<?php echo CHtml::encode($data->unidad_medida_id); ?>
+	<?php echo CHtml::encode($data->r_unidadMedida->unidad_medida); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('fabricante_id')); ?>:</b>
-	<?php echo CHtml::encode($data->fabricante_id); ?>
+	<?php echo CHtml::encode($data->r_fabricante->fabricante); ?>
 	<br />
 
 	<?php /*
