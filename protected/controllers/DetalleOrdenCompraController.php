@@ -35,7 +35,7 @@ class DetalleOrdenCompraController extends Controller
                 'users'=>array('*'),
                 ),
                 array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions'=>array('create','update','editCantidad'),
+                'actions'=>array('create','update','editCantidad','batchDelete'),
                 'users'=>array('@'),
                 ),
                 array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -73,6 +73,11 @@ class DetalleOrdenCompraController extends Controller
             if(isset($_POST['DetalleOrdenCompra']))
             {
                 $model->attributes=$_POST['DetalleOrdenCompra'];
+                //$model->orden_compra_id=$id;
+                $model->subtotal=$model->precio_unitario*$model->cantidad;
+                //$compraItem->cantidad_disponible=$compraItem->cantidad;//agregando la cantidad disponible
+                $model->impuesto=$model->subtotal*((int)Yii::app()->params['impuesto']*0.01);
+                $model->total=$model->subtotal+$model->impuesto;
                     if($model->save())
                     {
                         echo CJSON::encode(array(
@@ -106,7 +111,7 @@ class DetalleOrdenCompraController extends Controller
 
             // Uncomment the following line if AJAX validation is needed
             // $this->performAjaxValidation($model);
-
+            
             if(isset($_POST['DetalleOrdenCompra']))
             {
             $model->attributes=$_POST['DetalleOrdenCompra'];
@@ -120,15 +125,60 @@ class DetalleOrdenCompraController extends Controller
         }
         
         public function actionEditCantidad()
-    {
-         //$model= DetalleOrdenCompra::model();
-
-         //Yii::import('path.to.editable.EditableSaver');
+        {
          Yii::import('booster.components.TbEditableSaver');
-        $es = new TbEditableSaver('DetalleOrdenCompra');
-         $es->update();
-    }
+         $es = new TbEditableSaver('DetalleOrdenCompra');
+//         /$_cantidad= $es->value;
+          $es->onBeforeUpdate= function($event) {
 
+                   $model=$this->loadModel(yii::app()->request->getParam('pk')); //obteniendo el Model de detalleCompra
+                   $_cantidad=  yii::app()->request->getParam('value');
+                   $_subtotal=$model->precio_unitario*$_cantidad;//calculando el subtotal
+                   $_impuesto=$_subtotal*((int)Yii::app()->params['impuesto']*0.01); //calculando impuesto
+                   $_total=$_subtotal+$_impuesto; //calculando total
+                    
+                   $event->sender->setAttribute('subtotal', $_subtotal);//Actualizando Cantidad
+                   $event->sender->setAttribute('impuesto', $_impuesto);//Actualizando impuesto
+                   $event->sender->setAttribute('total', $_total); //actualizando total
+            
+            };
+            
+            $es->update();
+//         
+    }
+        
+         public function actionBatchDelete()
+        {
+             if(Yii::app()->request->getIsAjaxRequest())
+                {
+                 //$ids
+                    if(isset($_GET['ids'])){
+                    //if(isset($_POST['ids'])){
+                        //$ids = $_POST['ids'];
+                        $ids = $_GET['ids'];
+                    
+//                    if (empty($ids)) {
+//                        echo CJSON::encode(array('status' => 'failure', 'msg' => 'you should at least choice one item'));
+//                        die();
+//                    }
+                    $successCount = $failureCount = 0;
+                    foreach ($ids as $id) {
+                        $model = $this->loadModel($id);
+                        ($model->delete() == true) ? $successCount++ : $failureCount++;
+                    }
+//                    echo CJSON::encode(array('status' => 'success',
+//                        'data' => array(
+//                            'successCount' => $successCount,
+//                            'failureCount' => $failureCount,
+//                        )));
+//                    die();
+                }   
+                else{
+                    throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+                }
+            }
+        }
+        
         /**
         * Deletes a particular model.
         * If deletion is successful, the browser will be redirected to the 'admin' page.
@@ -136,17 +186,17 @@ class DetalleOrdenCompraController extends Controller
         */
         public function actionDelete($id)
         {
-        if(Yii::app()->request->isPostRequest)
-        {
-        // we only allow deletion via POST request
-        $this->loadModel($id)->delete();
+            if(Yii::app()->request->isPostRequest)
+            {
+                // we only allow deletion via POST request
+                $this->loadModel($id)->delete();
 
-        // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-        if(!isset($_GET['ajax']))
-        $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
-        }
-        else
-        throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+                // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+                if(!isset($_GET['ajax']))
+                $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+            }
+            else
+            throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
         }
 
         /**
@@ -225,9 +275,7 @@ class DetalleOrdenCompraController extends Controller
         public function getOrdenCompra()
         {
             return $this->_ordenCompra;
-            
         }
-        
         /**
         * Protected method to load the associated Project model class
         * @project_id the primary identifier of the associated Project
@@ -241,7 +289,7 @@ class DetalleOrdenCompraController extends Controller
                 $this->_ordenCompra=  OrdenCompra::model()->findByPk($oc_id);
                 if ($this->_ordenCompra===null)
                 {
-                throw new CHttpException(404,'The requested project does not exist.');
+                throw new CHttpException(404,'The requested orden compre does not exist.');
                 }
             }
             

@@ -179,6 +179,21 @@ public $layout='//layouts/column2';
         echo CJSON::encode($resultados);   
 
        }
+       
+       public function actionFiltro2Producto()
+        {
+           $lista =  Producto::model()->findAll('descontinuado=0'); 
+           $resultados = array();
+           foreach ($lista as $list){
+            $resultados[] = array(
+                         'id'=>$list->id,
+                         'text'=>  $list->nombre .' - '.$list->r_presentacion->presentacion. ' (STOCK:'.$list->stock.')',
+            ); 
+            }
+            return $resultados;
+        //echo CJSON::encode($resultados);   
+
+       }
 
         /**
         * Returns the data model based on the primary key given in the GET variable.

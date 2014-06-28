@@ -130,14 +130,18 @@ class Producto extends Erp_startedActiveRecord// CActiveRecord
 		// should not be searched.
 
 		$criteria=new CDbCriteria;
-
+                $criteria->with=array('r_fabricante','r_presentacion','r_tipoProducto');
+                //$_lab= Fabricante::model()->tablename();
+               // $criteria->join='inner join '.$_lab.' lab on lab.id = t.fabricante_id ';
+                        
 		$criteria->compare('id',$this->id);
 		$criteria->compare('nombre',$this->nombre,true);
 		$criteria->compare('descripcion',$this->descripcion,true);
-		$criteria->compare('tipo_producto_id',$this->tipo_producto_id);
-		$criteria->compare('presentacion_id',$this->presentacion_id);
+		$criteria->compare('r_tipoProducto.tipo_producto',$this->tipo_producto_id,true);
+		$criteria->compare('r_presentacion.presentacion',$this->presentacion_id,true);
 		$criteria->compare('unidad_medida_id',$this->unidad_medida_id);
-		$criteria->compare('fabricante_id',$this->fabricante_id);
+		$criteria->compare('r_fabricante.fabricante',$this->fabricante_id,true);
+                //$criteria->compare('fabricante_id',$this->fabricante_id);
 		$criteria->compare('minimo_stock',$this->minimo_stock);
 		$criteria->compare('stock',$this->stock);
 		$criteria->compare('descontinuado',$this->descontinuado);
@@ -205,8 +209,22 @@ class Producto extends Erp_startedActiveRecord// CActiveRecord
         {
             $criteria= new CDbCriteria();
             $criteria->condition='descontinuado=0';
-            //$criteria->
-              return $this->model()->findAll($criteria);      
+            $criteria->with=array('r_fabricante');
+            //$criteria->together=true;
+            $_lab= Fabricante::model()->tablename();
+           // $criteria->select='t.id,lab.fabricante as lab,t.nombre,t.stock';
+            $criteria->join='inner join '.$_lab.' lab on lab.id = t.fabricante_id ';
+            
+            $lista= $this->model()->findAll($criteria); 
+              $resultados = array();
+              foreach ($lista as $list){
+                $resultados[] = array(
+                         'id'=>$list->id,
+                         'text'=> $list->nombre.'-'.$list->r_fabricante->fabricante. ' (STOCK:'.$list->stock.')',
+              ); 
+            
+              }
+              return $resultados;   
         }
         
 }
