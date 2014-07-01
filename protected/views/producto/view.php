@@ -35,14 +35,17 @@ array('label'=>'Manage Producto','url'=>array('admin')),
                   'name'=> 'presentacion_id',
                    'value'=>$model->r_presentacion->presentacion
                 ),
+                array(
+                    'name'=>'fabricante_id',
+                    'value'=>$model->r_fabricante->fabricante
+                ),
+    
+    
 		array(
                     'name'=>'unidad_medida_id',
                     'value'=>$model->r_unidadMedida->unidad_medida
                 ),
-		array(
-                    'name'=>'fabricante_id',
-                    'value'=>$model->r_fabricante->fabricante
-                ),
+		
 		'minimo_stock',
 		'stock',
 		array(

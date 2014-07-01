@@ -14,7 +14,9 @@
  * @property integer $minimo_stock
  * @property integer $stock
  * @property integer $descontinuado
- * @property double $precio
+ * @property double $precio_venta
+ * @property double $precio_compra
+ * @property double $porcentaje_ganancia
  * @property integer $ventaUnd
  * @property string $observacion
  * @property string $create_time
@@ -23,16 +25,16 @@
  * @property integer $update_user_id
  *
  * The followings are the available model relations:
- * @property TblCaracteristicaProducto[] $tblCaracteristicaProductos
- * @property TblDetalleCaractProducto[] $tblDetalleCaractProductos
- * @property TblDetalleCompra[] $tblDetalleCompras
- * @property TblDetalleVenta[] $tblDetalleVentas
- * @property TblFabricante $fabricante
- * @property TblPresentacion $presentacion
- * @property TblTipoProducto $tipoProducto
- * @property TblUnidadMedida $unidadMedida
- * @property TblProductoDetalle[] $tblProductoDetalles
- * @property TblProductoDetalle[] $tblProductoDetalles1
+ * @property CaracteristicaProducto[] $tblCaracteristicaProductos
+ * @property DetalleCaractProducto[] $tblDetalleCaractProductos
+ * @property DetalleCompra[] $tblDetalleCompras
+ * @property DetalleVenta[] $tblDetalleVentas
+ * @property Fabricante $fabricante
+ * @property Presentacion $presentacion
+ * @property TipoProducto $tipoProducto
+ * @property UnidadMedida $unidadMedida
+ * @property ProductoDetalle[] $tblProductoDetalles
+ * @property ProductoDetalle[] $tblProductoDetalles1
  */
 class Producto extends Erp_startedActiveRecord// CActiveRecord
 {
@@ -64,12 +66,12 @@ class Producto extends Erp_startedActiveRecord// CActiveRecord
 		return array(
 			array('nombre', 'required'),
 			array('tipo_producto_id, presentacion_id, unidad_medida_id, fabricante_id, minimo_stock, stock, descontinuado, create_user_id, update_user_id', 'numerical', 'integerOnly'=>true),
-			array('precio', 'numerical'),
+			array('precio_venta, precio_compra, porcentaje_ganancia', 'numerical'),
 			array('nombre', 'length', 'max'=>100),
 			array('descripcion, observacion, create_time, update_time', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, nombre, descripcion, tipo_producto_id, presentacion_id, unidad_medida_id, fabricante_id, minimo_stock, stock, descontinuado, precio, observacion, create_time, create_user_id, update_time, update_user_id', 'safe', 'on'=>'search'),
+			array('id, nombre, descripcion, tipo_producto_id, presentacion_id, unidad_medida_id, fabricante_id, minimo_stock, stock, descontinuado, precio_venta, observacion, create_time, create_user_id, update_time, update_user_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -81,10 +83,9 @@ class Producto extends Erp_startedActiveRecord// CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'r_CaracteristicaProductos' => array(self::HAS_MANY, 'CaracteristicaProducto', 'producto_id'),
-			'r_DetalleCaractProductos' => array(self::HAS_MANY, 'DetalleCaractProducto', 'producto_id'),
-			'r_DetalleCompras' => array(self::HAS_MANY, 'DetalleCompra', 'producto_id'),
-			'r_DetalleVentas' => array(self::HAS_MANY, 'DetalleVenta', 'producto_id'),
+			'r_caracteristicaProductos' => array(self::HAS_MANY, 'CaracteristicaProducto', 'producto_id'),
+			'r_detalleCompras' => array(self::HAS_MANY, 'DetalleCompra', 'producto_id'),
+			'r_detalleVentas' => array(self::HAS_MANY, 'DetalleVenta', 'producto_id'),
 			'r_fabricante' => array(self::BELONGS_TO, 'Fabricante', 'fabricante_id'),
 			'r_presentacion' => array(self::BELONGS_TO, 'Presentacion', 'presentacion_id'),
 			'r_tipoProducto' => array(self::BELONGS_TO, 'TipoProducto', 'tipo_producto_id'),
@@ -110,7 +111,9 @@ class Producto extends Erp_startedActiveRecord// CActiveRecord
 			'minimo_stock' => 'Minimo Stock',
 			'stock' => 'Stock',
 			'descontinuado' => 'Descontinuado',
-			'precio' => 'Precio',
+			'precio_venta' => 'Precio Venta',
+                        'precio_compra' => 'Precio Compra',
+			'porcentaje_ganancia' => 'Porcentaje Ganancia',
                         'ventaUnd' => 'Venta Und',
 			'observacion' => 'Observacion',
 			'create_time' => 'Create Time',
@@ -139,13 +142,15 @@ class Producto extends Erp_startedActiveRecord// CActiveRecord
 		$criteria->compare('descripcion',$this->descripcion,true);
 		$criteria->compare('r_tipoProducto.tipo_producto',$this->tipo_producto_id,true);
 		$criteria->compare('r_presentacion.presentacion',$this->presentacion_id,true);
-		$criteria->compare('unidad_medida_id',$this->unidad_medida_id);
+		$criteria->compare('unidad_medida_id',$this->unidad_medida_id,true);
 		$criteria->compare('r_fabricante.fabricante',$this->fabricante_id,true);
                 //$criteria->compare('fabricante_id',$this->fabricante_id);
 		$criteria->compare('minimo_stock',$this->minimo_stock);
 		$criteria->compare('stock',$this->stock);
 		$criteria->compare('descontinuado',$this->descontinuado);
-		$criteria->compare('precio',$this->precio);
+		$criteria->compare('precio_venta',$this->precio_venta);
+               // $criteria->compare('precio_compra',$this->precio_compra);
+		//$criteria->compare('porcentaje_ganancia',$this->porcentaje_ganancia);
                 $criteria->compare('ventaUnd',$this->ventaUnd);
 		$criteria->compare('observacion',$this->observacion,true);
 		$criteria->compare('create_time',$this->create_time,true);
@@ -173,6 +178,7 @@ class Producto extends Erp_startedActiveRecord// CActiveRecord
         {
             $criteria = new CDbCriteria();
 		$criteria->order='presentacion';
+                $criteria->condition='activo=0';
 		return Presentacion::model()->findAll($criteria);
         }
         
@@ -181,6 +187,7 @@ class Producto extends Erp_startedActiveRecord// CActiveRecord
         {
             $criteria= new CDbCriteria();
             $criteria->order='tipo_producto';
+            $criteria->condition='activo=0';
             return TipoProducto::model()->findAll($criteria);
         }
         //obtiene las unidades de medida disponibles
@@ -188,6 +195,7 @@ class Producto extends Erp_startedActiveRecord// CActiveRecord
         {
             $criteria= new CDbCriteria();
             $criteria->order='unidad_medida';
+            $criteria->condition='activo=0';
             return UnidadMedida::model()->findAll($criteria);
         }
         //obtiene los fabricantes/ marcas/ laboratorios disponibles
@@ -195,6 +203,7 @@ class Producto extends Erp_startedActiveRecord// CActiveRecord
         {
             $criteria = new CDbCriteria();
             $criteria->order='fabricante';
+            $criteria->condition='activo=0';
             return Fabricante::model()->findAll($criteria);
         }
         //obtien las caracteristicas adicionales para un producto
@@ -202,6 +211,7 @@ class Producto extends Erp_startedActiveRecord// CActiveRecord
         {
             $criteria=new CDbCriteria();
             $criteria->order='caracteristica';
+            $criteria->condition='activo=0';
             return Caracteristica::model()->findAll($criteria);
         }
         

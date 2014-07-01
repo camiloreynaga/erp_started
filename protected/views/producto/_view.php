@@ -20,9 +20,7 @@
 	<?php echo CHtml::encode($data->r_presentacion->presentacion); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('unidad_medida_id')); ?>:</b>
-	<?php echo CHtml::encode($data->r_unidadMedida->unidad_medida); ?>
-	<br />
+	
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('fabricante_id')); ?>:</b>
 	<?php echo CHtml::encode($data->r_fabricante->fabricante); ?>

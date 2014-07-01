@@ -6,7 +6,6 @@
  * The followings are the available columns in table 'tbl_detalle_orden_compra':
  * @property integer $id
  * @property integer $orden_compra_id
- * @property integer $cotizacion_id
  * @property integer $producto_id
  * @property integer $cantidad
  * @property string $observacion
@@ -46,13 +45,13 @@ class DetalleOrdenCompra extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('orden_compra_id, cotizacion_id, producto_id, cantidad', 'numerical', 'integerOnly'=>true),
+			array('orden_compra_id, producto_id, cantidad', 'numerical', 'integerOnly'=>true),
                         array('producto_id,cantidad','required'),
 			array('precio_unitario, subtotal, impuesto, total', 'length', 'max'=>10),
 			array('observacion', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, orden_compra_id, cotizacion_id, producto_id, cantidad, observacion, precio_unitario, subtotal, impuesto, total', 'safe', 'on'=>'search'),
+			array('id, orden_compra_id,  producto_id, cantidad, observacion, precio_unitario, subtotal, impuesto, total', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -77,7 +76,6 @@ class DetalleOrdenCompra extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'orden_compra_id' => 'Orden Compra',
-			'cotizacion_id' => 'Cotizacion',
 			'producto_id' => 'Producto',
 			'cantidad' => 'Cantidad',
 			'observacion' => 'Observacion',
@@ -101,7 +99,6 @@ class DetalleOrdenCompra extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('orden_compra_id',$this->orden_compra_id);
-		$criteria->compare('cotizacion_id',$this->cotizacion_id);
 		$criteria->compare('producto_id',$this->producto_id);
 		$criteria->compare('cantidad',$this->cantidad);
 		$criteria->compare('observacion',$this->observacion,true);

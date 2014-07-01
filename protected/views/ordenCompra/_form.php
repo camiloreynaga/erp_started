@@ -7,7 +7,6 @@
 
 <?php echo $form->errorSummary($model); ?>
 
-	<?php //echo $form->textFieldGroup($model,'codigo_unico',array('class'=>'span5','maxlength'=>50)); ?>
 
 	<?php //echo $form->textFieldGroup($model,'fecha_orden',array('class'=>'span5')); ?>
 

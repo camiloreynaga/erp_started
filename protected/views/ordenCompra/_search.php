@@ -5,7 +5,6 @@
 
 		<?php echo $form->textFieldGroup($model,'id',array('class'=>'span5')); ?>
 
-		<?php echo $form->textFieldGroup($model,'codigo_unico',array('class'=>'span5','maxlength'=>50)); ?>
 
 		<?php echo $form->textFieldGroup($model,'fecha_orden',array('class'=>'span5')); ?>
 

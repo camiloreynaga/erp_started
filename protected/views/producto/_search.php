@@ -23,7 +23,7 @@
 
 		<?php echo $form->textFieldGroup($model,'descontinuado',array('class'=>'span5')); ?>
 
-		<?php echo $form->textFieldGroup($model,'precio',array('class'=>'span5')); ?>
+		<?php echo $form->textFieldGroup($model,'precio_venta',array('class'=>'span5')); ?>
 
 		<?php echo $form->textFieldGroup($model,'ventaUnd',array('class'=>'span5')); ?>
 

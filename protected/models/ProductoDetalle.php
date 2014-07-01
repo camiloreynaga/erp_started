@@ -10,21 +10,11 @@
  * @property integer $cantidad
  *
  * The followings are the available model relations:
- * @property TblProducto $producto
- * @property TblProducto $productoGrupo
+ * @property Producto $producto
+ * @property Producto $productoGrupo
  */
-class ProductoDetalle extends CActiveRecord
+class ProductoDetalle extends Erp_startedActiveRecord//CActiveRecord
 {
-	/**
-	 * Returns the static model of the specified AR class.
-	 * @param string $className active record class name.
-	 * @return ProductoDetalle the static model class
-	 */
-	public static function model($className=__CLASS__)
-	{
-		return parent::model($className);
-	}
-
 	/**
 	 * @return string the associated database table name
 	 */
@@ -43,7 +33,7 @@ class ProductoDetalle extends CActiveRecord
 		return array(
 			array('producto_grupo_id, producto_id, cantidad', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
-			// Please remove those attributes that should not be searched.
+			// @todo Please remove those attributes that should not be searched.
 			array('id, producto_grupo_id, producto_id, cantidad', 'safe', 'on'=>'search'),
 		);
 	}
@@ -76,12 +66,19 @@ class ProductoDetalle extends CActiveRecord
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
-	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
+	 *
+	 * Typical usecase:
+	 * - Initialize the model fields with values from filter form.
+	 * - Execute this method to get CActiveDataProvider instance which will filter
+	 * models according to data in model fields.
+	 * - Pass data provider to CGridView, CListView or any similar widget.
+	 *
+	 * @return CActiveDataProvider the data provider that can return the models
+	 * based on the search/filter conditions.
 	 */
 	public function search()
 	{
-		// Warning: Please modify the following code to remove attributes that
-		// should not be searched.
+		// @todo Please modify the following code to remove attributes that should not be searched.
 
 		$criteria=new CDbCriteria;
 
@@ -93,5 +90,16 @@ class ProductoDetalle extends CActiveRecord
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
+	}
+
+	/**
+	 * Returns the static model of the specified AR class.
+	 * Please note that you should have this exact method in all your CActiveRecord descendants!
+	 * @param string $className active record class name.
+	 * @return ProductoDetalle the static model class
+	 */
+	public static function model($className=__CLASS__)
+	{
+		return parent::model($className);
 	}
 }

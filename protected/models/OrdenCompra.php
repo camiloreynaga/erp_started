@@ -5,9 +5,9 @@
  *
  * The followings are the available columns in table 'tbl_orden_compra':
  * @property integer $id
- * @property string $codigo_unico
  * @property string $fecha_orden
  * @property integer $proveedor_id
+ * @property integer $cotizacion_id
  * @property string $observaciones
  * @property integer $estado
  * @property string $create_time
@@ -16,7 +16,7 @@
  * @property integer $update_user_id
  *
  * The followings are the available model relations:
- * @property TblDetalleOrdenCompra[] $tblDetalleOrdenCompras
+ * @property DetalleOrdenCompra[] $DetalleOrdenCompras
  */
 class OrdenCompra extends Erp_startedActiveRecord//CActiveRecord
 {
@@ -46,14 +46,13 @@ class OrdenCompra extends Erp_startedActiveRecord//CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('proveedor_id, estado, create_user_id, update_user_id', 'numerical', 'integerOnly'=>true),
+			array('proveedor_id,cotizacion_id, estado, create_user_id, update_user_id', 'numerical', 'integerOnly'=>true),
                         array('proveedor_id','required'),
                     
-			array('codigo_unico', 'length', 'max'=>50),
 			array('fecha_orden, observaciones, create_time, update_time', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, codigo_unico, fecha_orden, proveedor_id, observaciones, estado, create_time, create_user_id, update_time, update_user_id', 'safe', 'on'=>'search'),
+			array('id, fecha_orden, proveedor_id, cotizacion_id, observaciones, estado, create_time, create_user_id, update_time, update_user_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -77,9 +76,9 @@ class OrdenCompra extends Erp_startedActiveRecord//CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'codigo_unico' => 'Codigo Unico',
 			'fecha_orden' => 'Fecha Orden',
 			'proveedor_id' => 'Proveedor',
+                        'cotizacion_id' => 'Cotizacion',
 			'observaciones' => 'Observaciones',
 			'estado' => 'Estado',
 			'create_time' => 'Create Time',
@@ -101,9 +100,9 @@ class OrdenCompra extends Erp_startedActiveRecord//CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('codigo_unico',$this->codigo_unico,true);
 		$criteria->compare('fecha_orden',$this->fecha_orden,true);
 		$criteria->compare('proveedor_id',$this->proveedor_id);
+                $criteria->compare('cotizacion_id',$this->cotizacion_id);
 		$criteria->compare('observaciones',$this->observaciones,true);
 		$criteria->compare('estado',$this->estado);
 		$criteria->compare('create_time',$this->create_time,true);

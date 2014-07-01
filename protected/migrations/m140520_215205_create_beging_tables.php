@@ -100,7 +100,9 @@ class m140520_215205_create_beging_tables extends CDbMigration
                 'minimo_stock'=>'int(11) DEFAULT 0', // revisar
                 'stock'=>'int(11) DEFAULT 0',              
                 'descontinuado'=>'bool DEFAULT 0',
-                'precio'=>'float DEFAULT 0',
+                'precio_venta'=>'float DEFAULT 0', // no incluye impuesto
+                'precio_compra'=>'float DEFAULT 0', // no incluye impuesto
+                'porcentaje_ganancia'=>'float DEFAULT 0', 
                 'ventaUnd'=>'bool DEFAULT 1', //0 = false , 1=true
                 'observacion'=>'text DEFAULT NULL',
                 //registro para el sistema

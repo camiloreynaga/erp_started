@@ -7,26 +7,17 @@
  * @property integer $id
  * @property string $presentacion
  * @property string $abreviatura
+ * @property integer $activo
  * @property string $create_time
  * @property integer $create_user_id
  * @property string $update_time
  * @property integer $update_user_id
  *
  * The followings are the available model relations:
- * @property TblProducto[] $tblProductos
+ * @property Producto[] $productos
  */
 class Presentacion extends Erp_startedActiveRecord//CActiveRecord
 {
-	/**
-	 * Returns the static model of the specified AR class.
-	 * @param string $className active record class name.
-	 * @return Presentacion the static model class
-	 */
-	public static function model($className=__CLASS__)
-	{
-		return parent::model($className);
-	}
-
 	/**
 	 * @return string the associated database table name
 	 */
@@ -44,12 +35,12 @@ class Presentacion extends Erp_startedActiveRecord//CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('presentacion, abreviatura', 'required'),
-			array('create_user_id, update_user_id', 'numerical', 'integerOnly'=>true),
+			array('activo, create_user_id, update_user_id', 'numerical', 'integerOnly'=>true),
 			array('presentacion, abreviatura', 'length', 'max'=>50),
 			array('create_time, update_time', 'safe'),
 			// The following rule is used by search().
-			// Please remove those attributes that should not be searched.
-			array('id, presentacion, abreviatura, create_time, create_user_id, update_time, update_user_id', 'safe', 'on'=>'search'),
+			// @todo Please remove those attributes that should not be searched.
+			array('id, presentacion, abreviatura, activo, create_time, create_user_id, update_time, update_user_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -61,7 +52,7 @@ class Presentacion extends Erp_startedActiveRecord//CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'r_Productos' => array(self::HAS_MANY, 'Producto', 'presentacion_id'),
+			'r_productos' => array(self::HAS_MANY, 'Producto', 'presentacion_id'),
 		);
 	}
 
@@ -74,6 +65,7 @@ class Presentacion extends Erp_startedActiveRecord//CActiveRecord
 			'id' => 'ID',
 			'presentacion' => 'Presentacion',
 			'abreviatura' => 'Abreviatura',
+			'activo' => 'Activo',
 			'create_time' => 'Create Time',
 			'create_user_id' => 'Create User',
 			'update_time' => 'Update Time',
@@ -83,18 +75,26 @@ class Presentacion extends Erp_startedActiveRecord//CActiveRecord
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
-	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
+	 *
+	 * Typical usecase:
+	 * - Initialize the model fields with values from filter form.
+	 * - Execute this method to get CActiveDataProvider instance which will filter
+	 * models according to data in model fields.
+	 * - Pass data provider to CGridView, CListView or any similar widget.
+	 *
+	 * @return CActiveDataProvider the data provider that can return the models
+	 * based on the search/filter conditions.
 	 */
 	public function search()
 	{
-		// Warning: Please modify the following code to remove attributes that
-		// should not be searched.
+		// @todo Please modify the following code to remove attributes that should not be searched.
 
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('presentacion',$this->presentacion,true);
 		$criteria->compare('abreviatura',$this->abreviatura,true);
+		$criteria->compare('activo',$this->activo);
 		$criteria->compare('create_time',$this->create_time,true);
 		$criteria->compare('create_user_id',$this->create_user_id);
 		$criteria->compare('update_time',$this->update_time,true);
@@ -104,8 +104,15 @@ class Presentacion extends Erp_startedActiveRecord//CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
-        
-        
-         
-      
+
+	/**
+	 * Returns the static model of the specified AR class.
+	 * Please note that you should have this exact method in all your CActiveRecord descendants!
+	 * @param string $className active record class name.
+	 * @return Presentacion the static model class
+	 */
+	public static function model($className=__CLASS__)
+	{
+		return parent::model($className);
+	}
 }

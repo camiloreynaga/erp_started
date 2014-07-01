@@ -44,7 +44,6 @@ return false;
 'filter'=>$model,
 'columns'=>array(
 		'id',
-		'codigo_unico',
 		'fecha_orden',
 		'proveedor_id',
 		'observaciones',

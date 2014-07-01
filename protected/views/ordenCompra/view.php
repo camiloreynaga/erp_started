@@ -19,7 +19,6 @@ array('label'=>'Manage OrdenCompra','url'=>array('admin')),
 'data'=>$model,
 'attributes'=>array(
 		//'id',
-		//'codigo_unico',
 		'fecha_orden',
                 array(
                     'name'=>'proveedor_id',

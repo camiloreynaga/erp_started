@@ -4,9 +4,6 @@
 	<?php echo CHtml::link(CHtml::encode($data->id),array('view','id'=>$data->id)); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('codigo_unico')); ?>:</b>
-	<?php echo CHtml::encode($data->codigo_unico); ?>
-	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('fecha_orden')); ?>:</b>
 	<?php echo CHtml::encode($data->fecha_orden); ?>
