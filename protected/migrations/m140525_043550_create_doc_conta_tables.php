@@ -17,11 +17,10 @@ class m140525_043550_create_doc_conta_tables extends CDbMigration
 	public function safeUp()
 	{
             
-            
             $this->createTable('tbl_tipo_comprobante',array(
                 'id'=>'pk',
                 'comprobante'=>'varchar(20) NOT NULL',
-                'cod_comprobante'=>'varchar(5) NOT NULL',
+                'codigo_comprobante'=>'varchar(5) NOT NULL',
                 'create_time'=>'datetime DEFAULT NULL',
                 'create_user_id'=> 'int(11) DEFAULT NULL',
                 'update_time'=>'datetime DEFAULT NULL',
@@ -30,20 +29,73 @@ class m140525_043550_create_doc_conta_tables extends CDbMigration
             ),'ENGINE=InnoDB');
             
             //tabla para registro de comprobantes de pago
-            $this->createTable('tbl_comprobante',array(
+            $this->createTable('tbl_comprobante_compra',array(
                 'id'=>'pk',
-                'compra_venta_id'=>'int(11) NOT NULL',
-                'compra_venta'=>'smallint(6)', // especifica si la operación es venta o compra 0= compra 1 = venta
-                'tipo_id'=>'int(11) NOT NULL', //tipo de comproante
+                'compra_id'=>'int(11) NOT NULL',
+                //'compra_venta'=>'smallint(6)', // especifica si la operación es venta o compra 0= compra 1 = venta
+                'tipo_comprobante_id'=>'int(11) NOT NULL', //tipo de comproante
                 'fecha_emision'=>'Date DEFAULT NULL', //fecha de emisión del comprobante
+                'fecha_cancelacion'=>'Date DEFAULT NULL',
                 'serie'=>'varchar(5) NOT NULL',
                 'numero'=>'varchar(10) NOT NULL',
-                'estado'=>'smallint(5) DEFAULT 0', // 0 pendiente, 1 cancelado
-                'guia_remision_id'=>'int(11)',
+                'estado'=>'smallint(5) DEFAULT 0', // 0 pendiente, 1 cancelado 
+                'guia_remision_remitente'=>'varchar(15)',
+                'guia_remision_transportista'=>'varchar(15)',
                 'create_time'=>'datetime DEFAULT NULL',
                 'create_user_id'=> 'int(11) DEFAULT NULL',
                 'update_time'=>'datetime DEFAULT NULL',
                 'update_user_id'=>'int(11) DEFAULT NULL',
+            ), 'ENGINE=InnoDB');
+            
+            
+            $this->createTable('tbl_comprobante_venta',array(
+                'id'=>'pk',
+                'venta_id'=>'int(11) NOT NULL',
+                //'compra_venta'=>'smallint(6)', // especifica si la operación es venta o compra 0= compra 1 = venta
+                'tipo_comprobante_id'=>'int(11) NOT NULL', //tipo de comprobante
+                'fecha_emision'=>'Date DEFAULT NULL', //fecha de emisión del comprobante
+                'fecha_cancelacion'=>'Date DEFAULT NULL',
+                'serie'=>'varchar(5) NOT NULL',
+                'numero'=>'varchar(10) NOT NULL',
+                'estado'=>'smallint(5) DEFAULT 0', // 0 pendiente, 1 cancelado 
+                'guia_remision_remitente'=>'varchar(15)',
+                'guia_remision_transportista'=>'varchar(15)',
+                'create_time'=>'datetime DEFAULT NULL',
+                'create_user_id'=> 'int(11) DEFAULT NULL',
+                'update_time'=>'datetime DEFAULT NULL',
+                'update_user_id'=>'int(11) DEFAULT NULL',
+            ), 'ENGINE=InnoDB');
+            
+            
+            //tabla para registro de comprobantes de pago
+            $this->createTable('tbl_nota_credito',array(
+                'id'=>'pk',
+                //'venta_id'=>'int(11) NOT NULL',
+                'comprobante_venta_id'=>'int(11)',
+                'fecha_emision'=>'Date DEFAULT NULL', //fecha de emisión del comprobante
+                'serie'=>'varchar(5) NOT NULL',
+                'numero'=>'varchar(10) NOT NULL',
+                'estado'=>'smallint(5) DEFAULT 0', // 0 pendiente, 1 cancelado 2 anulado
+                'motivo_emision'=>'varchar(50)',
+                'base_imponible'=>'decimal(10,2)',
+                'impuesto'=>'decimal(10,2) DEFAULT NULL' ,
+                'importe_total'=>'decimal(10,2) DEFAULT NULL',
+                'create_time'=>'datetime DEFAULT NULL',
+                'create_user_id'=> 'int(11) DEFAULT NULL',
+                'update_time'=>'datetime DEFAULT NULL',
+                'update_user_id'=>'int(11) DEFAULT NULL',
+            ), 'ENGINE=InnoDB');
+            
+            $this->createTable('tbl_detalle_nota_credito',array(
+                'id'=>'pk',
+                'nota_credito_id'=>'int(11)',
+                //'cotizacion_id'=>'int(11) DEFAULT NULL',
+                'producto_id'=>'int(11)',
+                'cantidad'=>'int(11)',
+                'precio_unitario'=>'decimal(10,2)',
+                'subtotal'=>'decimal(10,2)',
+                'impuesto'=>'decimal(10,2)',
+                'total'=>'decimal(10,2)',
             ), 'ENGINE=InnoDB');
             
                         
@@ -89,27 +141,41 @@ class m140525_043550_create_doc_conta_tables extends CDbMigration
             
             //relaciones entre tablas
             
-            //tipo de comprobante con comprobante
-            $this->addForeignKey('fk_tipo_comprobante', 'tbl_comprobante', 'tipo_id', 'tbl_tipo_comprobante', 'id', 'CASCADE', 'RESTRICT');
+            //tipo de comprobante con comprobante compra
+            $this->addForeignKey('fk_tipo_comprobante_compra', 'tbl_comprobante_compra', 'tipo_comprobante_id', 'tbl_tipo_comprobante', 'id', 'CASCADE', 'RESTRICT');
+            //tipo de comprobante con comprobante venta
+            $this->addForeignKey('fk_tipo_comprobante_venta', 'tbl_comprobante_venta', 'tipo_comprobante_id', 'tbl_tipo_comprobante', 'id', 'CASCADE', 'RESTRICT');
             //compra con comprobante
-            $this->addForeignKey('fk_compra_comprobante', 'tbl_comprobante', 'compra_venta_id', 'tbl_compra', 'id', 'CASCADE', 'RESTRICT');
+            $this->addForeignKey('fk_compra_comprobante', 'tbl_comprobante_compra', 'compra_id', 'tbl_compra', 'id', 'CASCADE', 'RESTRICT');
            //venta con comprobante
-            $this->addForeignKey('fk_venta_comprobante', 'tbl_comprobante', 'compra_venta_id', 'tbl_venta', 'id', 'CASCADE', 'RESTRICT');
+            $this->addForeignKey('fk_venta_comprobante', 'tbl_comprobante_venta', 'venta_id', 'tbl_venta', 'id', 'CASCADE', 'RESTRICT');
            
-            
+            //Relación e guia de remision con detalle de GR
+            $this->addForeignKey('fk_guia_remision_detalle', 'tbl_detalle_guia_remision', 'guia_remision_id', 'tbl_guia_remision', 'id','CASCADE','RESTRICT');
+            //relaación nota de credito detalle nota de credito
+            $this->addForeignKey('fk_nota_credito_detalle', 'tbl_detalle_nota_credito', 'nota_credito_id', 'tbl_nota_credito', 'id','CASCADE','RESTRICT');
             
 	}
 
 	public function safeDown()
 	{
-            $this->dropForeignKey('fk_tipo_comprobante', 'tbl_comprobante');
-            $this->dropForeignKey('fk_compra_comprobante', 'tbl_comprobante');
-            $this->dropForeignKey('fk_venta_comprobante', 'tbl_comprobante');
-//            
+            
+            $this->dropForeignKey('fk_tipo_comprobante_compra', 'tbl_comprobante_compra');
+            $this->dropForeignKey('fk_tipo_comprobante_venta', 'tbl_comprobante_venta');
+            $this->dropForeignKey('fk_compra_comprobante', 'tbl_comprobante_compra');
+            $this->dropForeignKey('fk_venta_comprobante', 'tbl_comprobante_venta');
+//          $this  
+            $this->dropForeignKey('fk_guia_remision_detalle', 'tbl_detalle_guia_remision');
+            $this->dropForeignKey('fk_nota_credito_detalle', 'tbl_detalle_nota_credito');
+            
             $this->dropTable('tbl_tipo_comprobante');
-            $this->dropTable('tbl_comprobante');
+            $this->dropTable('tbl_comprobante_compra');
+            $this->dropTable('tbl_comprobante_venta');
             $this->dropTable('tbl_guia_remision');
             $this->dropTable('tbl_detalle_guia_remision');
+            $this->dropTable('tbl_nota_credito');
+            $this->dropTable('tbl_detalle_nota_credito');
+            
 //            $this->dropTable('tbl_comprante_guia');
 	}
 	

@@ -66,6 +66,7 @@ class OrdenCompra extends Erp_startedActiveRecord//CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'r_DetalleOrdenCompras' => array(self::HAS_MANY, 'DetalleOrdenCompra', 'orden_compra_id'),
+                        'r_proveedor'=>array(self::BELONGS_TO,'Proveedor','proveedor_id'),
 		);
 	}
 

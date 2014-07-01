@@ -124,6 +124,10 @@ class DetalleOrdenCompraController extends Controller
             ));
         }
         
+        /*
+         * Edita la cantidad de la columna 
+         * además actualiza los calculos de subtotal,impuesto y total
+         */
         public function actionEditCantidad()
         {
          Yii::import('booster.components.TbEditableSaver');
@@ -294,5 +298,11 @@ class DetalleOrdenCompraController extends Controller
             }
             
             return $this->_ordenCompra;
+        }
+        
+        
+        public function actionFinalizarCompra($id)
+        {
+            $this->redirect(array('compra/view','id'=>$id));
         }
 }

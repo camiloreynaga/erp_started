@@ -28,6 +28,7 @@ class m140520_215205_create_beging_tables extends CDbMigration
                 'id'=>'pk',
                 'presentacion'=>'varchar(50) NOT NULL',
                 'abreviatura'=>'varchar(50) NOT NULL', // und de medida
+                'activo'=>'bool DEFAULT 0', // 0=si ;1=no
                 //registro para el sistema
                 'create_time'=>'datetime DEFAULT NULL',
                 'create_user_id'=> 'int(11) DEFAULT NULL',
@@ -38,7 +39,8 @@ class m140520_215205_create_beging_tables extends CDbMigration
             $this->createTable('tbl_unidad_medida',array(
                 'id'=>'pk',
                 'unidad_medida'=>'varchar(50) NOT NULL',
-                'nonmenclatura'=>'varchar(50) NOT NULL',
+                'nonmenclatura'=>'varchar(10) NOT NULL',
+                'activo'=>'bool DEFAULT 0', // 0=si ;1=no
                 //
                 'create_time'=>'datetime DEFAULT NULL',
                 'create_user_id'=> 'int(11) DEFAULT NULL',
@@ -51,6 +53,7 @@ class m140520_215205_create_beging_tables extends CDbMigration
             $this->createTable('tbl_tipo_producto',array(
                 'id'=>'pk',
                 'tipo_producto'=>'varchar(50) NOT NULL',
+                'activo'=>'bool DEFAULT 0', // 0=si ;1=no
                 //registro para el sistema
                 'create_time'=>'datetime DEFAULT NULL',
                 'create_user_id'=> 'int(11) DEFAULT NULL',
@@ -63,6 +66,7 @@ class m140520_215205_create_beging_tables extends CDbMigration
             $this->createTable('tbl_fabricante', array(
                 'id'=>'pk',
                 'fabricante'=>'varchar(50) NOT NULL',
+                'activo'=>'bool DEFAULT 0', // 0=si ;1=no
                 //registro para el sistema
                 'create_time'=>'datetime DEFAULT NULL',
                 'create_user_id'=> 'int(11) DEFAULT NULL',
@@ -75,6 +79,7 @@ class m140520_215205_create_beging_tables extends CDbMigration
             $this->createTable('tbl_caracteristica', array(
                 'id'=>'pk',
                 'caracteristica'=>'varchar(50)',
+                'activo'=>'bool DEFAULT 0', // 0=si ;1=no
                 //registro para el sistema
                 'create_time'=>'datetime DEFAULT NULL',
                 'create_user_id'=> 'int(11) DEFAULT NULL',
@@ -94,7 +99,7 @@ class m140520_215205_create_beging_tables extends CDbMigration
                 'fabricante_id'=>'int(11) DEFAULT NULL',
                 'minimo_stock'=>'int(11) DEFAULT 0', // revisar
                 'stock'=>'int(11) DEFAULT 0',              
-                'descontinado'=>'bool DEFAULT 0',
+                'descontinuado'=>'bool DEFAULT 0',
                 'precio'=>'float DEFAULT 0',
                 'ventaUnd'=>'bool DEFAULT 1', //0 = false , 1=true
                 'observacion'=>'text DEFAULT NULL',
@@ -113,11 +118,11 @@ class m140520_215205_create_beging_tables extends CDbMigration
                  //'nonmenclatura'=>'varchar(50)',
              ),'ENGINE=InnoDB');
              
-            $this->createTable('tbl_producto_detalle', array(
-                'id'=>'pk',
-                'producto_grupo_id'=>'int(11)',
-                'producto_id'=>'int(11)',
-                'cantidad'=>'int(11)'
+            $this->createTable('tbl_producto_detalle', array( 
+                'id'=>'pk', //
+                'producto_grupo_id'=>'int(11)', //id producto que se padre Ej: set Ollas
+                'producto_id'=>'int(11)', //id producto hijo (detalle) Ej: Olla a presion, Olla nro 12
+                'cantidad'=>'int(11)'  // cantidad de los productos Ej: 
 
             ), 'ENGINE=InnoDB');
 

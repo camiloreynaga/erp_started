@@ -51,19 +51,19 @@ return false;
                             'name' => 'cantidad',
                             'header' => 'Cantidad',
                             'class' => 'booster.widgets.TbEditableColumn',
-                            'headerHtmlOptions' => array('style' => 'width:200px'),
+                            //'headerHtmlOptions' => array('style' => 'width:200px'),
                             'editable' => array(
                                 'type' => 'text',
                                 'url' => $this->createUrl('DetalleOrdenCompra/editCantidad')
                             )
                         ),
 		'observacion',
-		/*
+		
 		'precio_unitario',
 		'subtotal',
 		'impuesto',
 		'total',
-		*/
+		
 array(
 'class'=>'booster.widgets.TbButtonColumn',
 ),

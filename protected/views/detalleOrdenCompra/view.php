@@ -30,3 +30,4 @@ array('label'=>'Manage DetalleOrdenCompra','url'=>array('admin')),
 		'total',
 ),
 )); ?>
+

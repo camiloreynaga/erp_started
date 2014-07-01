@@ -1,6 +1,113 @@
+<script> //
+        //actualiza la grila 
+        function updateGrilla(data) {
+                // display data returned from action
+                $("#Items").html(data);
+                // refresh your grid
+                $.fn.yiiGridView.update('detalle-orden-compra-grid');
+        }
+        //muestra errores del form luego de la validación
+        function formErrors(data,form){
+        var summary = '';
+        summary="<p>Please solve following errors:</p>";
+
+        $.each(data, function(key, val) {
+        $(form+" #"+key+"_em_").html(val.toString());
+        $(form+" #"+key+"_em_").show();
+
+        $("#"+key).parent().addClass("row error");
+        summary = summary + "<ul><li>" + val.toString() + "</li></ul>";
+        });
+        $(form+"_es_").html(summary.toString());
+        $(form+"_es_").show();
+
+        $("[id^='update-button']").show();
+        $('#ajax-status').hide();//css({display:'none'});
+        $('#ajax-status').text('');
+        }
+        
+        //esconde los errores del form si la validación es correcta
+        function hideFormErrors(form){
+        //alert (form+"_es_");
+        $(form+"_es_").html('');
+        $(form+"_es_").hide();
+        $("[id$='_em_']").html('');
+        }
+</script>
+
+<script type="text/javascript">
+    
+    
+    
+    // as a global variable
+    var gridId = "detalle-orden-compra-grid";
+
+    $(function(){
+        // prevent the click event
+        $(document).on('click','#detalle-orden-compra-grid a.bulk-action',function() {
+            return false;
+        });
+    });
+    
+    
+    
+    
+    
+    function batchActions()
+    {   
+        var url = $(this).attr('href');
+        var checked = $.fn.yiiGridView.getCheckedRowsIds('detalle-orden-compra-grid');
+        var count = checked.length;
+        if (!count) {
+	                alert('No items are checked');
+	                //return false;
+	            }
+//        if(count>0 && confirm("Do you want to delete these "+count+" item(s)"))
+//        {
+                $.ajax({
+                        
+                        type: "POST",
+                        dataType:'json',
+                        url:url,
+                        data:{ids:checked},
+                        //"'.CHtml::normalizeUrl(array('CONTROLLER_NAME/RemoveChecked')).'",
+                        success: function(data){
+                            //alert( "Data Saved: " + resp);
+                                if(data.status == "success"){
+                                    updateGrilla(data);
+                                   //$.fn.yiiGridView.update(gridId);
+                                }else{
+                                    alert(data.msg);
+                                }
+                            }
+                        //success:function(data){$("#GRID_ID").yiiGridView("update",{});},              
+                });
+//        }
+    }
+   
+</script>
+
+<?php
+//script para boton delete 
+Yii::app()->clientScript->registerScript('delete','
+$("#delete").click(function(){
+        var checked=$("#detalle-orden-compra-grid").yiiGridView("getChecked","detalle-orden-compra-grid_c0"); // _c0 means the checkboxes are located in the first column, change if you put the checkboxes somewhere else
+        var count=checked.length;
+                if(count==0){
+                alert("No items selected");
+                }
+        if(count>0 && confirm("Do you want to delete these "+count+" item(s)"))
+        {
+                $.ajax({
+                        data:{ids:checked},
+                        url:"'.CController::createUrl('detalleOrdenCompra/batchDelete').'",
+                        success:function(data){$("#detalle-orden-compra-grid").yiiGridView("update",{});},              
+                });
+        }
+        });
+');?>
+
 <?php 
-
-
 $form=$this->beginWidget('booster.widgets.TbActiveForm',array(
 	'id'=>'detalle-orden-compra-form',
 	'enableAjaxValidation'=>true,
@@ -12,24 +119,7 @@ $form=$this->beginWidget('booster.widgets.TbActiveForm',array(
             'validateOnSubmit' => true,
             'validateOnChange' => false,
             'validateOnType' => false,
-//            'afterValidate' => "js:function(form, data, hasError){
-//            //RECEIVE FORM VALIDATION MESSAGES
-//            if (hasError) {
-//                alert(data.msg);
-//                //DO SOMETHING IF NECESSARY
-//                return false;
-//            }
-//            //RECEIVE other validation messages from try/catch: database constraints, unknown messages
-//            else {
-//                //SHOW MESSAGES
-//                if (typeof data.status !== 'undefined')
-//                    alert(data.msg);
-//                //NO ERROR, DO SOMETHING (SHOW ABOVE CONDITIONS)
-//                else {
-//                    " . $js . "
-//                }
-//            }
-//        }"
+
         )
 )); ?>
 
@@ -144,42 +234,7 @@ echo $form->errorSummary($model); ?>
 
 <?php $this->endWidget(); ?>
 
-<script>
-        //actualiza la grila 
-        function updateGrilla(data) {
-                // display data returned from action
-                $("#Items").html(data);
-                // refresh your grid
-                $.fn.yiiGridView.update('detalle-orden-compra-grid');
-        }
-        //muestra errores del form luego de la validación
-        function formErrors(data,form){
-        var summary = '';
-        summary="<p>Please solve following errors:</p>";
 
-        $.each(data, function(key, val) {
-        $(form+" #"+key+"_em_").html(val.toString());
-        $(form+" #"+key+"_em_").show();
-
-        $("#"+key).parent().addClass("row error");
-        summary = summary + "<ul><li>" + val.toString() + "</li></ul>";
-        });
-        $(form+"_es_").html(summary.toString());
-        $(form+"_es_").show();
-
-        $("[id^='update-button']").show();
-        $('#ajax-status').hide();//css({display:'none'});
-        $('#ajax-status').text('');
-        }
-        
-        //esconde los errores del form si la validación es correcta
-        function hideFormErrors(form){
-        //alert (form+"_es_");
-        $(form+"_es_").html('');
-        $(form+"_es_").hide();
-        $("[id$='_em_']").html('');
-        }
-</script>
 
 
 <div id="Items"></div>
@@ -190,7 +245,7 @@ $this->widget('booster.widgets.TbExtendedGridView',array(
             'type'=>'striped bordered',
             'fixedHeader' => true,
             'headerOffset' => 40,
-            'responsiveTable' => true,
+            //'responsiveTable' => true,
             'dataProvider'=>$model->search(),
              'selectableRows' => 2,
             //'filter'=>$model,
@@ -229,10 +284,15 @@ $this->widget('booster.widgets.TbExtendedGridView',array(
 //                                'header'=>'laboratorio',
 //                                'value'=>'$data->r_producto->r_fabricante->fabricante', 
 //                            ),
-                  array(
+                            array(
                                 'name'=>'producto_id',
                                 'header'=>'Producto',
                                 'value'=>'$data->r_producto->nombre', 
+                            ),
+                            array(
+                                'name'=>'presentacion_id',
+                                'header'=>'Presentacion',
+                                'value'=>'$data->r_producto->r_presentacion->presentacion'
                             ),
                             array(
                             'name' => 'cantidad',
@@ -292,84 +352,55 @@ $this->widget('booster.widgets.TbExtendedGridView',array(
             ),
 )); 
 
-    $this->widget('booster.widgets.TbButton',array( // Button to delete
+   
+?>
+<div >
+    
+    <?php  $this->widget('booster.widgets.TbButton',array( // Button to delete
             'label' => 'Delete Selected Items',
             'context' => 'danger',
             'size' => 'small',
             'id' => 'delete',
             'url'=>CController::createUrl('detalleOrdenCompra/create')
             ));
-?>
+    ?>
+</div>
 
-<?php
-//script para boton delete 
-
-Yii::app()->clientScript->registerScript('delete','
-$("#delete").click(function(){
-        var checked=$("#detalle-orden-compra-grid").yiiGridView("getChecked","detalle-orden-compra-grid_c0"); // _c0 means the checkboxes are located in the first column, change if you put the checkboxes somewhere else
-        var count=checked.length;
-                if(count==0){
-                alert("No items selected");
-                }
-        if(count>0 && confirm("Do you want to delete these "+count+" item(s)"))
-        {
-                $.ajax({
-                        data:{ids:checked},
-                        url:"'.CController::createUrl('detalleOrdenCompra/batchDelete').'",
-                        success:function(data){$("#detalle-orden-compra-grid").yiiGridView("update",{});},              
-                });
-        }
-        });
-');?>
-
-<script type="text/javascript">
-    
-    
-    
-    // as a global variable
-    var gridId = "detalle-orden-compra-grid";
-
-    $(function(){
-        // prevent the click event
-        $(document).on('click','#detalle-orden-compra-grid a.bulk-action',function() {
-            return false;
-        });
-    });
-    
-    
-    
-    
-    
-    function batchActions()
-    {   
-        var url = $(this).attr('href');
-        var checked = $.fn.yiiGridView.getCheckedRowsIds('detalle-orden-compra-grid');
-        var count = checked.length;
-        if (!count) {
-	                alert('No items are checked');
-	                //return false;
-	            }
-//        if(count>0 && confirm("Do you want to delete these "+count+" item(s)"))
-//        {
-                $.ajax({
+<div class="row buttons">
+    <br>
+    <?php
+    $this->widget('booster.widgets.TbButton', array(
+			'buttonType'=>'Submit',
+			'context'=>'success',
+                        'loadingText'=>'trabajando...',
+                        'url'=>CController::createUrl('detalleOrdenCompra/create',
+                                array('pid'=>$model->orden_compra_id)
+                                ),
+			'label'=> 'Finalizar',//$orden_compra->isNewRecord ? 'Create' : 'Save',
+                        'id'=>'end',
+                        //'confirm'=>'Esta seguro de proceder con la compra?'
                         
-                        type: "POST",
-                        dataType:'json',
-                        url:url,
-                        data:{ids:checked},
-                        //"'.CHtml::normalizeUrl(array('CONTROLLER_NAME/RemoveChecked')).'",
-                        success: function(data){
-                            //alert( "Data Saved: " + resp);
-                                if(data.status == "success"){
-                                    updateGrilla(data);
-                                   //$.fn.yiiGridView.update(gridId);
-                                }else{
-                                    alert(data.msg);
-                                }
-                            }
-                        //success:function(data){$("#GRID_ID").yiiGridView("update",{});},              
-                });
-//        }
-    }
-   
-</script>
+		));
+    ?>
+
+     <?php echo CHtml::Button('Confirmar compra',
+             array(
+                 'submit'=>array(
+                     'compra/confirmarCompra','id'=>$model->orden_compra_id,'updateStock'=>true
+                     ),
+                     'confirm'=>'Esta seguro de proceder con la compra?',
+                 )
+             );
+     echo CHtml::ajaxButton('Cancelar compra',array('compra/delete','id'=>$model->orden_compra_id),
+                 array(
+                      'type' => 'post',
+                      'success'=>'function(data){location.href="'.CController::createUrl('compra/admin').'"}'
+                ),
+             array(
+                 'confirm'=>'Esta seguro de eliminar/cancelar la compra en proceso?',
+             ));
+         ?>
+              
+    
+</div>
+

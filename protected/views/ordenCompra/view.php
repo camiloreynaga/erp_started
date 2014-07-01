@@ -18,10 +18,14 @@ array('label'=>'Manage OrdenCompra','url'=>array('admin')),
 <?php $this->widget('booster.widgets.TbDetailView',array(
 'data'=>$model,
 'attributes'=>array(
-		'id',
-		'codigo_unico',
+		//'id',
+		//'codigo_unico',
 		'fecha_orden',
-		'proveedor_id',
+                array(
+                    'name'=>'proveedor_id',
+                    //'header'=>'Proveedor'
+                    'value'=>$model->r_proveedor->nombre_rz
+                ),
 		'observaciones',
 		'estado',
 		'create_time',
@@ -36,3 +40,7 @@ array('label'=>'Manage OrdenCompra','url'=>array('admin')),
                 ),
 ),
 )); ?>
+
+<?php
+$this->renderPartial('//DetalleOrdenCompra/_viewDetalleOc',array('model'=>  DetalleOrdenCompra::model(),'pid'=>$model->id));
+?>
