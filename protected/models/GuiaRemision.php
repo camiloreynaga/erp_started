@@ -25,7 +25,7 @@
  * The followings are the available model relations:
  * @property DetalleGuiaRemision[] $detalleGuiaRemisions
  */
-class GuiaRemision extends CActiveRecord
+class GuiaRemision extends Erp_startedActiveRecord//CActiveRecord
 {
 	/**
 	 * @return string the associated database table name

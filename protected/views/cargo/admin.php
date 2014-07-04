@@ -46,11 +46,10 @@ return false;
 		'id',
 		'cargo',
 		'activo',
-		'fecha_nacimiento',
 		'create_time',
 		'create_user_id',
-		/*
 		'update_time',
+		/*
 		'update_user_id',
 		*/
 array(

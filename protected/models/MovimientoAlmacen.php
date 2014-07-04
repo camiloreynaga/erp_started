@@ -26,7 +26,7 @@
  * @property MotivoMovimiento $motivoMovimiento
  * @property Almacen $almacen
  */
-class MovimientoAlmacen extends CActiveRecord
+class MovimientoAlmacen extends Erp_startedActiveRecord//CActiveRecord
 {
 	/**
 	 * @return string the associated database table name

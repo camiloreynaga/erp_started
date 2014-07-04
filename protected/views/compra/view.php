@@ -18,18 +18,28 @@ array('label'=>'Manage Compra','url'=>array('admin')),
 <?php $this->widget('booster.widgets.TbDetailView',array(
 'data'=>$model,
 'attributes'=>array(
-		'id',
+		//'id',
 		'fecha_compra',
-		'proveedor_id',
-		'base_imponible',
+		 array(
+                    'name'=>'proveedor_id',
+                    'value'=>$model->r_proveedor->nombre_rz
+                ),
+		//'base_imponible',
 		'orden_compra_id',
 		'impuesto',
 		'importe_total',
 		'observacion',
 		'estado',
-		'create_time',
-		'create_user_id',
-		'update_time',
-		'update_user_id',
+//		'create_time',
+//		'create_user_id',
+//		'update_time',
+//		'update_user_id',
 ),
 )); ?>
+<?php
+$this->renderPartial('//ComprobanteCompra/_viewDetalleComprobanteCompra',array('model'=>  ComprobanteCompra::model(),'pid'=>$model->id));
+
+$this->renderPartial('//DetalleCompra/_viewDetalleCompra',array('model'=>DetalleCompra::model(),'pid'=>$model->id));
+
+
+?>

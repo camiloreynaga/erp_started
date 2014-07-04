@@ -25,7 +25,7 @@
                                     'data'      => CHtml::listData($model->getTipoOptions(),'id','tipo_producto'),
 					'options' => array(
 						//'tags' => array('clever', 'is', 'better', 'clevertech'),
-						'placeholder' => 'eliga por favor.',
+						'placeholder' => 'elija por favor.',
 						/* 'width' => '40%', */
 						//'tokenSeparators' => array(',', ' ')
 					)

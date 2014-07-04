@@ -9,7 +9,7 @@ class DetalleOrdenCompraController extends Controller
     
         private $_ordenCompra = null;
     
-        public $layout='//layouts/column2';
+        public $layout='//layouts/column1';
 
         /**
         * @return array action filters
@@ -35,7 +35,7 @@ class DetalleOrdenCompraController extends Controller
                 'users'=>array('*'),
                 ),
                 array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions'=>array('create','update','editCantidad','batchDelete'),
+                'actions'=>array('create','update','editCantidad','EditPrecioUnitario','batchDelete','detalleOC','finalizarOc'),
                 'users'=>array('@'),
                 ),
                 array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -73,11 +73,15 @@ class DetalleOrdenCompraController extends Controller
             if(isset($_POST['DetalleOrdenCompra']))
             {
                 $model->attributes=$_POST['DetalleOrdenCompra'];
-                //$model->orden_compra_id=$id;
-                $model->subtotal=$model->precio_unitario*$model->cantidad;
-                //$compraItem->cantidad_disponible=$compraItem->cantidad;//agregando la cantidad disponible
-                $model->impuesto=$model->subtotal*((int)Yii::app()->params['impuesto']*0.01);
-                $model->total=$model->subtotal+$model->impuesto;
+                
+                $tmp= DetalleOrdenCompra::model()->count('orden_compra_id=:oc_id and producto_id=:producto',array(':oc_id'=>$this->_ordenCompra->id,':producto'=>$model->producto_id));
+                if($tmp==0)
+                {
+                    //$model->orden_compra_id=$id;
+                    $model->subtotal=$model->precio_unitario*$model->cantidad;
+                    //$compraItem->cantidad_disponible=$compraItem->cantidad;//agregando la cantidad disponible
+                    $model->impuesto=$model->subtotal*((int)Yii::app()->params['impuesto']*0.01);
+                    $model->total=$model->subtotal+$model->impuesto;
                     if($model->save())
                     {
                         echo CJSON::encode(array(
@@ -91,6 +95,20 @@ class DetalleOrdenCompraController extends Controller
                                             echo $error;
                                         Yii::app()->end();
                     }
+                }
+                else
+                {
+                    echo CJSON::encode(array(
+                                //'status'=>'failure', 
+                                //'msg'=>$model->addError('producto_id', 'Producto ya Existe')
+                                'val' =>'Producto ya Existe'
+                            ));
+                            
+                           Yii::app()->end();// exit;
+                    
+                }
+                
+                
             }
             else
                 {
@@ -148,9 +166,55 @@ class DetalleOrdenCompraController extends Controller
             };
             
             $es->update();
-//         
-    }
-        
+        }
+        /*
+         * Actualiza el precio unitario haciendo lo calculos de subtotal impuesto y total
+         */
+        public function actionEditPrecioUnitario()
+        {
+         Yii::import('booster.components.TbEditableSaver');
+         $es = new TbEditableSaver('DetalleOrdenCompra');
+//         /$_cantidad= $es->value;
+          $es->onBeforeUpdate= function($event) {
+
+                   $model=$this->loadModel(yii::app()->request->getParam('pk')); //obteniendo el Model de detalleCompra
+                   $_precioUnitario=  yii::app()->request->getParam('value');
+                   $_subtotal=$model->cantidad*$_precioUnitario;//calculando el subtotal
+                   $_impuesto=$_subtotal*((int)Yii::app()->params['impuesto']*0.01); //calculando impuesto
+                   $_total=$_subtotal+$_impuesto; //calculando total
+                    
+                   $event->sender->setAttribute('subtotal', $_subtotal);//Actualizando Cantidad
+                   $event->sender->setAttribute('impuesto', $_impuesto);//Actualizando impuesto
+                   $event->sender->setAttribute('total', $_total); //actualizando total
+            
+            };
+            
+            $es->update();
+        }
+        /*
+         * muestra el detalle de orden de compra 
+         */
+        public function actionDetalleOC()
+            {
+                if(Yii::app()->request->getIsAjaxRequest())
+                {
+                    if(isset($_GET['ids'])){
+                         $id_oc = $_GET['ids'];
+                    
+                    
+                     $model=new DetalleOrdenCompra('search');
+                     $model->unsetAttributes();  // clear any default values
+                     if(isset($_GET['DetalleOrdenCompra']))
+                     $model->attributes=$_GET['DetalleOrdenCompra'];
+                     $model->orden_compra_id=$id_oc;
+                     $this->renderPartial('admin',array(
+                     'model'=>$model,
+                     ));
+                    }
+                }
+
+
+            }
          public function actionBatchDelete()
         {
              if(Yii::app()->request->getIsAjaxRequest())
@@ -219,15 +283,17 @@ class DetalleOrdenCompraController extends Controller
         */
         public function actionAdmin()
         {
-        $model=new DetalleOrdenCompra('search');
-        $model->unsetAttributes();  // clear any default values
-        if(isset($_GET['DetalleOrdenCompra']))
-        $model->attributes=$_GET['DetalleOrdenCompra'];
+            $model=new DetalleOrdenCompra('search');
+            $model->unsetAttributes();  // clear any default values
+            if(isset($_GET['DetalleOrdenCompra']))
+            $model->attributes=$_GET['DetalleOrdenCompra'];
 
-        $this->render('admin',array(
-        'model'=>$model,
-        ));
+            $this->render('admin',array(
+            'model'=>$model,
+            ));
         }
+        
+        
 
         /**
         * Returns the data model based on the primary key given in the GET variable.
@@ -293,7 +359,7 @@ class DetalleOrdenCompraController extends Controller
                 $this->_ordenCompra=  OrdenCompra::model()->findByPk($oc_id);
                 if ($this->_ordenCompra===null)
                 {
-                throw new CHttpException(404,'The requested orden compre does not exist.');
+                throw new CHttpException(404,'The requested orden compra does not exist.');
                 }
             }
             
@@ -301,8 +367,8 @@ class DetalleOrdenCompraController extends Controller
         }
         
         
-        public function actionFinalizarCompra($id)
+        public function actionFinalizarOc($id)
         {
-            $this->redirect(array('compra/view','id'=>$id));
+            $this->redirect(array('ordenCompra/view','id'=>$id));
         }
 }

@@ -20,7 +20,7 @@ class m140525_044431_create_empleado_user_tables extends CDbMigration
                 'id'=>'pk',
                 'cargo'=>'varchar(50) NOT NULL',
                 'activo'=>'bool DEFAULT 0', //0=Si 1=No
-                'fecha_nacimiento'=>'date',
+                //'fecha_nacimiento'=>'date',
                 //
                 'create_time'=>'datetime DEFAULT NULL',
                 'create_user_id'=> 'int(11) DEFAULT NULL',

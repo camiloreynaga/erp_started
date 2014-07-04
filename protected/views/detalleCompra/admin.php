@@ -62,6 +62,7 @@ return false;
 		'create_user_id',
 		'update_time',
 		'update_user_id',
+		'comprobante_id',
 		*/
 array(
 'class'=>'booster.widgets.TbButtonColumn',

@@ -22,7 +22,7 @@
  * The followings are the available model relations:
  * @property DetalleNotaCredito[] $detalleNotaCreditos
  */
-class NotaCredito extends CActiveRecord
+class NotaCredito extends Erp_startedActiveRecord//CActiveRecord
 {
 	/**
 	 * @return string the associated database table name

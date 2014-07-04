@@ -16,7 +16,7 @@
  * @property ComprobanteCompra[] $comprobanteCompras
  * @property ComprobanteVenta[] $comprobanteVentas
  */
-class TipoComprobante extends CActiveRecord
+class TipoComprobante extends Erp_startedActiveRecord//CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
@@ -115,4 +115,9 @@ class TipoComprobante extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+        public function getTiposComprobante(){
+            //$criteria = new CDbCriteria();
+            //$criteria->='activo=0';
+            return $this->findAll();
+        }
 }

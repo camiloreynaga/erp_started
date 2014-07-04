@@ -22,13 +22,13 @@
  * @property integer $create_user_id
  * @property string $update_time
  * @property integer $update_user_id
- *
+ * @property integer $comprobante_id
  * The followings are the available model relations:
  * @property Producto $producto
  * @property Compra $compra
  * @property MovimientoAlmacen[] $movimientoAlmacens
  */
-class DetalleCompra extends CActiveRecord
+class DetalleCompra extends Erp_startedActiveRecord//CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
@@ -46,13 +46,14 @@ class DetalleCompra extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('compra_id, producto_id, cantidad, cantidad_bueno, cantidad_malo, estado, create_user_id, update_user_id', 'numerical', 'integerOnly'=>true),
-			array('lote', 'length', 'max'=>50),
+			array('compra_id, producto_id, cantidad, cantidad_bueno, cantidad_malo, estado, create_user_id, update_user_id, comprobante_id', 'numerical', 'integerOnly'=>true),
+			array('compra_id,cantidad','required'),
+                        array('lote', 'length', 'max'=>50),
 			array('precio_unitario, subtotal, impuesto, total', 'length', 'max'=>10),
 			array('fecha_vencimiento, observacion, create_time, update_time', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, compra_id, producto_id, cantidad, lote, fecha_vencimiento, cantidad_bueno, cantidad_malo, estado, observacion, precio_unitario, subtotal, impuesto, total, create_time, create_user_id, update_time, update_user_id', 'safe', 'on'=>'search'),
+			array('id, compra_id, producto_id, cantidad, lote, fecha_vencimiento, cantidad_bueno, cantidad_malo, estado, observacion, precio_unitario, subtotal, impuesto, total, create_time, create_user_id, update_time, update_user_id, comprobante_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -64,9 +65,9 @@ class DetalleCompra extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'producto' => array(self::BELONGS_TO, 'Producto', 'producto_id'),
-			'compra' => array(self::BELONGS_TO, 'Compra', 'compra_id'),
-			'movimientoAlmacens' => array(self::HAS_MANY, 'MovimientoAlmacen', 'detalle_compra_id'),
+			'r_producto' => array(self::BELONGS_TO, 'Producto', 'producto_id'),
+			'r_compra' => array(self::BELONGS_TO, 'Compra', 'compra_id'),
+			'r_movimientoAlmacens' => array(self::HAS_MANY, 'MovimientoAlmacen', 'detalle_compra_id'),
 		);
 	}
 
@@ -94,6 +95,7 @@ class DetalleCompra extends CActiveRecord
 			'create_user_id' => 'Create User',
 			'update_time' => 'Update Time',
 			'update_user_id' => 'Update User',
+                        'comprobante_id' => 'Comprobante',
 		);
 	}
 
@@ -133,7 +135,8 @@ class DetalleCompra extends CActiveRecord
 		$criteria->compare('create_user_id',$this->create_user_id);
 		$criteria->compare('update_time',$this->update_time,true);
 		$criteria->compare('update_user_id',$this->update_user_id);
-
+                $criteria->compare('comprobante_id',$this->comprobante_id);
+                $criteria->order= 'id DESC';
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
@@ -149,4 +152,15 @@ class DetalleCompra extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+        
+        public function beforeSave()
+        {
+            if($this->fecha_vencimiento==null) //validando la fecha de cancelación
+                $this->fecha_vencimiento=null;
+            else {
+                $this->fecha_vencimiento= DateTime::createFromFormat('d/m/Y', $this->fecha_vencimiento)->format('Y-m-d');
+            }
+            
+            return parent::beforeSave();
+        }
 }

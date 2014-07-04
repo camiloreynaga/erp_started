@@ -17,7 +17,7 @@
  * The followings are the available model relations:
  * @property DetalleCotizacionCompra[] $detalleCotizacionCompras
  */
-class CotizacionCompra extends CActiveRecord
+class CotizacionCompra extends Erp_startedActiveRecord//CActiveRecord
 {
 	/**
 	 * @return string the associated database table name

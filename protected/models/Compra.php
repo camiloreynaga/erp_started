@@ -24,7 +24,7 @@
  * @property CuentaPagar[] $cuentaPagars
  * @property DetalleCompra[] $detalleCompras
  */
-class Compra extends CActiveRecord
+class Compra extends Erp_startedActiveRecord//CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
@@ -42,7 +42,7 @@ class Compra extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('proveedor_id', 'required'),
+			array('proveedor_id, fecha_compra, orden_compra_id' , 'required'),
 			array('proveedor_id, orden_compra_id, estado, create_user_id, update_user_id', 'numerical', 'integerOnly'=>true),
 			array('base_imponible, impuesto, importe_total', 'length', 'max'=>10),
 			array('fecha_compra, observacion, create_time, update_time', 'safe'),
@@ -60,10 +60,10 @@ class Compra extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'proveedor' => array(self::BELONGS_TO, 'Proveedor', 'proveedor_id'),
-			'comprobanteCompras' => array(self::HAS_MANY, 'ComprobanteCompra', 'compra_id'),
-			'cuentaPagars' => array(self::HAS_MANY, 'CuentaPagar', 'compra_id'),
-			'detalleCompras' => array(self::HAS_MANY, 'DetalleCompra', 'compra_id'),
+			'r_proveedor' => array(self::BELONGS_TO, 'Proveedor', 'proveedor_id'),
+			'r_comprobanteCompras' => array(self::HAS_MANY, 'ComprobanteCompra', 'compra_id'),
+			'r_cuentaPagars' => array(self::HAS_MANY, 'CuentaPagar', 'compra_id'),
+			'r_detalleCompras' => array(self::HAS_MANY, 'DetalleCompra', 'compra_id'),
 		);
 	}
 
@@ -74,7 +74,7 @@ class Compra extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'fecha_compra' => 'Fecha Compra',
+			'fecha_compra' => 'Fecha Recepción',
 			'proveedor_id' => 'Proveedor',
 			'base_imponible' => 'Base Imponible',
 			'orden_compra_id' => 'Orden Compra',
@@ -120,7 +120,7 @@ class Compra extends CActiveRecord
 		$criteria->compare('create_user_id',$this->create_user_id);
 		$criteria->compare('update_time',$this->update_time,true);
 		$criteria->compare('update_user_id',$this->update_user_id);
-
+                $criteria->order='id DESC';
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
@@ -136,4 +136,10 @@ class Compra extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+        
+        public function beforeSave()
+        {
+            $this->fecha_compra = DateTime::createFromFormat('d/m/Y', $this->fecha_compra)->format('Y-m-d');
+            return parent::beforeSave();
+        }
 }

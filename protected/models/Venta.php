@@ -25,7 +25,7 @@
  * @property DetalleVenta[] $detalleVentas
  * @property Cliente $cliente
  */
-class Venta extends CActiveRecord
+class Venta extends Erp_startedActiveRecord//CActiveRecord
 {
 	/**
 	 * @return string the associated database table name

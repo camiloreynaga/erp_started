@@ -21,7 +21,7 @@ class m140521_051336_create_begining_almacen_tables extends CDbMigration
                 'id'=>'pk',
                 'almacen'=>'varchar(50) NOT NULL',
                 'direccion'=>'varchar(50)',
-                'ubicacion'=>'int(11) default 1', // 1= cusco, 
+                'ubicacion_id'=>'int(11) default 1', // 1= cusco, 
                 'activo'=>'bool DEFAULT 0', // 0=si ;1=no
                 //
                 'create_time' => 'datetime DEFAULT NULL',

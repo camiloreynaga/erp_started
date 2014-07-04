@@ -46,10 +46,12 @@
                                     ),
                                 array('label'=>'Almacen',
                                     'items'=>array(
+                                        array('label'=>'Ubicaciones','url'=>array('/ubicacion')),
                                         array('label'=>'Almacenes','url'=>array('/almacen')),
                                         array('label'=>'Motivos de movimiento','url'=>array('/motivoMovimiento')),
                                         array('label'=>'Ingreso/Salida','url'=>array('/movimientoAlmacen')),
                                         array('label'=>'Productos x almacen','url'=>array('/productoAlmacen')),
+                                         
                                     )
                                     ),
                                 array('label'=>'Documentos',

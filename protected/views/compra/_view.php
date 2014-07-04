@@ -1,24 +1,26 @@
 <div class="view">
 
 		<b><?php echo CHtml::encode($data->getAttributeLabel('id')); ?>:</b>
-	<?php echo CHtml::link(CHtml::encode($data->id),array('view','id'=>$data->id)); ?>
+	<?php echo CHtml::link(CHtml::encode($data->id)." (ver más)" ,array('view','id'=>$data->id)); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('fecha_compra')); ?>:</b>
 	<?php echo CHtml::encode($data->fecha_compra); ?>
 	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('proveedor_id')); ?>:</b>
-	<?php echo CHtml::encode($data->proveedor_id); ?>
+        
+        <b><?php echo CHtml::encode($data->getAttributeLabel('orden_compra_id')); ?>:</b>
+	<?php echo CHtml::encode($data->orden_compra_id); ?>
+	<br />
+	
+        <b><?php echo CHtml::encode($data->getAttributeLabel('proveedor_id')); ?>:</b>
+	<?php echo CHtml::encode($data->r_proveedor->nombre_rz); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('base_imponible')); ?>:</b>
 	<?php echo CHtml::encode($data->base_imponible); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('orden_compra_id')); ?>:</b>
-	<?php echo CHtml::encode($data->orden_compra_id); ?>
-	<br />
+	
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('impuesto')); ?>:</b>
 	<?php echo CHtml::encode($data->impuesto); ?>

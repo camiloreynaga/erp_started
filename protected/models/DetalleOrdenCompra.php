@@ -112,4 +112,26 @@ class DetalleOrdenCompra extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+        
+        public function getItemsDetalleOrdenCompra($id_oc)
+        {
+            $criteria= new CDbCriteria();
+            $criteria->condition='orden_compra_id='.$id_oc; //pendiente
+            //$criteria->with=array('r_proveedor');
+            //$_lab= Fabricante::model()->tablename();
+            //$criteria->join='inner join '.$_lab.' lab on lab.id = t.fabricante_id ';
+            
+            return $lista= $this->model()->findAll($criteria); 
+            
+//            $lista= $this->model()->findAll($criteria); 
+//              $resultados = array();
+//              foreach ($lista as $list){
+//                $resultados[] = array(
+//                         'id'=>$list->id,
+//                         'text'=> $list->id.'-'.$list->r_proveedor->nombre_rz. ' (Fecha:'.$list->fecha_orden.')',
+//              ); 
+//            
+//              }
+//              return $resultados;   
+        }
 }

@@ -127,6 +127,7 @@ class m140520_224733_create_begining_compras_tables extends CDbMigration
                 'subtotal'=>'decimal(10,2)',
                 'impuesto'=>'decimal(10,2)',
                 'total'=>'decimal(10,2)',
+                'comprobante_id'=>'int(11)', //almacena el id del Comprobante/ factura o boleta
                 
                 //'estado'=>'SmallInt(6)', // 0=bueno,1=observado,2=terminado,3=cancelado
 //                'lote'=>'varchar(50)',// 

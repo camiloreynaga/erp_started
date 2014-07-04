@@ -19,7 +19,7 @@
  * The followings are the available model relations:
  * @property DetallePedido[] $detallePedidos
  */
-class Pedido extends CActiveRecord
+class Pedido extends Erp_startedActiveRecord//CActiveRecord
 {
 	/**
 	 * @return string the associated database table name

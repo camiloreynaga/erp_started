@@ -9,7 +9,7 @@
 
 		<?php echo $form->textFieldGroup($model,'direccion',array('class'=>'span5','maxlength'=>50)); ?>
 
-		<?php echo $form->textFieldGroup($model,'ubicacion',array('class'=>'span5')); ?>
+		<?php echo $form->textFieldGroup($model,'ubicacion_id',array('class'=>'span5')); ?>
 
 		<?php echo $form->textFieldGroup($model,'activo',array('class'=>'span5')); ?>
 

@@ -15,7 +15,7 @@
  * @property string $update_time
  * @property integer $update_user_id
  */
-class ProductoAlmacen extends CActiveRecord
+class ProductoAlmacen extends Erp_startedActiveRecord//CActiveRecord
 {
 	/**
 	 * @return string the associated database table name

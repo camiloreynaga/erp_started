@@ -9,7 +9,8 @@
  * @property integer $proveedor_id
  * @property integer $cotizacion_id
  * @property string $observaciones
- * @property integer $estado
+ * @property integer $estado 0=pendiente (solicitante) ,1=confirmado(solicitante)
+ * ,2=anulado (solicitante),3=aprobado(supervisor), 4=recepcionado(almacenero), 5=almacen(almacenero)
  * @property string $create_time
  * @property integer $create_user_id
  * @property string $update_time
@@ -64,7 +65,7 @@ class OrdenCompra extends Erp_startedActiveRecord//CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'r_DetalleOrdenCompras' => array(self::HAS_MANY, 'DetalleOrdenCompra', 'orden_compra_id'),
+			'r_detalleOrdenCompras' => array(self::HAS_MANY, 'DetalleOrdenCompra', 'orden_compra_id'),
                         'r_proveedor'=>array(self::BELONGS_TO,'Proveedor','proveedor_id'),
 		);
 	}
@@ -109,9 +110,32 @@ class OrdenCompra extends Erp_startedActiveRecord//CActiveRecord
 		$criteria->compare('create_user_id',$this->create_user_id);
 		$criteria->compare('update_time',$this->update_time,true);
 		$criteria->compare('update_user_id',$this->update_user_id);
-
+                $criteria->order= 'id DESC';
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
 	}
+        /**
+         * retorna las ordenes de compra pendientes
+         * @return type array de resultado ordenes de compra
+         */
+        public function getOrdenCompra()
+        {
+            $criteria= new CDbCriteria();
+            $criteria->condition='estado=0'; //pendiente
+            $criteria->with=array('r_proveedor');
+            //$_lab= Fabricante::model()->tablename();
+            //$criteria->join='inner join '.$_lab.' lab on lab.id = t.fabricante_id ';
+            
+            $lista= $this->model()->findAll($criteria); 
+              $resultados = array();
+              foreach ($lista as $list){
+                $resultados[] = array(
+                         'id'=>$list->id,
+                         'text'=> $list->id.'-'.$list->r_proveedor->nombre_rz. ' (Fecha:'.$list->fecha_orden.')',
+              ); 
+            
+              }
+              return $resultados;   
+        }
 }

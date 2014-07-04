@@ -10,6 +10,13 @@ array('label'=>'Manage DetalleCompra','url'=>array('admin')),
 );
 ?>
 
-<h1>Create DetalleCompra</h1>
 
+
+<?php
+$compra= Compra::model()->findByPk($_GET['pid']);
+//$model = new Compra();
+//$model->getat
+echo $this->renderPartial('//Compra/_head', array('compra'=>$compra));
+?>
+<h4> Detalle Compra</h4>
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

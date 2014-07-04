@@ -7,7 +7,6 @@
 
 		<?php echo $form->textFieldGroup($model,'orden_compra_id',array('class'=>'span5')); ?>
 
-		<?php echo $form->textFieldGroup($model,'cotizacion_id',array('class'=>'span5')); ?>
 
 		<?php echo $form->textFieldGroup($model,'producto_id',array('class'=>'span5')); ?>
 

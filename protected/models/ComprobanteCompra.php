@@ -23,7 +23,7 @@
  * @property Compra $compra
  * @property TipoComprobante $tipoComprobante
  */
-class ComprobanteCompra extends CActiveRecord
+class ComprobanteCompra extends Erp_startedActiveRecord//CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
@@ -41,7 +41,8 @@ class ComprobanteCompra extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('compra_id, tipo_comprobante_id, serie, numero', 'required'),
+                        array( 'fecha_cancelacion','compare','compareAttribute' => 'fecha_emision','operator'=>'>=', 'allowEmpty'=>'true', 'message' => '{attribute} debe ser igual o mayor a "{compareValue}".'),//Validación de fechas
+			array('compra_id, tipo_comprobante_id,fecha_emision, serie, numero', 'required'),
 			array('compra_id, tipo_comprobante_id, estado, create_user_id, update_user_id', 'numerical', 'integerOnly'=>true),
 			array('serie', 'length', 'max'=>5),
 			array('numero', 'length', 'max'=>10),
@@ -61,8 +62,8 @@ class ComprobanteCompra extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'compra' => array(self::BELONGS_TO, 'Compra', 'compra_id'),
-			'tipoComprobante' => array(self::BELONGS_TO, 'TipoComprobante', 'tipo_comprobante_id'),
+			'r_compra' => array(self::BELONGS_TO, 'Compra', 'compra_id'),
+			'r_tipoComprobante' => array(self::BELONGS_TO, 'TipoComprobante', 'tipo_comprobante_id'),
 		);
 	}
 
@@ -75,8 +76,8 @@ class ComprobanteCompra extends CActiveRecord
 			'id' => 'ID',
 			'compra_id' => 'Compra',
 			'tipo_comprobante_id' => 'Tipo Comprobante',
-			'fecha_emision' => 'Fecha Emision',
-			'fecha_cancelacion' => 'Fecha Cancelacion',
+			'fecha_emision' => 'Fecha de Emisión',
+			'fecha_cancelacion' => 'Fecha de Cancelación',
 			'serie' => 'Serie',
 			'numero' => 'Numero',
 			'estado' => 'Estado',
@@ -137,4 +138,17 @@ class ComprobanteCompra extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+        
+        public function beforeSave()
+        {
+            $this->fecha_emision = DateTime::createFromFormat('d/m/Y', $this->fecha_emision)->format('Y-m-d');
+            if($this->fecha_cancelacion==null) //validando la fecha de cancelación
+                $this->fecha_cancelacion=null;
+            else {
+                $this->fecha_cancelacion= DateTime::createFromFormat('d/m/Y', $this->fecha_cancelacion)->format('Y-m-d');
+            }
+                
+                    
+            return parent::beforeSave();
+        }
 }

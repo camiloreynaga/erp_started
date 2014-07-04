@@ -9,8 +9,6 @@
 
 		<?php echo $form->textFieldGroup($model,'activo',array('class'=>'span5')); ?>
 
-		<?php echo $form->datepickerGroup($model,'fecha_nacimiento',array('options'=>array(),'htmlOptions'=>array('class'=>'span5')),array('prepend'=>'<i class="icon-calendar"></i>','append'=>'Click on Month/Year at top to select a different year or type in (mm/dd/yyyy).')); ?>
-
 		<?php echo $form->textFieldGroup($model,'create_time',array('class'=>'span5')); ?>
 
 		<?php echo $form->textFieldGroup($model,'create_user_id',array('class'=>'span5')); ?>

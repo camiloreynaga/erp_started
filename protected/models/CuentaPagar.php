@@ -19,7 +19,7 @@
  * The followings are the available model relations:
  * @property Compra $compra
  */
-class CuentaPagar extends CActiveRecord
+class CuentaPagar extends Erp_startedActiveRecord//CActiveRecord
 {
 	/**
 	 * @return string the associated database table name

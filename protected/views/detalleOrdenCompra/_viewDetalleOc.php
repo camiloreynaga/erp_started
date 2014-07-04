@@ -6,7 +6,10 @@
  */
 ?>
 <h2>Detalle Orden Compras <?php echo $pid;//$_GET['pid']; ?></h2>
-<?php $this->widget('zii.widgets.grid.CGridView',array(
+<?php 
+$model->orden_compra_id=$pid;
+
+$this->widget('zii.widgets.grid.CGridView',array(
 'id'=>'detalle-orden-compra-grid',
 //'fixedHeader' => true,
 'dataProvider'=>$model->search(),

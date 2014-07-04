@@ -15,6 +15,9 @@
 			'buttonType'=>'submit',
 			'context'=>'primary',
 			'label'=>$model->isNewRecord ? 'Create' : 'Save',
+                        'htmlOptions'=>array(
+                            'confirm'=>'Esta seguro de proceder?',
+                        )
 		)); ?>
 </div>
 

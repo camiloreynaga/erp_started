@@ -6,7 +6,7 @@
  * The followings are the available columns in table 'tbl_motivo_movimiento':
  * @property integer $id
  * @property string $movimiento
- * @property integer $tipo_movimiento
+ * @property integer $tipo_movimiento 0=ingresp, 1=salida 2=custodia
  * @property string $create_time
  * @property integer $create_user_id
  * @property string $update_time
@@ -15,7 +15,7 @@
  * The followings are the available model relations:
  * @property MovimientoAlmacen[] $movimientoAlmacens
  */
-class MotivoMovimiento extends CActiveRecord
+class MotivoMovimiento extends Erp_startedActiveRecord//CActiveRecord
 {
 	/**
 	 * @return string the associated database table name

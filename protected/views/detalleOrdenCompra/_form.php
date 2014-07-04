@@ -38,7 +38,7 @@
 <script type="text/javascript">
     
     
-    
+    /* 
     // as a global variable
     var gridId = "detalle-orden-compra-grid";
 
@@ -48,9 +48,6 @@
             return false;
         });
     });
-    
-    
-    
     
     
     function batchActions()
@@ -84,7 +81,7 @@
                 });
 //        }
     }
-   
+   */
 </script>
 
 <?php
@@ -105,7 +102,9 @@ $("#delete").click(function(){
                 });
         }
         });
-');?>
+');
+
+?>
 
 <?php 
 $form=$this->beginWidget('booster.widgets.TbActiveForm',array(
@@ -114,7 +113,7 @@ $form=$this->beginWidget('booster.widgets.TbActiveForm',array(
        //'enableClientValidation' => true,
        //'type'=>'inline',
         'htmlOptions' => array('class' => 'well'),
-        'focus' => 'input:text:enabled:visible:first',
+//        'focus' => 'input:text:enabled:visible:first',
         'clientOptions' =>array(
             'validateOnSubmit' => true,
             'validateOnChange' => false,
@@ -132,7 +131,7 @@ echo $form->errorSummary($model); ?>
 
 	<?php //echo $form->textFieldGroup($model,'orden_compra_id',array('class'=>'span5')); ?>
 
-	<?php //echo $form->textFieldGroup($model,'cotizacion_id',array('class'=>'span5')); ?>
+	<?php //echo $form->textFieldGroup($model,'estado',array('class'=>'span5')); ?>
 
 	<?php 
         echo $form->select2Group(
@@ -198,9 +197,9 @@ echo $form->errorSummary($model); ?>
 
 	<?php echo $form->textFieldGroup($model,'cantidad',array('class'=>'span5')); ?>
 
-	<?php echo $form->textAreaGroup($model,'observacion',array('rows'=>6, 'cols'=>50, 'class'=>'span8')); ?>
+	<?php echo $form->textFieldGroup($model,'precio_unitario',array('class'=>'span5')); //,'maxlength'=>10, 'width'=>'40px' ?>
 
-	<?php echo $form->textFieldGroup($model,'precio_unitario',array('class'=>'span5','maxlength'=>10, 'width'=>'40px')); ?>
+        <?php echo $form->textAreaGroup($model,'observacion'); //,array( 'class'=>'span8')'rows'=>6, 'cols'=>50, ?>
 
 <div class="form-actions">
     <?php $this->widget('booster.widgets.TbButton', array(
@@ -244,7 +243,7 @@ $this->widget('booster.widgets.TbExtendedGridView',array(
             'id'=>'detalle-orden-compra-grid',
             'type'=>'striped bordered',
             'fixedHeader' => true,
-            'headerOffset' => 40,
+            //'headerOffset' => 40,
             //'responsiveTable' => true,
             'dataProvider'=>$model->search(),
              'selectableRows' => 2,
@@ -319,7 +318,13 @@ $this->widget('booster.widgets.TbExtendedGridView',array(
                             array(
                                 'name'=>'precio_unitario',
                                 'header'=>'P.U.',
-                                'htmlOptions'=>array('style'=> 'text-align: right')
+                                'htmlOptions'=>array('style'=> 'text-align: right'),
+                                'class' => 'booster.widgets.TbEditableColumn',
+                                    'editable' => array(
+                                        'type' => 'text',
+                                        'url' => $this->createUrl('detalleOrdenCompra/editPrecioUnitario'),
+                                        'success'=>'updateGrilla'
+                                    )
                             ),
                             array(
                                 'name'=>'subtotal',
@@ -361,7 +366,7 @@ $this->widget('booster.widgets.TbExtendedGridView',array(
             'context' => 'danger',
             'size' => 'small',
             'id' => 'delete',
-            'url'=>CController::createUrl('detalleOrdenCompra/create')
+            //'url'=>CController::createUrl('detalleOrdenCompra/create')
             ));
     ?>
 </div>
@@ -369,28 +374,28 @@ $this->widget('booster.widgets.TbExtendedGridView',array(
 <div class="row buttons">
     <br>
     <?php
-    $this->widget('booster.widgets.TbButton', array(
-			'buttonType'=>'Submit',
-			'context'=>'success',
-                        'loadingText'=>'trabajando...',
-                        'url'=>CController::createUrl('detalleOrdenCompra/create',
-                                array('pid'=>$model->orden_compra_id)
-                                ),
-			'label'=> 'Finalizar',//$orden_compra->isNewRecord ? 'Create' : 'Save',
-                        'id'=>'end',
-                        //'confirm'=>'Esta seguro de proceder con la compra?'
-                        
-		));
+//    $this->widget('booster.widgets.TbButton', array(
+//			//'buttonType'=>'Submit',
+//			'context'=>'success',
+//                        //'loadingText'=>'trabajando...',
+//                        'url'=>array('detalleOrdenCompra/finalizarOc',
+//                                array('id'=>$model->orden_compra_id)
+//                                ),
+//			'label'=> 'Finalizar',//$orden_compra->isNewRecord ? 'Create' : 'Save',
+//                        'id'=>'end',
+//                        //'confirm'=>'Esta seguro de proceder con la compra?'
+//                        
+//		));
     ?>
 
-     <?php echo CHtml::Button('Confirmar compra',
+     <?php  echo CHtml::Button('Confirmar compra',
              array(
-                 'submit'=>array(
-                     'compra/confirmarCompra','id'=>$model->orden_compra_id,'updateStock'=>true
+                 'submit'=>array('detalleOrdenCompra/finalizarOc',
+                     'id'=>$model->orden_compra_id,
                      ),
-                     'confirm'=>'Esta seguro de proceder con la compra?',
+                     'confirm'=>'Esta seguro de proceder con la orden compra?',
                  )
-             );
+             );/*
      echo CHtml::ajaxButton('Cancelar compra',array('compra/delete','id'=>$model->orden_compra_id),
                  array(
                       'type' => 'post',
@@ -398,7 +403,7 @@ $this->widget('booster.widgets.TbExtendedGridView',array(
                 ),
              array(
                  'confirm'=>'Esta seguro de eliminar/cancelar la compra en proceso?',
-             ));
+             ));*/
          ?>
               
     

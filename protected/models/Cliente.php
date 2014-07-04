@@ -21,7 +21,7 @@
  * The followings are the available model relations:
  * @property Venta[] $ventas
  */
-class Cliente extends CActiveRecord
+class Cliente extends Erp_startedActiveRecord//CActiveRecord
 {
 	/**
 	 * @return string the associated database table name

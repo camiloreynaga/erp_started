@@ -12,8 +12,8 @@
 	<?php echo CHtml::encode($data->direccion); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('ubicacion')); ?>:</b>
-	<?php echo CHtml::encode($data->ubicacion); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('ubicacion_id')); ?>:</b>
+	<?php echo CHtml::encode($data->ubicacion_id); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('activo')); ?>:</b>

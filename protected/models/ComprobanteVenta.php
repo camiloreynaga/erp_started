@@ -23,7 +23,7 @@
  * @property Venta $venta
  * @property TipoComprobante $tipoComprobante
  */
-class ComprobanteVenta extends CActiveRecord
+class ComprobanteVenta extends Erp_startedActiveRecord//CActiveRecord
 {
 	/**
 	 * @return string the associated database table name

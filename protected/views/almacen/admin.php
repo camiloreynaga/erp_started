@@ -46,7 +46,7 @@ return false;
 		'id',
 		'almacen',
 		'direccion',
-		'ubicacion',
+		'ubicacion_id',
 		'activo',
 		'create_time',
 		/*

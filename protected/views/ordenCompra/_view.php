@@ -10,7 +10,7 @@
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('proveedor_id')); ?>:</b>
-	<?php echo CHtml::encode($data->proveedor_id); ?>
+	<?php echo CHtml::encode($data->r_proveedor->nombre_rz); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('observaciones')); ?>:</b>

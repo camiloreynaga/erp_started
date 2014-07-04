@@ -73,6 +73,10 @@
 	<?php echo CHtml::encode($data->update_user_id); ?>
 	<br />
 
+	<b><?php echo CHtml::encode($data->getAttributeLabel('comprobante_id')); ?>:</b>
+	<?php echo CHtml::encode($data->comprobante_id); ?>
+	<br />
+
 	*/ ?>
 
 </div>

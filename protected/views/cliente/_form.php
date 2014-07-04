@@ -23,13 +23,7 @@
 
 	<?php echo $form->textFieldGroup($model,'linea_credito',array('class'=>'span5','maxlength'=>10)); ?>
 
-	<?php echo $form->textFieldGroup($model,'create_time',array('class'=>'span5')); ?>
-
-	<?php echo $form->textFieldGroup($model,'create_user_id',array('class'=>'span5')); ?>
-
-	<?php echo $form->textFieldGroup($model,'update_time',array('class'=>'span5')); ?>
-
-	<?php echo $form->textFieldGroup($model,'update_user_id',array('class'=>'span5')); ?>
+	
 
 <div class="form-actions">
 	<?php $this->widget('booster.widgets.TbButton', array(

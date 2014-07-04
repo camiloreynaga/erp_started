@@ -16,6 +16,7 @@ class m140701_162807_query_data_inicial extends CDbMigration
 	// Use safeUp/safeDown to do migration with transaction
 	public function safeUp()
 	{
+           // $this->delete('tbl_unidad_medida');
             $this->insert('tbl_unidad_medida', array(
                 'id'=>1,
                 'unidad_medida'=>'Unidad',
@@ -31,7 +32,7 @@ class m140701_162807_query_data_inicial extends CDbMigration
 
 	public function safeDown()
 	{
-            $this->dele('tbl_unidad_medida');
+            $this->delete('tbl_unidad_medida');
 	}
 	
 }

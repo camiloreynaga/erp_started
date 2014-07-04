@@ -46,6 +46,11 @@ return false;
 		'id',
 		'fecha_orden',
 		'proveedor_id',
+                array(
+                    'name'=>'proveedor_id',
+                    'header'=>'Proveedor',
+                    'value'=>'$data->r_proveedor->nombre_rz'
+                ),
 		'observaciones',
 		'estado',
 		/*
