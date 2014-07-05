@@ -21,11 +21,21 @@ array('label'=>'Manage Almacen','url'=>array('admin')),
 		'id',
 		'almacen',
 		'direccion',
-		'ubicacion_id',
+                array(
+                    'name'=>'ubicacion_id',
+                    'value'=>$model->r_ubicacion->ubicacion
+                ),
+		
 		'activo',
 		'create_time',
-		'create_user_id',
+                array(
+                  'name'=>'create_user_id',
+                  'value'=>Usuario::model()->getUsuario($model->create_user_id),
+                ),
 		'update_time',
-		'update_user_id',
+                array(
+                    'name'=>'update_user_id',
+                    'value'=>Usuario::model()->getUsuario($model->update_user_id),
+                ),
 ),
 )); ?>

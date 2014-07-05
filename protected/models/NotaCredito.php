@@ -60,7 +60,7 @@ class NotaCredito extends Erp_startedActiveRecord//CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'detalleNotaCreditos' => array(self::HAS_MANY, 'DetalleNotaCredito', 'nota_credito_id'),
+			'r_detalleNotaCreditos' => array(self::HAS_MANY, 'DetalleNotaCredito', 'nota_credito_id'),
 		);
 	}
 
@@ -71,7 +71,7 @@ class NotaCredito extends Erp_startedActiveRecord//CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'comprobante_venta_id' => 'Comprobante Venta',
+			'comprobante_venta_id' => 'Comprobante',
 			'fecha_emision' => 'Fecha Emision',
 			'serie' => 'Serie',
 			'numero' => 'Numero',

@@ -46,9 +46,14 @@ return false;
 		'id',
 		'almacen',
 		'direccion',
-		'ubicacion_id',
+                array(
+                    'name'=>'ubicacion_id',
+                    'value'=>'$data->r_ubicacion->ubicacion'
+                ),    
+		
 		'activo',
-		'create_time',
+		//'create_time',
+                //''
 		/*
 		'create_user_id',
 		'update_time',

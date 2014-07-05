@@ -37,7 +37,7 @@ class Pedido extends Erp_startedActiveRecord//CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('vendedor_id', 'required'),
+			array('cliente_id,vendedor_id', 'required'),
 			array('cliente_id, vendedor_id, cotizacion_id, estado, create_user_id, update_user_id', 'numerical', 'integerOnly'=>true),
 			array('fecha_pedido, observaciones, create_time, update_time', 'safe'),
 			// The following rule is used by search().
@@ -54,7 +54,7 @@ class Pedido extends Erp_startedActiveRecord//CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'detallePedidos' => array(self::HAS_MANY, 'DetallePedido', 'pedido_id'),
+			'r_detallePedidos' => array(self::HAS_MANY, 'DetallePedido', 'pedido_id'),
 		);
 	}
 

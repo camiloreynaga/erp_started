@@ -62,7 +62,7 @@ class GuiaRemision extends Erp_startedActiveRecord//CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'detalleGuiaRemisions' => array(self::HAS_MANY, 'DetalleGuiaRemision', 'guia_remision_id'),
+			'r_detalleGuiaRemisions' => array(self::HAS_MANY, 'DetalleGuiaRemision', 'guia_remision_id'),
 		);
 	}
 

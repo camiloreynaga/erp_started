@@ -32,9 +32,9 @@ class m140701_174809_create_tables_almacen_adicionales extends CDbMigration
                  'id'=>'1',
                 'ubicacion'=>'Cusco',
                 //
-                'create_time'=>  date('m/d/y d:i A'),
+                'create_time'=>  date('Y-m-d H:i:s'),
                 'create_user_id'=> '1',
-                'update_time'=>date('m/d/y d:i A'),
+                'update_time'=>date('Y-m-d H:i:s'),
                 'update_user_id'=>'1',
              ));
              

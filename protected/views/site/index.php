@@ -8,7 +8,7 @@ $this->pageTitle=Yii::app()->name;
 
 <?php if(!Yii::app()->user->isGuest): ?>
 <p>
-    You las logged in on <?php echo Yii::app()->user->lastLogin; ?>
+    You last logged in on <?php echo Yii::app()->user->lastLogin; ?>
 </p>
 <?php endif; ?>
 

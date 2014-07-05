@@ -7,22 +7,84 @@
 
 <?php echo $form->errorSummary($model); ?>
 
-	<?php echo $form->datepickerGroup($model,'fecha_venta',array('options'=>array(),'htmlOptions'=>array('class'=>'span5')),array('prepend'=>'<i class="icon-calendar"></i>','append'=>'Click on Month/Year at top to select a different year or type in (mm/dd/yyyy).')); ?>
+	<?php //echo $form->datepickerGroup($model,'fecha_venta',array('options'=>array(),'htmlOptions'=>array('class'=>'span5')),array('prepend'=>'<i class="icon-calendar"></i>','append'=>'Click on Month/Year at top to select a different year or type in (mm/dd/yyyy).')); ?>
+        
+        <?php echo $form->textFieldGroup($model,'pedido_id',array('class'=>'span5')); ?>
+        
+	<?php 
+        
+        echo $form->select2Group(
+			$model,
+			'cliente_id',
+                      
+			array(
+				'wrapperHtmlOptions' => array(
+					'class' => 'col-sm-5',
+				),
+				'widgetOptions' => array(
+                                    
+                                    'asDropDownList' => true,
+                                    'data'      => CHtml::listData (Cliente::model()->getClientes(), "id","nombre_rz"),
+					'options' => array(
+						'placeholder' =>'Seleccione Cliente', 
+                                                //'width' => '40%', 
+						'tokenSeparators' => array(',', ' ')
+					),
+				)
+			)
+		);
+        
+        ?>
 
-	<?php echo $form->textFieldGroup($model,'cliente_id',array('class'=>'span5')); ?>
+	<?php 
+        echo $form->select2Group(
+			$model,
+			'vendedor_id',
+                      
+			array(
+				'wrapperHtmlOptions' => array(
+					'class' => 'col-sm-5',
+				),
+				'widgetOptions' => array(
+                                    
+                                    'asDropDownList' => true,
+                                    'data'      => CHtml::listData (Empleado::model()->getVendedores(), "id","text"),
+					'options' => array(
+						'placeholder' =>'Seleccione Preventista', 
+                                                //'width' => '40%', 
+						'tokenSeparators' => array(',', ' ')
+					),
+				)
+			)
+		);
+        ?>
 
-	<?php echo $form->textFieldGroup($model,'vendedor_id',array('class'=>'span5')); ?>
-
-	<?php echo $form->textFieldGroup($model,'forma_pago',array('class'=>'span5')); ?>
-
-	<?php echo $form->textFieldGroup($model,'pedido_id',array('class'=>'span5')); ?>
-
-	<?php echo $form->textFieldGroup($model,'base_imponible',array('class'=>'span5','maxlength'=>10)); ?>
-
-	<?php echo $form->textFieldGroup($model,'impuesto',array('class'=>'span5','maxlength'=>10)); ?>
-
-	<?php echo $form->textFieldGroup($model,'importe_total',array('class'=>'span5','maxlength'=>10)); ?>
-
+	<?php 
+        
+        echo $form->select2Group(
+			$model,
+			'forma_pago_id',
+                      
+			array(
+				'wrapperHtmlOptions' => array(
+					'class' => 'col-sm-5',
+				),
+				'widgetOptions' => array(
+                                    
+                                    'asDropDownList' => true,
+                                    'data'      => CHtml::listData (FormaPago::model()->getFormasPagos(), "id","forma_pago"),
+					'options' => array(
+						'placeholder' =>'Seleccione Forma Pago', 
+                                                //'width' => '40%', 
+						'tokenSeparators' => array(',', ' ')
+					),
+				)
+			)
+		);
+        
+        //echo $form->textFieldGroup($model,'forma_pago_id',array('class'=>'span5')); 
+        
+        ?>
 	<?php echo $form->textAreaGroup($model,'observacion',array('rows'=>6, 'cols'=>50, 'class'=>'span8')); ?>
 
 	

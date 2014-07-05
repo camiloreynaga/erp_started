@@ -50,7 +50,7 @@ class DetalleGuiaRemision extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'guiaRemision' => array(self::BELONGS_TO, 'GuiaRemision', 'guia_remision_id'),
+			'r_guiaRemision' => array(self::BELONGS_TO, 'GuiaRemision', 'guia_remision_id'),
 		);
 	}
 

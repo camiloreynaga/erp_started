@@ -1,11 +1,11 @@
 <?php
 
 /**
- * This is the model class for table "tbl_cargo".
+ * This is the model class for table "tbl_forma_pago".
  *
- * The followings are the available columns in table 'tbl_cargo':
+ * The followings are the available columns in table 'tbl_forma_pago':
  * @property integer $id
- * @property string $cargo
+ * @property string $forma_pago
  * @property integer $activo
  * @property string $create_time
  * @property integer $create_user_id
@@ -13,16 +13,16 @@
  * @property integer $update_user_id
  *
  * The followings are the available model relations:
- * @property Empleado[] $empleados
+ * @property Venta[] $ventas
  */
-class Cargo extends Erp_startedActiveRecord//CActiveRecord
+class FormaPago extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'tbl_cargo';
+		return 'tbl_forma_pago';
 	}
 
 	/**
@@ -33,13 +33,13 @@ class Cargo extends Erp_startedActiveRecord//CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('cargo', 'required'),
+			array('forma_pago', 'required'),
 			array('activo, create_user_id, update_user_id', 'numerical', 'integerOnly'=>true),
-			array('cargo', 'length', 'max'=>50),
+			array('forma_pago', 'length', 'max'=>20),
 			array('create_time, update_time', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, cargo, activo, create_time, create_user_id, update_time, update_user_id', 'safe', 'on'=>'search'),
+			array('id, forma_pago, activo, create_time, create_user_id, update_time, update_user_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -51,7 +51,7 @@ class Cargo extends Erp_startedActiveRecord//CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'r_empleados' => array(self::HAS_MANY, 'Empleado', 'cargo_id'),
+			'ventas' => array(self::HAS_MANY, 'Venta', 'forma_pago_id'),
 		);
 	}
 
@@ -62,7 +62,7 @@ class Cargo extends Erp_startedActiveRecord//CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'cargo' => 'Cargo',
+			'forma_pago' => 'Forma Pago',
 			'activo' => 'Activo',
 			'create_time' => 'Create Time',
 			'create_user_id' => 'Create User',
@@ -90,7 +90,7 @@ class Cargo extends Erp_startedActiveRecord//CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('cargo',$this->cargo,true);
+		$criteria->compare('forma_pago',$this->forma_pago,true);
 		$criteria->compare('activo',$this->activo);
 		$criteria->compare('create_time',$this->create_time,true);
 		$criteria->compare('create_user_id',$this->create_user_id);
@@ -106,18 +106,18 @@ class Cargo extends Erp_startedActiveRecord//CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Cargo the static model class
+	 * @return FormaPago the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
 	}
         
-         public function getCargos()
+        public function getFormasPagos()
         {
-            $criteria= new CDbCriteria();
+            $criteria=  new CDbCriteria();
             $criteria->condition='activo=0';
-            
             return $this->findAll($criteria);
         }
+        
 }

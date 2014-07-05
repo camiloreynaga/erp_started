@@ -51,7 +51,7 @@ class CotizacionCompra extends Erp_startedActiveRecord//CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'detalleCotizacionCompras' => array(self::HAS_MANY, 'DetalleCotizacionCompra', 'cotizacion_id'),
+			'r_detalleCotizacionCompras' => array(self::HAS_MANY, 'DetalleCotizacionCompra', 'cotizacion_id'),
 		);
 	}
 

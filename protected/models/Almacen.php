@@ -53,7 +53,8 @@ class Almacen extends Erp_startedActiveRecord//CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'movimientoAlmacens' => array(self::HAS_MANY, 'MovimientoAlmacen', 'almacen_id'),
+			'r_movimientoAlmacens' => array(self::HAS_MANY, 'MovimientoAlmacen', 'almacen_id'),
+                        'r_ubicacion'=>array(self::BELONGS_TO,'Ubicacion','ubicacion_id'),
 		);
 	}
 

@@ -19,7 +19,7 @@ array('label'=>'Manage Cliente','url'=>array('admin')),
 'data'=>$model,
 'attributes'=>array(
 		'id',
-		'nombre_rz',
+                'name'=>'nombre_rz',
 		'ruc',
 		'contacto',
 		'direccion',

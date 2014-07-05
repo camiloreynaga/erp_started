@@ -24,7 +24,7 @@
 				'widgetOptions' => array(
                                     
                                     'asDropDownList' => true,
-                                    'data'      => CHtml::listData (Proveedor::model()->findAll(), "id","nombre_rz"),
+                                    'data'      => CHtml::listData (Proveedor::model()->getProveedores(), "id","nombre_rz"),
 					'options' => array(
 						'placeholder' =>'Seleccione Proveedor', 
                                                 'width' => '40%', 
@@ -68,7 +68,6 @@
     ?>
 </div>
 
-    <?php $model_proveedor= new Proveedor();// Proveedor::model();?>
 
 <?php 
 

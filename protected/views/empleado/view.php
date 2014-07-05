@@ -23,6 +23,10 @@ array('label'=>'Manage Empleado','url'=>array('admin')),
 		'ap_paterno',
 		'ap_materno',
 		'doc_identidad',
+                array(
+                  'name'=>'cargo_id',
+                  'value'=>$model->r_cargo->cargo
+                ),
 		'direccion',
 		'telefono',
 		'movil',

@@ -22,9 +22,9 @@ class m140701_162807_query_data_inicial extends CDbMigration
                 'unidad_medida'=>'Unidad',
                 'nonmenclatura'=>'und',
                 //
-               'create_time'=>date("m/d/y g:i A"),
+               'create_time'=>date("Y-m-d H:i:s"),
                 'create_user_id'=> '1',
-                'update_time'=>date("m/d/y g:i A"),
+                'update_time'=>date("Y-m-d H:i:s"),
                 'update_user_id'=>'1',
             ));
             

@@ -61,10 +61,10 @@ class MovimientoAlmacen extends Erp_startedActiveRecord//CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'detalleVenta' => array(self::BELONGS_TO, 'DetalleVenta', 'detalle_venta_id'),
-			'detalleCompra' => array(self::BELONGS_TO, 'DetalleCompra', 'detalle_compra_id'),
-			'motivoMovimiento' => array(self::BELONGS_TO, 'MotivoMovimiento', 'motivo_movimiento_id'),
-			'almacen' => array(self::BELONGS_TO, 'Almacen', 'almacen_id'),
+			'r_detalleVenta' => array(self::BELONGS_TO, 'DetalleVenta', 'detalle_venta_id'),
+			'r_detalleCompra' => array(self::BELONGS_TO, 'DetalleCompra', 'detalle_compra_id'),
+			'r_motivoMovimiento' => array(self::BELONGS_TO, 'MotivoMovimiento', 'motivo_movimiento_id'),
+			'r_almacen' => array(self::BELONGS_TO, 'Almacen', 'almacen_id'),
 		);
 	}
 
@@ -78,7 +78,7 @@ class MovimientoAlmacen extends Erp_startedActiveRecord//CActiveRecord
 			'fecha_movimiento' => 'Fecha Movimiento',
 			'producto_id' => 'Producto',
 			'cantidad' => 'Cantidad',
-			'motivo_movimiento_id' => 'Motivo Movimiento',
+			'motivo_movimiento_id' => 'Motivo',
 			'detalle_compra_id' => 'Detalle Compra',
 			'detalle_venta_id' => 'Detalle Venta',
 			'observacion' => 'Observacion',

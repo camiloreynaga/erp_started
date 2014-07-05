@@ -55,7 +55,7 @@ class CuentaPagar extends Erp_startedActiveRecord//CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'compra' => array(self::BELONGS_TO, 'Compra', 'compra_id'),
+			'r_compra' => array(self::BELONGS_TO, 'Compra', 'compra_id'),
 		);
 	}
 

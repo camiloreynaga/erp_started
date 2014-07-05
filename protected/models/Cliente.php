@@ -60,7 +60,7 @@ class Cliente extends Erp_startedActiveRecord//CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'ventas' => array(self::HAS_MANY, 'Venta', 'cliente_id'),
+			'r_ventas' => array(self::HAS_MANY, 'Venta', 'cliente_id'),
 		);
 	}
 
@@ -71,8 +71,8 @@ class Cliente extends Erp_startedActiveRecord//CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'nombre_rz' => 'Nombre Rz',
-			'ruc' => 'Ruc',
+			'nombre_rz' => 'Razon Social',
+			'ruc' => 'RUC',
 			'contacto' => 'Contacto',
 			'direccion' => 'Direccion',
 			'ciudad' => 'Ciudad',
@@ -133,4 +133,12 @@ class Cliente extends Erp_startedActiveRecord//CActiveRecord
 	{
 		return parent::model($className);
 	}
+        
+         public function getClientes()
+        {
+            $criteria= new CDbCriteria();
+            $criteria->condition='activo=0';
+            
+            return $this->findAll($criteria);
+        }
 }

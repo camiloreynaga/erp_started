@@ -70,12 +70,13 @@ class m140521_035044_create_begining_venta_tables extends CDbMigration
                 'fecha_venta'=>'date DEFAULT NULL', // fecha emision comprobante
                 'cliente_id'=>'int(11) NOT NULL', // fk de registro de proveedores
                 'vendedor_id'=>'int(11) NOT NULL', // Registro de preventista
-                'forma_pago'=>'int(11) NOT NULL', // contado / credito/ letra.
+                'forma_pago_id'=>'int(11) NOT NULL', // contado / credito/ letra.
                 'pedido_id'=>'int(11)', //relacion de pedido - venta
                 'base_imponible'=>'decimal(10,2)',
                 'impuesto'=>'decimal(10,2) DEFAULT NULL' ,
                 'importe_total'=>'decimal(10,2) DEFAULT NULL',
                 'observacion'=>'text DEFAULT NULL',
+                'estado'=>'SmallInt(6)', // 0=pendiente,1=proceso,2=terminado,3=cancelado
                 'create_time'=>'datetime DEFAULT NULL',
                 'create_user_id'=> 'int(11) DEFAULT NULL',
                 'update_time'=>'datetime DEFAULT NULL',

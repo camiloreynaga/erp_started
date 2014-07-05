@@ -56,7 +56,7 @@ class CuentaCobrar extends Erp_startedActiveRecord//CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'venta' => array(self::BELONGS_TO, 'Venta', 'venta_id'),
+			'r_venta' => array(self::BELONGS_TO, 'Venta', 'venta_id'),
 		);
 	}
 

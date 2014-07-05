@@ -41,7 +41,7 @@ class Empleado extends Erp_startedActiveRecord//CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('nombre, ap_paterno, doc_identidad', 'required'),
+			array('nombre, ap_paterno, doc_identidad, cargo_id', 'required'),
 			array('cargo_id, create_user_id, update_user_id', 'numerical', 'integerOnly'=>true),
 			array('nombre, ap_paterno, ap_materno, telefono, movil', 'length', 'max'=>50),
 			array('doc_identidad', 'length', 'max'=>10),
@@ -121,7 +121,7 @@ class Empleado extends Erp_startedActiveRecord//CActiveRecord
 		$criteria->compare('create_user_id',$this->create_user_id);
 		$criteria->compare('update_time',$this->update_time,true);
 		$criteria->compare('update_user_id',$this->update_user_id);
-
+                $criteria->condition='id>1';
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
@@ -137,4 +137,22 @@ class Empleado extends Erp_startedActiveRecord//CActiveRecord
 	{
 		return parent::model($className);
 	}
+        
+        public function getVendedores()
+        {
+            $criteria= new CDbCriteria();
+            $criteria->condition='cargo_id=4'; //Cargo de preventista
+   
+            
+            $lista= $this->model()->findAll($criteria); 
+              $resultados = array();
+              foreach ($lista as $list){
+                $resultados[] = array(
+                         'id'=>$list->id,
+                         'text'=> $list->nombre.' '.$list->ap_paterno
+              ); 
+            
+              }
+              return $resultados;
+        }
 }

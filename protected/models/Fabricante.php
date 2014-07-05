@@ -62,7 +62,7 @@ class Fabricante extends Erp_startedActiveRecord//CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'fabricante' => 'Fabricante',
+			'fabricante' => 'Laboratorio',
 			'activo' => 'Activo',
 			'create_time' => 'Create Time',
 			'create_user_id' => 'Create User',

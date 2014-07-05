@@ -20,11 +20,11 @@ class m140701_062314_query_first extends CDbMigration
                 'id'=>1,
                 'nombre'=>'root',
                 'ap_paterno'=>'root',
-                'fecha_nacimiento'=> date("m/d/y g:i A"),
+                'fecha_nacimiento'=> date("Y-m-d H:i:s"),
                 'doc_identidad'=>'0',
                 
-                'create_time'=>date("m/d/y g:i A"),
-                'update_time'=>date("m/d/y g:i A"),
+                'create_time'=>date("Y-m-d H:i:s"),
+                'update_time'=>date("Y-m-d H:i:s"),
             ));
             
             $this->insert('tbl_usuario', array(
@@ -33,8 +33,8 @@ class m140701_062314_query_first extends CDbMigration
                 'email' => 'camilo.reynaga@gmail.com',
                 'password' => md5('admin'),
                 'empleado_id'=>1,
-                'create_time'=>date("m/d/y g:i A"),
-                'update_time'=>date("m/d/y g:i A"),
+                'create_time'=>date("Y-m-d H:i:s"),
+                'update_time'=>date("Y-m-d H:i:s"),
             ));
 	}
 

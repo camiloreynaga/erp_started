@@ -58,8 +58,8 @@ class CaracteristicaProducto extends Erp_startedActiveRecord//CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'producto' => array(self::BELONGS_TO, 'Producto', 'producto_id'),
-			'caracteristica' => array(self::BELONGS_TO, 'Caracteristica', 'caracteristica_id'),
+			'r_producto' => array(self::BELONGS_TO, 'Producto', 'producto_id'),
+			'r_caracteristica' => array(self::BELONGS_TO, 'Caracteristica', 'caracteristica_id'),
 		);
 	}
 

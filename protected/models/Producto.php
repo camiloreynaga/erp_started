@@ -107,7 +107,7 @@ class Producto extends Erp_startedActiveRecord// CActiveRecord
 			'tipo_producto_id' => 'Tipo Producto',
 			'presentacion_id' => 'Presentacion',
 			'unidad_medida_id' => 'Unidad Medida',
-			'fabricante_id' => 'Fabricante',
+			'fabricante_id' => 'Laboratorio',
 			'minimo_stock' => 'Minimo Stock',
 			'stock' => 'Stock',
 			'descontinuado' => 'Descontinuado',

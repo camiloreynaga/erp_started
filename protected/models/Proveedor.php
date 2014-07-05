@@ -72,7 +72,7 @@ class Proveedor extends Erp_startedActiveRecord//CActiveRecord
 		return array(
 			'id' => 'ID',
 			'nombre_rz' => 'Razon Social',
-			'ruc' => 'Ruc',
+			'ruc' => 'RUC',
 			'contacto' => 'Contacto',
 			'direccion' => 'Direccion',
 			'ciudad' => 'Ciudad',
@@ -133,4 +133,12 @@ class Proveedor extends Erp_startedActiveRecord//CActiveRecord
 	{
 		return parent::model($className);
 	}
+        
+        public function getProveedores()
+        {
+            $criteria= new CDbCriteria();
+            $criteria->condition='activo=0';
+            
+            return $this->findAll($criteria);
+        }
 }

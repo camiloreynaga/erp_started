@@ -51,7 +51,8 @@ class Ubicacion extends Erp_startedActiveRecord//CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'almacens' => array(self::HAS_MANY, 'Almacen', 'ubicacion_id'),
+			'r_almacen' => array(self::HAS_MANY, 'Almacen', 'ubicacion_id'),
+//                        'r_'
 		);
 	}
 
@@ -112,4 +113,9 @@ class Ubicacion extends Erp_startedActiveRecord//CActiveRecord
 	{
 		return parent::model($className);
 	}
+        
+        public function getUbicacion($id)
+        {
+           return isset($id) ?$this->findByPk($id)->ubicacion : 'Unknow';
+        }
 }

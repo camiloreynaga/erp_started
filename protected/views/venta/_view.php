@@ -16,8 +16,8 @@
 	<?php echo CHtml::encode($data->vendedor_id); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('forma_pago')); ?>:</b>
-	<?php echo CHtml::encode($data->forma_pago); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('forma_pago_id')); ?>:</b>
+	<?php echo CHtml::encode($data->forma_pago_id); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('pedido_id')); ?>:</b>
@@ -39,6 +39,10 @@
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('observacion')); ?>:</b>
 	<?php echo CHtml::encode($data->observacion); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($data->getAttributeLabel('estado')); ?>:</b>
+	<?php echo CHtml::encode($data->estado); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('create_time')); ?>:</b>

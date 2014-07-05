@@ -50,7 +50,7 @@ class DetalleNotaCredito extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'notaCredito' => array(self::BELONGS_TO, 'NotaCredito', 'nota_credito_id'),
+			'r_notaCredito' => array(self::BELONGS_TO, 'NotaCredito', 'nota_credito_id'),
 		);
 	}
 

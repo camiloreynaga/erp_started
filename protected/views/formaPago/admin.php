@@ -1,12 +1,12 @@
 <?php
 $this->breadcrumbs=array(
-	'Empleados'=>array('index'),
+	'Forma Pagos'=>array('index'),
 	'Manage',
 );
 
 $this->menu=array(
-array('label'=>'List Empleado','url'=>array('index')),
-array('label'=>'Create Empleado','url'=>array('create')),
+array('label'=>'List FormaPago','url'=>array('index')),
+array('label'=>'Create FormaPago','url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -15,7 +15,7 @@ $('.search-form').toggle();
 return false;
 });
 $('.search-form form').submit(function(){
-$.fn.yiiGridView.update('empleado-grid', {
+$.fn.yiiGridView.update('forma-pago-grid', {
 data: $(this).serialize()
 });
 return false;
@@ -23,7 +23,7 @@ return false;
 ");
 ?>
 
-<h1>Manage Empleados</h1>
+<h1>Manage Forma Pagos</h1>
 
 <p>
 	You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>
@@ -39,28 +39,17 @@ return false;
 </div><!-- search-form -->
 
 <?php $this->widget('booster.widgets.TbGridView',array(
-'id'=>'empleado-grid',
+'id'=>'forma-pago-grid',
 'dataProvider'=>$model->search(),
 'filter'=>$model,
 'columns'=>array(
 		'id',
-		'nombre',
-		'ap_paterno',
-		'ap_materno',
-		'doc_identidad',
-                array(
-                    'name'=>'cargo_id',
-                    'value'=>'$data->r_cargo->cargo'
-                ),
-                'movil',
-		//'direccion',
-		/*
-		'telefono',
-		
-		'fecha_nacimiento',
+		'forma_pago',
+		'activo',
 		'create_time',
 		'create_user_id',
 		'update_time',
+		/*
 		'update_user_id',
 		*/
 array(
