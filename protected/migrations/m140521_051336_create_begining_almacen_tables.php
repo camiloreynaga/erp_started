@@ -36,7 +36,8 @@ class m140521_051336_create_begining_almacen_tables extends CDbMigration
                 'producto_id'=>'int(11)',
                 'lote'=>'varchar(50)',
                 'fecha_vencimiento'=>'Date',
-                'cantidad_disponible'=>'int(11)', // 1= cusco, 
+                'cantidad_disponible'=>'int(11)', // cantidad que se muestra disponible de venta
+                'cantidad_real'=>'int(11)', //cantidad real en ítems físicos en el almacén
                 //'activo'=>'bool DEFAULT 0', // 0=si ;1=no
                 //
                 'create_time' => 'datetime DEFAULT NULL',

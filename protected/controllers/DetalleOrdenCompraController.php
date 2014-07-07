@@ -103,12 +103,8 @@ class DetalleOrdenCompraController extends Controller
                                 //'msg'=>$model->addError('producto_id', 'Producto ya Existe')
                                 'val' =>'Producto ya Existe'
                             ));
-                            
                            Yii::app()->end();// exit;
-                    
                 }
-                
-                
             }
             else
                 {
@@ -193,6 +189,8 @@ class DetalleOrdenCompraController extends Controller
         }
         /*
          * muestra el detalle de orden de compra 
+         * usado para la creación de compra, permite ver el detalle de un OC luego
+         * de seleccionarla
          */
         public function actionDetalleOC()
             {
@@ -215,7 +213,7 @@ class DetalleOrdenCompraController extends Controller
 
 
             }
-         public function actionBatchDelete()
+        public function actionBatchDelete()
         {
              if(Yii::app()->request->getIsAjaxRequest())
                 {
@@ -314,11 +312,11 @@ class DetalleOrdenCompraController extends Controller
         */
         protected function performAjaxValidation($model)
         {
-        if(isset($_POST['ajax']) && $_POST['ajax']==='detalle-orden-compra-form')
-        {
-        echo CActiveForm::validate($model);
-        Yii::app()->end();
-        }
+            if(isset($_POST['ajax']) && $_POST['ajax']==='detalle-orden-compra-form')
+            {
+                echo CActiveForm::validate($model);
+                Yii::app()->end();
+            }
         }
         
         public function filterOrdenCompraContext($filterChain)

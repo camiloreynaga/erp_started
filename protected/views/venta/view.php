@@ -18,20 +18,35 @@ array('label'=>'Manage Venta','url'=>array('admin')),
 <?php $this->widget('booster.widgets.TbDetailView',array(
 'data'=>$model,
 'attributes'=>array(
-		'id',
+		//'id',
 		'fecha_venta',
-		'cliente_id',
-		'vendedor_id',
-		'forma_pago_id',
+                array(
+                    'name'=>'cliente_id',
+                    'value'=>$model->r_cliente->nombre_rz
+                ),
+		array(
+                    'name'=>'vendedor_id',
+                    'value'=>$model->r_empleado->nombre.' '.$model->r_empleado->ap_paterno
+                ),
+		array(
+                    'name'=>'forma_pago_id',
+                    'value'=>$model->r_formaPago->forma_pago
+                ),
+		
 		'pedido_id',
 		'base_imponible',
 		'impuesto',
 		'importe_total',
 		'observacion',
 		'estado',
-		'create_time',
-		'create_user_id',
-		'update_time',
-		'update_user_id',
+		//'create_time',
+		//'create_user_id',
+		//'update_time',
+		//'update_user_id',
 ),
 )); ?>
+<?php
+$this->renderPartial('//DetalleVenta/_viewDetalleVenta',array('model'=>DetalleVenta::model(),'pid'=>$model->id));
+
+?>
+<a href="facturacion2/factura.php?id_venta=<?php echo $model->id; ?>" target="blank" >Facturar</a></p>

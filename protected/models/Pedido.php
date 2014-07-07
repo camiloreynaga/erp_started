@@ -55,6 +55,8 @@ class Pedido extends Erp_startedActiveRecord//CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'r_detallePedidos' => array(self::HAS_MANY, 'DetallePedido', 'pedido_id'),
+                        'r_cliente' => array(self::BELONGS_TO, 'Cliente', 'cliente_id'),
+                        'r_empleado'=>array(self::BELONGS_TO,'Empleado','vendedor_id')
 		);
 	}
 

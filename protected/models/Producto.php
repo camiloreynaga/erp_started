@@ -236,5 +236,29 @@ class Producto extends Erp_startedActiveRecord// CActiveRecord
               }
               return $resultados;   
         }
+        /*
+         * Recuperar los productos con stock mayor a cero
+         */
+        public function getProductosStock()
+        {
+            $criteria= new CDbCriteria();
+            $criteria->condition='descontinuado=0 and stock>0';
+            $criteria->with=array('r_fabricante');
+            //$criteria->together=true;
+            $_lab= Fabricante::model()->tablename();
+           // $criteria->select='t.id,lab.fabricante as lab,t.nombre,t.stock';
+            $criteria->join='inner join '.$_lab.' lab on lab.id = t.fabricante_id ';
+            
+            $lista= $this->model()->findAll($criteria); 
+              $resultados = array();
+              foreach ($lista as $list){
+                $resultados[] = array(
+                         'id'=>$list->id,
+                         'text'=> $list->nombre.'-'.$list->r_fabricante->fabricante. ' (STOCK:'.$list->stock.')',
+              ); 
+            
+              }
+              return $resultados;   
+        }
         
 }

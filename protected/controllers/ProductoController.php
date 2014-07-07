@@ -31,7 +31,7 @@ public $layout='//layouts/column2';
                 'users'=>array('*'),
                 ),
                 array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions'=>array('create','update','search','filtroProducto'),
+                'actions'=>array('create','update','search','filtroProducto','filtroProductoStock'),
                 'users'=>array('@'),
                 ),
                 array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -166,9 +166,32 @@ public $layout='//layouts/column2';
                 ));
 	}
         
+        /*
+         * 
+         */
+         public function actionFiltroProductoStock()
+        {
+           $lista =  Producto::model()->findAll('descontinuado=0 AND stock>0 AND nombre like :nombre',array(':nombre'=>"%".$_GET['q']."%")); 
+          // $lista = Producto::model()->getProductosStock();
+           $resultados = array();
+           foreach ($lista as $list){
+            $resultados[] = array(
+                         'id'=>$list->id,
+                         'text'=>  $list->nombre .' - '.$list->r_presentacion->presentacion. ' (STOCK:'.$list->stock.')',
+                         
+            ); 
+            }
+        echo CJSON::encode($resultados);   
+       }
+        
+        /*
+         * retorna los productos vigentes por JSON, la busqueda 
+         * es por producto solamente.
+         */
          public function actionFiltroProducto()
         {
            $lista =  Producto::model()->findAll('descontinuado=0 AND nombre like :nombre',array(':nombre'=>"%".$_GET['q']."%")); 
+           $lista = Producto::model()->getProductosStock();
            $resultados = array();
            foreach ($lista as $list){
             $resultados[] = array(
@@ -177,9 +200,11 @@ public $layout='//layouts/column2';
             ); 
             }
         echo CJSON::encode($resultados);   
-
        }
        
+       /*
+        * Retorna los productos vigentes, nombre, presentación y stock
+        */
        public function actionFiltro2Producto()
         {
            $lista =  Producto::model()->findAll('descontinuado=0'); 

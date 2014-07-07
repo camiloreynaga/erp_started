@@ -308,7 +308,7 @@ $this->widget('booster.widgets.TbExtendedGridView',array(
                                 
                                 
                             )
-                        ),
+                            ),
                             array(
                                 'name'=>'observacion',
                                 'header'=>'Obs.',
@@ -328,7 +328,7 @@ $this->widget('booster.widgets.TbExtendedGridView',array(
                             ),
                             array(
                                 'name'=>'subtotal',
-                                'header'=>'Subtotal',
+                                //'header'=>'Subtotal',
                                 'htmlOptions'=>array('style'=> 'text-align: right')
                             ),
                             array(

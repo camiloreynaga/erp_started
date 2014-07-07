@@ -68,6 +68,8 @@ class Venta extends Erp_startedActiveRecord//CActiveRecord
 			'r_detalleVentas' => array(self::HAS_MANY, 'DetalleVenta', 'venta_id'),
 			'r_cliente' => array(self::BELONGS_TO, 'Cliente', 'cliente_id'),
                         'r_formaPago' => array(self::BELONGS_TO, 'FormaPago', 'forma_pago_id'),
+                        'r_empleado'=>array(self::BELONGS_TO,'Empleado','vendedor_id'),
+                        'r_formaPago'=>array(self::BELONGS_TO,'FormaPago','forma_pago_id'),
 		);
 	}
 

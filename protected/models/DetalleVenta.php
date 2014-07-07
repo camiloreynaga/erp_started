@@ -42,6 +42,7 @@ class DetalleVenta extends Erp_startedActiveRecord//CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
+                        array('venta_id,producto_id,cantidad,precio_unitario,lote','required'),
 			array('venta_id, producto_id, cantidad, create_user_id, update_user_id', 'numerical', 'integerOnly'=>true),
 			array('precio_unitario, subtotal, impuesto, total', 'length', 'max'=>10),
 			array('lote', 'length', 'max'=>50),
@@ -136,5 +137,42 @@ class DetalleVenta extends Erp_startedActiveRecord//CActiveRecord
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
+	}
+        
+//        public function beforeSave()
+//        {
+//            $this->fecha_compra = DateTime::createFromFormat('d/m/Y', $this->fecha_compra)->format('Y-m-d');
+//            return parent::beforeSave();
+//        }
+        
+        /*
+         * Retorna los lotes con cantidad disponible mayor a cero
+         */
+        public function getListLote($id_producto)
+	{
+		$criteria = new CDbCriteria();
+		$criteria->select='lote,sum(cantidad_disponible) as cantidad_disponible,fecha_vencimiento'; //lote
+                $criteria->compare('producto_id',$id_producto);
+                $criteria->group='lote';
+                $criteria->addCondition('cantidad_disponible > 0');
+                $criteria->order='fecha_vencimiento ASC';
+               //$criteria->group 
+                //$criteria->with=array('r_fabricante');
+               // $_lab= Fabricante::model()->tablename();
+               // $criteria->join='inner join '.$_lab.' lab on lab.id = t.fabricante_id ';
+            
+                $lista= ProductoAlmacen::model()->findAll($criteria);
+                $resultados = array();
+                foreach ($lista as $list){
+                    $resultados[] = array(
+                             'lote'=>$list->lote, 
+                             'text'=> 'LOTE:' .strtoupper($list->lote).' FV: '.$list->fecha_vencimiento. ' #'.$list->cantidad_disponible.'(UNDS)',
+                    ); 
+                    
+                }
+              return $resultados;  
+                
+		
+		
 	}
 }

@@ -35,6 +35,7 @@ class DetallePedido extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
+                        array('pedido_id,producto_id,cantidad','required'),
 			array('pedido_id, producto_id, cantidad', 'numerical', 'integerOnly'=>true),
 			array('precio_unitario, subtotal, impuesto, total', 'length', 'max'=>10),
 			array('observacion', 'safe'),
@@ -53,6 +54,7 @@ class DetallePedido extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'r_pedido' => array(self::BELONGS_TO, 'Pedido', 'pedido_id'),
+                        'r_producto' => array(self::BELONGS_TO, 'Producto', 'producto_id'),    
 		);
 	}
 

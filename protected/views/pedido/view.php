@@ -18,16 +18,29 @@ array('label'=>'Manage Pedido','url'=>array('admin')),
 <?php $this->widget('booster.widgets.TbDetailView',array(
 'data'=>$model,
 'attributes'=>array(
-		'id',
+		//'id',
 		'fecha_pedido',
-		'cliente_id',
-		'vendedor_id',
+		array(
+                    'name'=>'cliente_id',
+                    'value'=>$model->r_cliente->nombre_rz
+                ),
+                array(
+                    'name'=>'vendedor_id',
+                    'value'=>$model->r_empleado->nombre.' '.$model->r_empleado->ap_paterno
+                ),
+		//'vendedor_id',
 		'cotizacion_id',
 		'observaciones',
 		'estado',
-		'create_time',
-		'create_user_id',
-		'update_time',
-		'update_user_id',
+		//'create_time',
+		//'create_user_id',
+		//'update_time',
+		//'update_user_id',
 ),
 )); ?>
+
+<?php
+$this->renderPartial('//DetallePedido/_viewDetallePedido',array('model'=>DetallePedido::model(),'pid'=>$model->id));
+
+?>
+
