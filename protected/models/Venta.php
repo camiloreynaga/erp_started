@@ -146,4 +146,28 @@ class Venta extends Erp_startedActiveRecord//CActiveRecord
 	{
 		return parent::model($className);
 	}
+        
+        /**
+         * retorna las ordenes de compra pendientes
+         * @return type array de resultado ordenes de compra
+         */
+        public function getVenta()
+        {
+            $criteria= new CDbCriteria();
+            $criteria->condition='estado=0'; //pendiente
+            $criteria->with=array('r_cliente');
+            //$_lab= Fabricante::model()->tablename();
+            //$criteria->join='inner join '.$_lab.' lab on lab.id = t.fabricante_id ';
+            
+            $lista= $this->model()->findAll($criteria); 
+              $resultados = array();
+              foreach ($lista as $list){
+                $resultados[] = array(
+                         'id'=>$list->id,
+                         'text'=> $list->id.'-'.$list->r_cliente->nombre_rz. ' (Fecha:'.$list->fecha_venta.')',
+              ); 
+            
+              }
+              return $resultados;   
+        }
 }

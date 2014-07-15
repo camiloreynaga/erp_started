@@ -34,59 +34,59 @@
 				//array('label'=>'Contact', 'url'=>array('/site/contact')),
                                 array('label'=>'Mantenimiento Producto',
                                     'items'=>array(
-                                        array('label'=>'Presentaciones','url'=>array('/presentacion')),
-                                        array('label'=>'Tipos de producto','url'=>array('/tipoProducto')),
-                                        array('label'=>'Fabricantes','url'=>array('/fabricante')),
-                                        array('label'=>'Caracteristica','url'=>array('/caracteristica')),
-                                        array('label'=>'Unidades de Medida','url'=>array('/unidadMedida')),
-                                        array('label'=>'Productos','url'=>array('/producto')),
+                                        array('label'=>'Presentaciones','url'=>array('/presentacion/admin')),
+                                        array('label'=>'Tipos de producto','url'=>array('/tipoProducto/admin')),
+                                        array('label'=>'Fabricantes','url'=>array('/fabricante/admin')),
+                                        array('label'=>'Caracteristica','url'=>array('/caracteristica/admin')),
+                                        array('label'=>'Unidades de Medida','url'=>array('/unidadMedida/admin')),
+                                        array('label'=>'Productos','url'=>array('/producto/admin')),
                                     
                                 
                                         ),
                                     ),
                                 array('label'=>'Almacen',
                                     'items'=>array(
-                                        array('label'=>'Ubicaciones','url'=>array('/ubicacion')),
-                                        array('label'=>'Almacenes','url'=>array('/almacen')),
-                                        array('label'=>'Motivos de movimiento','url'=>array('/motivoMovimiento')),
-                                        array('label'=>'Ingreso/Salida','url'=>array('/movimientoAlmacen')),
-                                        array('label'=>'Productos x almacen','url'=>array('/productoAlmacen')),
+                                        array('label'=>'Ubicaciones','url'=>array('/ubicacion/admin')),
+                                        array('label'=>'Almacenes','url'=>array('/almacen/admin')),
+                                        array('label'=>'Motivos de movimiento','url'=>array('/motivoMovimiento/admin')),
+                                        array('label'=>'Ingreso/Salida','url'=>array('/movimientoAlmacen/admin')),
+                                        array('label'=>'Productos x almacen','url'=>array('/productoAlmacen/admin')),
                                          
                                     )
                                     ),
                                 array('label'=>'Documentos',
                                     'items'=>array(
-                                        array('label'=>'Tipos de Comprobante','url'=>array('/tipoComprobante')),
-                                        array('label'=>'Guias de Remision','url'=>array('/guiaRemision')),
-                                        array('label'=>'Notas de Credito','url'=>array('/notaCredito')),
+                                        array('label'=>'Tipos de Comprobante','url'=>array('/tipoComprobante/admin')),
+                                        array('label'=>'Guias de Remision','url'=>array('/guiaRemision/admin')),
+                                        array('label'=>'Notas de Credito','url'=>array('/notaCredito/admin')),
                                     )
                                     ),    
                                 array('label'=>'Empleados',
                                     'items'=>array(
-                                        array('label'=>'Cargos','url'=>array('/cargo')),
-                                        array('label'=>'Empleados','url'=>array('/empleado')),
-                                        array('label'=>'Usuarios','url'=>array('/usuario')),
+                                        array('label'=>'Cargos','url'=>array('/cargo/admin')),
+                                        array('label'=>'Empleados','url'=>array('/empleado/admin')),
+                                        array('label'=>'Usuarios','url'=>array('/usuario/admin')),
                                     )
                                     ),    
                                 array('label'=>'Sistema',
                                         'items'=>array(
-                                            array('label'=>'Proveedores','url'=>array('/proveedor')),
-                                            array('label'=>'Clientes','url'=>array('/cliente')),
+                                            array('label'=>'Proveedores','url'=>array('/proveedor/admin')),
+                                            array('label'=>'Clientes','url'=>array('/cliente/admin')),
                                             
                                         ),
                                     ),
                                 array('label'=>'Operaciones',
                                     'items'=>array(
-                                            array('label'=>'Ordenes de compra','url'=>array('/ordenCompra')),
-                                            array('label'=>'Compras','url'=>array('/compra')),
-                                            array('label'=>'Pedidos','url'=>array('/pedido')),
-                                            array('label'=>'Ventas','url'=>array('/venta')),
+                                            array('label'=>'Ordenes de compra','url'=>array('/ordenCompra/admin')),
+                                            array('label'=>'Compras','url'=>array('/compra/admin')),
+                                            array('label'=>'Pedidos','url'=>array('/pedido/admin')),
+                                            array('label'=>'Ventas','url'=>array('/venta/admin')),
                                         ),
                                     ),
                                 array('label'=>'Cuentas',
                                     'items'=>array(
-                                        array('label'=>'Cuentas por Cobrar','url'=>array('/cuentaCobrar')),
-                                        array('label'=>'Cuentas por Pagar','url'=>array('/cuentaPagar')),
+                                        array('label'=>'Cuentas por Cobrar','url'=>array('/cuentaCobrar/admin')),
+                                        array('label'=>'Cuentas por Pagar','url'=>array('/cuentaPagar/admin')),
                                     )
                                     ), 
                                    

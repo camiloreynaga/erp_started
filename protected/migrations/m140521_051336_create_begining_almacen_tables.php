@@ -94,7 +94,7 @@ class m140521_051336_create_begining_almacen_tables extends CDbMigration
                 'observacion'=>'text DEFAULT NULL',
                 'almacen_id'=>'int(11)',
                 'saldo_stock'=>'int(11)',
-                'operacion'=>'bool ',// 0=> compra, 1= venta
+                'operacion'=>'bool ',// 0=> ingreso, 1= salida
                 'create_time' => 'datetime DEFAULT NULL',
                 'create_user_id' => 'int(11) DEFAULT NULL',
                 'update_time' => 'datetime DEFAULT NULL',

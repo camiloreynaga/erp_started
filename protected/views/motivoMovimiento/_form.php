@@ -9,7 +9,25 @@
 
 	<?php echo $form->textFieldGroup($model,'movimiento',array('class'=>'span5','maxlength'=>50)); ?>
 
-	<?php echo $form->textFieldGroup($model,'tipo_movimiento',array('class'=>'span5')); ?>
+	<?php 
+        
+        echo $form->switchGroup($model,'tipo_movimiento',
+                array('class'=>'span5',
+                        'widgetOptions'=>array(
+                            'options'=>array(
+                                'size'=>'large',
+                                'onText'=>'Salida',
+                                'offText'=>'Ingreso',
+                                'onColor' => 'danger',
+                                'offColor' => 'primary', 
+                                ),
+                            //'htmlOptions'=>$htmlOptions,
+                    )
+                )
+                
+                ); 
+        
+        //echo $form->textFieldGroup($model,'tipo_movimiento',array('class'=>'span5')); ?>
 
 	
 

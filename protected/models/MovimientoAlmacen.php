@@ -19,7 +19,8 @@
  * @property integer $create_user_id
  * @property string $update_time
  * @property integer $update_user_id
- *
+ * @property string $_lote para registrar lotes
+ * @property date $_fecha_vencimiento para registrar fechas de vencimiento
  * The followings are the available model relations:
  * @property DetalleVenta $detalleVenta
  * @property DetalleCompra $detalleCompra
@@ -28,6 +29,14 @@
  */
 class MovimientoAlmacen extends Erp_startedActiveRecord//CActiveRecord
 {
+        /*
+         * para 
+         */
+        public $_lote=null;
+        /*
+         * Para fecha de vencimiento
+         */
+        public $_fecha_vencimiento=null; 
 	/**
 	 * @return string the associated database table name
 	 */
@@ -44,9 +53,10 @@ class MovimientoAlmacen extends Erp_startedActiveRecord//CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('producto_id, cantidad, motivo_movimiento_id', 'required'),
+			array('producto_id, cantidad, motivo_movimiento_id,_lote', 'required'),
+                        //array('producto_id, cantidad , motivo_movimiento_id','required'),
 			array('producto_id, cantidad, motivo_movimiento_id, detalle_compra_id, detalle_venta_id, almacen_id, saldo_stock, operacion, create_user_id, update_user_id', 'numerical', 'integerOnly'=>true),
-			array('fecha_movimiento, observacion, create_time, update_time', 'safe'),
+			array('fecha_movimiento, observacion, create_time, update_time,_lote', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, fecha_movimiento, producto_id, cantidad, motivo_movimiento_id, detalle_compra_id, detalle_venta_id, observacion, almacen_id, saldo_stock, operacion, create_time, create_user_id, update_time, update_user_id', 'safe', 'on'=>'search'),
@@ -89,6 +99,7 @@ class MovimientoAlmacen extends Erp_startedActiveRecord//CActiveRecord
 			'create_user_id' => 'Create User',
 			'update_time' => 'Update Time',
 			'update_user_id' => 'Update User',
+                        '_lote'=>'Lote',
 		);
 	}
 
@@ -141,4 +152,16 @@ class MovimientoAlmacen extends Erp_startedActiveRecord//CActiveRecord
 	{
 		return parent::model($className);
 	}
+        
+        /*
+         * obtiene los lotes desde la tabla producto_almacen
+         */
+        public function getLoteIngreso($almacen_id,$producto_id)
+        {
+            $criteria = new CDbCriteria();
+            $criteria->condition='almacen_id='.$almacen_id.' and producto_id='.$producto_id;
+            $criteria->select='lote';
+            return ProductoAlmacen::model()->findAll($criteria);
+            //$criteria
+        }
 }

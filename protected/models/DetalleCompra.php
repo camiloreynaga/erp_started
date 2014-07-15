@@ -158,7 +158,8 @@ class DetalleCompra extends Erp_startedActiveRecord//CActiveRecord
             if($this->fecha_vencimiento==null) //validando la fecha de cancelación
                 $this->fecha_vencimiento=null;
             else {
-                $this->fecha_vencimiento= DateTime::createFromFormat('d/m/Y', $this->fecha_vencimiento)->format('Y-m-d');
+                //if($this->fecha_vencimiento )
+                //$this->fecha_vencimiento= DateTime::createFromFormat('d/m/Y', $this->fecha_vencimiento)->format('Y-m-d');
             }
             
             return parent::beforeSave();

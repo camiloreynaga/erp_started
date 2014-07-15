@@ -25,18 +25,18 @@ return false;
 
 <h1>Manage Motivo Movimientos</h1>
 
-<p>
+<!--<p>
 	You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>
 		&lt;&gt;</b>
 	or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
-</p>
+</p>-->
 
-<?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button btn')); ?>
-<div class="search-form" style="display:none">
-	<?php $this->renderPartial('_search',array(
-	'model'=>$model,
-)); ?>
-</div><!-- search-form -->
+<?php // echo CHtml::link('Advanced Search','#',array('class'=>'search-button btn')); ?>
+<!--<div class="search-form" style="display:none">
+	<?php // $this->renderPartial('_search',array(
+//	'model'=>$model,
+//)); ?>
+</div> search-form -->
 
 <?php $this->widget('booster.widgets.TbGridView',array(
 'id'=>'motivo-movimiento-grid',
@@ -45,7 +45,13 @@ return false;
 'columns'=>array(
 		'id',
 		'movimiento',
-		'tipo_movimiento',
+                array(
+                    'name'=>'tipo_movimiento',
+                    //'value'=> $model->tipo_movimiento==0 ? 'ingreso' : 'salida'
+                        
+                         //='0' ? 'Ingreso' : 'Salida',
+                ),
+		
 		'create_time',
 		'create_user_id',
 		'update_time',

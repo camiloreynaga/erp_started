@@ -112,4 +112,12 @@ class MotivoMovimiento extends Erp_startedActiveRecord//CActiveRecord
 	{
 		return parent::model($className);
 	}
+        
+        public function getMovimientos($operacion)
+        {
+           $criteria = new CDbCriteria();
+            $criteria->condition='tipo_movimiento='.$operacion;
+            return $this->findAll($criteria);
+            
+        }
 }

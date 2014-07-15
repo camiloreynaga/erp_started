@@ -10,10 +10,12 @@
  * @property string $lote
  * @property string $fecha_vencimiento
  * @property integer $cantidad_disponible
+ * @property integer $update_real
  * @property string $create_time
  * @property integer $create_user_id
  * @property string $update_time
  * @property integer $update_user_id
+ * 
  */
 class ProductoAlmacen extends Erp_startedActiveRecord//CActiveRecord
 {
@@ -33,12 +35,12 @@ class ProductoAlmacen extends Erp_startedActiveRecord//CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('almacen_id, producto_id, cantidad_disponible, create_user_id, update_user_id', 'numerical', 'integerOnly'=>true),
+			array('almacen_id, producto_id, cantidad_disponible,cantidad_real, create_user_id, update_user_id', 'numerical', 'integerOnly'=>true),
 			array('lote', 'length', 'max'=>50),
 			array('fecha_vencimiento, create_time, update_time', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, almacen_id, producto_id, lote, fecha_vencimiento, cantidad_disponible, create_time, create_user_id, update_time, update_user_id', 'safe', 'on'=>'search'),
+			array('id, almacen_id, producto_id, lote, fecha_vencimiento, cantidad_disponible,cantidad_real, create_time, create_user_id, update_time, update_user_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -65,6 +67,7 @@ class ProductoAlmacen extends Erp_startedActiveRecord//CActiveRecord
 			'lote' => 'Lote',
 			'fecha_vencimiento' => 'Fecha Vencimiento',
 			'cantidad_disponible' => 'Cantidad Disponible',
+                        'cantidad_real'=>'Cantidad Real',
 			'create_time' => 'Create Time',
 			'create_user_id' => 'Create User',
 			'update_time' => 'Update Time',
@@ -133,7 +136,7 @@ class ProductoAlmacen extends Erp_startedActiveRecord//CActiveRecord
         }
         
         /*
-         * 
+         * devuelve la cantidad disponible para un producto por lote
          */
         public function cantidad_lote2($_producto,$_lote)
         {

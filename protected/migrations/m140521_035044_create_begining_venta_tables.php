@@ -95,6 +95,7 @@ class m140521_035044_create_begining_venta_tables extends CDbMigration
                 'total'=>'decimal(10,2)',
                 'lote'=>'varchar(50)',// 
                 'fecha_vencimiento'=>'DATE',//
+                'estado'=>'SmallInt(6)', // 0=pendiente, 1= terminado
                 //
                 'create_time'=>'datetime DEFAULT NULL',
                 'create_user_id'=> 'int(11) DEFAULT NULL',

@@ -57,7 +57,16 @@ class DetalleCompraController extends Controller
             'model'=>$this->loadModel($id),
             ));
         }
-
+        
+        protected function PuConIGV($model)
+        {
+            $model->total=$model->precio_unitario*$model->cantidad;
+            $model->subtotal=$model->total/((int)Yii::app()->params['impuesto']*0.01+1);
+            $model->impuesto=$model->total-$model->impuesto;
+            
+            return $model;
+        }
+        
         /**
         * Creates a new model.
         * If creation is successful, the browser will be redirected to the 'view' page.
@@ -72,9 +81,14 @@ class DetalleCompraController extends Controller
             if(isset($_POST['DetalleCompra']))
             {
                 $model->attributes=$_POST['DetalleCompra'];
-                $model->subtotal=$model->precio_unitario*$model->cantidad;
+                /* calculo sin igv incluido
+                 $model->subtotal=$model->precio_unitario*$model->cantidad;
                 $model->impuesto=$model->subtotal*((int)Yii::app()->params['impuesto']*0.01);
                 $model->total=$model->subtotal+$model->impuesto;
+                 */
+                $model->total=$model->precio_unitario*$model->cantidad;
+                $model->subtotal=$model->total/((int)Yii::app()->params['impuesto']*0.01+1);
+                $model->impuesto=$model->total-$model->subtotal;
                 
                 if($model->save())
                 {
@@ -135,11 +149,16 @@ class DetalleCompraController extends Controller
           $es->onBeforeUpdate= function($event) {
 
                    $model=$this->loadModel(yii::app()->request->getParam('pk')); //obteniendo el Model de detalleCompra
+                   
                    $_cantidad=  yii::app()->request->getParam('value');
-                   $_subtotal=$model->precio_unitario*$_cantidad;//calculando el subtotal
-                   $_impuesto=$_subtotal*((int)Yii::app()->params['impuesto']*0.01); //calculando impuesto
-                   $_total=$_subtotal+$_impuesto; //calculando total
+                   
+                   //$this->PuConIGV($model);
+                   // IGV INCLUIDO
+                   $_total=$model->precio_unitario*$_cantidad;//calculando el subtotal
+                   $_subtotal=$_total/((int)Yii::app()->params['impuesto']*0.01 + 1); //calculando impuesto
+                   $_impuesto=$_total-$_subtotal; //calculando total
                     
+                   
                    $event->sender->setAttribute('subtotal', $_subtotal);//Actualizando Cantidad
                    $event->sender->setAttribute('impuesto', $_impuesto);//Actualizando impuesto
                    $event->sender->setAttribute('total', $_total); //actualizando total
@@ -161,9 +180,10 @@ class DetalleCompraController extends Controller
 
                    $model=$this->loadModel(yii::app()->request->getParam('pk')); //obteniendo el Model de detalleCompra
                    $_precioUnitario=  yii::app()->request->getParam('value');
-                   $_subtotal=$model->cantidad*$_precioUnitario;//calculando el subtotal
-                   $_impuesto=$_subtotal*((int)Yii::app()->params['impuesto']*0.01); //calculando impuesto
-                   $_total=$_subtotal+$_impuesto; //calculando total
+                   
+                   $_total=$model->cantidad*$_precioUnitario;//calculando el subtotal
+                   $_subtotal=$_total/((int)Yii::app()->params['impuesto']*0.01 + 1); //calculando impuesto
+                   $_impuesto=$_total-$_subtotal; //calculando total
                     
                    $event->sender->setAttribute('subtotal', $_subtotal);//Actualizando Cantidad
                    $event->sender->setAttribute('impuesto', $_impuesto);//Actualizando impuesto

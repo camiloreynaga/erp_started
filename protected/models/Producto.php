@@ -214,7 +214,9 @@ class Producto extends Erp_startedActiveRecord// CActiveRecord
             $criteria->condition='activo=0';
             return Caracteristica::model()->findAll($criteria);
         }
-        
+        /*
+         * recupera todos los productos no descontinuados
+         */
         public function getProductos()
         {
             $criteria= new CDbCriteria();

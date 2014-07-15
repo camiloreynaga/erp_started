@@ -1,4 +1,42 @@
 <script> //
+        
+//        "success"=>\'js:function(html){
+//          jQuery("#pub\'.$row.\'")
+//          .html((html>0)?"Unpublish":"Publish");
+        
+        $('#detalle-orden-compra-grid a.save-ajax-button').live('click', function(e)
+    {
+        var row = $(this).parent().parent();
+ 
+        var data = $('input', row).serializeObject();
+ 
+        $.ajax({
+            type: 'POST',
+            data: data,
+            url: jQuery(this).attr('href'),
+            success: function(data, textStatus, jqXHR) {
+ 
+                if (data == 'error') {
+                    alert("Data has error(s)");
+                } else {
+                    //this code updates only the specific row
+                    var dataT = $('tbody tr',$(data));
+                    row.html(dataT.html());
+                    /////////////////////////////////////////
+                    console.log(data);
+                    console.log(textStatus);
+                    console.log(jqXHR);
+                }
+            },
+            error: function(textStatus, errorThrown) {
+                console.log(textStatus);
+                console.log(errorThrown);
+            }
+        });
+        return false;
+    });
+        
+        
         //actualiza la grila 
         function updateGrilla(data) {
                 // display data returned from action
@@ -85,12 +123,12 @@
                                     'asDropDownList' => true,
                                     //'data'      => CHtml::listData(Producto::model()->findAll('descontinuado=0'), "id","nombre"),
                                     'data'      => CHtml::listData(Producto::model()->getProductos(), "id","text"),
-					'options' => array(
-						'placeholder' =>'Seleccione producto', 
-                                                //'tags'=>'de',
-                                                //'width' => '40%', 
-						'tokenSeparators' => array(',', ' ')
-					),
+                                    'options' => array(
+                                            'placeholder' =>'Seleccione producto', 
+                                            //'tags'=>'de',
+                                            //'width' => '40%', 
+                                            'tokenSeparators' => array(',', ' ')
+                                    ),
 				)
 			)
 		);
@@ -106,8 +144,11 @@
 				'widgetOptions' => array(
 					'options' => array(
                                            // 'language' => 'es',
-                                           'format'=>'dd/mm/yyyy',
-                                            //'format'=>'yyyy-mm-dd',
+                                           //'format'=>'dd/mm/yyyy',
+                                            
+                                            'format'=>'yyyy-mm-dd',
+                                            'starView'=>2,
+                                            'minViewMode'=>1,
                                             'autoclose'=>true,
                                             'todayHighlight'=>true,
                                             )
@@ -217,8 +258,9 @@
                                 'editable' => array(
                                     'type' => 'text',
                                     'url' => $this->createUrl('detalleCompra/editCantidad'),
+                                    //'options'=>array('class'=>'save-ajax-button'),
                                     //'placement' => 'left',
-                                    'success'=>'updateGrilla'
+                                    'success'=>'updateGrilla',
                                     
                                     //'success'=>'function(link,success,data){ if(success) window.location.reload();',
                                     )
@@ -245,7 +287,7 @@
                                 'editable' => array(
                                     'type' => 'combodate',
                                     'url' => $this->createUrl('detalleCompra/editItem'),
-                                    //'format'      => 'YYYY-MM-DD', //in this format date sent to server  
+                                    //'format'      => 'Y-m-d',//'YYYY-MM-DD', //in this format date sent to server  
                                     'viewformat'  => 'MM-YYYY', //in this format date is displayed
                                     'template'    => 'MM / YYYY', //template for dropdowns
 //                                    'options'     => array(
@@ -263,7 +305,11 @@
                                 'editable' => array(
                                     'type' => 'text',
                                     'url' => $this->createUrl('detalleCompra/editItem'),
-                                   // 'success'=>'updateGrilla'
+                                    'success'=>'updateGrilla',
+//                                    'htmlOptions'=>array(
+//                                        'update'=>'".button-column"'
+//                                    )
+                                    
                                     //'success'=>'function(link,success,data){ if(success) window.location.reload();',
                                     )
                                 ),
@@ -274,7 +320,7 @@
                                 'editable' => array(
                                     'type' => 'text',
                                     'url' => $this->createUrl('detalleCompra/editItem'),
-                                   // 'success'=>'updateGrilla'
+                                    'success'=>'updateGrilla'
                                     //'success'=>'function(link,success,data){ if(success) window.location.reload();',
                                     )
                                 ),
@@ -318,11 +364,21 @@
                                 ),
 
                 array(
+                    'header'=>'Acción',
                     'class'=>'booster.widgets.TbButtonColumn',
-                    'template'=>'{delete}',
+                    'template'=>'{delete} {obs}',
                     'buttons'=>array(
                         'delete'=>array(
                             'url'=>'Yii::app()->createUrl("detalleCompra/delete", array("id"=>$data->id))',
+                        ),
+                        'obs'=>array(
+                            'label'=>'<i class="glyphicon glyphicon-exclamation-sign"></i>',
+                            'url'=>'Yii::app()->createUrl("detalleCompra/upObs")',
+                            'visible'=>'$data->cantidad_malo>0 || $data->cantidad_bueno < $data->cantidad ',
+                            'options'=>array(
+                                'title'=>'Observado',
+                                
+                            )
                         )
                     ),
                     'deleteConfirmation'=>'Esta seguro de eliminar este item?',

@@ -142,4 +142,28 @@ class Compra extends Erp_startedActiveRecord//CActiveRecord
             $this->fecha_compra = DateTime::createFromFormat('d/m/Y', $this->fecha_compra)->format('Y-m-d');
             return parent::beforeSave();
         }
+        
+        /**
+         * retorna las ordenes de compra pendientes
+         * @return type array de resultado ordenes de compra
+         */
+        public function getCompra()
+        {
+            $criteria= new CDbCriteria();
+            $criteria->condition='estado=0'; //pendiente
+            $criteria->with=array('r_proveedor');
+            //$_lab= Fabricante::model()->tablename();
+            //$criteria->join='inner join '.$_lab.' lab on lab.id = t.fabricante_id ';
+            
+            $lista= $this->model()->findAll($criteria); 
+              $resultados = array();
+              foreach ($lista as $list){
+                $resultados[] = array(
+                         'id'=>$list->id,
+                         'text'=> $list->id.'-'.$list->r_proveedor->nombre_rz. ' (Fecha:'.$list->fecha_compra.')',
+              ); 
+            
+              }
+              return $resultados;   
+        }
 }

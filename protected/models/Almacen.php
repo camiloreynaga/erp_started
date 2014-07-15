@@ -119,4 +119,13 @@ class Almacen extends Erp_startedActiveRecord//CActiveRecord
 	{
 		return parent::model($className);
 	}
+        
+        public function getAlmacen()
+        {
+            $criteria= new CDbCriteria();
+            $criteria->condition = 'activo=0';
+            
+            return $this->findAll($criteria);
+                   
+        }
 }
