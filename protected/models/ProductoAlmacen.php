@@ -130,7 +130,7 @@ class ProductoAlmacen extends Erp_startedActiveRecord//CActiveRecord
         {
             $criteria = new CDbCriteria();
             $criteria->select='fecha_vencimiento';
-            $criteria->condition = 'producto_id='.$_producto.' and lote='.$_lote;
+            $criteria->condition = 'producto_id='.$_producto.' and lote='."'".$_lote."'";
             return $this->find($criteria)['fecha_vencimiento'];
             //return  $this->find('producto_id= :producto and lote=:lote',array(':producto'=>$_producto,':lote'=>$_lote));
         }
@@ -140,8 +140,11 @@ class ProductoAlmacen extends Erp_startedActiveRecord//CActiveRecord
          */
         public function cantidad_lote2($_producto,$_lote)
         {
+            $criteria = new CDbCriteria();
+            $criteria->condition = 'producto_id='.$_producto.' and lote='."'".$_lote."'";
             $cantidad_lote=0;
-            $tmp= $this->findAll('producto_id=:id_producto and lote=:lote',array(':id_producto'=>$_producto,':lote'=>$_lote));
+            //$tmp= $this->findAll('producto_id=:id_producto and lote=:lote',array(':id_producto'=>$_producto,':lote'=>$_lote));
+            $tmp= $this->findAll($criteria);
             foreach($tmp as $r)
             {
                 $cantidad_lote+=$r->cantidad_disponible;

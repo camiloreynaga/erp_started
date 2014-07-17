@@ -56,6 +56,7 @@ $form=$this->beginWidget('booster.widgets.TbActiveForm',array(
                             'placeholder'=>'elija una Orden de compra',
                             'htmlOptions'=>array(
                                 'id'=>'combo_oc',
+                                'update'=>'#detalle-oc'
                             ),
                             
 //                            'ajax'=>array(
@@ -72,16 +73,13 @@ $form=$this->beginWidget('booster.widgets.TbActiveForm',array(
                         'events'=>array(
                             'change'=>'js:function (element) {
                                 var id=element.val;
-                                //alert(id);
                                 $.ajax({
-                                    //data:$detalle-oc,
                                     data:{ids:id},
                                     dataType:"html",
                                     url:"'.CController::createUrl('DetalleOrdenCompra/DetalleOC').'",
                                     success:function(data){
                                       $("#detalle-oc").html(data);
                                         //$("#detalle-oc").show(html);
-                                       // alert(id);
                                     },              
                                  });
                                 

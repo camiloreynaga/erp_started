@@ -5,7 +5,7 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-array('label'=>'List Producto','url'=>array('index')),
+//array('label'=>'List Producto','url'=>array('index')),
 array('label'=>'Create Producto','url'=>array('create')),
 );
 
@@ -109,9 +109,11 @@ return false;
 		*/
                 array(
                 'class'=>'booster.widgets.TbButtonColumn',
+                    
                 'htmlOptions'=>array(
                                 'width'=>'70px',
-                            )   
+                            )
+                  
                 ),
     ),
 )); ?>

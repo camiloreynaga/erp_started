@@ -35,7 +35,15 @@ class DetalleOrdenCompraController extends Controller
                 'users'=>array('*'),
                 ),
                 array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions'=>array('create','update','editCantidad','EditPrecioUnitario','batchDelete','detalleOC','finalizarOc'),
+                'actions'=>array(
+                    'create',
+                    'update',
+                    'editCantidad',
+                    'EditPrecioUnitario',
+                    'batchDelete',
+                    'detalleOC',
+                    'finalizarOc',
+                    'editItem'),
                 'users'=>array('@'),
                 ),
                 array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -78,10 +86,10 @@ class DetalleOrdenCompraController extends Controller
                 if($tmp==0)
                 {
                     //$model->orden_compra_id=$id;
-                    $model->subtotal=$model->precio_unitario*$model->cantidad;
+                    $model->total=$model->precio_unitario*$model->cantidad;
                     //$compraItem->cantidad_disponible=$compraItem->cantidad;//agregando la cantidad disponible
-                    $model->impuesto=$model->subtotal*((int)Yii::app()->params['impuesto']*0.01);
-                    $model->total=$model->subtotal+$model->impuesto;
+                    $model->subtotal=$model->total/((int)Yii::app()->params['impuesto']*0.01 + 1);
+                    $model->impuesto=$model->total-$model->subtotal;
                     if($model->save())
                     {
                         echo CJSON::encode(array(
@@ -139,21 +147,31 @@ class DetalleOrdenCompraController extends Controller
         }
         
         /*
+         * edita la una celda de la grilla
+         */
+        public function actionEditItem()
+        {
+         Yii::import('booster.components.TbEditableSaver');
+         $es = new TbEditableSaver('DetalleOrdenCompra');
+         $es->update();
+        }
+        
+        /*
          * Edita la cantidad de la columna 
          * además actualiza los calculos de subtotal,impuesto y total
          */
         public function actionEditCantidad()
         {
          Yii::import('booster.components.TbEditableSaver');
-         $es = new TbEditableSaver('DetalleOrdenCompra');
+          $es = new TbEditableSaver('DetalleOrdenCompra');
 //         /$_cantidad= $es->value;
           $es->onBeforeUpdate= function($event) {
 
                    $model=$this->loadModel(yii::app()->request->getParam('pk')); //obteniendo el Model de detalleCompra
                    $_cantidad=  yii::app()->request->getParam('value');
-                   $_subtotal=$model->precio_unitario*$_cantidad;//calculando el subtotal
-                   $_impuesto=$_subtotal*((int)Yii::app()->params['impuesto']*0.01); //calculando impuesto
-                   $_total=$_subtotal+$_impuesto; //calculando total
+                   $_total=$model->precio_unitario*$_cantidad;//calculando el total
+                   $_subtotal=$_total/((int)Yii::app()->params['impuesto']*0.01 +1); //calculando subtotal
+                   $_impuesto=$_total-$_subtotal; //calculando impuesto
                     
                    $event->sender->setAttribute('subtotal', $_subtotal);//Actualizando Cantidad
                    $event->sender->setAttribute('impuesto', $_impuesto);//Actualizando impuesto
@@ -175,9 +193,9 @@ class DetalleOrdenCompraController extends Controller
 
                    $model=$this->loadModel(yii::app()->request->getParam('pk')); //obteniendo el Model de detalleCompra
                    $_precioUnitario=  yii::app()->request->getParam('value');
-                   $_subtotal=$model->cantidad*$_precioUnitario;//calculando el subtotal
-                   $_impuesto=$_subtotal*((int)Yii::app()->params['impuesto']*0.01); //calculando impuesto
-                   $_total=$_subtotal+$_impuesto; //calculando total
+                   $_total=$model->cantidad*$_precioUnitario;//calculando el total
+                   $_subtotal=$_total/((int)Yii::app()->params['impuesto']*0.01 +1); //calculando subtotal
+                   $_impuesto=$_total-$_subtotal; //calculando impuesto
                     
                    $event->sender->setAttribute('subtotal', $_subtotal);//Actualizando Cantidad
                    $event->sender->setAttribute('impuesto', $_impuesto);//Actualizando impuesto
@@ -367,6 +385,6 @@ class DetalleOrdenCompraController extends Controller
         
         public function actionFinalizarOc($id)
         {
-            $this->redirect(array('ordenCompra/view','id'=>$id));
+            $this->redirect(array('//ordenCompra/view','id'=>$id));
         }
 }

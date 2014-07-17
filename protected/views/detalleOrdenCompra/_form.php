@@ -312,6 +312,11 @@ $this->widget('booster.widgets.TbExtendedGridView',array(
                             array(
                                 'name'=>'observacion',
                                 'header'=>'Obs.',
+                                'class'=>'booster.widgets.TbEditableColumn',
+                                'editable'=>array(
+                                    'type'=>'text',
+                                    'url'=>$this->createUrl('detalleOrdenCompra/editItem'),
+                                )
                                 
                             ),
                             

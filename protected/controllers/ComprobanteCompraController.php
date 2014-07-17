@@ -249,6 +249,26 @@ class ComprobanteCompraController extends Controller
         }
         public function actionFinalizar($id)
         {
-            $this->redirect(array('DetalleCompra/create','pid'=>$id));
+                $tmp= ComprobanteCompra::model()->count('compra_id=:compra_id',array(':compra_id'=>$id));
+                //$model=ComprobanteCompra::model()->coun($id);
+                if($tmp==0)
+                {                
+                
+                    echo CJSON::encode(array(
+                                    'status'=>'true', 
+                                    ));
+//                  // echo "Ingresa un comprobante";
+//                    Yii::app()->end();
+    //               $this->redirect(array('create','pid'=>$id));
+                }
+                else
+                {
+                    echo CJSON::encode(array(
+                                    'status'=>'false', 
+                                    ));
+                    //$this->redirect(array('DetalleCompra/create','pid'=>$id));
+                }
+                
+            
         }
 }

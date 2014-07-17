@@ -5,10 +5,10 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-array('label'=>'List OrdenCompra','url'=>array('index')),
+//array('label'=>'List OrdenCompra','url'=>array('index'),),
 array('label'=>'Create OrdenCompra','url'=>array('create')),
-array('label'=>'Update OrdenCompra','url'=>array('update','id'=>$model->id)),
-array('label'=>'Delete OrdenCompra','url'=>'#','linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
+array('label'=>'Update OrdenCompra','url'=>array('update','id'=>$model->id),'visible'=>$model->estado==0),
+//array('label'=>'Delete OrdenCompra','url'=>'#','linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
 array('label'=>'Manage OrdenCompra','url'=>array('admin')),
 );
 ?>
@@ -26,7 +26,10 @@ array('label'=>'Manage OrdenCompra','url'=>array('admin')),
                     'value'=>$model->r_proveedor->nombre_rz
                 ),
 		'observaciones',
-		'estado',
+		array(
+                    'name'=>'estado',
+                    'value'=>$model->_estado[$model->estado]
+                ),
 		'create_time',
                 array(
                   'name'=>'create_user_id',

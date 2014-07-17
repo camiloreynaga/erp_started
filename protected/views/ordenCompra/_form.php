@@ -27,8 +27,6 @@
                                     'data'      => CHtml::listData (Proveedor::model()->getProveedores(), "id","nombre_rz"),
 					'options' => array(
 						'placeholder' =>'Seleccione Proveedor', 
-                                                'width' => '40%', 
-						'tokenSeparators' => array(',', ' ')
 					),
 				)
 			)

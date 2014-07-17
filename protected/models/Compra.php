@@ -26,6 +26,18 @@
  */
 class Compra extends Erp_startedActiveRecord//CActiveRecord
 {
+    
+        /*estado de compra
+         * 
+         */
+         public $_estado=array(
+            '0'=>'RECEPCIONADO', // REVISADO SIN REVISADO 
+            '1'=>'INGRESADO', // , // COMPROBANTE REGISTRADO
+            '2'=>'OBSERVADO', // 
+            '3'=>'ANULADO',
+            //'4'=>'RECEPCIONADO'
+         );
+    
 	/**
 	 * @return string the associated database table name
 	 */

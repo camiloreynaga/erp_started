@@ -139,16 +139,16 @@ class ComprobanteCompra extends Erp_startedActiveRecord//CActiveRecord
 		return parent::model($className);
 	}
         
-        public function beforeSave()
-        {
-            $this->fecha_emision = DateTime::createFromFormat('d/m/Y', $this->fecha_emision)->format('Y-m-d');
-            if($this->fecha_cancelacion==null) //validando la fecha de cancelación
-                $this->fecha_cancelacion=null;
-            else {
-                $this->fecha_cancelacion= DateTime::createFromFormat('d/m/Y', $this->fecha_cancelacion)->format('Y-m-d');
-            }
-                
-                    
-            return parent::beforeSave();
-        }
+//        public function beforeSave()
+//        {
+//            $this->fecha_emision = DateTime::createFromFormat('d/m/Y', $this->fecha_emision)->format('Y-m-d');
+//            if($this->fecha_cancelacion==null) //validando la fecha de cancelación
+//                $this->fecha_cancelacion=null;
+//            else {
+//                $this->fecha_cancelacion= DateTime::createFromFormat('d/m/Y', $this->fecha_cancelacion)->format('Y-m-d');
+//            }
+//                
+//                    
+//            return parent::beforeSave();
+//        }
 }

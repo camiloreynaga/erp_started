@@ -19,6 +19,8 @@
  */
 class DetalleOrdenCompra extends CActiveRecord
 {
+    
+    
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -107,7 +109,7 @@ class DetalleOrdenCompra extends CActiveRecord
 		$criteria->compare('impuesto',$this->impuesto,true);
 		$criteria->compare('total',$this->total,true);
                 //$criteria->order('id');
-                $criteria->order= 'id DESC';
+                //$criteria->order= 'id DESC';
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));

@@ -4,13 +4,10 @@
 //          jQuery("#pub\'.$row.\'")
 //          .html((html>0)?"Unpublish":"Publish");
         
-        $('#detalle-orden-compra-grid a.save-ajax-button').live('click', function(e)
-    {
-        var row = $(this).parent().parent();
- 
-        var data = $('input', row).serializeObject();
- 
-        $.ajax({
+        function updateRow(data)
+        {
+            var row = $(this).parent().parent();
+            $.ajax({
             type: 'POST',
             data: data,
             url: jQuery(this).attr('href'),
@@ -20,7 +17,7 @@
                     alert("Data has error(s)");
                 } else {
                     //this code updates only the specific row
-                    var dataT = $('tbody tr',$(data));
+                    var dataT = $('tbody tr ',$(data));
                     row.html(dataT.html());
                     /////////////////////////////////////////
                     console.log(data);
@@ -34,13 +31,13 @@
             }
         });
         return false;
-    });
+        }
         
         
         //actualiza la grila 
         function updateGrilla(data) {
                 // display data returned from action
-                $("#Items").html(data);
+                //$("#Items").html(data);
                 // refresh your grid
                 $.fn.yiiGridView.update('detalle-orden-compra-grid');
         }
@@ -261,7 +258,7 @@
                                     //'options'=>array('class'=>'save-ajax-button'),
                                     //'placement' => 'left',
                                     'success'=>'updateGrilla',
-                                    
+                                                                        
                                     //'success'=>'function(link,success,data){ if(success) window.location.reload();',
                                     )
                                 ),
@@ -305,7 +302,7 @@
                                 'editable' => array(
                                     'type' => 'text',
                                     'url' => $this->createUrl('detalleCompra/editItem'),
-                                    'success'=>'updateGrilla',
+                                    //'success'=>'updateGrilla',
 //                                    'htmlOptions'=>array(
 //                                        'update'=>'".button-column"'
 //                                    )
@@ -320,7 +317,12 @@
                                 'editable' => array(
                                     'type' => 'text',
                                     'url' => $this->createUrl('detalleCompra/editItem'),
-                                    'success'=>'updateGrilla'
+                                    'htmlOptions'=>array(
+                                        'style'=> 'text-align: right',
+                                        'ajax'=>array('update'=>'#button-column',),
+                                        
+                                        ),
+                                   // 'success'=>'updateGrilla'
                                     //'success'=>'function(link,success,data){ if(success) window.location.reload();',
                                     )
                                 ),

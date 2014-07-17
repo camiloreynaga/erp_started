@@ -33,6 +33,7 @@
         $(form+"_es_").hide();
         $("[id$='_em_']").html('');
         }
+                
 </script>
 
 
@@ -66,8 +67,8 @@
 				'widgetOptions' => array(
 					'options' => array(
                                            // 'language' => 'es',
-                                           'format'=>'dd/mm/yyyy',
-                                            //'format'=>'yyyy-mm-dd',
+                                           //'format'=>'dd/mm/yyyy',
+                                           // 'format'=>'yyyy-mm-dd',
                                             'autoclose'=>true,
                                             'todayHighlight'=>true,
                                             )
@@ -90,7 +91,7 @@
                     'widgetOptions'=> array(
                         'options'=>array(
                             //'language' => 'es',
-                            'format'=>'dd/mm/yyyy',
+                            //'format'=>'dd/mm/yyyy',
                              'autoclose'=>true,
                              'todayHighlight'=>true,
                             
@@ -167,11 +168,14 @@
                             'editable'=>array(
                                 'type'=>'date',
                                 'url'=>$this->createUrl('comprobanteCompra/editItem'),
+                                'options'=>array(
+                                    'language'=>Yii::app()->language,
+                                    'datepicker' => array(
+                                        'language' => Yii::app()->language,
+                                    ),
+                                ),
                                 'format'=>'yyyy-mm-dd',
-                                'viewformat'=>'dd/mm/yyyy',
-                                'htmlOptions'=>array(
-                                    'language'=>Yii::app()->language
-                                )
+                                
                             ) 
                         ),
                         array(
@@ -181,11 +185,14 @@
                             'editable'=>array(
                                 'type'=>'date',
                                 'url'=>$this->createUrl('comprobanteCompra/editItem'),
+                                'options'=>array(
+                                    'language'=>Yii::app()->language,
+                                    'datepicker' => array(
+                                        'language' => Yii::app()->language,
+                                    ),
+                                ),
                                 'format'=>'yyyy-mm-dd',
-                                'viewformat'=>'dd/mm/yyyy',
-                                'htmlOptions'=>array(
-                                    'language'=>  Yii::app()->language
-                                )
+                                
                             )
                         ),
                         array(
@@ -246,11 +253,62 @@
         ),
 )); ?>
 
-<?php  echo CHtml::Button('Siguiente',
-             array(
-                 'submit'=>array('ComprobanteCompra/finalizar',
+<?php  echo CHtml::ajaxButton('Siguiente',array('ComprobanteCompra/finalizar',
                      'id'=>$model->compra_id,
                      ),
-                     'confirm'=>'Esta seguro de proceder?',
-                 )
-             );
+                 array(
+                      'dataType'=>'json',
+                      'type' => 'post',
+                      'success'=>'
+                          function(data){
+                                if(data.status=="true")
+                                {
+                                   alert("ingresa comprobante");
+                                }
+                                else
+                                {
+                                    location.href="'.CController::createUrl('DetalleCompra/create',
+                                array('pid'=>$model->compra_id)
+                                ).'"}
+                                }
+                                '
+                     ),
+                     array(
+                         'confirm'=>'Esta seguro de proceder?'
+                     )
+                     
+                     );
+
+?>
+<?php $this->widget('booster.widgets.TbButton', array(
+			'buttonType'=>'ajaxSubmit',
+			'context'=>'info',
+                        'url'=>CController::createUrl('comprobanteCompra/finalizar',
+                                array('id'=>$model->compra_id)
+                                ),
+			'label'=>'Siguiente',
+                        'ajaxOptions'=>array(
+                            'dataType'=>'json',
+                            'type' => 'POST',
+                            //'data' => '',
+                            'success'=>'function(data){
+                                if(data.status=="true")
+                             {
+                                alert(data.status + " ingresa comprobante");
+                             }
+                             else
+                                {
+                                    location.href="'.CController::createUrl('DetalleCompra/create',
+                                array('pid'=>$model->compra_id)
+                                ).'"
+                                }
+                                
+                             
+                            }',  
+                            ),
+                            'htmlOptions'=>array(
+                                'confirm'=>'Esta seguro de proceder?', 
+                            )
+                               
+		)); ?>
+

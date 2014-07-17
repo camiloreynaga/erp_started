@@ -136,7 +136,7 @@ class DetalleCompra extends Erp_startedActiveRecord//CActiveRecord
 		$criteria->compare('update_time',$this->update_time,true);
 		$criteria->compare('update_user_id',$this->update_user_id);
                 $criteria->compare('comprobante_id',$this->comprobante_id);
-                $criteria->order= 'id DESC';
+                //$criteria->order= 'id DESC';
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));

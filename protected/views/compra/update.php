@@ -6,9 +6,9 @@ $this->breadcrumbs=array(
 );
 
 	$this->menu=array(
-	array('label'=>'List Compra','url'=>array('index')),
+	//array('label'=>'List Compra','url'=>array('index')),
 	array('label'=>'Create Compra','url'=>array('create')),
-	array('label'=>'View Compra','url'=>array('view','id'=>$model->id)),
+	//array('label'=>'View Compra','url'=>array('view','id'=>$model->id)),
 	array('label'=>'Manage Compra','url'=>array('admin')),
 	);
 	?>

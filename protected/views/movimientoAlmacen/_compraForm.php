@@ -5,8 +5,10 @@
  * and open the template in the editor.
  */
 ?>
+<h1>Registrar Ingreso de Compra</h1>
 
 
+<h3>Detalle Compra</h3>
 <?php 
     $model= DetalleCompra::model();   
     $model->estado=0;
@@ -177,6 +179,7 @@
                                                       }",
                                                 'options'=>array(
                                                     'title'=>'ingresar',
+                                                    'confirm'=>'Ingresar ?',
 //                                                    'ajax'=>array(
 //                                                        'type'=>'POST',
 //                                                        'url'=>'Yii::app()->createUrl("movimientoAlmacen/RegistrarCompra", array("id"=>$data->id))',

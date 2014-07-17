@@ -21,6 +21,14 @@
  */
 class OrdenCompra extends Erp_startedActiveRecord//CActiveRecord
 {
+        public $_estado = array(
+            '0'=>'PENDIENTE',
+            '1'=>'CONFIRMADO',
+            '2'=>'PROCESADO',
+            '3'=>'ANULADO',
+            '4'=>'RECEPCIONADO'
+        );
+    
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -105,7 +113,7 @@ class OrdenCompra extends Erp_startedActiveRecord//CActiveRecord
 		$criteria->compare('proveedor_id',$this->proveedor_id);
                 $criteria->compare('cotizacion_id',$this->cotizacion_id);
 		$criteria->compare('observaciones',$this->observaciones,true);
-		$criteria->compare('estado',$this->estado);
+		$criteria->compare('estado',$this->estado,true);
 		$criteria->compare('create_time',$this->create_time,true);
 		$criteria->compare('create_user_id',$this->create_user_id);
 		$criteria->compare('update_time',$this->update_time,true);
