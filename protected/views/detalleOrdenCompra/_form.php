@@ -15,7 +15,7 @@
         $(form+" #"+key+"_em_").html(val.toString());
         $(form+" #"+key+"_em_").show();
 
-        $("#"+key).parent().addClass("row error");
+        $("#"+key).parent().addClass("form-group");
         summary = summary + "<ul><li>" + val.toString() + "</li></ul>";
         });
         $(form+"_es_").html(summary.toString());

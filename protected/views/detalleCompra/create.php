@@ -19,4 +19,6 @@ $compra= Compra::model()->findByPk($_GET['pid']);
 echo $this->renderPartial('//Compra/_head', array('compra'=>$compra));
 ?>
 <h4> Detalle Compra</h4>
-<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php 
+$model->estado=''; // estado limpio
+echo $this->renderPartial('_form', array('model'=>$model)); ?>

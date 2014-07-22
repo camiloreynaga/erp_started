@@ -41,8 +41,10 @@ class ComprobanteCompra extends Erp_startedActiveRecord//CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-                        array( 'fecha_cancelacion','compare','compareAttribute' => 'fecha_emision','operator'=>'>=', 'allowEmpty'=>'true', 'message' => '{attribute} debe ser igual o mayor a "{compareValue}".'),//Validación de fechas
-			array('compra_id, tipo_comprobante_id,fecha_emision, serie, numero', 'required'),
+                        array( 'fecha_cancelacion','compare','compareAttribute' => 'fecha_emision','operator'=>'>=', 'allowEmpty'=>'true', 'message' => '{attribute} debe ser igual o mayor a "{compareValue}".','except'=>'compra'),//Validación de fechas
+			array('compra_id, tipo_comprobante_id,fecha_emision, serie, numero', 'required', 'except'=>'compra'),
+                        //array('serie, numero, tipo_comprobante_id','duplicado'),
+                        array('compra_id','exist','message' => 'Ingrese comprobante ','on'=>'compra'),
 			array('compra_id, tipo_comprobante_id, estado, create_user_id, update_user_id', 'numerical', 'integerOnly'=>true),
 			array('serie', 'length', 'max'=>5),
 			array('numero', 'length', 'max'=>10),
@@ -139,6 +141,24 @@ class ComprobanteCompra extends Erp_startedActiveRecord//CActiveRecord
 		return parent::model($className);
 	}
         
+        public function duplicado($attribute,$params)
+        {
+            //$count= $this->countByAttributes($attributes)
+            if(!empty($this->attributes['serie']) && !empty($this->attributes['numero']))
+            {   
+                
+                $count= ComprobanteCompra::model()->count('compra_id=:compra_id and serie=:serie and numero=:numero',
+                        array(':compra_id'=>$_GET['pid'],':serie'=>$this->attributes['serie'],':numero'=>$this->attributes['numero']));
+//                $count= ComprobanteCompra::model()->count('compra_id=:compra_id and serie=:serie and numero=:numero and tipo_comprobante_id=:tipo',
+//                        array(':compra_id'=>$_GET['pid'],':serie'=>$this->serie,':numero'=>$this->numero,':tipo'=>  $this->tipo_comprobante_id));
+                if($count==1){
+                    $this->addError($attribute,$this->getAttributeLabel($attribute)." ".$this->$attribute. ' ya se registro '.$count." id ".$_GET['pid']. " ".$this->serie );
+//                    /$this->
+                }
+            }
+        }
+
+
 //        public function beforeSave()
 //        {
 //            $this->fecha_emision = DateTime::createFromFormat('d/m/Y', $this->fecha_emision)->format('Y-m-d');

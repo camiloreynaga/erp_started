@@ -15,7 +15,7 @@
         $(form+" #"+key+"_em_").html(val.toString());
         $(form+" #"+key+"_em_").show();
 
-        $("#"+key).parent().addClass("row error");
+        $("#"+key).parent().addClass("form-group");
         summary = summary + "<ul><li>" + val.toString() + "</li></ul>";
         });
         $(form+"_es_").html(summary.toString());
@@ -29,6 +29,7 @@
         //esconde los errores del form si la validación es correcta
         function hideFormErrors(form){
         //alert (form+"_es_");
+        
         $(form+"_es_").html('');
         $(form+"_es_").hide();
         $("[id$='_em_']").html('');
@@ -68,7 +69,7 @@
 					'options' => array(
                                            // 'language' => 'es',
                                            //'format'=>'dd/mm/yyyy',
-                                           // 'format'=>'yyyy-mm-dd',
+                                            'format'=>'yyyy-mm-dd',
                                             'autoclose'=>true,
                                             'todayHighlight'=>true,
                                             )
@@ -92,6 +93,7 @@
                         'options'=>array(
                             //'language' => 'es',
                             //'format'=>'dd/mm/yyyy',
+                            'format'=>'yyyy-mm-dd',
                              'autoclose'=>true,
                              'todayHighlight'=>true,
                             
@@ -116,6 +118,7 @@
 	
 
 <div class="form-actions">
+
 	<?php $this->widget('booster.widgets.TbButton', array(
 			'buttonType'=>'ajaxSubmit',
 			'context'=>'primary',
@@ -253,36 +256,37 @@
         ),
 )); ?>
 
-<?php  echo CHtml::ajaxButton('Siguiente',array('ComprobanteCompra/finalizar',
-                     'id'=>$model->compra_id,
-                     ),
-                 array(
-                      'dataType'=>'json',
-                      'type' => 'post',
-                      'success'=>'
-                          function(data){
-                                if(data.status=="true")
-                                {
-                                   alert("ingresa comprobante");
-                                }
-                                else
-                                {
-                                    location.href="'.CController::createUrl('DetalleCompra/create',
-                                array('pid'=>$model->compra_id)
-                                ).'"}
-                                }
-                                '
-                     ),
-                     array(
-                         'confirm'=>'Esta seguro de proceder?'
-                     )
-                     
-                     );
+<?php //  echo CHtml::ajaxButton('Siguiente',array('ComprobanteCompra/finalizar',
+//                     'id'=>$model->compra_id,
+//                     ),
+//                 array(
+//                      'dataType'=>'json',
+//                      'type' => 'post',
+//                      'success'=>'
+//                          function(data){
+//                                if(data.status=="true")
+//                                {
+//                                   alert("ingresa comprobante");
+//                                }
+//                                else
+//                                {
+//                                    location.href="'.CController::createUrl('DetalleCompra/create',
+//                                array('pid'=>$model->compra_id)
+//                                ).'"}
+//                                }
+//                                '
+//                     ),
+//                     array(
+//                         'confirm'=>'Esta seguro de proceder?'
+//                     )
+//                     
+//                     );
 
 ?>
+<div >
 <?php $this->widget('booster.widgets.TbButton', array(
 			'buttonType'=>'ajaxSubmit',
-			'context'=>'info',
+			'context'=>'success',
                         'url'=>CController::createUrl('comprobanteCompra/finalizar',
                                 array('id'=>$model->compra_id)
                                 ),
@@ -294,7 +298,7 @@
                             'success'=>'function(data){
                                 if(data.status=="true")
                              {
-                                alert(data.status + " ingresa comprobante");
+                                alert(" ingrese comprobante");
                              }
                              else
                                 {
@@ -312,3 +316,4 @@
                                
 		)); ?>
 
+</div>

@@ -21,8 +21,9 @@ $form=$this->beginWidget('booster.widgets.TbActiveForm',array(
                 array(
                     'widgetOptions'=> array(
                         'options'=>array(
-                            'language' => 'es',
-                            'format'=>'dd/mm/yyyy',
+                            //'language' => 'es',
+                            //'format'=>'dd/mm/yyyy',
+                             'format'=>'yyyy-mm-dd',
                              'autoclose'=>true,
                              'todayHighlight'=>true,
                             
@@ -56,7 +57,7 @@ $form=$this->beginWidget('booster.widgets.TbActiveForm',array(
                             'placeholder'=>'elija una Orden de compra',
                             'htmlOptions'=>array(
                                 'id'=>'combo_oc',
-                                'update'=>'#detalle-oc'
+                                //'update'=>'#detalle-oc'
                             ),
                             
 //                            'ajax'=>array(
@@ -139,8 +140,33 @@ $form=$this->beginWidget('booster.widgets.TbActiveForm',array(
 
 <?php $this->endWidget(); ?>
 
+<?php
+//$oc->orden_compra_id=$model->id;
+$oc=new DetalleOrdenCompra('search');
+//$this->renderPartial('//detalleOrdenCompra/admin',array(
+//                     'model'=>$oc,
+//                     ));
 
-
+?>
 <div id="detalle-oc">
     
 </div>
+<?php
+$this->widget('booster.widgets.TbGridView',array(
+    'id'=>'detalle-orden-compra-grid',
+    'dataProvider'=>$oc->search(),
+    'columns'=>array(
+                    array(
+                        'name'=>'producto_id',
+                        'header'=>'Producto',
+                        'value'=>'$data->r_producto->nombre',
+                    ),
+                    array(
+                    'name'=>'cantidad',
+                    'header'=>'Cantidad',
+                    ),
+    ),
+)); 
+?>
+
+

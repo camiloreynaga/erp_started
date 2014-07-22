@@ -49,10 +49,11 @@ return false;
 		'cantidad',
 		'lote',
 		'fecha_vencimiento',
+                'estado',
 		/*
 		'cantidad_bueno',
 		'cantidad_malo',
-		'estado',
+		
 		'observacion',
 		'precio_unitario',
 		'subtotal',

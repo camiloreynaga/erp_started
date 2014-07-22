@@ -105,6 +105,8 @@ class m140520_224733_create_begining_compras_tables extends CDbMigration
                 'importe_total'=>'decimal(10,2) DEFAULT NULL',
                 'observacion'=>'text DEFAULT NULL',
                 'estado'=>'SmallInt(6)', // 0=pendiente,1=proceso,2=terminado,3=cancelado
+                'estado_comprobante'=>'SmallInt(6)',
+                'estado_pago'=>'SmallInt(6)',
                 'create_time'=>'datetime DEFAULT NULL',
                 'create_user_id'=> 'int(11) DEFAULT NULL',
                 'update_time'=>'datetime DEFAULT NULL',

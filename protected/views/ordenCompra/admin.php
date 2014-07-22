@@ -60,11 +60,12 @@ return false;
                     'header'=>'Proveedor',
                     'value'=>'$data->r_proveedor->nombre_rz'
                 ),
-		'observaciones',
-		
+                'observaciones',
                 array(
                     'name'=>'estado',
-                    'value'=>'$data->_estado[$data->estado]'
+                    'value'=>'$data->_estado[$data->estado]',
+                   // 'filter'=>  CHtml::listDat
+                    
                 ),
                  
 		/*

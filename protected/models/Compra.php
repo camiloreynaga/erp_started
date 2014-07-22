@@ -13,6 +13,8 @@
  * @property string $importe_total
  * @property string $observacion
  * @property integer $estado
+ * @property integer $estado_comprobante
+ * @property integer $estado_pago
  * @property string $create_time
  * @property integer $create_user_id
  * @property string $update_time
@@ -31,11 +33,11 @@ class Compra extends Erp_startedActiveRecord//CActiveRecord
          * 
          */
          public $_estado=array(
-            '0'=>'RECEPCIONADO', // REVISADO SIN REVISADO 
-            '1'=>'INGRESADO', // , // COMPROBANTE REGISTRADO
-            '2'=>'OBSERVADO', // 
+            '0'=>'PENDIENTE', // PENDIENTE DE REVISADO 
+            '1'=>'REVISADO', // , // COMPROBANTE REGISTRADO
+            '2'=>'OBSERVADO', // ALGUN DATO REQUERIDO PENDIENTE
             '3'=>'ANULADO',
-            //'4'=>'RECEPCIONADO'
+            '4'=>'ALMACENADO'
          );
     
 	/**
@@ -54,13 +56,13 @@ class Compra extends Erp_startedActiveRecord//CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('proveedor_id, fecha_compra, orden_compra_id' , 'required'),
-			array('proveedor_id, orden_compra_id, estado, create_user_id, update_user_id', 'numerical', 'integerOnly'=>true),
+			array('proveedor_id, fecha_compra, orden_compra_id' ,'required','except'=>'comprobante'),
+			array('proveedor_id, orden_compra_id, estado, estado_comprobante, estado_pago, create_user_id, update_user_id', 'numerical', 'integerOnly'=>true),
 			array('base_imponible, impuesto, importe_total', 'length', 'max'=>10),
 			array('fecha_compra, observacion, create_time, update_time', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, fecha_compra, proveedor_id, base_imponible, orden_compra_id, impuesto, importe_total, observacion, estado, create_time, create_user_id, update_time, update_user_id', 'safe', 'on'=>'search'),
+			array('id, fecha_compra, proveedor_id, base_imponible, orden_compra_id, impuesto, importe_total, observacion, estado,estado_comprobante,estado_pago, create_time, create_user_id, update_time, update_user_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -128,6 +130,8 @@ class Compra extends Erp_startedActiveRecord//CActiveRecord
 		$criteria->compare('importe_total',$this->importe_total,true);
 		$criteria->compare('observacion',$this->observacion,true);
 		$criteria->compare('estado',$this->estado);
+                $criteria->compare('estado_comprobante',$this->estado_comprobante);
+		$criteria->compare('estado_pago',$this->estado_pago);
 		$criteria->compare('create_time',$this->create_time,true);
 		$criteria->compare('create_user_id',$this->create_user_id);
 		$criteria->compare('update_time',$this->update_time,true);
@@ -149,11 +153,11 @@ class Compra extends Erp_startedActiveRecord//CActiveRecord
 		return parent::model($className);
 	}
         
-        public function beforeSave()
-        {
-            $this->fecha_compra = DateTime::createFromFormat('d/m/Y', $this->fecha_compra)->format('Y-m-d');
-            return parent::beforeSave();
-        }
+//        public function beforeSave()
+//        {
+////            $this->fecha_compra = DateTime::createFromFormat('d/m/Y', $this->fecha_compra)->format('Y-m-d');
+////            return parent::beforeSave();
+//        }
         
         /**
          * retorna las ordenes de compra pendientes

@@ -79,7 +79,9 @@ return false;
                 'template'=>'{view} {update} {delete}',
                 'buttons'=>array(
                     'update'=>array(
-                        'visible'=>'$data->estado==0'
+                        'visible'=>'$data->estado<3', //'$data->estado==0 || $data->estado==2 ',
+                        'url'=>'Yii::app()->createUrl("//detalleCompra/create", array("pid"=>$data->id))'
+                        //'url'=>$this->createUrl('//detalleCompra/create',array('pid'=>$model->id)) 
                     ),
                     'delete'=>array(
                         'visible'=>'$data->estado==0'

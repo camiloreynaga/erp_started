@@ -66,16 +66,29 @@ class ComprobanteCompraController extends Controller
             $model=new ComprobanteCompra;
             $model->compra_id= $this->_Compra->id;
             // Uncomment the following line if AJAX validation is needed
-            // $this->performAjaxValidation($model);
+            $this->performAjaxValidation($model);
 
             if(isset($_POST['ComprobanteCompra']))
             {
                 $model->attributes=$_POST['ComprobanteCompra'];
-                //$model->fecha_emision= date_format($model->fecha_emision, 'Y-m-d'); 
+                $count= ComprobanteCompra::model()->count('compra_id=:compra_id and serie=:serie and numero=:numero and tipo_comprobante_id=:tipo',
+                        array(':compra_id'=>$this->_Compra->id,':serie'=>$model->serie,':numero'=>$model->numero,':tipo'=>$model->tipo_comprobante_id));
+                if ($count==0)
+                {
+                
+                $model->save();
                 if($model->save())
                 {
-                 echo CJSON::encode(array(
+                    //actualizando estado_comprobante Compra
+                    $compra= Compra::model()->findByPk($model->compra_id);
+                    //$compra->setScenario('comprobante');
+                    //echo $compra->validate();
+                            
+                    $compra->estado_comprobante=1;
+                    $compra->save();
+                    echo CJSON::encode(array(
                                 'status'=>'success', 
+                                'val'=>$compra->save(),
                                 ));
                            Yii::app()->end();// exit;
                 }
@@ -86,7 +99,14 @@ class ComprobanteCompraController extends Controller
                                             echo $error;
                                         Yii::app()->end();
                 }
-                //$this->redirect(array('view','id'=>$model->id));
+                }else
+                {
+                    echo CJSON::encode(array(
+                                'val'=>'ya existe comprobante', 
+                                ));
+                           Yii::app()->end();
+                }
+                
             }
             else
             {
@@ -121,7 +141,9 @@ class ComprobanteCompraController extends Controller
             'model'=>$model,
             ));
         }
-        
+        /*
+         * edita un item de Comprobante de compra
+         */
         public function actionEditItem()
         {
          Yii::import('booster.components.TbEditableSaver');
@@ -140,7 +162,18 @@ class ComprobanteCompraController extends Controller
             if(Yii::app()->request->isPostRequest)
             {
             // we only allow deletion via POST request
-            $this->loadModel($id)->delete();
+                
+            $model=$this->loadModel($id);  
+           
+            if($model->count('compra_id=:compra_id',array(':compra_id'=>$model->compra_id))==1)
+            {
+                $compra= Compra::model()->findByPk($model->compra_id);
+                //$compra->setScenario('comprobante');
+                $compra->estado_comprobante=0;
+                $compra->save();
+            }
+            $model->delete();
+            
 
             // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
             if(!isset($_GET['ajax']))
@@ -249,19 +282,26 @@ class ComprobanteCompraController extends Controller
         }
         public function actionFinalizar($id)
         {
+            //$tmp=ComprobanteCompra::model()->setScenario('compra');
                 $tmp= ComprobanteCompra::model()->count('compra_id=:compra_id',array(':compra_id'=>$id));
-                //$model=ComprobanteCompra::model()->coun($id);
-                if($tmp==0)
-                {                
                 
+                $_comprobante = ComprobanteCompra::model();
+                $_comprobante->setScenario('compra');
+                $_comprobante->compra_id=$id;
+                $error = CActiveForm::validate($_comprobante);
+                
+                if($tmp==0) // si comprobantes = 0
+                {                
+                   // $_compra->estado=0; 
                     echo CJSON::encode(array(
-                                    'status'=>'true', 
+                                    'status'=>'true',
+                                    'id'=>$error,
                                     ));
 //                  // echo "Ingresa un comprobante";
 //                    Yii::app()->end();
     //               $this->redirect(array('create','pid'=>$id));
                 }
-                else
+                else 
                 {
                     echo CJSON::encode(array(
                                     'status'=>'false', 

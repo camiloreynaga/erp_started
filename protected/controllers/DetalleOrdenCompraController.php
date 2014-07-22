@@ -216,8 +216,6 @@ class DetalleOrdenCompraController extends Controller
                 {
                     if(isset($_GET['ids'])){
                          $id_oc = $_GET['ids'];
-                    
-                    
                      $model=new DetalleOrdenCompra('search');
                      $model->unsetAttributes();  // clear any default values
                      if(isset($_GET['DetalleOrdenCompra']))

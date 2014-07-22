@@ -15,6 +15,8 @@
  * @property string $importe_total
  * @property string $observacion
  * @property integer $estado
+ * @property integer $estado_comprobante
+ * @property integer $estado_pago
  * @property string $create_time
  * @property integer $create_user_id
  * @property string $update_time
@@ -46,12 +48,12 @@ class Venta extends Erp_startedActiveRecord//CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('cliente_id, vendedor_id, forma_pago_id', 'required'),
-			array('cliente_id, vendedor_id, forma_pago_id, pedido_id,estado, create_user_id, update_user_id', 'numerical', 'integerOnly'=>true),
+			array('cliente_id, vendedor_id, forma_pago_id, pedido_id,estado, estado_comprobante, estado_pago, create_user_id, update_user_id', 'numerical', 'integerOnly'=>true),
 			array('base_imponible, impuesto, importe_total', 'length', 'max'=>10),
 			array('fecha_venta, observacion, create_time, update_time', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, fecha_venta, cliente_id, vendedor_id, forma_pago_id, pedido_id, base_imponible, impuesto, importe_total, observacion,estado, create_time, create_user_id, update_time, update_user_id', 'safe', 'on'=>'search'),
+			array('id, fecha_venta, cliente_id, vendedor_id, forma_pago_id, pedido_id, base_imponible, impuesto, importe_total, observacion,estado, estado_comprobante, estado_pago, create_time, create_user_id, update_time, update_user_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -126,6 +128,8 @@ class Venta extends Erp_startedActiveRecord//CActiveRecord
 		$criteria->compare('importe_total',$this->importe_total,true);
 		$criteria->compare('observacion',$this->observacion,true);
                 $criteria->compare('estado',$this->estado);
+                $criteria->compare('estado_comprobante',$this->estado_comprobante);
+		$criteria->compare('estado_pago',$this->estado_pago);
 		$criteria->compare('create_time',$this->create_time,true);
 		$criteria->compare('create_user_id',$this->create_user_id);
 		$criteria->compare('update_time',$this->update_time,true);

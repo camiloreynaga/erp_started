@@ -164,6 +164,12 @@ class DetalleCompraController extends Controller
                    $event->sender->setAttribute('total', $_total); //actualizando total
             
             };
+            //actualiza el estado del item de detalle de compra
+         $es->onAfterUpdate= function($event) {
+
+             $model=$this->loadModel(yii::app()->request->getParam('pk')); //obteniendo el Model de detalleCompra
+             $model->actualizarEstado();    
+            }; 
             
             $es->update();
 //         
@@ -175,7 +181,7 @@ class DetalleCompraController extends Controller
         {
          Yii::import('booster.components.TbEditableSaver');
          $es = new TbEditableSaver('DetalleCompra');
-//         /$_cantidad= $es->value;
+         //actualizando los calculos de precio unitario, subtotal y total
           $es->onBeforeUpdate= function($event) {
 
                    $model=$this->loadModel(yii::app()->request->getParam('pk')); //obteniendo el Model de detalleCompra
@@ -191,15 +197,34 @@ class DetalleCompraController extends Controller
             
             };
             
+            //actualiza el estado del item de detalle de compra
+         $es->onAfterUpdate= function($event) {
+
+             $model=$this->loadModel(yii::app()->request->getParam('pk')); //obteniendo el Model de detalleCompra
+             $model->actualizarEstado();    
+            }; 
+            
+            
             $es->update();
+           // DetalleCompra::model()->actualizarEstado(yii::app()->request->getParam('pk'));
         }
         
         public function actionEditItem()
         {
          Yii::import('booster.components.TbEditableSaver');
          $es = new TbEditableSaver('DetalleCompra');
+         
+         //actualiza el estado del item de detalle de compra
+         $es->onAfterUpdate= function($event) {
+
+             $model=$this->loadModel(yii::app()->request->getParam('pk')); //obteniendo el Model de detalleCompra
+             $model->actualizarEstado();    
+            };  
+            
             $es->update();
-//         
+            
+            
+        
         }
         
         /**
@@ -320,6 +345,9 @@ class DetalleCompraController extends Controller
             return $this->_Compra;
         }
         
+        /*
+         * finaliza El registro de compra
+         */
          public function actionFinalizar($id)
         {
             $this->redirect(array('Compra/view','id'=>$id));

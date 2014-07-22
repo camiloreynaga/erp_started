@@ -30,6 +30,19 @@
  */
 class DetalleCompra extends Erp_startedActiveRecord//CActiveRecord
 {
+        public $_save=false;
+        /*estado de item detalle compra
+         * 
+         */
+         public $_estado=array(
+            '0'=>'PENDIENTE', // PENDIENTE DE REVISADO 
+            '1'=>'OK', // , // COMPROBANTE REGISTRADO
+            '2'=>'OBSERVADO', // ALGUN DATO REQUERIDO PENDIENTE
+            '3'=>'ANULADO',
+            '4'=>'ALMACENADO'
+         );
+    
+        //public $updateFlag;
 	/**
 	 * @return string the associated database table name
 	 */
@@ -46,6 +59,8 @@ class DetalleCompra extends Erp_startedActiveRecord//CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
+                        array('cantidad_bueno,cantidad_malo','comprobarCantidad'),
+                        array('cantidad_bueno,cantidad_malo','compare','compareAttribute'=>'cantidad','operator'=>'<='),
 			array('compra_id, producto_id, cantidad, cantidad_bueno, cantidad_malo, estado, create_user_id, update_user_id, comprobante_id', 'numerical', 'integerOnly'=>true),
 			array('compra_id,cantidad','required'),
                         array('lote', 'length', 'max'=>50),
@@ -56,7 +71,19 @@ class DetalleCompra extends Erp_startedActiveRecord//CActiveRecord
 			array('id, compra_id, producto_id, cantidad, lote, fecha_vencimiento, cantidad_bueno, cantidad_malo, estado, observacion, precio_unitario, subtotal, impuesto, total, create_time, create_user_id, update_time, update_user_id, comprobante_id', 'safe', 'on'=>'search'),
 		);
 	}
-
+        
+        /**
+         * validación para cantidad_bueno y cantidad_malo 
+         * @param type $attribute
+         * @param type $params
+         */
+        public function comprobarCantidad($attribute,$params){
+            if(!is_null($this->attributes['cantidad_bueno'])&&!is_null($this->attributes['cantidad_malo']))
+            {
+                if($this->attributes['cantidad']< ($this->attributes['cantidad_bueno']+$this->attributes['cantidad_malo']))
+                    $this->addError ($attribute, "Suma de cantidad bueno y malo excede a cantidad ");
+            }
+        }
 	/**
 	 * @return array relational rules.
 	 */
@@ -153,15 +180,118 @@ class DetalleCompra extends Erp_startedActiveRecord//CActiveRecord
 		return parent::model($className);
 	}
         
-        public function beforeSave()
-        {
-            if($this->fecha_vencimiento==null) //validando la fecha de cancelación
-                $this->fecha_vencimiento=null;
-            else {
-                //if($this->fecha_vencimiento )
-                //$this->fecha_vencimiento= DateTime::createFromFormat('d/m/Y', $this->fecha_vencimiento)->format('Y-m-d');
-            }
+//        public function beforeSave()
+//        {
+//             if(!$this->isNewRecord)
+//                $this->updateFlag=true;
+////            if($this->fecha_vencimiento==null) //validando la fecha de cancelación
+////                $this->fecha_vencimiento=null;
+////            else {
+////                //if($this->fecha_vencimiento )
+////                //$this->fecha_vencimiento= DateTime::createFromFormat('d/m/Y', $this->fecha_vencimiento)->format('Y-m-d');
+////            }
+//            
+//            return parent::beforeSave();
+//        }
+        
+        /**
+         * actualiza la suma de los totales, subtotales e impuesto para la compra 
+         * actual
+         */
+        public function SumaTotal(){
             
-            return parent::beforeSave();
+            $criteria = new CDbCriteria();
+		$criteria->select='sum(total) as total'; //lote
+                //$criteria->addCondition('cantidad_disponible > 0');
+                $criteria->condition='compra_id='.$this->compra_id;
+               //$lista= $this->find($criteria);
+                return $this->find($criteria);
+//                $resultados = array();
+//                foreach ($lista as $list){
+//                    $resultados[] = array(
+//                             'lote'=>$list->lote, 
+//                             'text'=> 'LOTE:' .strtoupper($list->lote).' FV: '.$list->fecha_vencimiento. ' #'.$list->cantidad_disponible.'(UNDS)',
+//                    ); 
+//                    
+//                }
+              //return $resultados;  
+        }
+
+
+        /**
+         * verifica que los datos de registro de un item esten OK
+         * Lote != null, cantidad_bueno = cantidad, cantidad malo =0 fecha_vencimiento !=null
+         */
+        public function VerificarDetalleOK($id)
+        {
+            $retorna = true;
+            $model = $this->findByPk($id);
+            // verifica que Lote este ingresado
+            if (empty($model->lote) || is_null($model->lote) )  
+                $retorna= false;
+            //verifica si cantidad_bueno = cantidad
+            if(is_null($model->cantidad_bueno) || $model->cantidad_bueno<$model->cantidad) 
+                 $retorna= false;
+            if($model->cantidad_malo>0) //!is_null($model->cantidad_malo)
+                 $retorna= false;
+            if(is_null($model->fecha_vencimiento))
+                 $retorna= false;
+            
+            return $retorna;
+        }
+        /**
+         * verifica que no exista items observados
+         */
+        public function AllOK()
+        {
+            // verficiar que todos los item sean diferentes de observado
+            $retorna = true;
+            $_count = DetalleCompra::model()->count('compra_id=:compra_id and estado=:estado', array(':estado'=>2,':compra_id'=>$this->compra_id));
+            if($_count==0)
+                $retorna=true;
+            else {
+                $retorna=false;
+            }
+            return $retorna;
+                
+        }
+        /**
+         * Actualiza el estado de un item del detalle de compra
+         */
+        public function actualizarEstado()
+        {
+            if($this->VerificarDetalleOK($this->id))
+                {
+                    $this->estado=1; //ok
+                }
+                else
+                {
+                    $this->estado=2; //observado
+                }
+                $this->save();
+        }
+        /**
+         * cambia de estado del item detalle compra y compra luego de guardar/actualizar
+         */
+        public function afterSave(){
+             if(!$this->isNewRecord)// verfica que no sea registro que recien se creara
+            {
+                 //obtiendo compra
+                 $_compra= Compra::model()->findByPk($this->compra_id);
+                if($this->AllOK())
+                    $_compra->estado=1; //Revisado OK
+                else
+                    $_compra->estado=2; //observado
+                //actulizando el total, base imponible e impuesto de la compra
+                $_total=$this->SumaTotal()['total'];
+                $_bi=$_total/((int)Yii::app()->params['impuesto']*0.01 + 1);
+                $_compra->importe_total=$_total;//$this->SumaTotal()['total'];
+                $_compra->base_imponible=round($_bi); 
+                $_compra->impuesto=$_total-round($_bi);
+                $_compra->save(); //actualizando el estado de compra
+                
+                
+            }
+            parent::afterSave();
         }
 }

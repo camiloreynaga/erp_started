@@ -50,7 +50,7 @@
         $(form+" #"+key+"_em_").html(val.toString());
         $(form+" #"+key+"_em_").show();
 
-        $("#"+key).parent().addClass("row error");
+        $("#"+key).parent().addClass("form group");
         summary = summary + "<ul><li>" + val.toString() + "</li></ul>";
         });
         $(form+"_es_").html(summary.toString());
@@ -271,7 +271,6 @@
                                 'editable' => array(
                                     'type' => 'text',
                                     'url' => $this->createUrl('detalleCompra/editItem'),
-                                    //'placement' => 'left',
                                     //'success'=>'updateGrilla'
                                     //'success'=>'function(link,success,data){ if(success) window.location.reload();',
                                     )
@@ -319,10 +318,10 @@
                                     'url' => $this->createUrl('detalleCompra/editItem'),
                                     'htmlOptions'=>array(
                                         'style'=> 'text-align: right',
-                                        'ajax'=>array('update'=>'#button-column',),
+                                        //'ajax'=>array('update'=>'#button-column',),
                                         
                                         ),
-                                   // 'success'=>'updateGrilla'
+                                    'success'=>'updateRow'
                                     //'success'=>'function(link,success,data){ if(success) window.location.reload();',
                                     )
                                 ),
@@ -338,7 +337,11 @@
                                     )
 
                                 ),
-                                'estado',
+                                array(
+                                    'name'=>'estado',
+                                    'value'=>'$data->_estado[$data->estado]'
+                                ),
+                                
                                 array(
                                     'name'=>'precio_unitario',
                                     'header'=>'P.U.',
@@ -347,7 +350,11 @@
                                     'type' => 'text',
                                     'url' => $this->createUrl('detalleCompra/editPrecioUnitario'),
                                     'htmlOptions'=>array('style'=> 'text-align: right'),
-                                    'success'=>'updateGrilla'
+                                    'success'=>'updateGrilla',
+                                     //'disabled'=>'($data->estado>2) ? false : true',
+                                     'apply' => '($data->estado>2) ? false : true', //desabilita la edición 
+//                                      
+                                        
                                 )),
                                 array(
                                     'name'=>'subtotal',
@@ -392,6 +399,8 @@
 
    
 ?>
+
+
 <?php
 echo CHtml::Button('Confirmar Registro',
              array(
