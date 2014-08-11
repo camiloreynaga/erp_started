@@ -73,8 +73,8 @@ class DetalleVentaController extends Controller
                 $model->attributes=$_POST['DetalleVenta'];
                 $model->fecha_vencimiento= ProductoAlmacen::model()->getFecha_vencimiento($model->producto_id,$model->lote);
                 $model->subtotal=$model->precio_unitario*$model->cantidad;
-                $model->impuesto=$model->subtotal*((int)Yii::app()->params['impuesto']*0.01);
-                $model->total=$model->subtotal+$model->impuesto;
+                $model->impuesto= round($model->subtotal*((int)Yii::app()->params['impuesto']*0.01));
+                $model->total= round($model->subtotal+$model->impuesto);
                 
                 $_cantidad_alm= ProductoAlmacen::model()->cantidad_lote2($model->producto_id,$model->lote);
                 
@@ -159,8 +159,8 @@ class DetalleVentaController extends Controller
 
                    $model=$this->loadModel(yii::app()->request->getParam('pk')); //obteniendo el Model de detalleCompra
                    $_cantidad=  yii::app()->request->getParam('value');
-                   $_subtotal=$model->precio_unitario*$_cantidad;//calculando el subtotal
-                   $_impuesto=$_subtotal*((int)Yii::app()->params['impuesto']*0.01); //calculando impuesto
+                   $_subtotal= round($model->precio_unitario*$_cantidad);//calculando el subtotal
+                   $_impuesto= round($_subtotal*((int)Yii::app()->params['impuesto']*0.01)); //calculando impuesto
                    $_total=$_subtotal+$_impuesto; //calculando total
                     
                    $event->sender->setAttribute('subtotal', $_subtotal);//Actualizando Cantidad
@@ -193,8 +193,8 @@ class DetalleVentaController extends Controller
 
                    $model=$this->loadModel(yii::app()->request->getParam('pk')); //obteniendo el Model de detalleCompra
                    $_precioUnitario=  yii::app()->request->getParam('value');
-                   $_subtotal=$model->cantidad*$_precioUnitario;//calculando el subtotal
-                   $_impuesto=$_subtotal*((int)Yii::app()->params['impuesto']*0.01); //calculando impuesto
+                   $_subtotal= round($model->cantidad*$_precioUnitario);//calculando el subtotal
+                   $_impuesto= round($_subtotal*((int)Yii::app()->params['impuesto']*0.01)); //calculando impuesto
                    $_total=$_subtotal+$_impuesto; //calculando total
                     
                    $event->sender->setAttribute('subtotal', $_subtotal);//Actualizando Cantidad

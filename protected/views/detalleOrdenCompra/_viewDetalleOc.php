@@ -5,7 +5,7 @@
  * and open the template in the editor.
  */
 ?>
-<h2>Detalle Orden Compras <?php echo $pid;//$_GET['pid']; ?></h2>
+<h2><?php echo yii::t('app','Details').' '. yii::t('app','Purchase order').' '.$pid;//$_GET['pid']; ?></h2>
 <?php 
 $model->orden_compra_id=$pid;
 

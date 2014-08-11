@@ -107,10 +107,10 @@ class OrdenCompra extends Erp_startedActiveRecord//CActiveRecord
 		// should not be searched.
 
 		$criteria=new CDbCriteria;
-
+                $criteria->with=array('r_proveedor');
 		$criteria->compare('id',$this->id);
 		$criteria->compare('fecha_orden',$this->fecha_orden,true);
-		$criteria->compare('proveedor_id',$this->proveedor_id);
+		$criteria->compare('r_proveedor.nombre_rz',$this->proveedor_id,true);
                 $criteria->compare('cotizacion_id',$this->cotizacion_id);
 		$criteria->compare('observaciones',$this->observaciones,true);
 		$criteria->compare('estado',$this->estado,true);
@@ -118,7 +118,7 @@ class OrdenCompra extends Erp_startedActiveRecord//CActiveRecord
 		$criteria->compare('create_user_id',$this->create_user_id);
 		$criteria->compare('update_time',$this->update_time,true);
 		$criteria->compare('update_user_id',$this->update_user_id);
-                $criteria->order= 'id DESC';
+                $criteria->order= 't.id DESC';
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));

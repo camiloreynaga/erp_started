@@ -12,6 +12,7 @@ return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'ERP APP',
         'language'=>'es',
+        //'sourceLanguage'=>'en',
 
 	// preloading 'log' component
 	'preload'=>array('log','booster'),
@@ -60,13 +61,15 @@ return array(
 		// uncomment the following to use a MySQL database
 	
 		'db'=>array(
-			'connectionString' => 'mysql:host=localhost;dbname=erp_started3',
+			'connectionString' => 'mysql:host=localhost;dbname=erp_started2',
 			'emulatePrepare' => true,
 			'username' => 'root',
 			'password' => 'adonde',
 			'charset' => 'utf8',
 		),
-		
+		'coreMessage'=>array(
+                    'basePath'=>'protected/messages',
+                ),
 		'errorHandler'=>array(
 			// use 'site/error' action to display errors
 			'errorAction'=>'site/error',

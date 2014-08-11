@@ -1,19 +1,20 @@
 <?php
 $this->breadcrumbs=array(
-	'Orden Compras'=>array('index'),
+	Yii::t('app', 'Purchase order')=>array('admin'),
+        //Yii::t('app', 'Purchase order')=>array('index'),
 	$model->id,
 );
 
 $this->menu=array(
 //array('label'=>'List OrdenCompra','url'=>array('index'),),
-array('label'=>'Create OrdenCompra','url'=>array('create')),
-array('label'=>'Update OrdenCompra','url'=>array('update','id'=>$model->id),'visible'=>$model->estado==0),
+array('label'=>Yii::t('app','Create').' '. Yii::t('app', 'Purchase order'),'url'=>array('create')),
+array('label'=>Yii::t('app','Update').' '. Yii::t('app', 'Purchase order'),'url'=>array('update','id'=>$model->id),'visible'=>$model->estado==0),
 //array('label'=>'Delete OrdenCompra','url'=>'#','linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-array('label'=>'Manage OrdenCompra','url'=>array('admin')),
+array('label'=>Yii::t('app','Manage').' '. Yii::t('app', 'Purchase order'),'url'=>array('admin')),
 );
 ?>
 
-<h1>View OrdenCompra #<?php echo $model->id; ?></h1>
+<h1><?php echo Yii::t('app','View').' '. Yii::t('app', 'Purchase order').' # '. $model->id; ?></h1>
 
 <?php $this->widget('booster.widgets.TbDetailView',array(
 'data'=>$model,

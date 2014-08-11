@@ -11,7 +11,7 @@ $form=$this->beginWidget('booster.widgets.TbActiveForm',array(
 	'enableAjaxValidation'=>false,
 )); ?>
 
-<p class="help-block">Fields with <span class="required">*</span> are required.</p>
+<p class="help-block"><?php echo yii::t('app','Fields with');?> <span class="required">*</span><?php echo ' '.yii::t('app','are required.');?> </p>
 
 <?php echo $form->errorSummary($model); ?>
 
@@ -30,7 +30,7 @@ $form=$this->beginWidget('booster.widgets.TbActiveForm',array(
                         ),
                        //'htmlOptions'=>array('class'=>'span5')
                         ),
-                        'hint' => 'Ingrese fecha',
+                        'hint' => yii::t('app','Put date'),
                         'prepend' => '<i class="glyphicon glyphicon-calendar"></i>'
                     )
                 ) ;
@@ -53,10 +53,13 @@ $form=$this->beginWidget('booster.widgets.TbActiveForm',array(
                         'asDropDownList'=>true,
                         'data'=>  CHtml::listData(OrdenCompra::model()->getOrdenCompra(),'id','text'),
                         //
+                        'val'=>isset($_GET['id'])? $_GET['id']: null,
                         'options'=>array(
-                            'placeholder'=>'elija una Orden de compra',
+                              //
+                            'placeholder'=>yii::t('app','Select an purchase order'),
                             'htmlOptions'=>array(
                                 'id'=>'combo_oc',
+                                
                                 //'update'=>'#detalle-oc'
                             ),
                             
@@ -76,10 +79,12 @@ $form=$this->beginWidget('booster.widgets.TbActiveForm',array(
                                 var id=element.val;
                                 $.ajax({
                                     data:{ids:id},
-                                    dataType:"html",
+                                    //dataType:"html",
                                     url:"'.CController::createUrl('DetalleOrdenCompra/DetalleOC').'",
-                                    success:function(data){
+                                        
+                                    success: function(data){
                                       $("#detalle-oc").html(data);
+                                      //$.fn.yiiGridView.update("detalle-oc");
                                         //$("#detalle-oc").show(html);
                                     },              
                                  });
@@ -131,9 +136,9 @@ $form=$this->beginWidget('booster.widgets.TbActiveForm',array(
 	<?php $this->widget('booster.widgets.TbButton', array(
 			'buttonType'=>'submit',
 			'context'=>'primary',
-			'label'=>$model->isNewRecord ? 'Create' : 'Save',
+			'label'=>$model->isNewRecord ? yii::t('app','Create') : yii::t('app','Save'),
                         'htmlOptions'=>array(
-                            'confirm'=>'Esta seguro de proceder?',
+                            'confirm'=>yii::t('app','Are you sure to process?'),
                         )
 		)); ?>
 </div>
@@ -141,8 +146,9 @@ $form=$this->beginWidget('booster.widgets.TbActiveForm',array(
 <?php $this->endWidget(); ?>
 
 <?php
-//$oc->orden_compra_id=$model->id;
-$oc=new DetalleOrdenCompra('search');
+
+//$oc=new DetalleOrdenCompra('search');
+//$oc->orden_compra_id= $form->;
 //$this->renderPartial('//detalleOrdenCompra/admin',array(
 //                     'model'=>$oc,
 //                     ));
@@ -152,21 +158,23 @@ $oc=new DetalleOrdenCompra('search');
     
 </div>
 <?php
-$this->widget('booster.widgets.TbGridView',array(
-    'id'=>'detalle-orden-compra-grid',
-    'dataProvider'=>$oc->search(),
-    'columns'=>array(
-                    array(
-                        'name'=>'producto_id',
-                        'header'=>'Producto',
-                        'value'=>'$data->r_producto->nombre',
-                    ),
-                    array(
-                    'name'=>'cantidad',
-                    'header'=>'Cantidad',
-                    ),
-    ),
-)); 
+//isset($_GET['id'])? $oc->orden_compra_id=$_GET['id']: $oc->orden_compra_id=0  ;
+//
+//$this->widget('booster.widgets.TbGridView',array(
+//    'id'=>'detalle-orden-compra-grid',
+//    'dataProvider'=>$oc->search(),
+//    'columns'=>array(
+//                    array(
+//                        'name'=>'producto_id',
+//                        'header'=>'Producto',
+//                        'value'=>'$data->r_producto->nombre',
+//                    ),
+//                    array(
+//                    'name'=>'cantidad',
+//                    'header'=>'Cantidad',
+//                    ),
+//    ),
+//)); 
 ?>
 
 

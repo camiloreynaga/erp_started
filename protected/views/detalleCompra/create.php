@@ -1,7 +1,8 @@
 <?php
 $this->breadcrumbs=array(
-	'Detalle Compras'=>array('index'),
-	'Create',
+        yii::t('app','Purchase')=>array('//Compra/admin'),
+	//'Detalle Compras'=>array('index'),
+	yii::t('app','Details').' '.yii::t('app','Purchase'),
 );
 
 $this->menu=array(
@@ -18,7 +19,7 @@ $compra= Compra::model()->findByPk($_GET['pid']);
 //$model->getat
 echo $this->renderPartial('//Compra/_head', array('compra'=>$compra));
 ?>
-<h4> Detalle Compra</h4>
+<h4> <?php echo yii::t('app','Details').' '.yii::t('app','Purchase');?></h4>
 <?php 
 $model->estado=''; // estado limpio
 echo $this->renderPartial('_form', array('model'=>$model)); ?>

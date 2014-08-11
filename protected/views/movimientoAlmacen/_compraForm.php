@@ -5,13 +5,71 @@
  * and open the template in the editor.
  */
 ?>
-<h1>Registrar Ingreso de Compra</h1>
+<h1><?php echo yii::t('app', 'Store purchase') ?></h1>
+
+<?php
+    $compra= Compra::model();
+    $compra->estado=1; //Revisado
+    $this->widget('booster.widgets.TbGridView',array(
+    'id'=>'compra-grid',
+    'dataProvider'=>$compra->search(),
+    //'filter'=>$compra,
+    'columns'=>array(
+                    array(
+                        'name'=>'id',
+                        'htmlOptions'=>array(
+                            'width'=>'50px',
+                        )
+                    ),
+                    'fecha_compra',
+                    array(
+                        'name'=>'proveedor_id',
+                        'value'=>'$data->r_proveedor->nombre_rz'
+                    ),
+
+                    array(
+                        'name'=>'estado',
+                        'value'=>'$data->_estado[$data->estado]'
+                    ),
+                    'observacion',
+                    /*
+                    'base_imponible',
+                    'impuesto',
+
+                    'importe_total',
+
+                    /*
+                    'create_time',
+                    'create_user_id',
+                    'update_time',
+                    'update_user_id',
+                    */
+                    array(
+                    'class'=>'booster.widgets.TbButtonColumn',
+                    'template'=>'{select}',
+                    'buttons'=>array(
+                        'select'=>array(
+                            'url'=>'Yii::app()->createUrl("MovimientoAlmacen/ingresarCompra", array("id"=>$data->id))'
+                        ),
+                    ),    
+                    'htmlOptions'=>array(
+                                    'width'=>'70px',
+                                )   
+                    ),
+    ),
+    )); 
+?>
 
 
-<h3>Detalle Compra</h3>
+<h3> <?php echo yii::t('app','Details').' '. yii::t('app','Purchase').' '; echo  isset($_GET['id'])? $_GET['id'] : "";
+//isset($_GET['id'])? $pk= $_GET['id'] : $pk= "";
+//$_compra= $compra->findByPk($pk) ;
+//echo ' '.$_compra['id'].' '. $compra->r_proveedor->$_compra['proveedor_id'];
+?></h3>
 <?php 
     $model= DetalleCompra::model();   
-    $model->estado=0;
+    $model->estado=1;
+    $model->compra_id= isset($_GET['id'])? $_GET['id']: 0;
     $this->widget('booster.widgets.TbExtendedGridView',array(
                 'id'=>'detalle-orden-compra-grid',
                 'type'=>'striped bordered',
@@ -29,7 +87,7 @@
                                 'selectableRows'=>2,        // Allow multiple selections 
                                 ),
                                // 'id',
-                               // 'orden_compra_id',
+                                'compra_id',
                                 //'cotizacion_id',
     //                            array(
     //                                //'name'=>'producto_id',

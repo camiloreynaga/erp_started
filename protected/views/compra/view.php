@@ -1,19 +1,19 @@
 <?php
 $this->breadcrumbs=array(
-	'Compras'=>array('index'),
+	Yii::t('app', 'Purchase')=>array('admin'),
 	$model->id,
 );
 
 $this->menu=array(
 //array('label'=>'List Compra','url'=>array('index')),
-array('label'=>'Create Compra','url'=>array('create')),
-array('label'=>'Update Compra','url'=>array('update','id'=>$model->id)),
+array('label'=>Yii::t('app','Create').' '. Yii::t('app', 'Purchase'),'url'=>array('create')),
+array('label'=>Yii::t('app','Update').' '. Yii::t('app', 'Purchase'),'url'=>array('//detalleCompra/create','pid'=>$model->id)), //Yii::app()->createUrl("//detalleCompra/create", array("pid"=>$data->id))
 //array('label'=>'Delete Compra','url'=>'#','linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-array('label'=>'Manage Compra','url'=>array('admin')),
+array('label'=>Yii::t('app','Manage').' '. Yii::t('app', 'Purchase'),'url'=>array('admin')),
 );
 ?>
 
-<h1>View Compra #<?php echo $model->id; ?></h1>
+<h1><?php echo Yii::t('app','View').' '. Yii::t('app', 'Purchase').' # '. $model->id; ?></h1>
 
 <?php $this->widget('booster.widgets.TbDetailView',array(
 'data'=>$model,
@@ -29,7 +29,11 @@ array('label'=>'Manage Compra','url'=>array('admin')),
 		'impuesto',
 		'importe_total',
 		'observacion',
-		'estado',
+		array(
+                    'name'=>'estado',
+                    'value'=>$model->_estado[$model->estado]
+                )
+                //'estado',
 //		'create_time',
 //		'create_user_id',
 //		'update_time',

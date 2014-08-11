@@ -25,23 +25,23 @@ class CompraController extends Controller
         */
         public function accessRules()
         {
-        return array(
-        array('allow',  // allow all users to perform 'index' and 'view' actions
-        'actions'=>array('index','view'),
-        'users'=>array('*'),
-        ),
-        array('allow', // allow authenticated user to perform 'create' and 'update' actions
-        'actions'=>array('create','update'),
-        'users'=>array('@'),
-        ),
-        array('allow', // allow admin user to perform 'admin' and 'delete' actions
-        'actions'=>array('admin','delete'),
-        'users'=>array('admin'),
-        ),
-        array('deny',  // deny all users
-        'users'=>array('*'),
-        ),
-        );
+            return array(
+                array('allow',  // allow all users to perform 'index' and 'view' actions
+                'actions'=>array('index','view'),
+                'users'=>array('*'),
+                ),
+                array('allow', // allow authenticated user to perform 'create' and 'update' actions
+                'actions'=>array('create','update'),
+                'users'=>array('@'),
+                ),
+                array('allow', // allow admin user to perform 'admin' and 'delete' actions
+                'actions'=>array('admin','delete'),
+                'users'=>array('admin'),
+                ),
+                array('deny',  // deny all users
+                'users'=>array('*'),
+                ),
+            );
         }
 
         /**
@@ -50,9 +50,9 @@ class CompraController extends Controller
         */
         public function actionView($id)
         {
-        $this->render('view',array(
-        'model'=>$this->loadModel($id),
-        ));
+            $this->render('view',array(
+            'model'=>$this->loadModel($id),
+            ));
         }
 
         /**
@@ -152,8 +152,15 @@ class CompraController extends Controller
         {
             if(Yii::app()->request->isPostRequest)
             {
-            // we only allow deletion via POST request
-            $this->loadModel($id)->delete();
+                // we only allow deletion via POST request
+            
+                $model= $this->loadModel($id);
+                $orden_compra= OrdenCompra::model()->findByPk($model->orden_compra_id);
+                $orden_compra->estado=0; //volvieno a estado pendiente
+                $orden_compra->save();
+                $model->delete();
+            
+            
 
             // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
             if(!isset($_GET['ajax']))

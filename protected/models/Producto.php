@@ -263,4 +263,17 @@ class Producto extends Erp_startedActiveRecord// CActiveRecord
               return $resultados;   
         }
         
+        /**
+         * calcula el subtotal del monto
+         */
+        public function getSubtotal($monto)
+        {
+            return round($monto/((int)Yii::app()->params['impuesto']*0.01 + 1),2);
+        }
+        /**
+         * calcula el impuesto para el monto
+         */
+        public function getImpuesto($monto){
+            return round($monto * ((int)Yii::app()->params['impuesto']*0.01 + 1),2);
+        }
 }

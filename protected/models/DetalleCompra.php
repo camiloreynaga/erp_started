@@ -255,6 +255,25 @@ class DetalleCompra extends Erp_startedActiveRecord//CActiveRecord
             return $retorna;
                 
         }
+        
+        /**
+         * verifica que todos los items esten almacenados
+         */
+        public function AllIntoStore()
+        {
+            // verficiar que todos los item esten almacenados
+            $retorna = true;
+            $_count = DetalleCompra::model()->count('compra_id=:compra_id and estado!=:estado', array(':estado'=>4,':compra_id'=>$this->compra_id));
+            if($_count==0)
+                $retorna=true;
+            else {
+                $retorna=false;
+            }
+            return $retorna;
+                
+        }
+        
+        
         /**
          * Actualiza el estado de un item del detalle de compra
          */
@@ -274,21 +293,33 @@ class DetalleCompra extends Erp_startedActiveRecord//CActiveRecord
          * cambia de estado del item detalle compra y compra luego de guardar/actualizar
          */
         public function afterSave(){
-             if(!$this->isNewRecord)// verfica que no sea registro que recien se creara
+             if(!$this->isNewRecord)// verfica que no sea registro nuevo
             {
                  //obtiendo compra
                  $_compra= Compra::model()->findByPk($this->compra_id);
-                if($this->AllOK())
+                //Verificando que si existen items Observados 
+                if($this->AllOK()) 
                     $_compra->estado=1; //Revisado OK
                 else
                     $_compra->estado=2; //observado
-                //actulizando el total, base imponible e impuesto de la compra
+                
+                
+                
+                //actualizando el total, base imponible e impuesto de la compra
                 $_total=$this->SumaTotal()['total'];
-                $_bi=$_total/((int)Yii::app()->params['impuesto']*0.01 + 1);
+                //$_bi=$_total/((int)Yii::app()->params['impuesto']*0.01 + 1);
+                $_bi=  Producto::model()->getSubtotal($_total);
                 $_compra->importe_total=$_total;//$this->SumaTotal()['total'];
-                $_compra->base_imponible=round($_bi); 
-                $_compra->impuesto=$_total-round($_bi);
+                $_compra->base_imponible=$_bi; 
+                $_compra->impuesto=$_total-$_bi;
+               
+                //Verificando que todos los item se hayan almacenado
+                if($this->AllIntoStore())
+                    $_compra->estado=4; // Cambiar estado a Almacenado
+                
                 $_compra->save(); //actualizando el estado de compra
+                
+                
                 
                 
             }

@@ -6,7 +6,7 @@
         
         function updateRow(data)
         {
-            var row = $(this).parent().parent();
+            var row = $(this).parent().parent().parent();
             $.ajax({
             type: 'POST',
             data: data,
@@ -36,10 +36,29 @@
         
         //actualiza la grila 
         function updateGrilla(data) {
+//                $.ajax({
+//                    
+//                type: 'POST',
+//                data: data,
+//                url: jQuery(this).attr('href'), 
+//                success: function(data){
+//                    if(data =='error'){
+//                        alert("Data has error(s)");
+//                    }
+//                    else{
+//                         $(".view").html(text);
+//                        // $("#Items").html(data);
+//                    }
+//                        
+//                }
+//                })
+                
                 // display data returned from action
                 //$("#Items").html(data);
+               // $("#view").html(data);
                 // refresh your grid
                 $.fn.yiiGridView.update('detalle-orden-compra-grid');
+                
         }
         //muestra errores del form luego de la validación
         function formErrors(data,form){
@@ -99,7 +118,7 @@
         )
 )); ?>
 
-<p class="help-block">Fields with <span class="required">*</span> are required.</p>
+<p class="help-block"><?php echo yii::t('app','Fields with');?>  <span class="required">*</span> <?php echo ' '.yii::t('app','are required.');?></p>
 
 
 
@@ -289,7 +308,7 @@
 //                                    'options'     => array(
 //                                            'datepicker' => array('language' => yii::app()->params['language']) 
 //                                        ) 
-                                    'combodate'   => array('minYear' => 2015, 'maxYear' => 2050),
+                                    'combodate'   => array('minYear' => 2015, 'maxYear' => 2030),
                                     //'success'=>'updateGrilla'
                                     //'success'=>'function(link,success,data){ if(success) window.location.reload();',
                                     )
@@ -321,7 +340,7 @@
                                         //'ajax'=>array('update'=>'#button-column',),
                                         
                                         ),
-                                    'success'=>'updateRow'
+                                    //'success'=>'updateRow'
                                     //'success'=>'function(link,success,data){ if(success) window.location.reload();',
                                     )
                                 ),
@@ -352,7 +371,7 @@
                                     'htmlOptions'=>array('style'=> 'text-align: right'),
                                     'success'=>'updateGrilla',
                                      //'disabled'=>'($data->estado>2) ? false : true',
-                                     'apply' => '($data->estado>2) ? false : true', //desabilita la edición 
+                                     'apply' => '($data->estado>2) ? false : true', //deshabilita la edición 
 //                                      
                                         
                                 )),

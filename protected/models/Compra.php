@@ -120,10 +120,10 @@ class Compra extends Erp_startedActiveRecord//CActiveRecord
 		// @todo Please modify the following code to remove attributes that should not be searched.
 
 		$criteria=new CDbCriteria;
-
+                $criteria->with=array('r_proveedor');
 		$criteria->compare('id',$this->id);
 		$criteria->compare('fecha_compra',$this->fecha_compra,true);
-		$criteria->compare('proveedor_id',$this->proveedor_id);
+		$criteria->compare('r_proveedor.nombre_rz',$this->proveedor_id,true);
 		$criteria->compare('base_imponible',$this->base_imponible,true);
 		$criteria->compare('orden_compra_id',$this->orden_compra_id);
 		$criteria->compare('impuesto',$this->impuesto,true);
@@ -132,11 +132,11 @@ class Compra extends Erp_startedActiveRecord//CActiveRecord
 		$criteria->compare('estado',$this->estado);
                 $criteria->compare('estado_comprobante',$this->estado_comprobante);
 		$criteria->compare('estado_pago',$this->estado_pago);
-		$criteria->compare('create_time',$this->create_time,true);
-		$criteria->compare('create_user_id',$this->create_user_id);
-		$criteria->compare('update_time',$this->update_time,true);
-		$criteria->compare('update_user_id',$this->update_user_id);
-                $criteria->order='id DESC';
+		//$criteria->compare('create_time',$this->create_time,true);
+		//$criteria->compare('create_user_id',$this->create_user_id);
+		//$criteria->compare('update_time',$this->update_time,true);
+		//$criteria->compare('update_user_id',$this->update_user_id);
+                $criteria->order='t.id DESC';
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));

@@ -61,6 +61,7 @@ class Proveedor extends Erp_startedActiveRecord//CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'r_compras' => array(self::HAS_MANY, 'Compra', 'proveedor_id'),
+                        'r_orden_compra'=>array(self::HAS_MANY,'OrdenCompra','proveedor_id'),
 		);
 	}
 

@@ -91,9 +91,9 @@ $("#delete").click(function(){
         var checked=$("#detalle-orden-compra-grid").yiiGridView("getChecked","detalle-orden-compra-grid_c0"); // _c0 means the checkboxes are located in the first column, change if you put the checkboxes somewhere else
         var count=checked.length;
                 if(count==0){
-                alert("No items selected");
+                alert("'.yii::t('app','No items selected.').'");
                 }
-        if(count>0 && confirm("Do you want to delete these "+count+" item(s)"))
+        if(count>0 && confirm("'.yii::t('app','Do you want to delete these').' "+count+" item(s)"))
         {
                 $.ajax({
                         data:{ids:checked},
@@ -122,7 +122,7 @@ $form=$this->beginWidget('booster.widgets.TbActiveForm',array(
         )
 )); ?>
 
-<p class="help-block">Fields with <span class="required">*</span> are required.</p>
+<p class="help-block"><?php echo yii::t('app','Fields with');?> <span class="required">*</span> <?php echo yii::t('app','are required.')?></p>
 
 <?php
 
@@ -147,7 +147,7 @@ echo $form->errorSummary($model); ?>
                                     //'data'      => CHtml::listData(Producto::model()->findAll('descontinuado=0'), "id","nombre"),
                                     'data'      => CHtml::listData(Producto::model()->getProductos(), "id","text"),
 					'options' => array(
-						'placeholder' =>'Seleccione producto', 
+						'placeholder' =>yii::t('app','Select product'),
                                                 //'tags'=>'de',
                                                 //'width' => '40%', 
 						'tokenSeparators' => array(',', ' ')
@@ -205,11 +205,11 @@ echo $form->errorSummary($model); ?>
     <?php $this->widget('booster.widgets.TbButton', array(
 			'buttonType'=>'ajaxSubmit',
 			'context'=>'primary',
-                        'loadingText'=>'trabajando...',
+                        //'loadingText'=>'trabajando...',
                         'url'=>CController::createUrl('detalleOrdenCompra/create',
                                 array('pid'=>$model->orden_compra_id)
                                 ),
-			'label'=> 'Add Item',//$orden_compra->isNewRecord ? 'Create' : 'Save',
+			'label'=> yii::t('app','Add'),//$orden_compra->isNewRecord ? 'Create' : 'Save',
                         'id'=>'update',
                         'ajaxOptions'=>array(
                             'dataType'=>'json',
@@ -355,7 +355,7 @@ $this->widget('booster.widgets.TbExtendedGridView',array(
                         'url'=>'Yii::app()->createUrl("detalleOrdenCompra/delete", array("id"=>$data->id))',
                     )
                 ),
-                'deleteConfirmation'=>'Esta seguro de eliminar este item?',
+                'deleteConfirmation'=>yii::t('app','Are you sure to delete this item?'),
                 'afterDelete'=>'function(link,success,data){ if(success) window.location.reload(); }',
 		
                 ),
@@ -367,7 +367,7 @@ $this->widget('booster.widgets.TbExtendedGridView',array(
 <div >
     
     <?php  $this->widget('booster.widgets.TbButton',array( // Button to delete
-            'label' => 'Delete Selected Items',
+            'label' => yii::t('app','Delete Selected Items'),
             'context' => 'danger',
             'size' => 'small',
             'id' => 'delete',
@@ -393,12 +393,12 @@ $this->widget('booster.widgets.TbExtendedGridView',array(
 //		));
     ?>
 
-     <?php  echo CHtml::Button('Confirmar compra',
+     <?php  echo CHtml::Button(yii::t('app','Confirm').' '.yii::t('app','Purchase'),
              array(
                  'submit'=>array('detalleOrdenCompra/finalizarOc',
                      'id'=>$model->orden_compra_id,
                      ),
-                     'confirm'=>'Esta seguro de proceder con la orden compra?',
+                     'confirm'=>yii::t('app','Are you sure to process this purchase?'),
                  )
              );/*
      echo CHtml::ajaxButton('Cancelar compra',array('compra/delete','id'=>$model->orden_compra_id),

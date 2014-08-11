@@ -1,12 +1,12 @@
 <?php
 $this->breadcrumbs=array(
-	'Compras'=>array('index'),
-	'Manage',
+	Yii::t('app', 'Purchase')=>array('admin'),
+	yii::t('app','Manage'),
 );
 
 $this->menu=array(
 //array('label'=>'List Compra','url'=>array('index')),
-array('label'=>'Create Compra','url'=>array('create')),
+array('label'=>Yii::t('app','Create').' '. Yii::t('app', 'Purchase'),'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -23,7 +23,7 @@ return false;
 ");
 ?>
 
-<h1>Manage Compras</h1>
+<h1><?php echo Yii::t('app','Manage').' '. Yii::t('app', 'Purchase');?></h1>
 
 <!--<p>
 	You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>
@@ -56,12 +56,14 @@ return false;
                     'name'=>'proveedor_id',
                     'value'=>'$data->r_proveedor->nombre_rz'
                 ),
-                
+                 'observacion',
                 array(
                     'name'=>'estado',
-                    'value'=>'$data->_estado[$data->estado]'
+                    'value'=>'$data->_estado[$data->estado]',
+                    'filter'=>  array_merge(array(''=>yii::t('app','ALL')),$model->_estado),
+                    
                 ),
-                'observacion',
+               
                 /*
 		'base_imponible',
 		'impuesto',

@@ -1,22 +1,22 @@
 <?php
 $this->breadcrumbs=array(
-	'Orden Compras'=>array('index'),
+	Yii::t('app', 'Purchase order')=>array('admin'),
 	$model->id=>array('view','id'=>$model->id),
-	'Update',
+	yii::t('app','Update'),
 );
 
 	$this->menu=array(
 	//array('label'=>'List OrdenCompra','url'=>array('index')),
-	array('label'=>'Create OrdenCompra','url'=>array('create')),
+	array('label'=>Yii::t('app','Create').' '. Yii::t('app', 'Purchase order'),'url'=>array('create')),
 	//array('label'=>'View OrdenCompra','url'=>array('view','id'=>$model->id)),
-	array('label'=>'Manage OrdenCompra','url'=>array('admin')),
+	array('label'=>Yii::t('app','Manage').' '. Yii::t('app', 'Purchase order'),'url'=>array('admin')),
 	);
 	?>
 
-	<h1>Update OrdenCompra <?php echo $model->id; ?></h1>
+	<h1><?php echo yii::t('app','Update').' '. yii::t('app','Purchase order');  echo ' '. $model->id; ?></h1>
 
 <?php echo $this->renderPartial('_form',array('model'=>$model)); ?>
-        <h3>Detalle</h3>
+        <h3> <?php echo yii::t('app','Details');?> </h3>
 <?php 
 $detalle_orden = new DetalleOrdenCompra();
 $detalle_orden->orden_compra_id=$model->id;

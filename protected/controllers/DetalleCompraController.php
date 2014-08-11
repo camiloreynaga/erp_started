@@ -61,8 +61,8 @@ class DetalleCompraController extends Controller
         protected function PuConIGV($model)
         {
             $model->total=$model->precio_unitario*$model->cantidad;
-            $model->subtotal=$model->total/((int)Yii::app()->params['impuesto']*0.01+1);
-            $model->impuesto=$model->total-$model->impuesto;
+            $model->subtotal= round($model->total/((int)Yii::app()->params['impuesto']*0.01+1));
+            $model->impuesto= round($model->total-$model->impuesto);
             
             return $model;
         }
@@ -87,8 +87,8 @@ class DetalleCompraController extends Controller
                 $model->total=$model->subtotal+$model->impuesto;
                  */
                 $model->total=$model->precio_unitario*$model->cantidad;
-                $model->subtotal=$model->total/((int)Yii::app()->params['impuesto']*0.01+1);
-                $model->impuesto=$model->total-$model->subtotal;
+                $model->subtotal= round($model->total/((int)Yii::app()->params['impuesto']*0.01+1));
+                $model->impuesto= round($model->total-$model->subtotal);
                 
                 if($model->save())
                 {
@@ -155,8 +155,8 @@ class DetalleCompraController extends Controller
                    //$this->PuConIGV($model);
                    // IGV INCLUIDO
                    $_total=$model->precio_unitario*$_cantidad;//calculando el subtotal
-                   $_subtotal=$_total/((int)Yii::app()->params['impuesto']*0.01 + 1); //calculando impuesto
-                   $_impuesto=$_total-$_subtotal; //calculando total
+                   $_subtotal= round($_total/((int)Yii::app()->params['impuesto']*0.01 + 1)); //calculando impuesto
+                   $_impuesto= round($_total-$_subtotal); //calculando total
                     
                    
                    $event->sender->setAttribute('subtotal', $_subtotal);//Actualizando Cantidad
@@ -188,8 +188,8 @@ class DetalleCompraController extends Controller
                    $_precioUnitario=  yii::app()->request->getParam('value');
                    
                    $_total=$model->cantidad*$_precioUnitario;//calculando el subtotal
-                   $_subtotal=$_total/((int)Yii::app()->params['impuesto']*0.01 + 1); //calculando impuesto
-                   $_impuesto=$_total-$_subtotal; //calculando total
+                   $_subtotal= round($_total/((int)Yii::app()->params['impuesto']*0.01 + 1)); //calculando impuesto
+                   $_impuesto= round($_total-$_subtotal); //calculando total
                     
                    $event->sender->setAttribute('subtotal', $_subtotal);//Actualizando Cantidad
                    $event->sender->setAttribute('impuesto', $_impuesto);//Actualizando impuesto

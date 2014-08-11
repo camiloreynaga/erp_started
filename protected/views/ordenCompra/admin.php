@@ -1,12 +1,13 @@
 <?php
 $this->breadcrumbs=array(
-	'Orden Compras'=>array('index'),
-	'Manage',
+	Yii::t('app', 'Purchase order')=>array('admin'),
+	yii::t('app','Manage'),
+        //'Manage',
 );
 
 $this->menu=array(
 //array('label'=>'List OrdenCompra','url'=>array('index')),
-array('label'=>'Create OrdenCompra','url'=>array('create')),
+array('label'=>Yii::t('app','Create').' '. Yii::t('app', 'Purchase order'),'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -23,7 +24,7 @@ return false;
 ");
 ?>
 
-<h1>Manage Orden Compras</h1>
+<h1><?php echo Yii::t('app','Manage').' '. Yii::t('app', 'Purchase order');?></h1>
 
 <!--<p>
 	You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>
@@ -64,7 +65,7 @@ return false;
                 array(
                     'name'=>'estado',
                     'value'=>'$data->_estado[$data->estado]',
-                   // 'filter'=>  CHtml::listDat
+                    'filter'=> array_merge(array(''=> yii::t('app','ALL')),$model->_estado ),// $model->_estado,// array('1'=>'On','0'=>'Off'),  //CHtml::listData($model,, $textField)
                     
                 ),
                  
@@ -88,6 +89,27 @@ return false;
                 'htmlOptions'=>array(
                                 'width'=>'70px',
                             )   
+                ),
+                array(
+                'class'=>'booster.widgets.TbButtonColumn',
+                'template'=>'{reception}',
+                'buttons'=>array(
+                    'reception'=>array(
+                        'label'=>'<i class="glyphicon glyphicon-check"></i>',
+                        'url'=>'Yii::app()->createUrl("Compra/Create", array("id"=>$data->id))',
+                        'visible'=>'$data->estado==0',
+                         'options'=>array(
+                                                    'title'=>yii::t('app','Reception'),
+                                                        'confirm'=>yii::t('app','Receive?'),
+//                                                    'ajax'=>array(
+//                                                        'type'=>'POST',
+//                                                        'url'=>'Yii::app()->createUrl("movimientoAlmacen/RegistrarCompra", array("id"=>$data->id))',
+////                                                        'success'=>'function(data) { $("#viewModal .modal-body p").html(data); $("#viewModal").modal(); }'
+//                                                    ),
+                                                ),
+                    ),
+                ),    
+                 
                 ),
 ),
 )); ?>

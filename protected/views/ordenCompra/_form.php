@@ -3,7 +3,7 @@
 	'enableAjaxValidation'=>false,
 )); ?>
 
-<p class="help-block">Fields with <span class="required">*</span> are required.</p>
+<p class="help-block"><?php echo Yii::t('app','Fields with');?> <span class="required">*</span> <?php echo yii::t('app','are required.'); ?></p>
 
 <?php echo $form->errorSummary($model); ?>
 
@@ -26,7 +26,7 @@
                                     'asDropDownList' => true,
                                     'data'      => CHtml::listData (Proveedor::model()->getProveedores(), "id","nombre_rz"),
 					'options' => array(
-						'placeholder' =>'Seleccione Proveedor', 
+						'placeholder' =>yii::t('app','Select provider')
 					),
 				)
 			)
@@ -42,7 +42,7 @@
 	<?php $this->widget('booster.widgets.TbButton', array(
 			'buttonType'=>'submit',
 			'context'=>'primary',
-			'label'=>$model->isNewRecord ? 'Create' : 'Save',
+			'label'=>$model->isNewRecord ? Yii::t('app','Create') : Yii::t('app','Save') ,
 		)); 
         
      

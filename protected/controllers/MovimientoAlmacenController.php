@@ -57,8 +57,8 @@
         
         
         
-        /*
-         * registra los items de las compras
+        /**
+         * registra el ingreso a almacen de una fial del detalle de compra
          */
         public function actionRegistrarCompra($id)
         {
@@ -77,10 +77,13 @@
             $model->_lote=$_detalle->lote;
             $model->_fecha_vencimiento=$_detalle->fecha_vencimiento;
             $model->operacion=0;
+            //estado almacenado
              //$model->setScenario('create');
             if($model->save())                 
                 {
-                    $this->ActualizaStock($model);
+                    $this->ActualizaStock($model); //actualiza el stock 
+                    $_detalle->estado=4; // actualizar el estado del item a almacenado
+                    $_detalle->save();
                     echo "Registro agregado";
                 }
                 //$this->redirect(array('view','id'=>$model->id));
@@ -100,6 +103,7 @@
          */
         public function actionIngresarCompra()
         {
+            $this->layout='//layouts/column1';
             //$model=new MovimientoAlmacen;
             
             // Uncomment the following line if AJAX validation is needed
@@ -199,7 +203,7 @@
 //            $_producto_almacen->save();
 //        }
         
-        /*
+        /**
          * Actualiza/registra cantidad_disponible/cantidad_real que se encuentra en lbl_producot_almacen
          * cuando se registra una compra como movimiento de almacen 
          */
