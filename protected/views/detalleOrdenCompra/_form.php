@@ -333,17 +333,23 @@ $this->widget('booster.widgets.TbExtendedGridView',array(
                             ),
                             array(
                                 'name'=>'subtotal',
+                                'class'=>'booster.widgets.TbTotalSumColumnCurrency',
+                                'footerHtmlOptions'=>array('style'=> 'text-align: right'),
                                 //'header'=>'Subtotal',
                                 'htmlOptions'=>array('style'=> 'text-align: right')
                             ),
                             array(
                                 'name'=>'impuesto',
                                 'header'=>'IGV',
+                                'class'=>'booster.widgets.TbTotalSumColumnCurrency',
+                                'footerHtmlOptions'=>array('style'=> 'text-align: right'),
                                 'htmlOptions'=>array('style'=> 'text-align: right')
                             ),
                             array(
                                 'name'=>'total',
                                 'header'=>'Total',
+                                'class'=>'booster.widgets.TbTotalSumColumnCurrency',
+                                'footerHtmlOptions'=>array('style'=> 'text-align: right'),
                                 'htmlOptions'=>array('style'=> 'text-align: right')
                             ),
                             
