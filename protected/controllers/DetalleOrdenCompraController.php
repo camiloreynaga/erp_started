@@ -43,7 +43,8 @@ class DetalleOrdenCompraController extends Controller
                     'batchDelete',
                     'detalleOC',
                     'finalizarOc',
-                    'editItem'),
+                    'editItem',
+                    'UpdateItem'),
                 'users'=>array('@'),
                 ),
                 array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -136,16 +137,32 @@ class DetalleOrdenCompraController extends Controller
             
             if(isset($_POST['DetalleOrdenCompra']))
             {
-            $model->attributes=$_POST['DetalleOrdenCompra'];
-            if($model->save())
-            $this->redirect(array('view','id'=>$model->id));
+                $model->attributes=$_POST['DetalleOrdenCompra'];
+                if($model->save())
+                {
+                    echo CJSON::encode(array(
+                        'status'=>'success',
+                        'div'=>'La información fué guardada exitosamente.'
+                    ));
+                    Yii::app()->end();
+                }
             }
-
-            $this->render('update',array(
-            'model'=>$model,
+            echo CJSON::encode(
+                array(
+                    'status'=>'failure',
+                    'div'=>$this->renderPartial('_formPartial',array('model'=>$model),true)
             ));
+
         }
-        
+        public function actionUpdateItem($id)
+        {
+            $model=$this->loadModel($id);
+            if(isset($_POST['DetalleOrdenCompra']))
+            {
+                
+            }
+            echo CJSON::encode();
+        }
         /*
          * edita la una celda de la grilla
          */
