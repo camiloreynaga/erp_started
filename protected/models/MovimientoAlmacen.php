@@ -29,11 +29,18 @@
  */
 class MovimientoAlmacen extends Erp_startedActiveRecord//CActiveRecord
 {
-        /*
-         * para 
+        
+    
+        public $_operacion = array(
+            '0'=>'INGRESO',
+            '1'=>'SALIDA',
+            
+        );
+        /**
+         * para lote
          */
         public $_lote=null;
-        /*
+        /**
          * Para fecha de vencimiento
          */
         public $_fecha_vencimiento=null; 
@@ -71,10 +78,11 @@ class MovimientoAlmacen extends Erp_startedActiveRecord//CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'r_detalleVenta' => array(self::BELONGS_TO, 'DetalleVenta', 'detalle_venta_id'),
-			'r_detalleCompra' => array(self::BELONGS_TO, 'DetalleCompra', 'detalle_compra_id'),
-			'r_motivoMovimiento' => array(self::BELONGS_TO, 'MotivoMovimiento', 'motivo_movimiento_id'),
+			'r_detalle_ venta' => array(self::BELONGS_TO, 'DetalleVenta', 'detalle_venta_id'),
+			'r_detalle_compra' => array(self::BELONGS_TO, 'DetalleCompra', 'detalle_compra_id'),
+			'r_motivo_movimiento' => array(self::BELONGS_TO, 'MotivoMovimiento', 'motivo_movimiento_id'),
 			'r_almacen' => array(self::BELONGS_TO, 'Almacen', 'almacen_id'),
+                        'r_producto'=>array(self::BELONGS_TO,'Producto','producto_id'),
 		);
 	}
 
@@ -85,7 +93,7 @@ class MovimientoAlmacen extends Erp_startedActiveRecord//CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'fecha_movimiento' => 'Fecha Movimiento',
+			'fecha_movimiento' => 'Fecha',//Movimiento
 			'producto_id' => 'Producto',
 			'cantidad' => 'Cantidad',
 			'motivo_movimiento_id' => 'Motivo',
@@ -120,23 +128,27 @@ class MovimientoAlmacen extends Erp_startedActiveRecord//CActiveRecord
 		// @todo Please modify the following code to remove attributes that should not be searched.
 
 		$criteria=new CDbCriteria;
-
-		$criteria->compare('id',$this->id);
+                
+                $criteria->with=array('r_motivo_movimiento','r_producto','r_almacen');
+                //$criteria->with=array('r_producto');
+		$criteria->compare('t.id',$this->id);
 		$criteria->compare('fecha_movimiento',$this->fecha_movimiento,true);
-		$criteria->compare('producto_id',$this->producto_id);
+		$criteria->compare('r_producto.nombre',$this->producto_id,true);
 		$criteria->compare('cantidad',$this->cantidad);
-		$criteria->compare('motivo_movimiento_id',$this->motivo_movimiento_id);
+		$criteria->compare('r_motivo_movimiento.movimiento',$this->motivo_movimiento_id,true);
 		$criteria->compare('detalle_compra_id',$this->detalle_compra_id);
 		$criteria->compare('detalle_venta_id',$this->detalle_venta_id);
 		$criteria->compare('observacion',$this->observacion,true);
-		$criteria->compare('almacen_id',$this->almacen_id);
+		$criteria->compare('r_almacen.almacen',$this->almacen_id,true);
 		$criteria->compare('saldo_stock',$this->saldo_stock);
 		$criteria->compare('operacion',$this->operacion);
 		$criteria->compare('create_time',$this->create_time,true);
 		$criteria->compare('create_user_id',$this->create_user_id);
 		$criteria->compare('update_time',$this->update_time,true);
 		$criteria->compare('update_user_id',$this->update_user_id);
-
+                    
+                $criteria->order = ' t.id DESC';
+                
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));

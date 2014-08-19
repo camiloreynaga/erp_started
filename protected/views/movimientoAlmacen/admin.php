@@ -1,13 +1,13 @@
 <?php
 $this->breadcrumbs=array(
-	'Movimiento Almacens'=>array('index'),
-	'Manage',
+	yii::t('app','Stock movements') =>array('admin'),
+	yii::t('app','Manage'),
 );
 
 $this->menu=array(
-array('label'=>'List MovimientoAlmacen','url'=>array('index')),
-array('label'=>'Create MovimientoAlmacen','url'=>array('create')),
-array('label'=>'Process Compra','url'=>array('ingresarCompra')),    
+//array('label'=>'List MovimientoAlmacen','url'=>array('index')),
+array('label'=>yii::t('app','Register').' '.yii::t('app','Movement'),'url'=>array('create')),
+array('label'=>yii::t('app','Process').' '. yii::t('app','Purchase'),'url'=>array('ingresarCompra')),    
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -24,7 +24,7 @@ return false;
 ");
 ?>
 
-<h1>Manage Movimiento Almacens</h1>
+<h1><?php echo yii::t('app','Manage').' '.yii::t('app','Stock movements') ;?></h1>
 
 <!--<p>
 	You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>
@@ -43,28 +43,48 @@ return false;
 
 <?php $this->widget('booster.widgets.TbGridView',array(
 'id'=>'movimiento-almacen-grid',
+//'fixedHeader'=>true,
+//'headerOffset' => 30, 
 'dataProvider'=>$model->search(),
 'filter'=>$model,
 'columns'=>array(
 		'id',
-		'fecha_movimiento',
-		'producto_id',
-		'cantidad',
-		'motivo_movimiento_id',
-		'detalle_compra_id',
+		
+                array(
+                  'name'=>'producto_id',
+                  'value'=>'$data->r_producto->nombre'
+                ),
+                'cantidad',
+                'fecha_movimiento',
+                
+                array(
+                    'name'=>'operacion',
+                    'value'=>'$data->_operacion[$data->operacion]',
+                    'filter'=>  array_merge(array(''=>yii::t('app','ALL')),$model->_operacion)
+                ),
+                array(
+                    'name'=>'motivo_movimiento_id',
+                    'value'=>'$data->r_motivo_movimiento->movimiento'
+                ),
+                array(
+                    'name'=>'almacen_id',
+                    'value'=>'$data->r_almacen->almacen'
+                ),
+                'saldo_stock',
 		/*
 		'detalle_venta_id',
 		'observacion',
-		'almacen_id',
-		'saldo_stock',
+		
+		
 		'operacion',
 		'create_time',
 		'create_user_id',
 		'update_time',
 		'update_user_id',
 		*/
-array(
-'class'=>'booster.widgets.TbButtonColumn',
-),
+                array(
+                'class'=>'booster.widgets.TbButtonColumn',
+                'template'=>'{view}',
+                ),
 ),
 )); ?>

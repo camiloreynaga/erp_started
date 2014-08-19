@@ -23,7 +23,7 @@ return false;
 ");
 ?>
 
-<h1>Manage Forma Pagos</h1>
+<H1> <?php echo yii::t('app','Manage'); ?>   Forma Pagos</h1>
 
 <p>
 	You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>

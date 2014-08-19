@@ -2,10 +2,12 @@
 
 <?php $form=$this->beginWidget('booster.widgets.TbActiveForm',array(
 	'id'=>'movimiento-almacen-form',
-	'enableAjaxValidation'=>false,
+	'enableAjaxValidation'=>true,
+    'clientOptions' =>array(
+            'validateOnSubmit' => true),
 )); ?>
 
-<p class="help-block">Fields with <span class="required">*</span> are required.</p>
+<p class="help-block"> <?php echo yii::t('app','Fields with') ;?>');?> <span class="required"> * </span> <?php echo yii::t('app','are required.') ;?>');?> </p>
 
 <?php echo $form->errorSummary($model); ?>
 
@@ -20,22 +22,36 @@
           ),  
         );
         
-        echo $form->switchGroup($model,'operacion',
-                array('class'=>'span5',
-                        'widgetOptions'=>array(
-                            'options'=>array(
-                                'size'=>'large',
-                                'onText'=>'Salida',
-                                'offText'=>'Ingreso',
-                                'onColor' => 'danger',
-                                'offColor' => 'primary', 
-                                ),
-                            'htmlOptions'=>$htmlOptions,
+//        echo $form->switchGroup($model,'operacion',
+//                array('class'=>'span5',
+//                        'widgetOptions'=>array(
+//                            'options'=>array(
+//                                'size'=>'large',
+//                                'onText'=>'Salida',
+//                                'offText'=>'Ingreso',
+//                                'onColor' => 'danger',
+//                                'offColor' => 'primary', 
+//                                ),
+//                            'htmlOptions'=>$htmlOptions,
+//                    )
+//                )
+//                
+//                ); ?>
+        <?php
+        
+        echo $form->radioButtonListGroup(
+                $model,
+                'operacion',
+                array(
+                    'widgetOptions'=>array(
+                        'data'=>$model->_operacion,
+                        'htmlOptions'=>$htmlOptions
                     )
+                    
                 )
-                
-                ); ?>
-        <?php //echo $form->textFieldGroup($model,'operacion',array('class'=>'span5')); ?>
+                );
+
+//echo $form->textFieldGroup($model,'operacion',array('class'=>'span5')); ?>
          <?php 
          
         echo $form->DropDownListGroup($model, //select2Group
@@ -133,6 +149,16 @@
 	
 
 
+<div class="form-actions">
+	<?php $this->widget('booster.widgets.TbButton', array(
+			'buttonType'=>'submit',
+			'context'=>'primary',
+			'label'=>$model->isNewRecord ? yii::t('app','Create') : yii::t('app','Save'),
+                        'htmlOptions'=>array(
+                            'confirm'=>yii::t('app','Are you sure to process?'),
+                        )
+		)); ?>
+</div>
 
 <div class="form-actions">
 	<?php $this->widget('booster.widgets.TbButton', array(
@@ -141,7 +167,7 @@
                         'url'=>  CController::createUrl('movimientoAlmacen/create'
                                 //array('')
                                 ),
-			'label'=>'Procesar', //$model->isNewRecord ? 'Create' : 'Save',
+			'label'=>yii::t('app','Process') , //$model->isNewRecord ? 'Create' : 'Save',
                         'ajaxOptions'=>array(
                             'dataType'=>'json',
                             'type'=>'POST',

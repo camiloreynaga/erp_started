@@ -75,13 +75,16 @@ class DetalleVentaController extends Controller
                 $model->subtotal=$model->precio_unitario*$model->cantidad;
                 $model->impuesto= round($model->subtotal*((int)Yii::app()->params['impuesto']*0.01));
                 $model->total= round($model->subtotal+$model->impuesto);
-                
+                //cantidad disponible para el producto almacen
                 $_cantidad_alm= ProductoAlmacen::model()->cantidad_lote2($model->producto_id,$model->lote);
                 
                 if($_cantidad_alm>=$model->cantidad)
                 {
                     if($model->save())
                     {
+                        //actualizar la cantidad disponible en ProductoAlmacen
+                        ProductoAlmacen::model()->actualizarCantidadDisponible($model,1); 
+                        
                         echo CJSON::encode(array(
                         'status'=>'success', 
                         ));
@@ -97,14 +100,11 @@ class DetalleVentaController extends Controller
                 }
                 else{
                     echo CJSON::encode(array(
-                                'val' =>'La Cantidad ingresa excede a la cantidad disponible de '.$_cantidad_alm
+                                'val' =>'La Cantidad ingresada excede a la cantidad disponible de '.$_cantidad_alm
                             ));
                            Yii::app()->end();// exit;
                     //$model->addError('cantidad','La cantidad seleccionada excede el total disponible.');
                 }
-                    
-                
-                
             }
             else
             {
@@ -112,10 +112,12 @@ class DetalleVentaController extends Controller
                 'model'=>$model,
                 ));
             }
-
-            
         }
 
+        protected function updateProductoAlmacen() {
+           // ProductoAlmacen::model()->
+        }
+        
         /**
         * Updates a particular model.
         * If update is successful, the browser will be redirected to the 'view' page.
@@ -181,7 +183,7 @@ class DetalleVentaController extends Controller
          
         }
         
-        /*
+        /**
          * Actualiza el precio unitario haciendo lo calculos de subtotal impuesto y total
          */
         public function actionEditPrecioUnitario()
@@ -206,6 +208,9 @@ class DetalleVentaController extends Controller
             $es->update();
         }
         
+        /**
+         * Hace un borrado por lotes 
+         */
         public function actionBatchDelete()
         {
              if(Yii::app()->request->getIsAjaxRequest())
@@ -222,7 +227,10 @@ class DetalleVentaController extends Controller
 //                    }
                     $successCount = $failureCount = 0;
                     foreach ($ids as $id) {
+                        //$model=$this->Delete($id);
                         $model = $this->loadModel($id);
+                        //actualiza la cantidad disponible
+                        ProductoAlmacen::model()->actualizarCantidadDisponible($model,0); 
                         ($model->delete() == true) ? $successCount++ : $failureCount++;
                     }
 //                    echo CJSON::encode(array('status' => 'success',
@@ -247,9 +255,17 @@ class DetalleVentaController extends Controller
         {
             if(Yii::app()->request->isPostRequest)
             {
+                
+             $detalle_venta= $this->loadModel($id);
+              //actualizar la cantidad disponible en ProductoAlmacen
+            ProductoAlmacen::model()->actualizarCantidadDisponible($detalle_venta,0); 
+             
             // we only allow deletion via POST request
-            $this->loadModel($id)->delete();
-
+            $detalle_venta->delete();
+           // $this->loadModel($id)->delete();
+            
+            
+            
             // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
             if(!isset($_GET['ajax']))
             $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
@@ -310,7 +326,7 @@ class DetalleVentaController extends Controller
             }
         }
         
-        /*
+        /**
          * Retorna los lotes que tiene stock >0
          */
         public function actionLotes()
@@ -340,7 +356,7 @@ class DetalleVentaController extends Controller
                 if (isset ($_POST['pid']))
                     $Venta_Id=$_POST['pid'];
                 
-                $this->loadOrdenCompra($Venta_Id);
+                $this->loadVenta($Venta_Id);
                 
                 //complete the running of other filters and execute the requested action
                 $filterChain->run();
@@ -349,7 +365,7 @@ class DetalleVentaController extends Controller
         /**
         * Returns the project model instance to which this issue belongs
         */
-        public function getOrdenCompra()
+        public function getVenta()
         {
             return $this->_venta;
         }
@@ -358,15 +374,15 @@ class DetalleVentaController extends Controller
         * @project_id the primary identifier of the associated Project
         * @return object the Project data model based on the primary key
         */
-        protected function loadOrdenCompra($venta_id)
+        protected function loadVenta($venta_id)
         {
             //if the project property is null, create it based on input id 
             if($this->_venta===null)
             {
-                $this->_venta=  OrdenCompra::model()->findByPk($venta_id);
+                $this->_venta= Venta::model()->findByPk($venta_id);
                 if ($this->_venta===null)
                 {
-                throw new CHttpException(404,'The requested orden compra does not exist.');
+                throw new CHttpException(404,'The requested detalle venta does not exist.');
                 }
             }
             

@@ -135,7 +135,7 @@ class ProductoAlmacen extends Erp_startedActiveRecord//CActiveRecord
             //return  $this->find('producto_id= :producto and lote=:lote',array(':producto'=>$_producto,':lote'=>$_lote));
         }
         
-        /*
+        /**
          * devuelve la cantidad disponible para un producto por lote
          */
         public function cantidad_lote2($_producto,$_lote)
@@ -150,6 +150,21 @@ class ProductoAlmacen extends Erp_startedActiveRecord//CActiveRecord
                 $cantidad_lote+=$r->cantidad_disponible;
             }
             return $cantidad_lote;
+        }
+        /**
+         * actualiza la cantidad disponible en tbl_producto_almacen
+         */
+        public function actualizarCantidadDisponible($model,$_operacion)
+        {
+            $_cantidad= $_operacion==0 ? $model->cantidad : $model->cantidad*(-1); 
+            $_producto_almacen= ProductoAlmacen::model()->findByAttributes(array(
+                                'almacen_id'=>1,//$model->almacen_id,//$almacen,
+                                'producto_id'=>$model->producto_id,//$producto,
+                                'lote'=>$model->lote,//$lote
+                                    ));
+            //$_producto_almacen= ProductoAlmacen::model()->findByPk($id);
+            $_producto_almacen->cantidad_disponible+=$_cantidad;
+            $_producto_almacen->save();
         }
         
 }

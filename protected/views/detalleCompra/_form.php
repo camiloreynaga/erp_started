@@ -118,7 +118,7 @@
         )
 )); ?>
 
-<p class="help-block"><?php echo yii::t('app','Fields with');?>  <span class="required">*</span> <?php echo ' '.yii::t('app','are required.');?></p>
+<p class="help-block"><?php echo yii::t('app','Fields with') ;?>');?>  <span class="required">*</span> <?php echo yii::t('app','are required.') ;?>');?></p>
 
 
 
@@ -138,7 +138,7 @@
                                     
                                     'asDropDownList' => true,
                                     //'data'      => CHtml::listData(Producto::model()->findAll('descontinuado=0'), "id","nombre"),
-                                    'data'      => CHtml::listData(Producto::model()->getProductos(), "id","text"),
+                                    'data'      => CHtml::listData(Producto::model()->getProductosStock(), "id","text"),
                                     'options' => array(
                                             'placeholder' =>'Seleccione producto', 
                                             //'tags'=>'de',

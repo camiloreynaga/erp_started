@@ -9,7 +9,7 @@
 
 <?php
     $compra= Compra::model();
-    $compra->estado=1; //Revisado
+    $compra->estado=1; // filtra a los compra con estado = Revisado 
     $this->widget('booster.widgets.TbGridView',array(
     'id'=>'compra-grid',
     'dataProvider'=>$compra->search(),

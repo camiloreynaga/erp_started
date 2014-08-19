@@ -23,7 +23,7 @@ return false;
 ");
 ?>
 
-<h1>Manage Productos</h1>
+<H1> <?php echo yii::t('app','Manage'); ?>   Productos</h1>
 
 <!--<p>
 	You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>
@@ -92,12 +92,12 @@ return false;
                     'header'=>'Laboratorio',
                     'value'=>'$data->r_fabricante->fabricante'
                 ),
-    
+                'stock',
 		
 		/*
 		'fabricante_id',
 		'minimo_stock',
-		'stock',
+		
 		'descontinado',
 		'precio',
 		'ventaUnd',

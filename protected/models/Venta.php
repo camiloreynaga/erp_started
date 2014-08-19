@@ -31,6 +31,17 @@
  */
 class Venta extends Erp_startedActiveRecord//CActiveRecord
 {
+        /*estado de compra
+         * 
+         */
+         public $_estado=array(
+            '0'=>'PENDIENTE', // PENDIENTE DE REVISADO 
+            '1'=>'FACTURADO', // , // COMPROBANTE REGISTRADO
+            '2'=>'OBSERVADO', // ALGUN DATO REQUERIDO PENDIENTE
+            '3'=>'ANULADO',
+            '4'=>'DESPACHADO'
+         );
+    
 	/**
 	 * @return string the associated database table name
 	 */
@@ -65,13 +76,12 @@ class Venta extends Erp_startedActiveRecord//CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'r_comprobanteVentas' => array(self::HAS_MANY, 'ComprobanteVenta', 'venta_id'),
-			'r_cuentaCobrars' => array(self::HAS_MANY, 'CuentaCobrar', 'venta_id'),
-			'r_detalleVentas' => array(self::HAS_MANY, 'DetalleVenta', 'venta_id'),
+			'r_comprobante_venta' => array(self::HAS_MANY, 'ComprobanteVenta', 'venta_id'),
+			'r_cuenta_cobrar' => array(self::HAS_MANY, 'CuentaCobrar', 'venta_id'),
+			'r_detalle_venta' => array(self::HAS_MANY, 'DetalleVenta', 'venta_id'),
 			'r_cliente' => array(self::BELONGS_TO, 'Cliente', 'cliente_id'),
-                        'r_formaPago' => array(self::BELONGS_TO, 'FormaPago', 'forma_pago_id'),
+                        'r_forma_pago' => array(self::BELONGS_TO, 'FormaPago', 'forma_pago_id'),
                         'r_empleado'=>array(self::BELONGS_TO,'Empleado','vendedor_id'),
-                        'r_formaPago'=>array(self::BELONGS_TO,'FormaPago','forma_pago_id'),
 		);
 	}
 
@@ -116,12 +126,12 @@ class Venta extends Erp_startedActiveRecord//CActiveRecord
 		// @todo Please modify the following code to remove attributes that should not be searched.
 
 		$criteria=new CDbCriteria;
-
+                $criteria->with= array('r_cliente','r_forma_pago','r_empleado');
 		$criteria->compare('id',$this->id);
 		$criteria->compare('fecha_venta',$this->fecha_venta,true);
-		$criteria->compare('cliente_id',$this->cliente_id);
-		$criteria->compare('vendedor_id',$this->vendedor_id);
-		$criteria->compare('forma_pago_id',$this->forma_pago_id);
+		$criteria->compare('r_cliente.nombre_rz',$this->cliente_id,true);
+		$criteria->compare('r_empleado.nombre',$this->vendedor_id,true);
+		$criteria->compare('r_forma_pago.forma_pago',$this->forma_pago_id,true);
 		$criteria->compare('pedido_id',$this->pedido_id);
 		$criteria->compare('base_imponible',$this->base_imponible,true);
 		$criteria->compare('impuesto',$this->impuesto,true);

@@ -5,11 +5,11 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-array('label'=>'List Venta','url'=>array('index')),
-array('label'=>'Create Venta','url'=>array('create')),
-array('label'=>'Update Venta','url'=>array('update','id'=>$model->id)),
-array('label'=>'Delete Venta','url'=>'#','linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-array('label'=>'Manage Venta','url'=>array('admin')),
+//array('label'=>'List Venta','url'=>array('index')),
+array('label'=>yii::t('app','Create').' '.yii::t('app','Sale'),'url'=>array('create')),
+array('label'=>yii::t('app','Update').' '.yii::t('app','Sale'),'url'=>array('update','id'=>$model->id)),
+array('label'=>yii::t('app','Delete').' '.yii::t('app','Sale'),'url'=>'#','linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
+array('label'=>yii::t('app','Manage').' '.yii::t('app','Sale'),'url'=>array('admin')),
 );
 ?>
 
@@ -30,7 +30,7 @@ array('label'=>'Manage Venta','url'=>array('admin')),
                 ),
 		array(
                     'name'=>'forma_pago_id',
-                    'value'=>$model->r_formaPago->forma_pago
+                    'value'=>$model->r_forma_pago->forma_pago
                 ),
 		
 		'pedido_id',
@@ -38,7 +38,10 @@ array('label'=>'Manage Venta','url'=>array('admin')),
 		'impuesto',
 		'importe_total',
 		'observacion',
-		'estado',
+                array(
+                    'name'=>'estado',
+                    'value'=>$model->_estado[$model->estado]
+                ),
 		//'create_time',
 		//'create_user_id',
 		//'update_time',

@@ -14,6 +14,7 @@ return array(
     'Update'=>'Modificar',
     'List'=>'Listar',
     'View'=>'Vista',
+    'Delete'=>'Borrar',
     //validation
     'Fields with'=>'Campos con',
     'are required.'=>'son requeridos.',
@@ -30,7 +31,8 @@ return array(
     'Add'=>'Agregar',
     'Confirm'=>'Confirmar',
     'Reception'=>'Recepcionar',
-    
+    'Process'=>'Procesar',
+    'Register'=>'Registrar',
     //purchase order
     'Purchase order'=>'Orden de compra',
     'Details'=>'Detalle',
@@ -46,5 +48,11 @@ return array(
     //Status
     'ALL'=>'TODO',
     
+    //Stock
+   'Movement'=>'Movimiento', 
+   'Stock movements'=>'Movimientos en Almacén',
+    
+    //Sales
+    'Sale'=>'Venta'
 );
 ?>

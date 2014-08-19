@@ -27538,3 +27538,991 @@ Stack trace:
 REQUEST_URI=/erp_started/index.php?ajax=compra-grid&id=5&r=compra%2Fdelete
 in C:\xampp\htdocs\ERP_started\protected\controllers\CompraController.php (157)
 in C:\xampp\htdocs\ERP_started\index.php (13)
+2014/08/11 15:28:41 [error] [exception.CException] exception 'CException' with message 'La propiedad "MovimientoAlmacen"."product_id" no se encuentra definida.' in C:\xampp\htdocs\yii\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\db\ar\CActiveRecord.php(145): CComponent->__get('product_id')
+#1 C:\xampp\htdocs\yii\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('product_id')
+#2 C:\xampp\htdocs\yii\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(MovimientoAlmacen), 'product_id')
+#3 C:\xampp\htdocs\yii\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(MovimientoAlmacen), 'product_id', Array)
+#4 C:\xampp\htdocs\ERP_started\protected\extensions\booster\widgets\TbDataColumn.php(119): CHtml::activeTextField(Object(MovimientoAlmacen), 'product_id', Array)
+#5 C:\xampp\htdocs\ERP_started\protected\extensions\booster\widgets\TbDataColumn.php(78): TbDataColumn->renderFilterCellContent()
+#6 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(532): TbDataColumn->renderFilterCell()
+#7 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(510): CGridView->renderFilter()
+#8 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(480): CGridView->renderTableHeader()
+#9 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(167): CGridView->renderItems()
+#10 [internal function]: CBaseListView->renderSection(Array)
+#11 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(150): preg_replace_callback('/{(\w+)}/', Array, '{summary}?{item...')
+#12 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(135): CBaseListView->renderContent()
+#13 C:\xampp\htdocs\yii\framework\web\CBaseController.php(173): CBaseListView->run()
+#14 C:\xampp\htdocs\ERP_started\protected\views\movimientoAlmacen\admin.php(74): CBaseController->widget('booster.widgets...', Array)
+#15 C:\xampp\htdocs\yii\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#16 C:\xampp\htdocs\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#17 C:\xampp\htdocs\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#18 C:\xampp\htdocs\yii\framework\web\CController.php(782): CController->renderPartial('admin', Array, true)
+#19 C:\xampp\htdocs\ERP_started\protected\controllers\MovimientoAlmacenController.php(323): CController->render('admin', Array)
+#20 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): MovimientoAlmacenController->actionAdmin()
+#21 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#22 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#23 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#24 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#25 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#26 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#27 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#28 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#29 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('admin')
+#30 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('movimientoAlmac...')
+#31 C:\xampp\htdocs\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#32 C:\xampp\htdocs\ERP_started\index.php(13): CApplication->run()
+#33 {main}
+REQUEST_URI=/erp_started/index.php?r=movimientoAlmacen/admin
+HTTP_REFERER=http://localhost/erp_started/index.php?r=ordenCompra/admin
+---
+2014/08/11 15:28:53 [error] [exception.CException] exception 'CException' with message 'La propiedad "MovimientoAlmacen"."r_producto" no se encuentra definida.' in C:\xampp\htdocs\yii\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\db\ar\CActiveRecord.php(145): CComponent->__get('r_producto')
+#1 C:\xampp\htdocs\yii\framework\base\CComponent.php(612) : eval()'d code(1): CActiveRecord->__get('r_producto')
+#2 C:\xampp\htdocs\yii\framework\base\CComponent.php(612): eval()
+#3 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CDataColumn.php(137): CComponent->evaluateExpression('$data->r_produc...', Array)
+#4 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridColumn.php(151): CDataColumn->renderDataCellContent(0, Object(MovimientoAlmacen))
+#5 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(616): CGridColumn->renderDataCell(0)
+#6 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(572): CGridView->renderTableRow(0)
+#7 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(482): CGridView->renderTableBody()
+#8 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(167): CGridView->renderItems()
+#9 [internal function]: CBaseListView->renderSection(Array)
+#10 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(150): preg_replace_callback('/{(\w+)}/', Array, '{summary}?{item...')
+#11 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(135): CBaseListView->renderContent()
+#12 C:\xampp\htdocs\yii\framework\web\CBaseController.php(173): CBaseListView->run()
+#13 C:\xampp\htdocs\ERP_started\protected\views\movimientoAlmacen\admin.php(74): CBaseController->widget('booster.widgets...', Array)
+#14 C:\xampp\htdocs\yii\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#15 C:\xampp\htdocs\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#16 C:\xampp\htdocs\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#17 C:\xampp\htdocs\yii\framework\web\CController.php(782): CController->renderPartial('admin', Array, true)
+#18 C:\xampp\htdocs\ERP_started\protected\controllers\MovimientoAlmacenController.php(323): CController->render('admin', Array)
+#19 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): MovimientoAlmacenController->actionAdmin()
+#20 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#21 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#22 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#23 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#24 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#25 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#26 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#27 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#28 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('admin')
+#29 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('movimientoAlmac...')
+#30 C:\xampp\htdocs\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#31 C:\xampp\htdocs\ERP_started\index.php(13): CApplication->run()
+#32 {main}
+REQUEST_URI=/erp_started/index.php?r=movimientoAlmacen/admin
+HTTP_REFERER=http://localhost/erp_started/index.php?r=ordenCompra/admin
+---
+2014/08/11 15:37:40 [error] [exception.CException] exception 'CException' with message 'La propiedad "MotivoMovimiento"."motivo" no se encuentra definida.' in C:\xampp\htdocs\yii\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\db\ar\CActiveRecord.php(145): CComponent->__get('motivo')
+#1 C:\xampp\htdocs\yii\framework\base\CComponent.php(612) : eval()'d code(1): CActiveRecord->__get('motivo')
+#2 C:\xampp\htdocs\yii\framework\base\CComponent.php(612): eval()
+#3 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CDataColumn.php(137): CComponent->evaluateExpression('$data->r_motivo...', Array)
+#4 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridColumn.php(151): CDataColumn->renderDataCellContent(0, Object(MovimientoAlmacen))
+#5 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(616): CGridColumn->renderDataCell(0)
+#6 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(572): CGridView->renderTableRow(0)
+#7 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(482): CGridView->renderTableBody()
+#8 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(167): CGridView->renderItems()
+#9 [internal function]: CBaseListView->renderSection(Array)
+#10 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(150): preg_replace_callback('/{(\w+)}/', Array, '{summary}?{item...')
+#11 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(135): CBaseListView->renderContent()
+#12 C:\xampp\htdocs\yii\framework\web\CBaseController.php(173): CBaseListView->run()
+#13 C:\xampp\htdocs\ERP_started\protected\views\movimientoAlmacen\admin.php(77): CBaseController->widget('booster.widgets...', Array)
+#14 C:\xampp\htdocs\yii\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#15 C:\xampp\htdocs\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#16 C:\xampp\htdocs\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#17 C:\xampp\htdocs\yii\framework\web\CController.php(782): CController->renderPartial('admin', Array, true)
+#18 C:\xampp\htdocs\ERP_started\protected\controllers\MovimientoAlmacenController.php(323): CController->render('admin', Array)
+#19 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): MovimientoAlmacenController->actionAdmin()
+#20 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#21 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#22 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#23 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#24 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#25 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#26 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#27 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#28 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('admin')
+#29 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('movimientoAlmac...')
+#30 C:\xampp\htdocs\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#31 C:\xampp\htdocs\ERP_started\index.php(13): CApplication->run()
+#32 {main}
+REQUEST_URI=/erp_started/index.php?r=movimientoAlmacen/admin
+HTTP_REFERER=http://localhost/erp_started/index.php?r=ordenCompra/admin
+---
+2014/08/11 15:41:28 [error] [system.db.CDbCommand] CDbCommand::fetchAll() falló: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DESC t.id LIMIT 10' at line 1. La sentencia SQL ejecutada fue: SELECT `t`.`id` AS `t0_c0`, `t`.`fecha_movimiento` AS `t0_c1`, `t`.`producto_id` AS `t0_c2`, `t`.`cantidad` AS `t0_c3`, `t`.`motivo_movimiento_id` AS `t0_c4`, `t`.`detalle_compra_id` AS `t0_c5`, `t`.`detalle_venta_id` AS `t0_c6`, `t`.`observacion` AS `t0_c7`, `t`.`almacen_id` AS `t0_c8`, `t`.`saldo_stock` AS `t0_c9`, `t`.`operacion` AS `t0_c10`, `t`.`create_time` AS `t0_c11`, `t`.`create_user_id` AS `t0_c12`, `t`.`update_time` AS `t0_c13`, `t`.`update_user_id` AS `t0_c14`, `r_motivo_movimiento`.`id` AS `t1_c0`, `r_motivo_movimiento`.`movimiento` AS `t1_c1`, `r_motivo_movimiento`.`tipo_movimiento` AS `t1_c2`, `r_motivo_movimiento`.`create_time` AS `t1_c3`, `r_motivo_movimiento`.`create_user_id` AS `t1_c4`, `r_motivo_movimiento`.`update_time` AS `t1_c5`, `r_motivo_movimiento`.`update_user_id` AS `t1_c6`, `r_producto`.`id` AS `t2_c0`, `r_producto`.`nombre` AS `t2_c1`, `r_producto`.`descripcion` AS `t2_c2`, `r_producto`.`tipo_producto_id` AS `t2_c3`, `r_producto`.`presentacion_id` AS `t2_c4`, `r_producto`.`unidad_medida_id` AS `t2_c5`, `r_producto`.`fabricante_id` AS `t2_c6`, `r_producto`.`minimo_stock` AS `t2_c7`, `r_producto`.`stock` AS `t2_c8`, `r_producto`.`descontinuado` AS `t2_c9`, `r_producto`.`precio_venta` AS `t2_c10`, `r_producto`.`precio_compra` AS `t2_c11`, `r_producto`.`porcentaje_ganancia` AS `t2_c12`, `r_producto`.`ventaUnd` AS `t2_c13`, `r_producto`.`observacion` AS `t2_c14`, `r_producto`.`create_time` AS `t2_c15`, `r_producto`.`create_user_id` AS `t2_c16`, `r_producto`.`update_time` AS `t2_c17`, `r_producto`.`update_user_id` AS `t2_c18`, `r_almacen`.`id` AS `t3_c0`, `r_almacen`.`almacen` AS `t3_c1`, `r_almacen`.`direccion` AS `t3_c2`, `r_almacen`.`ubicacion_id` AS `t3_c3`, `r_almacen`.`activo` AS `t3_c4`, `r_almacen`.`create_time` AS `t3_c5`, `r_almacen`.`create_user_id` AS `t3_c6`, `r_almacen`.`update_time` AS `t3_c7`, `r_almacen`.`update_user_id` AS `t3_c8` FROM `tbl_movimiento_almacen` `t`  LEFT OUTER JOIN `tbl_motivo_movimiento` `r_motivo_movimiento` ON (`t`.`motivo_movimiento_id`=`r_motivo_movimiento`.`id`)  LEFT OUTER JOIN `tbl_producto` `r_producto` ON (`t`.`producto_id`=`r_producto`.`id`)  LEFT OUTER JOIN `tbl_almacen` `r_almacen` ON (`t`.`almacen_id`=`r_almacen`.`id`)  ORDER BY DESC t.id LIMIT 10.
+in C:\xampp\htdocs\ERP_started\protected\extensions\booster\widgets\TbGridView.php (68)
+in C:\xampp\htdocs\ERP_started\protected\views\movimientoAlmacen\admin.php (77)
+in C:\xampp\htdocs\ERP_started\protected\controllers\MovimientoAlmacenController.php (323)
+2014/08/11 15:41:28 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falló al ejecutar la sentencia SQL: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DESC t.id LIMIT 10' at line 1. The SQL statement executed was: SELECT `t`.`id` AS `t0_c0`, `t`.`fecha_movimiento` AS `t0_c1`, `t`.`producto_id` AS `t0_c2`, `t`.`cantidad` AS `t0_c3`, `t`.`motivo_movimiento_id` AS `t0_c4`, `t`.`detalle_compra_id` AS `t0_c5`, `t`.`detalle_venta_id` AS `t0_c6`, `t`.`observacion` AS `t0_c7`, `t`.`almacen_id` AS `t0_c8`, `t`.`saldo_stock` AS `t0_c9`, `t`.`operacion` AS `t0_c10`, `t`.`create_time` AS `t0_c11`, `t`.`create_user_id` AS `t0_c12`, `t`.`update_time` AS `t0_c13`, `t`.`update_user_id` AS `t0_c14`, `r_motivo_movimiento`.`id` AS `t1_c0`, `r_motivo_movimiento`.`movimiento` AS `t1_c1`, `r_motivo_movimiento`.`tipo_movimiento` AS `t1_c2`, `r_motivo_movimiento`.`create_time` AS `t1_c3`, `r_motivo_movimiento`.`create_user_id` AS `t1_c4`, `r_motivo_movimiento`.`update_time` AS `t1_c5`, `r_motivo_movimiento`.`update_user_id` AS `t1_c6`, `r_producto`.`id` AS `t2_c0`, `r_producto`.`nombre` AS `t2_c1`, `r_producto`.`descripcion` AS `t2_c2`, `r_producto`.`tipo_producto_id` AS `t2_c3`, `r_producto`.`presentacion_id` AS `t2_c4`, `r_producto`.`unidad_medida_id` AS `t2_c5`, `r_producto`.`fabricante_id` AS `t2_c6`, `r_producto`.`minimo_stock` AS `t2_c7`, `r_producto`.`stock` AS `t2_c8`, `r_producto`.`descontinuado` AS `t2_c9`, `r_producto`.`precio_venta` AS `t2_c10`, `r_producto`.`precio_compra` AS `t2_c11`, `r_producto`.`porcentaje_ganancia` AS `t2_c12`, `r_producto`.`ventaUnd` AS `t2_c13`, `r_producto`.`observacion` AS `t2_c14`, `r_producto`.`create_time` AS `t2_c15`, `r_producto`.`create_user_id` AS `t2_c16`, `r_producto`.`update_time` AS `t2_c17`, `r_producto`.`update_user_id` AS `t2_c18`, `r_almacen`.`id` AS `t3_c0`, `r_almacen`.`almacen` AS `t3_c1`, `r_almacen`.`direccion` AS `t3_c2`, `r_almacen`.`ubicacion_id` AS `t3_c3`, `r_almacen`.`activo` AS `t3_c4`, `r_almacen`.`create_time` AS `t3_c5`, `r_almacen`.`create_user_id` AS `t3_c6`, `r_almacen`.`update_time` AS `t3_c7`, `r_almacen`.`update_user_id` AS `t3_c8` FROM `tbl_movimiento_almacen` `t`  LEFT OUTER JOIN `tbl_motivo_movimiento` `r_motivo_movimiento` ON (`t`.`motivo_movimiento_id`=`r_motivo_movimiento`.`id`)  LEFT OUTER JOIN `tbl_producto` `r_producto` ON (`t`.`producto_id`=`r_producto`.`id`)  LEFT OUTER JOIN `tbl_almacen` `r_almacen` ON (`t`.`almacen_id`=`r_almacen`.`id`)  ORDER BY DESC t.id LIMIT 10' in C:\xampp\htdocs\yii\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\db\CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 C:\xampp\htdocs\yii\framework\db\ar\CActiveFinder.php(803): CDbCommand->queryAll()
+#2 C:\xampp\htdocs\yii\framework\db\ar\CActiveFinder.php(437): CJoinElement->runQuery(Object(CJoinQuery))
+#3 C:\xampp\htdocs\yii\framework\db\ar\CActiveFinder.php(68): CJoinElement->find(Object(CDbCriteria))
+#4 C:\xampp\htdocs\yii\framework\db\ar\CActiveRecord.php(1356): CActiveFinder->query(Object(CDbCriteria), true)
+#5 C:\xampp\htdocs\yii\framework\db\ar\CActiveRecord.php(1470): CActiveRecord->query(Object(CDbCriteria), true)
+#6 C:\xampp\htdocs\yii\framework\web\CActiveDataProvider.php(199): CActiveRecord->findAll(Object(CDbCriteria))
+#7 C:\xampp\htdocs\yii\framework\web\CDataProvider.php(168): CActiveDataProvider->fetchData()
+#8 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(111): CDataProvider->getData()
+#9 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(339): CBaseListView->init()
+#10 C:\xampp\htdocs\ERP_started\protected\extensions\booster\widgets\TbGridView.php(68): CGridView->init()
+#11 C:\xampp\htdocs\yii\framework\web\CBaseController.php(147): TbGridView->init()
+#12 C:\xampp\htdocs\yii\framework\web\CBaseController.php(172): CBaseController->createWidget('booster.widgets...', Array)
+#13 C:\xampp\htdocs\ERP_started\protected\views\movimientoAlmacen\admin.php(77): CBaseController->widget('booster.widgets...', Array)
+#14 C:\xampp\htdocs\yii\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#15 C:\xampp\htdocs\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#16 C:\xampp\htdocs\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#17 C:\xampp\htdocs\yii\framework\web\CController.php(782): CController->renderPartial('admin', Array, true)
+#18 C:\xampp\htdocs\ERP_started\protected\controllers\MovimientoAlmacenController.php(323): CController->render('admin', Array)
+#19 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): MovimientoAlmacenController->actionAdmin()
+#20 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#21 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#22 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#23 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#24 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#25 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#26 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#27 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#28 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('admin')
+#29 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('movimientoAlmac...')
+#30 C:\xampp\htdocs\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#31 C:\xampp\htdocs\ERP_started\index.php(13): CApplication->run()
+#32 {main}
+REQUEST_URI=/erp_started/index.php?r=movimientoAlmacen/admin
+HTTP_REFERER=http://localhost/erp_started/index.php?r=ordenCompra/admin
+---
+2014/08/11 15:41:42 [error] [system.db.CDbCommand] CDbCommand::fetchAll() falló: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 't.id LIMIT 10' at line 1. La sentencia SQL ejecutada fue: SELECT `t`.`id` AS `t0_c0`, `t`.`fecha_movimiento` AS `t0_c1`, `t`.`producto_id` AS `t0_c2`, `t`.`cantidad` AS `t0_c3`, `t`.`motivo_movimiento_id` AS `t0_c4`, `t`.`detalle_compra_id` AS `t0_c5`, `t`.`detalle_venta_id` AS `t0_c6`, `t`.`observacion` AS `t0_c7`, `t`.`almacen_id` AS `t0_c8`, `t`.`saldo_stock` AS `t0_c9`, `t`.`operacion` AS `t0_c10`, `t`.`create_time` AS `t0_c11`, `t`.`create_user_id` AS `t0_c12`, `t`.`update_time` AS `t0_c13`, `t`.`update_user_id` AS `t0_c14`, `r_motivo_movimiento`.`id` AS `t1_c0`, `r_motivo_movimiento`.`movimiento` AS `t1_c1`, `r_motivo_movimiento`.`tipo_movimiento` AS `t1_c2`, `r_motivo_movimiento`.`create_time` AS `t1_c3`, `r_motivo_movimiento`.`create_user_id` AS `t1_c4`, `r_motivo_movimiento`.`update_time` AS `t1_c5`, `r_motivo_movimiento`.`update_user_id` AS `t1_c6`, `r_producto`.`id` AS `t2_c0`, `r_producto`.`nombre` AS `t2_c1`, `r_producto`.`descripcion` AS `t2_c2`, `r_producto`.`tipo_producto_id` AS `t2_c3`, `r_producto`.`presentacion_id` AS `t2_c4`, `r_producto`.`unidad_medida_id` AS `t2_c5`, `r_producto`.`fabricante_id` AS `t2_c6`, `r_producto`.`minimo_stock` AS `t2_c7`, `r_producto`.`stock` AS `t2_c8`, `r_producto`.`descontinuado` AS `t2_c9`, `r_producto`.`precio_venta` AS `t2_c10`, `r_producto`.`precio_compra` AS `t2_c11`, `r_producto`.`porcentaje_ganancia` AS `t2_c12`, `r_producto`.`ventaUnd` AS `t2_c13`, `r_producto`.`observacion` AS `t2_c14`, `r_producto`.`create_time` AS `t2_c15`, `r_producto`.`create_user_id` AS `t2_c16`, `r_producto`.`update_time` AS `t2_c17`, `r_producto`.`update_user_id` AS `t2_c18`, `r_almacen`.`id` AS `t3_c0`, `r_almacen`.`almacen` AS `t3_c1`, `r_almacen`.`direccion` AS `t3_c2`, `r_almacen`.`ubicacion_id` AS `t3_c3`, `r_almacen`.`activo` AS `t3_c4`, `r_almacen`.`create_time` AS `t3_c5`, `r_almacen`.`create_user_id` AS `t3_c6`, `r_almacen`.`update_time` AS `t3_c7`, `r_almacen`.`update_user_id` AS `t3_c8` FROM `tbl_movimiento_almacen` `t`  LEFT OUTER JOIN `tbl_motivo_movimiento` `r_motivo_movimiento` ON (`t`.`motivo_movimiento_id`=`r_motivo_movimiento`.`id`)  LEFT OUTER JOIN `tbl_producto` `r_producto` ON (`t`.`producto_id`=`r_producto`.`id`)  LEFT OUTER JOIN `tbl_almacen` `r_almacen` ON (`t`.`almacen_id`=`r_almacen`.`id`)  ORDER BY DES t.id LIMIT 10.
+in C:\xampp\htdocs\ERP_started\protected\extensions\booster\widgets\TbGridView.php (68)
+in C:\xampp\htdocs\ERP_started\protected\views\movimientoAlmacen\admin.php (77)
+in C:\xampp\htdocs\ERP_started\protected\controllers\MovimientoAlmacenController.php (323)
+2014/08/11 15:41:42 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falló al ejecutar la sentencia SQL: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 't.id LIMIT 10' at line 1. The SQL statement executed was: SELECT `t`.`id` AS `t0_c0`, `t`.`fecha_movimiento` AS `t0_c1`, `t`.`producto_id` AS `t0_c2`, `t`.`cantidad` AS `t0_c3`, `t`.`motivo_movimiento_id` AS `t0_c4`, `t`.`detalle_compra_id` AS `t0_c5`, `t`.`detalle_venta_id` AS `t0_c6`, `t`.`observacion` AS `t0_c7`, `t`.`almacen_id` AS `t0_c8`, `t`.`saldo_stock` AS `t0_c9`, `t`.`operacion` AS `t0_c10`, `t`.`create_time` AS `t0_c11`, `t`.`create_user_id` AS `t0_c12`, `t`.`update_time` AS `t0_c13`, `t`.`update_user_id` AS `t0_c14`, `r_motivo_movimiento`.`id` AS `t1_c0`, `r_motivo_movimiento`.`movimiento` AS `t1_c1`, `r_motivo_movimiento`.`tipo_movimiento` AS `t1_c2`, `r_motivo_movimiento`.`create_time` AS `t1_c3`, `r_motivo_movimiento`.`create_user_id` AS `t1_c4`, `r_motivo_movimiento`.`update_time` AS `t1_c5`, `r_motivo_movimiento`.`update_user_id` AS `t1_c6`, `r_producto`.`id` AS `t2_c0`, `r_producto`.`nombre` AS `t2_c1`, `r_producto`.`descripcion` AS `t2_c2`, `r_producto`.`tipo_producto_id` AS `t2_c3`, `r_producto`.`presentacion_id` AS `t2_c4`, `r_producto`.`unidad_medida_id` AS `t2_c5`, `r_producto`.`fabricante_id` AS `t2_c6`, `r_producto`.`minimo_stock` AS `t2_c7`, `r_producto`.`stock` AS `t2_c8`, `r_producto`.`descontinuado` AS `t2_c9`, `r_producto`.`precio_venta` AS `t2_c10`, `r_producto`.`precio_compra` AS `t2_c11`, `r_producto`.`porcentaje_ganancia` AS `t2_c12`, `r_producto`.`ventaUnd` AS `t2_c13`, `r_producto`.`observacion` AS `t2_c14`, `r_producto`.`create_time` AS `t2_c15`, `r_producto`.`create_user_id` AS `t2_c16`, `r_producto`.`update_time` AS `t2_c17`, `r_producto`.`update_user_id` AS `t2_c18`, `r_almacen`.`id` AS `t3_c0`, `r_almacen`.`almacen` AS `t3_c1`, `r_almacen`.`direccion` AS `t3_c2`, `r_almacen`.`ubicacion_id` AS `t3_c3`, `r_almacen`.`activo` AS `t3_c4`, `r_almacen`.`create_time` AS `t3_c5`, `r_almacen`.`create_user_id` AS `t3_c6`, `r_almacen`.`update_time` AS `t3_c7`, `r_almacen`.`update_user_id` AS `t3_c8` FROM `tbl_movimiento_almacen` `t`  LEFT OUTER JOIN `tbl_motivo_movimiento` `r_motivo_movimiento` ON (`t`.`motivo_movimiento_id`=`r_motivo_movimiento`.`id`)  LEFT OUTER JOIN `tbl_producto` `r_producto` ON (`t`.`producto_id`=`r_producto`.`id`)  LEFT OUTER JOIN `tbl_almacen` `r_almacen` ON (`t`.`almacen_id`=`r_almacen`.`id`)  ORDER BY DES t.id LIMIT 10' in C:\xampp\htdocs\yii\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\db\CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 C:\xampp\htdocs\yii\framework\db\ar\CActiveFinder.php(803): CDbCommand->queryAll()
+#2 C:\xampp\htdocs\yii\framework\db\ar\CActiveFinder.php(437): CJoinElement->runQuery(Object(CJoinQuery))
+#3 C:\xampp\htdocs\yii\framework\db\ar\CActiveFinder.php(68): CJoinElement->find(Object(CDbCriteria))
+#4 C:\xampp\htdocs\yii\framework\db\ar\CActiveRecord.php(1356): CActiveFinder->query(Object(CDbCriteria), true)
+#5 C:\xampp\htdocs\yii\framework\db\ar\CActiveRecord.php(1470): CActiveRecord->query(Object(CDbCriteria), true)
+#6 C:\xampp\htdocs\yii\framework\web\CActiveDataProvider.php(199): CActiveRecord->findAll(Object(CDbCriteria))
+#7 C:\xampp\htdocs\yii\framework\web\CDataProvider.php(168): CActiveDataProvider->fetchData()
+#8 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(111): CDataProvider->getData()
+#9 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(339): CBaseListView->init()
+#10 C:\xampp\htdocs\ERP_started\protected\extensions\booster\widgets\TbGridView.php(68): CGridView->init()
+#11 C:\xampp\htdocs\yii\framework\web\CBaseController.php(147): TbGridView->init()
+#12 C:\xampp\htdocs\yii\framework\web\CBaseController.php(172): CBaseController->createWidget('booster.widgets...', Array)
+#13 C:\xampp\htdocs\ERP_started\protected\views\movimientoAlmacen\admin.php(77): CBaseController->widget('booster.widgets...', Array)
+#14 C:\xampp\htdocs\yii\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#15 C:\xampp\htdocs\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#16 C:\xampp\htdocs\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#17 C:\xampp\htdocs\yii\framework\web\CController.php(782): CController->renderPartial('admin', Array, true)
+#18 C:\xampp\htdocs\ERP_started\protected\controllers\MovimientoAlmacenController.php(323): CController->render('admin', Array)
+#19 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): MovimientoAlmacenController->actionAdmin()
+#20 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#21 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#22 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#23 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#24 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#25 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#26 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#27 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#28 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('admin')
+#29 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('movimientoAlmac...')
+#30 C:\xampp\htdocs\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#31 C:\xampp\htdocs\ERP_started\index.php(13): CApplication->run()
+#32 {main}
+REQUEST_URI=/erp_started/index.php?r=movimientoAlmacen/admin
+HTTP_REFERER=http://localhost/erp_started/index.php?r=ordenCompra/admin
+---
+2014/08/11 16:38:13 [error] [php] Use of undefined constant operacion - assumed 'operacion' (C:\xampp\htdocs\yii\framework\base\CComponent.php(612) : eval()'d code:1)
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridColumn.php(151): TbDataColumn->renderDataCellContent()
+#1 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(616): TbDataColumn->renderDataCell()
+#2 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(572): TbGridView->renderTableRow()
+#3 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(482): TbGridView->renderTableBody()
+#4 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(167): TbGridView->renderItems()
+#5 unknown(0): TbGridView->renderSection()
+#6 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(150): preg_replace_callback()
+#7 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(135): TbGridView->renderContent()
+#8 C:\xampp\htdocs\yii\framework\web\CBaseController.php(173): TbGridView->run()
+#9 C:\xampp\htdocs\ERP_started\protected\views\movimientoAlmacen\admin.php(83): MovimientoAlmacenController->widget()
+#10 C:\xampp\htdocs\yii\framework\web\CBaseController.php(126): require()
+#11 C:\xampp\htdocs\yii\framework\web\CBaseController.php(95): MovimientoAlmacenController->renderInternal()
+#12 C:\xampp\htdocs\yii\framework\web\CController.php(869): MovimientoAlmacenController->renderFile()
+#13 C:\xampp\htdocs\yii\framework\web\CController.php(782): MovimientoAlmacenController->renderPartial()
+#14 C:\xampp\htdocs\ERP_started\protected\controllers\MovimientoAlmacenController.php(323): MovimientoAlmacenController->render()
+#15 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): MovimientoAlmacenController->actionAdmin()
+#16 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#17 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): MovimientoAlmacenController->runAction()
+#18 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#19 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#20 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): MovimientoAlmacenController->filterAccessControl()
+#21 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#22 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#23 C:\xampp\htdocs\yii\framework\web\CController.php(265): MovimientoAlmacenController->runActionWithFilters()
+#24 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): MovimientoAlmacenController->run()
+#25 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#26 C:\xampp\htdocs\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#27 C:\xampp\htdocs\ERP_started\index.php(13): CWebApplication->run()
+REQUEST_URI=/erp_started/index.php?r=movimientoAlmacen/admin
+in C:\xampp\htdocs\ERP_started\protected\views\movimientoAlmacen\admin.php (83)
+in C:\xampp\htdocs\ERP_started\protected\controllers\MovimientoAlmacenController.php (323)
+in C:\xampp\htdocs\ERP_started\index.php (13)
+2014/08/11 16:38:24 [error] [php] Use of undefined constant operacion - assumed 'operacion' (C:\xampp\htdocs\ERP_started\protected\views\movimientoAlmacen\admin.php:62)
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\CController.php(869): MovimientoAlmacenController->renderFile()
+#1 C:\xampp\htdocs\yii\framework\web\CController.php(782): MovimientoAlmacenController->renderPartial()
+#2 C:\xampp\htdocs\ERP_started\protected\controllers\MovimientoAlmacenController.php(323): MovimientoAlmacenController->render()
+#3 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): MovimientoAlmacenController->actionAdmin()
+#4 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#5 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): MovimientoAlmacenController->runAction()
+#6 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#7 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#8 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): MovimientoAlmacenController->filterAccessControl()
+#9 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#10 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#11 C:\xampp\htdocs\yii\framework\web\CController.php(265): MovimientoAlmacenController->runActionWithFilters()
+#12 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): MovimientoAlmacenController->run()
+#13 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#14 C:\xampp\htdocs\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\xampp\htdocs\ERP_started\index.php(13): CWebApplication->run()
+REQUEST_URI=/erp_started/index.php?r=movimientoAlmacen/admin
+in C:\xampp\htdocs\ERP_started\protected\views\movimientoAlmacen\admin.php (62)
+in C:\xampp\htdocs\ERP_started\protected\controllers\MovimientoAlmacenController.php (323)
+in C:\xampp\htdocs\ERP_started\index.php (13)
+2014/08/11 16:38:30 [error] [exception.CException] exception 'CException' with message 'La propiedad "MovimientoAlmacenController"."_operacion" no se encuentra definida.' in C:\xampp\htdocs\yii\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\xampp\htdocs\ERP_started\protected\views\movimientoAlmacen\admin.php(62): CComponent->__get('_operacion')
+#1 C:\xampp\htdocs\yii\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#2 C:\xampp\htdocs\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#3 C:\xampp\htdocs\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#4 C:\xampp\htdocs\yii\framework\web\CController.php(782): CController->renderPartial('admin', Array, true)
+#5 C:\xampp\htdocs\ERP_started\protected\controllers\MovimientoAlmacenController.php(323): CController->render('admin', Array)
+#6 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): MovimientoAlmacenController->actionAdmin()
+#7 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#8 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#9 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#10 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#11 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#12 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#13 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#14 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#15 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('admin')
+#16 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('movimientoAlmac...')
+#17 C:\xampp\htdocs\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#18 C:\xampp\htdocs\ERP_started\index.php(13): CApplication->run()
+#19 {main}
+REQUEST_URI=/erp_started/index.php?r=movimientoAlmacen/admin
+HTTP_REFERER=http://localhost/erp_started/index.php?r=MovimientoAlmacen/ingresarCompra&id=6
+---
+2014/08/11 16:48:21 [error] [system.db.CDbCommand] CDbCommand::fetchColumn() falló: SQLSTATE[23000]: Integrity constraint violation: 1052 Column 'id' in where clause is ambiguous. La sentencia SQL ejecutada fue: SELECT COUNT(DISTINCT `t`.`id`) FROM `tbl_movimiento_almacen` `t`  LEFT OUTER JOIN `tbl_motivo_movimiento` `r_motivo_movimiento` ON (`t`.`motivo_movimiento_id`=`r_motivo_movimiento`.`id`)  LEFT OUTER JOIN `tbl_producto` `r_producto` ON (`t`.`producto_id`=`r_producto`.`id`)  LEFT OUTER JOIN `tbl_almacen` `r_almacen` ON (`t`.`almacen_id`=`r_almacen`.`id`)  WHERE (id=:ycp0).
+in C:\xampp\htdocs\ERP_started\protected\extensions\booster\widgets\TbGridView.php (68)
+in C:\xampp\htdocs\ERP_started\protected\views\movimientoAlmacen\admin.php (85)
+in C:\xampp\htdocs\ERP_started\protected\controllers\MovimientoAlmacenController.php (323)
+2014/08/11 16:48:21 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falló al ejecutar la sentencia SQL: SQLSTATE[23000]: Integrity constraint violation: 1052 Column 'id' in where clause is ambiguous. The SQL statement executed was: SELECT COUNT(DISTINCT `t`.`id`) FROM `tbl_movimiento_almacen` `t`  LEFT OUTER JOIN `tbl_motivo_movimiento` `r_motivo_movimiento` ON (`t`.`motivo_movimiento_id`=`r_motivo_movimiento`.`id`)  LEFT OUTER JOIN `tbl_producto` `r_producto` ON (`t`.`producto_id`=`r_producto`.`id`)  LEFT OUTER JOIN `tbl_almacen` `r_almacen` ON (`t`.`almacen_id`=`r_almacen`.`id`)  WHERE (id=:ycp0)' in C:\xampp\htdocs\yii\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\db\CDbCommand.php(433): CDbCommand->queryInternal('fetchColumn', 0, Array)
+#1 C:\xampp\htdocs\yii\framework\db\ar\CActiveFinder.php(759): CDbCommand->queryScalar()
+#2 C:\xampp\htdocs\yii\framework\db\ar\CActiveFinder.php(151): CJoinElement->count(Object(CDbCriteria))
+#3 C:\xampp\htdocs\yii\framework\db\ar\CActiveRecord.php(1605): CActiveFinder->count(Object(CDbCriteria))
+#4 C:\xampp\htdocs\yii\framework\web\CActiveDataProvider.php(228): CActiveRecord->count(Object(CDbCriteria))
+#5 C:\xampp\htdocs\yii\framework\web\CDataProvider.php(224): CActiveDataProvider->calculateTotalItemCount()
+#6 C:\xampp\htdocs\yii\framework\web\CActiveDataProvider.php(178): CDataProvider->getTotalItemCount()
+#7 C:\xampp\htdocs\yii\framework\web\CDataProvider.php(168): CActiveDataProvider->fetchData()
+#8 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(111): CDataProvider->getData()
+#9 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(339): CBaseListView->init()
+#10 C:\xampp\htdocs\ERP_started\protected\extensions\booster\widgets\TbGridView.php(68): CGridView->init()
+#11 C:\xampp\htdocs\yii\framework\web\CBaseController.php(147): TbGridView->init()
+#12 C:\xampp\htdocs\yii\framework\web\CBaseController.php(172): CBaseController->createWidget('booster.widgets...', Array)
+#13 C:\xampp\htdocs\ERP_started\protected\views\movimientoAlmacen\admin.php(85): CBaseController->widget('booster.widgets...', Array)
+#14 C:\xampp\htdocs\yii\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#15 C:\xampp\htdocs\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#16 C:\xampp\htdocs\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#17 C:\xampp\htdocs\yii\framework\web\CController.php(782): CController->renderPartial('admin', Array, true)
+#18 C:\xampp\htdocs\ERP_started\protected\controllers\MovimientoAlmacenController.php(323): CController->render('admin', Array)
+#19 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): MovimientoAlmacenController->actionAdmin()
+#20 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#21 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#22 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#23 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#24 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#25 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#26 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#27 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#28 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('admin')
+#29 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('movimientoAlmac...')
+#30 C:\xampp\htdocs\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#31 C:\xampp\htdocs\ERP_started\index.php(13): CApplication->run()
+#32 {main}
+REQUEST_URI=/erp_started/index.php?MovimientoAlmacen%5Bid%5D=12&MovimientoAlmacen%5Bproducto_id%5D=&MovimientoAlmacen%5Bcantidad%5D=&MovimientoAlmacen%5Bfecha_movimiento%5D=&MovimientoAlmacen%5Boperacion%5D=&MovimientoAlmacen%5Bmotivo_movimiento_id%5D=&MovimientoAlmacen%5Balmacen_id%5D=&MovimientoAlmacen_page=1&ajax=movimiento-almacen-grid&r=movimientoAlmacen%2Fadmin
+HTTP_REFERER=http://localhost/erp_started/index.php?r=movimientoAlmacen/admin
+---
+2014/08/11 17:00:26 [error] [exception.CException] exception 'CException' with message 'La propiedad "TbGridView"."fixedHeader" no se encuentra definida.' in C:\xampp\htdocs\yii\framework\base\CComponent.php:173
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\CWidgetFactory.php(161): CComponent->__set('fixedHeader', true)
+#1 C:\xampp\htdocs\yii\framework\web\CBaseController.php(146): CWidgetFactory->createWidget(Object(MovimientoAlmacenController), 'booster.widgets...', Array)
+#2 C:\xampp\htdocs\yii\framework\web\CBaseController.php(172): CBaseController->createWidget('booster.widgets...', Array)
+#3 C:\xampp\htdocs\ERP_started\protected\views\movimientoAlmacen\admin.php(90): CBaseController->widget('booster.widgets...', Array)
+#4 C:\xampp\htdocs\yii\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#5 C:\xampp\htdocs\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#6 C:\xampp\htdocs\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#7 C:\xampp\htdocs\yii\framework\web\CController.php(782): CController->renderPartial('admin', Array, true)
+#8 C:\xampp\htdocs\ERP_started\protected\controllers\MovimientoAlmacenController.php(323): CController->render('admin', Array)
+#9 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): MovimientoAlmacenController->actionAdmin()
+#10 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#12 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#13 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#14 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#15 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#16 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#17 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#18 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('admin')
+#19 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('movimientoAlmac...')
+#20 C:\xampp\htdocs\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#21 C:\xampp\htdocs\ERP_started\index.php(13): CApplication->run()
+#22 {main}
+REQUEST_URI=/erp_started/index.php?r=movimientoAlmacen/admin
+HTTP_REFERER=http://localhost/erp_started/index.php?r=movimientoAlmacen/admin
+---
+2014/08/11 21:17:48 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in C:\xampp\htdocs\ERP_started\protected\controllers\MovimientoAlmacenController.php:331
+Stack trace:
+#0 C:\xampp\htdocs\ERP_started\protected\controllers\MovimientoAlmacenController.php(54): MovimientoAlmacenController->loadModel('')
+#1 [internal function]: MovimientoAlmacenController->actionView('')
+#2 C:\xampp\htdocs\yii\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs(Object(MovimientoAlmacenController), Array)
+#3 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(MovimientoAlmacenController), Object(ReflectionMethod), Array)
+#4 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#5 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#6 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#7 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#8 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#10 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#11 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('view')
+#13 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('movimientoAlmac...')
+#14 C:\xampp\htdocs\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\xampp\htdocs\ERP_started\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/erp_started/index.php?r=movimientoAlmacen/view&id=
+HTTP_REFERER=http://localhost/erp_started/index.php?r=movimientoAlmacen/create
+---
+2014/08/11 21:18:42 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in C:\xampp\htdocs\ERP_started\protected\controllers\MovimientoAlmacenController.php:331
+Stack trace:
+#0 C:\xampp\htdocs\ERP_started\protected\controllers\MovimientoAlmacenController.php(54): MovimientoAlmacenController->loadModel('')
+#1 [internal function]: MovimientoAlmacenController->actionView('')
+#2 C:\xampp\htdocs\yii\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs(Object(MovimientoAlmacenController), Array)
+#3 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(MovimientoAlmacenController), Object(ReflectionMethod), Array)
+#4 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#5 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#6 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#7 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#8 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#10 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#11 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('view')
+#13 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('movimientoAlmac...')
+#14 C:\xampp\htdocs\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\xampp\htdocs\ERP_started\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/erp_started/index.php?r=movimientoAlmacen/view&id=
+HTTP_REFERER=http://localhost/erp_started/index.php?r=movimientoAlmacen/create
+---
+2014/08/11 21:44:53 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in C:\xampp\htdocs\ERP_started\protected\controllers\MovimientoAlmacenController.php:331
+Stack trace:
+#0 C:\xampp\htdocs\ERP_started\protected\controllers\MovimientoAlmacenController.php(54): MovimientoAlmacenController->loadModel('')
+#1 [internal function]: MovimientoAlmacenController->actionView('')
+#2 C:\xampp\htdocs\yii\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs(Object(MovimientoAlmacenController), Array)
+#3 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(MovimientoAlmacenController), Object(ReflectionMethod), Array)
+#4 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#5 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#6 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#7 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#8 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#10 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#11 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('view')
+#13 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('movimientoAlmac...')
+#14 C:\xampp\htdocs\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\xampp\htdocs\ERP_started\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/erp_started/index.php?r=movimientoAlmacen/view&id=
+HTTP_REFERER=http://localhost/erp_started/index.php?r=movimientoAlmacen/create
+---
+2014/08/13 11:25:29 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'erp_started2.tbl_migration' doesn't exist. The SQL statement executed was: SHOW FULL COLUMNS FROM `tbl_migration`.
+2014/08/13 11:36:31 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'Usted no se encuentra autorizado a realizar esta acción.' in C:\xampp\htdocs\yii\framework\web\auth\CAccessControlFilter.php:182
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\auth\CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(CWebUser), 'Usted no se enc...')
+#1 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('admin')
+#8 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('caracteristica/...')
+#9 C:\xampp\htdocs\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\ERP_started\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/erp_started/index.php?r=caracteristica/admin
+HTTP_REFERER=http://localhost/erp_started/index.php?r=fabricante/admin
+---
+2014/08/13 11:39:06 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'Usted no se encuentra autorizado a realizar esta acción.' in C:\xampp\htdocs\yii\framework\web\auth\CAccessControlFilter.php:182
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\auth\CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(CWebUser), 'Usted no se enc...')
+#1 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('admin')
+#8 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('caracteristica/...')
+#9 C:\xampp\htdocs\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\ERP_started\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/erp_started/index.php?r=caracteristica/admin
+HTTP_REFERER=http://localhost/erp_started/index.php?r=fabricante/admin
+---
+2014/08/13 11:39:13 [error] [php] Trying to get property of non-object (C:\xampp\htdocs\yii\framework\base\CComponent.php(612) : eval()'d code:1)
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridColumn.php(151): TbDataColumn->renderDataCellContent()
+#1 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(616): TbDataColumn->renderDataCell()
+#2 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(572): TbGridView->renderTableRow()
+#3 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(482): TbGridView->renderTableBody()
+#4 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(167): TbGridView->renderItems()
+#5 unknown(0): TbGridView->renderSection()
+#6 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(150): preg_replace_callback()
+#7 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(135): TbGridView->renderContent()
+#8 C:\xampp\htdocs\yii\framework\web\CBaseController.php(173): TbGridView->run()
+#9 C:\xampp\htdocs\ERP_started\protected\views\producto\admin.php(119): ProductoController->widget()
+#10 C:\xampp\htdocs\yii\framework\web\CBaseController.php(126): require()
+#11 C:\xampp\htdocs\yii\framework\web\CBaseController.php(95): ProductoController->renderInternal()
+#12 C:\xampp\htdocs\yii\framework\web\CController.php(869): ProductoController->renderFile()
+#13 C:\xampp\htdocs\yii\framework\web\CController.php(782): ProductoController->renderPartial()
+#14 C:\xampp\htdocs\ERP_started\protected\controllers\ProductoController.php(148): ProductoController->render()
+#15 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): ProductoController->actionAdmin()
+#16 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#17 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): ProductoController->runAction()
+#18 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#19 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#20 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): ProductoController->filterAccessControl()
+#21 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#22 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#23 C:\xampp\htdocs\yii\framework\web\CController.php(265): ProductoController->runActionWithFilters()
+#24 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): ProductoController->run()
+#25 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#26 C:\xampp\htdocs\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#27 C:\xampp\htdocs\ERP_started\index.php(13): CWebApplication->run()
+REQUEST_URI=/erp_started/index.php?r=producto/admin
+in C:\xampp\htdocs\ERP_started\protected\views\producto\admin.php (119)
+in C:\xampp\htdocs\ERP_started\protected\controllers\ProductoController.php (148)
+in C:\xampp\htdocs\ERP_started\index.php (13)
+2014/08/13 11:43:11 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'Usted no se encuentra autorizado a realizar esta acción.' in C:\xampp\htdocs\yii\framework\web\auth\CAccessControlFilter.php:182
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\auth\CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(CWebUser), 'Usted no se enc...')
+#1 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('admin')
+#8 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('caracteristica/...')
+#9 C:\xampp\htdocs\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\ERP_started\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/erp_started/index.php?r=caracteristica/admin
+HTTP_REFERER=http://localhost/erp_started/index.php?r=fabricante/admin
+---
+2014/08/13 15:08:32 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'erp_started2.tbl_migration' doesn't exist. The SQL statement executed was: SHOW FULL COLUMNS FROM `tbl_migration`.
+2014/08/13 15:10:37 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'erp_started2.tbl_migration' doesn't exist. The SQL statement executed was: SHOW FULL COLUMNS FROM `tbl_migration`.
+2014/08/13 17:13:24 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested orden compra does not exist.' in C:\xampp\htdocs\ERP_started\protected\controllers\DetalleVentaController.php:369
+Stack trace:
+#0 C:\xampp\htdocs\ERP_started\protected\controllers\DetalleVentaController.php(343): DetalleVentaController->loadOrdenCompra('2')
+#1 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): DetalleVentaController->filterVentaContext(Object(CFilterChain))
+#2 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#4 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#6 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#7 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#8 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#9 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('create')
+#10 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('DetalleVenta/cr...')
+#11 C:\xampp\htdocs\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#12 C:\xampp\htdocs\ERP_started\index.php(13): CApplication->run()
+#13 {main}
+REQUEST_URI=/erp_started/index.php?r=DetalleVenta/create&pid=2
+HTTP_REFERER=http://localhost/erp_started/index.php?r=venta/create
+---
+2014/08/13 17:13:46 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested orden compra does not exist.' in C:\xampp\htdocs\ERP_started\protected\controllers\DetalleVentaController.php:369
+Stack trace:
+#0 C:\xampp\htdocs\ERP_started\protected\controllers\DetalleVentaController.php(343): DetalleVentaController->loadOrdenCompra('3')
+#1 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): DetalleVentaController->filterVentaContext(Object(CFilterChain))
+#2 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#4 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#6 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#7 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#8 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#9 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('create')
+#10 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('DetalleVenta/cr...')
+#11 C:\xampp\htdocs\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#12 C:\xampp\htdocs\ERP_started\index.php(13): CApplication->run()
+#13 {main}
+REQUEST_URI=/erp_started/index.php?r=DetalleVenta/create&pid=3
+HTTP_REFERER=http://localhost/erp_started/index.php?r=venta/create
+---
+2014/08/13 17:16:27 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested orden compra does not exist.' in C:\xampp\htdocs\ERP_started\protected\controllers\DetalleVentaController.php:369
+Stack trace:
+#0 C:\xampp\htdocs\ERP_started\protected\controllers\DetalleVentaController.php(343): DetalleVentaController->loadOrdenCompra('4')
+#1 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): DetalleVentaController->filterVentaContext(Object(CFilterChain))
+#2 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#4 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#6 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#7 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#8 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#9 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('create')
+#10 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('DetalleVenta/cr...')
+#11 C:\xampp\htdocs\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#12 C:\xampp\htdocs\ERP_started\index.php(13): CApplication->run()
+#13 {main}
+REQUEST_URI=/erp_started/index.php?r=DetalleVenta/create&pid=4
+HTTP_REFERER=http://localhost/erp_started/index.php?r=venta/create
+---
+2014/08/13 22:15:26 [error] [exception.CException] exception 'CException' with message 'La propiedad "DetalleVenta"."almacen_id" no se encuentra definida.' in C:\xampp\htdocs\yii\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\db\ar\CActiveRecord.php(145): CComponent->__get('almacen_id')
+#1 C:\xampp\htdocs\ERP_started\protected\models\ProductoAlmacen.php(161): CActiveRecord->__get('almacen_id')
+#2 C:\xampp\htdocs\ERP_started\protected\controllers\DetalleVentaController.php(86): ProductoAlmacen->actualizarCantidadDisponible(Object(DetalleVenta), 1)
+#3 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): DetalleVentaController->actionCreate()
+#4 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#5 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#6 C:\xampp\htdocs\ERP_started\protected\controllers\DetalleVentaController.php(359): CFilterChain->run()
+#7 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): DetalleVentaController->filterVentaContext(Object(CFilterChain))
+#8 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#10 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#11 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#12 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#13 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#14 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#15 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('create')
+#16 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('detalleVenta/cr...')
+#17 C:\xampp\htdocs\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#18 C:\xampp\htdocs\ERP_started\index.php(13): CApplication->run()
+#19 {main}
+REQUEST_URI=/erp_started/index.php?r=detalleVenta/create&pid=4
+HTTP_REFERER=http://localhost/erp_started/index.php?r=DetalleVenta/create&pid=4
+---
+2014/08/13 22:15:33 [error] [exception.CException] exception 'CException' with message 'La propiedad "DetalleVenta"."almacen_id" no se encuentra definida.' in C:\xampp\htdocs\yii\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\db\ar\CActiveRecord.php(145): CComponent->__get('almacen_id')
+#1 C:\xampp\htdocs\ERP_started\protected\models\ProductoAlmacen.php(161): CActiveRecord->__get('almacen_id')
+#2 C:\xampp\htdocs\ERP_started\protected\controllers\DetalleVentaController.php(86): ProductoAlmacen->actualizarCantidadDisponible(Object(DetalleVenta), 1)
+#3 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): DetalleVentaController->actionCreate()
+#4 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#5 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#6 C:\xampp\htdocs\ERP_started\protected\controllers\DetalleVentaController.php(359): CFilterChain->run()
+#7 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): DetalleVentaController->filterVentaContext(Object(CFilterChain))
+#8 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#10 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#11 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#12 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#13 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#14 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#15 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('create')
+#16 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('detalleVenta/cr...')
+#17 C:\xampp\htdocs\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#18 C:\xampp\htdocs\ERP_started\index.php(13): CApplication->run()
+#19 {main}
+REQUEST_URI=/erp_started/index.php?r=detalleVenta/create&pid=4
+HTTP_REFERER=http://localhost/erp_started/index.php?r=DetalleVenta/create&pid=4
+---
+2014/08/13 22:15:53 [error] [exception.CException] exception 'CException' with message 'La propiedad "DetalleVenta"."almacen_id" no se encuentra definida.' in C:\xampp\htdocs\yii\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\db\ar\CActiveRecord.php(145): CComponent->__get('almacen_id')
+#1 C:\xampp\htdocs\ERP_started\protected\models\ProductoAlmacen.php(161): CActiveRecord->__get('almacen_id')
+#2 C:\xampp\htdocs\ERP_started\protected\controllers\DetalleVentaController.php(86): ProductoAlmacen->actualizarCantidadDisponible(Object(DetalleVenta), 1)
+#3 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): DetalleVentaController->actionCreate()
+#4 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#5 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#6 C:\xampp\htdocs\ERP_started\protected\controllers\DetalleVentaController.php(359): CFilterChain->run()
+#7 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): DetalleVentaController->filterVentaContext(Object(CFilterChain))
+#8 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#10 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#11 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#12 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#13 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#14 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#15 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('create')
+#16 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('detalleVenta/cr...')
+#17 C:\xampp\htdocs\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#18 C:\xampp\htdocs\ERP_started\index.php(13): CApplication->run()
+#19 {main}
+REQUEST_URI=/erp_started/index.php?r=detalleVenta/create&pid=4
+HTTP_REFERER=http://localhost/erp_started/index.php?r=DetalleVenta/create&pid=4
+---
+2014/08/13 22:51:51 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Invalid request. Please do not repeat this request again.' in C:\xampp\htdocs\ERP_started\protected\controllers\DetalleVentaController.php:272
+Stack trace:
+#0 C:\xampp\htdocs\ERP_started\protected\controllers\DetalleVentaController.php(230): DetalleVentaController->actionDelete('10')
+#1 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): DetalleVentaController->actionBatchDelete()
+#2 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#3 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#4 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#5 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#6 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#7 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#8 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#9 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('batchDelete')
+#11 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('detalleVenta/ba...')
+#12 C:\xampp\htdocs\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#13 C:\xampp\htdocs\ERP_started\index.php(13): CApplication->run()
+#14 {main}
+REQUEST_URI=/erp_started/index.php?r=detalleVenta/batchDelete&ids%5B%5D=10&ids%5B%5D=11
+HTTP_REFERER=http://localhost/erp_started/index.php?r=DetalleVenta/create&pid=4
+---
+2014/08/13 22:53:52 [error] [exception.CException] exception 'CException' with message 'DetalleVentaController y sus behaviors no tienen un método o closure llamado "Delete".' in C:\xampp\htdocs\yii\framework\base\CComponent.php:266
+Stack trace:
+#0 C:\xampp\htdocs\ERP_started\protected\controllers\DetalleVentaController.php(230): CComponent->__call('Delete', Array)
+#1 C:\xampp\htdocs\ERP_started\protected\controllers\DetalleVentaController.php(230): DetalleVentaController->Delete('12')
+#2 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): DetalleVentaController->actionBatchDelete()
+#3 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#4 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#5 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#6 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#7 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#8 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#10 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('batchDelete')
+#12 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('detalleVenta/ba...')
+#13 C:\xampp\htdocs\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#14 C:\xampp\htdocs\ERP_started\index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/erp_started/index.php?r=detalleVenta/batchDelete&ids%5B%5D=12
+HTTP_REFERER=http://localhost/erp_started/index.php?r=DetalleVenta/create&pid=4
+---
+2014/08/14 18:20:05 [error] [exception.CException] exception 'CException' with message 'La propiedad "FormaPago"."formaPago" no se encuentra definida.' in C:\xampp\htdocs\yii\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\db\ar\CActiveRecord.php(145): CComponent->__get('formaPago')
+#1 C:\xampp\htdocs\yii\framework\base\CComponent.php(612) : eval()'d code(1): CActiveRecord->__get('formaPago')
+#2 C:\xampp\htdocs\yii\framework\base\CComponent.php(612): eval()
+#3 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CDataColumn.php(137): CComponent->evaluateExpression('$data->r_forma_...', Array)
+#4 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridColumn.php(151): CDataColumn->renderDataCellContent(0, Object(Venta))
+#5 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(616): CGridColumn->renderDataCell(0)
+#6 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(572): CGridView->renderTableRow(0)
+#7 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(482): CGridView->renderTableBody()
+#8 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(167): CGridView->renderItems()
+#9 [internal function]: CBaseListView->renderSection(Array)
+#10 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(150): preg_replace_callback('/{(\w+)}/', Array, '{summary}?{item...')
+#11 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(135): CBaseListView->renderContent()
+#12 C:\xampp\htdocs\yii\framework\web\CBaseController.php(173): CBaseListView->run()
+#13 C:\xampp\htdocs\ERP_started\protected\views\venta\admin.php(79): CBaseController->widget('booster.widgets...', Array)
+#14 C:\xampp\htdocs\yii\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#15 C:\xampp\htdocs\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#16 C:\xampp\htdocs\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#17 C:\xampp\htdocs\yii\framework\web\CController.php(782): CController->renderPartial('admin', Array, true)
+#18 C:\xampp\htdocs\ERP_started\protected\controllers\VentaController.php(149): CController->render('admin', Array)
+#19 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): VentaController->actionAdmin()
+#20 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#21 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#22 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#23 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#24 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#25 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#26 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#27 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#28 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('admin')
+#29 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('venta/admin')
+#30 C:\xampp\htdocs\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#31 C:\xampp\htdocs\ERP_started\index.php(13): CApplication->run()
+#32 {main}
+REQUEST_URI=/erp_started/index.php?r=venta/admin
+HTTP_REFERER=http://localhost/erp_started/index.php
+---
+2014/08/14 18:20:12 [error] [exception.CException] exception 'CException' with message 'La propiedad "FormaPago"."forma" no se encuentra definida.' in C:\xampp\htdocs\yii\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\db\ar\CActiveRecord.php(145): CComponent->__get('forma')
+#1 C:\xampp\htdocs\yii\framework\base\CComponent.php(612) : eval()'d code(1): CActiveRecord->__get('forma')
+#2 C:\xampp\htdocs\yii\framework\base\CComponent.php(612): eval()
+#3 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CDataColumn.php(137): CComponent->evaluateExpression('$data->r_forma_...', Array)
+#4 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridColumn.php(151): CDataColumn->renderDataCellContent(0, Object(Venta))
+#5 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(616): CGridColumn->renderDataCell(0)
+#6 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(572): CGridView->renderTableRow(0)
+#7 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(482): CGridView->renderTableBody()
+#8 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(167): CGridView->renderItems()
+#9 [internal function]: CBaseListView->renderSection(Array)
+#10 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(150): preg_replace_callback('/{(\w+)}/', Array, '{summary}?{item...')
+#11 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(135): CBaseListView->renderContent()
+#12 C:\xampp\htdocs\yii\framework\web\CBaseController.php(173): CBaseListView->run()
+#13 C:\xampp\htdocs\ERP_started\protected\views\venta\admin.php(79): CBaseController->widget('booster.widgets...', Array)
+#14 C:\xampp\htdocs\yii\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#15 C:\xampp\htdocs\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#16 C:\xampp\htdocs\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#17 C:\xampp\htdocs\yii\framework\web\CController.php(782): CController->renderPartial('admin', Array, true)
+#18 C:\xampp\htdocs\ERP_started\protected\controllers\VentaController.php(149): CController->render('admin', Array)
+#19 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): VentaController->actionAdmin()
+#20 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#21 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#22 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#23 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#24 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#25 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#26 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#27 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#28 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('admin')
+#29 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('venta/admin')
+#30 C:\xampp\htdocs\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#31 C:\xampp\htdocs\ERP_started\index.php(13): CApplication->run()
+#32 {main}
+REQUEST_URI=/erp_started/index.php?r=venta/admin
+HTTP_REFERER=http://localhost/erp_started/index.php
+---
+2014/08/14 23:03:00 [error] [php] Missing argument 2 for YiiBase::t(), called in C:\xampp\htdocs\ERP_started\protected\views\venta\admin.php on line 3 and defined (C:\xampp\htdocs\yii\framework\YiiBase.php:577)
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\CBaseController.php(95): VentaController->renderInternal()
+#1 C:\xampp\htdocs\yii\framework\web\CController.php(869): VentaController->renderFile()
+#2 C:\xampp\htdocs\yii\framework\web\CController.php(782): VentaController->renderPartial()
+#3 C:\xampp\htdocs\ERP_started\protected\controllers\VentaController.php(149): VentaController->render()
+#4 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): VentaController->actionAdmin()
+#5 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#6 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): VentaController->runAction()
+#7 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#8 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#9 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): VentaController->filterAccessControl()
+#10 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#11 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#12 C:\xampp\htdocs\yii\framework\web\CController.php(265): VentaController->runActionWithFilters()
+#13 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): VentaController->run()
+#14 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#15 C:\xampp\htdocs\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\xampp\htdocs\ERP_started\index.php(13): CWebApplication->run()
+REQUEST_URI=/erp_started/index.php?r=venta/admin
+in C:\xampp\htdocs\ERP_started\protected\views\venta\admin.php (3)
+in C:\xampp\htdocs\ERP_started\protected\controllers\VentaController.php (149)
+in C:\xampp\htdocs\ERP_started\index.php (13)
+2014/08/15 21:00:41 [error] [system.db.CDbCommand] CDbCommand::fetchColumn() falló: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r_cliente.nombre_rz' in 'where clause'. La sentencia SQL ejecutada fue: SELECT COUNT(*) FROM `tbl_venta` `t` WHERE r_cliente.nombre_rz LIKE :ycp0.
+in C:\xampp\htdocs\ERP_started\protected\extensions\booster\widgets\TbGridView.php (68)
+in C:\xampp\htdocs\ERP_started\protected\views\venta\admin.php (83)
+in C:\xampp\htdocs\ERP_started\protected\controllers\VentaController.php (149)
+2014/08/15 21:00:41 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falló al ejecutar la sentencia SQL: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r_cliente.nombre_rz' in 'where clause'. The SQL statement executed was: SELECT COUNT(*) FROM `tbl_venta` `t` WHERE r_cliente.nombre_rz LIKE :ycp0' in C:\xampp\htdocs\yii\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\db\CDbCommand.php(433): CDbCommand->queryInternal('fetchColumn', 0, Array)
+#1 C:\xampp\htdocs\yii\framework\db\ar\CActiveRecord.php(1601): CDbCommand->queryScalar()
+#2 C:\xampp\htdocs\yii\framework\web\CActiveDataProvider.php(228): CActiveRecord->count(Object(CDbCriteria))
+#3 C:\xampp\htdocs\yii\framework\web\CDataProvider.php(224): CActiveDataProvider->calculateTotalItemCount()
+#4 C:\xampp\htdocs\yii\framework\web\CActiveDataProvider.php(178): CDataProvider->getTotalItemCount()
+#5 C:\xampp\htdocs\yii\framework\web\CDataProvider.php(168): CActiveDataProvider->fetchData()
+#6 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(111): CDataProvider->getData()
+#7 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(339): CBaseListView->init()
+#8 C:\xampp\htdocs\ERP_started\protected\extensions\booster\widgets\TbGridView.php(68): CGridView->init()
+#9 C:\xampp\htdocs\yii\framework\web\CBaseController.php(147): TbGridView->init()
+#10 C:\xampp\htdocs\yii\framework\web\CBaseController.php(172): CBaseController->createWidget('booster.widgets...', Array)
+#11 C:\xampp\htdocs\ERP_started\protected\views\venta\admin.php(83): CBaseController->widget('booster.widgets...', Array)
+#12 C:\xampp\htdocs\yii\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#13 C:\xampp\htdocs\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#14 C:\xampp\htdocs\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#15 C:\xampp\htdocs\yii\framework\web\CController.php(782): CController->renderPartial('admin', Array, true)
+#16 C:\xampp\htdocs\ERP_started\protected\controllers\VentaController.php(149): CController->render('admin', Array)
+#17 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): VentaController->actionAdmin()
+#18 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#19 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#20 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#21 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#22 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#23 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#24 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#25 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#26 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('admin')
+#27 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('venta/admin')
+#28 C:\xampp\htdocs\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#29 C:\xampp\htdocs\ERP_started\index.php(13): CApplication->run()
+#30 {main}
+REQUEST_URI=/erp_started/index.php?Venta%5Bid%5D=&Venta%5Bfecha_venta%5D=&Venta%5Bcliente_id%5D=qui&Venta%5Bvendedor_id%5D=&Venta%5Bforma_pago_id%5D=&Venta%5Bimporte_total%5D=&Venta_page=1&ajax=venta-grid&r=venta%2Fadmin
+HTTP_REFERER=http://localhost/erp_started/index.php?r=venta/admin
+---
+2014/08/15 21:00:55 [error] [system.db.CDbCommand] CDbCommand::fetchColumn() falló: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r_cliente.nombre_rz' in 'where clause'. La sentencia SQL ejecutada fue: SELECT COUNT(*) FROM `tbl_venta` `t` WHERE r_cliente.nombre_rz LIKE :ycp0.
+in C:\xampp\htdocs\ERP_started\protected\extensions\booster\widgets\TbGridView.php (68)
+in C:\xampp\htdocs\ERP_started\protected\views\venta\admin.php (83)
+in C:\xampp\htdocs\ERP_started\protected\controllers\VentaController.php (149)
+2014/08/15 21:00:55 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falló al ejecutar la sentencia SQL: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r_cliente.nombre_rz' in 'where clause'. The SQL statement executed was: SELECT COUNT(*) FROM `tbl_venta` `t` WHERE r_cliente.nombre_rz LIKE :ycp0' in C:\xampp\htdocs\yii\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\db\CDbCommand.php(433): CDbCommand->queryInternal('fetchColumn', 0, Array)
+#1 C:\xampp\htdocs\yii\framework\db\ar\CActiveRecord.php(1601): CDbCommand->queryScalar()
+#2 C:\xampp\htdocs\yii\framework\web\CActiveDataProvider.php(228): CActiveRecord->count(Object(CDbCriteria))
+#3 C:\xampp\htdocs\yii\framework\web\CDataProvider.php(224): CActiveDataProvider->calculateTotalItemCount()
+#4 C:\xampp\htdocs\yii\framework\web\CActiveDataProvider.php(178): CDataProvider->getTotalItemCount()
+#5 C:\xampp\htdocs\yii\framework\web\CDataProvider.php(168): CActiveDataProvider->fetchData()
+#6 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(111): CDataProvider->getData()
+#7 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(339): CBaseListView->init()
+#8 C:\xampp\htdocs\ERP_started\protected\extensions\booster\widgets\TbGridView.php(68): CGridView->init()
+#9 C:\xampp\htdocs\yii\framework\web\CBaseController.php(147): TbGridView->init()
+#10 C:\xampp\htdocs\yii\framework\web\CBaseController.php(172): CBaseController->createWidget('booster.widgets...', Array)
+#11 C:\xampp\htdocs\ERP_started\protected\views\venta\admin.php(83): CBaseController->widget('booster.widgets...', Array)
+#12 C:\xampp\htdocs\yii\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#13 C:\xampp\htdocs\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#14 C:\xampp\htdocs\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#15 C:\xampp\htdocs\yii\framework\web\CController.php(782): CController->renderPartial('admin', Array, true)
+#16 C:\xampp\htdocs\ERP_started\protected\controllers\VentaController.php(149): CController->render('admin', Array)
+#17 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): VentaController->actionAdmin()
+#18 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#19 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#20 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#21 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#22 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#23 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#24 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#25 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#26 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('admin')
+#27 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('venta/admin')
+#28 C:\xampp\htdocs\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#29 C:\xampp\htdocs\ERP_started\index.php(13): CApplication->run()
+#30 {main}
+REQUEST_URI=/erp_started/index.php?Venta%5Bid%5D=&Venta%5Bfecha_venta%5D=&Venta%5Bcliente_id%5D=qui&Venta%5Bvendedor_id%5D=&Venta%5Bforma_pago_id%5D=&Venta%5Bimporte_total%5D=&Venta_page=1&ajax=venta-grid&r=venta%2Fadmin
+HTTP_REFERER=http://localhost/erp_started/index.php?r=venta/admin
+---
+2014/08/15 21:02:29 [error] [exception.CDbException] exception 'CDbException' with message 'La relación "r_cliente,r_forma_pago,r_empleado" no se encuentra definida en la clase active record "Venta".' in C:\xampp\htdocs\yii\framework\db\ar\CActiveFinder.php:226
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\db\ar\CActiveFinder.php(296): CActiveFinder->buildJoinTree(Object(CJoinElement), 'r_cliente,r_for...')
+#1 C:\xampp\htdocs\yii\framework\db\ar\CActiveFinder.php(48): CActiveFinder->buildJoinTree(Object(CJoinElement), Array)
+#2 C:\xampp\htdocs\yii\framework\db\ar\CActiveRecord.php(909): CActiveFinder->__construct(Object(Venta), Array)
+#3 C:\xampp\htdocs\yii\framework\db\ar\CActiveRecord.php(1604): CActiveRecord->getActiveFinder(Array)
+#4 C:\xampp\htdocs\yii\framework\web\CActiveDataProvider.php(228): CActiveRecord->count(Object(CDbCriteria))
+#5 C:\xampp\htdocs\yii\framework\web\CDataProvider.php(224): CActiveDataProvider->calculateTotalItemCount()
+#6 C:\xampp\htdocs\yii\framework\web\CActiveDataProvider.php(178): CDataProvider->getTotalItemCount()
+#7 C:\xampp\htdocs\yii\framework\web\CDataProvider.php(168): CActiveDataProvider->fetchData()
+#8 C:\xampp\htdocs\yii\framework\zii\widgets\CBaseListView.php(111): CDataProvider->getData()
+#9 C:\xampp\htdocs\yii\framework\zii\widgets\grid\CGridView.php(339): CBaseListView->init()
+#10 C:\xampp\htdocs\ERP_started\protected\extensions\booster\widgets\TbGridView.php(68): CGridView->init()
+#11 C:\xampp\htdocs\yii\framework\web\CBaseController.php(147): TbGridView->init()
+#12 C:\xampp\htdocs\yii\framework\web\CBaseController.php(172): CBaseController->createWidget('booster.widgets...', Array)
+#13 C:\xampp\htdocs\ERP_started\protected\views\venta\admin.php(83): CBaseController->widget('booster.widgets...', Array)
+#14 C:\xampp\htdocs\yii\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#15 C:\xampp\htdocs\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#16 C:\xampp\htdocs\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#17 C:\xampp\htdocs\yii\framework\web\CController.php(782): CController->renderPartial('admin', Array, true)
+#18 C:\xampp\htdocs\ERP_started\protected\controllers\VentaController.php(149): CController->render('admin', Array)
+#19 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): VentaController->actionAdmin()
+#20 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#21 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#22 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#23 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#24 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#25 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#26 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#27 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#28 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('admin')
+#29 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('venta/admin')
+#30 C:\xampp\htdocs\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#31 C:\xampp\htdocs\ERP_started\index.php(13): CApplication->run()
+#32 {main}
+REQUEST_URI=/erp_started/index.php?Venta%5Bid%5D=&Venta%5Bfecha_venta%5D=&Venta%5Bcliente_id%5D=qui&Venta%5Bvendedor_id%5D=&Venta%5Bforma_pago_id%5D=&Venta%5Bimporte_total%5D=&Venta_page=1&ajax=venta-grid&r=venta%2Fadmin
+HTTP_REFERER=http://localhost/erp_started/index.php?r=venta/admin
+---
+2014/08/15 21:10:22 [error] [exception.CException] exception 'CException' with message 'La propiedad "Venta"."r_formaPago" no se encuentra definida.' in C:\xampp\htdocs\yii\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\db\ar\CActiveRecord.php(145): CComponent->__get('r_formaPago')
+#1 C:\xampp\htdocs\ERP_started\protected\views\venta\view.php(33): CActiveRecord->__get('r_formaPago')
+#2 C:\xampp\htdocs\yii\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#3 C:\xampp\htdocs\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#4 C:\xampp\htdocs\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#5 C:\xampp\htdocs\yii\framework\web\CController.php(782): CController->renderPartial('view', Array, true)
+#6 C:\xampp\htdocs\ERP_started\protected\controllers\VentaController.php(55): CController->render('view', Array)
+#7 [internal function]: VentaController->actionView('1')
+#8 C:\xampp\htdocs\yii\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs(Object(VentaController), Array)
+#9 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(VentaController), Object(ReflectionMethod), Array)
+#10 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#12 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#13 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#14 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#15 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#16 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#17 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#18 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('view')
+#19 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('venta/view')
+#20 C:\xampp\htdocs\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#21 C:\xampp\htdocs\ERP_started\index.php(13): CApplication->run()
+#22 {main}
+REQUEST_URI=/erp_started/index.php?r=venta/view&id=1
+HTTP_REFERER=http://localhost/erp_started/index.php?r=venta/admin
+---
+2014/08/15 21:19:48 [error] [exception.CException] exception 'CException' with message 'La propiedad "Venta"."_estado" no se encuentra definida.' in C:\xampp\htdocs\yii\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\db\ar\CActiveRecord.php(145): CComponent->__get('_estado')
+#1 C:\xampp\htdocs\ERP_started\protected\views\venta\view.php(43): CActiveRecord->__get('_estado')
+#2 C:\xampp\htdocs\yii\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#3 C:\xampp\htdocs\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#4 C:\xampp\htdocs\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#5 C:\xampp\htdocs\yii\framework\web\CController.php(782): CController->renderPartial('view', Array, true)
+#6 C:\xampp\htdocs\ERP_started\protected\controllers\VentaController.php(55): CController->render('view', Array)
+#7 [internal function]: VentaController->actionView('1')
+#8 C:\xampp\htdocs\yii\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs(Object(VentaController), Array)
+#9 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(VentaController), Object(ReflectionMethod), Array)
+#10 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#12 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#13 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#14 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#15 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#16 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#17 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#18 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('view')
+#19 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('venta/view')
+#20 C:\xampp\htdocs\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#21 C:\xampp\htdocs\ERP_started\index.php(13): CApplication->run()
+#22 {main}
+REQUEST_URI=/erp_started/index.php?r=venta/view&id=1
+HTTP_REFERER=http://localhost/erp_started/index.php?r=venta/admin
+---
+2014/08/16 11:01:59 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'El sistema no ha podido encontrar la acción "form" solicitada.' in C:\xampp\htdocs\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\CController.php(270): CController->missingAction('form')
+#1 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('form')
+#2 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('detallecompra/f...')
+#3 C:\xampp\htdocs\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\ERP_started\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/erp_started/index.php?r=detallecompra/form&id=1
+---
+2014/08/16 11:02:06 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'El sistema no ha podido encontrar la acción "creat" solicitada.' in C:\xampp\htdocs\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\CController.php(270): CController->missingAction('creat')
+#1 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('creat')
+#2 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('detallecompra/c...')
+#3 C:\xampp\htdocs\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\ERP_started\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/erp_started/index.php?r=detallecompra/creat&id=1
+---
+2014/08/16 11:02:10 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested compra does not exist.' in C:\xampp\htdocs\ERP_started\protected\controllers\DetalleCompraController.php:341
+Stack trace:
+#0 C:\xampp\htdocs\ERP_started\protected\controllers\DetalleCompraController.php(314): DetalleCompraController->loadOrdenCompra(NULL)
+#1 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): DetalleCompraController->filterCompraContext(Object(CFilterChain))
+#2 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#4 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#6 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#7 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#8 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#9 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('create')
+#10 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('detallecompra/c...')
+#11 C:\xampp\htdocs\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#12 C:\xampp\htdocs\ERP_started\index.php(13): CApplication->run()
+#13 {main}
+REQUEST_URI=/erp_started/index.php?r=detallecompra/create&id=1
+---

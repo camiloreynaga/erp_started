@@ -198,7 +198,9 @@ class Producto extends Erp_startedActiveRecord// CActiveRecord
             $criteria->condition='activo=0';
             return UnidadMedida::model()->findAll($criteria);
         }
-        //obtiene los fabricantes/ marcas/ laboratorios disponibles
+        /**
+         * obtiene los fabricantes/ marcas/ laboratorios disponibles
+         */
         public function getFabricanteOptions()
         {
             $criteria = new CDbCriteria();
@@ -206,7 +208,9 @@ class Producto extends Erp_startedActiveRecord// CActiveRecord
             $criteria->condition='activo=0';
             return Fabricante::model()->findAll($criteria);
         }
-        //obtien las caracteristicas adicionales para un producto
+        /**
+         * obtiene las caracteristicas adicionales para un producto
+         */
         public function getCaracteristicaOptions()
         {
             $criteria=new CDbCriteria();
@@ -214,7 +218,7 @@ class Producto extends Erp_startedActiveRecord// CActiveRecord
             $criteria->condition='activo=0';
             return Caracteristica::model()->findAll($criteria);
         }
-        /*
+        /**
          * recupera todos los productos no descontinuados
          */
         public function getProductos()

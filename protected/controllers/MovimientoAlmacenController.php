@@ -133,8 +133,7 @@
             $model=new MovimientoAlmacen;
 
             // Uncomment the following line if AJAX validation is needed
-            // $this->performAjaxValidation($model);
-
+            $this->performAjaxValidation($model);
             if(isset($_POST['MovimientoAlmacen']))
             {
             $model->attributes=$_POST['MovimientoAlmacen'];
@@ -143,19 +142,17 @@
                 {
                    // $model->_lote;
                     $this->ActualizaStock($model);
-                    
+                    $this->redirect(array('view','id'=>$model->id));
                 }
-                //$this->redirect(array('view','id'=>$model->id));
+                
             }
-            else {
+            //else {
                 $this->render('create',array(
                 'model'=>$model,
                 ));
-            }
-
-            
+            //}
         }
-        /*
+        /**
          * carga los motivos de movimiento a partir de la operación elegida (ingreso=0 /salida=1)
          */
         public function actionOperacion()
@@ -169,7 +166,7 @@
                 }
         }
         
-        /*
+        /**
          * devuelve los lotes para el ingreso de productos a Almacen
          */
         public function actionLotesIngreso()
@@ -204,13 +201,13 @@
 //        }
         
         /**
-         * Actualiza/registra cantidad_disponible/cantidad_real que se encuentra en lbl_producot_almacen
+         * Actualiza/registra cantidad_disponible/cantidad_real que se encuentra en tbl_producto_almacen
          * cuando se registra una compra como movimiento de almacen 
          */
         protected function ActualizaStock($model)
         {
             // determinando si suma o resta cantidad
-            $cantidad= $model->operacion==0? $model->cantidad : $model->cantidad*(-1); 
+            $cantidad= $model->operacion==0 ? $model->cantidad : $model->cantidad*(-1); 
             //buscando registro en almacen por almacen, producto y lote
             $_producto_almacen= ProductoAlmacen::model()->findByAttributes(array(
                                 'almacen_id'=>$model->almacen_id,//$almacen,
@@ -232,14 +229,14 @@
                 $_producto_almacen->cantidad_disponible+=$cantidad; //modificando la cantidad disponible
                 $_producto_almacen->cantidad_real+=$cantidad; // modificando la cantidad real
             }    
-             if($_producto_almacen->save()) //guardando datos tbl_producto_almacen
-             {
-                 $model->saldo_stock=$_producto_almacen->cantidad_real;//$cantidad; //registra el saldo stock para el movimiento de almacen
-                 $model->save();
-                 $_producto= Producto::model()->findByPk($model->producto_id); //obteniendo producto desde id
-                 $_producto->stock+=$cantidad; // actualizando stock en producto
-                 $_producto->save();
-             }
+            if($_producto_almacen->save()) //guardando datos tbl_producto_almacen
+            {
+                $model->saldo_stock=$_producto_almacen->cantidad_real;//$cantidad; //registra el saldo stock para el movimiento de almacen
+                $model->save();
+                $_producto= Producto::model()->findByPk($model->producto_id); //obteniendo producto desde id
+                $_producto->stock+=$cantidad; // actualizando stock en producto
+                $_producto->save();
+            }
         }
         
 
