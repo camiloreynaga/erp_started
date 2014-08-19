@@ -118,7 +118,7 @@
         )
 )); ?>
 
-<p class="help-block"><?php echo yii::t('app','Fields with') ;?>');?>  <span class="required">*</span> <?php echo yii::t('app','are required.') ;?>');?></p>
+<p class="help-block"><?php echo yii::t('app','Fields with') ;?>  <span class="required">*</span> <?php echo yii::t('app','are required.') ;?></p>
 
 
 
