@@ -201,6 +201,62 @@ echo $form->errorSummary($model); ?>
 
         <?php echo $form->textAreaGroup($model,'observacion'); //,array( 'class'=>'span8')'rows'=>6, 'cols'=>50, ?>
 
+<?php
+$this->beginWidget('zii.widgets.jui.CJuiDialog', array( // the dialog
+    'id'=>'dialogClassroom',
+    'options'=>array(
+        'title'=>'Editar Orden de Compra',
+        'autoOpen'=>false,
+        'modal'=>true,
+        'width'=>550,
+        'height'=>470,
+    ),
+));?>
+    <div class="divForForm"></div>
+<?php $this->endWidget(); ?>
+    
+<script type="text/javascript">
+    function updateItem(url)
+    {
+        <?php echo CHtml::ajax(array(
+            'url'=>'js:url',
+            'data'=> "js:$('#detalle-orden-compra').serialize()",
+            'type'=>'post',
+            'dataType'=>'json',
+            'success'=>"function(data)
+            {
+                if (data.status == 'failure')
+                {
+                    $('#dialogClassroom div.divForForm').html(data.div);
+                          // Here is the trick: on submit-> once again this function!
+                    //$('#dialogClassroom div.divForForm form').submit(updateItem);
+                }
+                else
+                {
+                    $('#dialogClassroom div.divForForm').html(data.div);
+                    setTimeout(\"$('#dialogClassroom').dialog('close') \",3000);
+                    $.fn.yiiGridView.update('detalle-orden-compra-grid');//update GRID!!! :D
+                }
+
+            } ",
+            ))?>;
+        return false;  
+    }
+    function loadForm()
+    {
+
+    }
+        
+    function clearForm()
+    {
+        $('#s2id_DetalleOrdenCompra_producto_id').select2('data', null);//reset select2
+        $("#DetalleOrdenCompra_cantidad").val(null);//
+        $("#DetalleOrdenCompra_precio_unitario").val(null);//
+        $("#DetalleOrdenCompra_observacion").val(null);
+    }
+</script>
+    
+    
 <div class="form-actions">
     <?php $this->widget('booster.widgets.TbButton', array(
 			'buttonType'=>'ajaxSubmit',
@@ -220,6 +276,7 @@ echo $form->errorSummary($model); ?>
                             {      
                                     updateGrilla(data);
                                     hideFormErrors(form="#detalle-orden-compra-form");
+                                    clearForm();
                                     //callback(status=data.status);
                                     
                             }else{
@@ -296,27 +353,26 @@ $this->widget('booster.widgets.TbExtendedGridView',array(
                             array(
                             'name' => 'cantidad',
                             'header' => 'Cantidad',
-                            'class' => 'booster.widgets.TbEditableColumn',
+                            //'class' => 'booster.widgets.TbEditableColumn',
                             //'headerHtmlOptions' => array('style' => 'width:200px'),
                             
-                            'editable' => array(
+                            /*'editable' => array(
                                 'type' => 'text',
                                 'url' => $this->createUrl('detalleOrdenCompra/editCantidad'),
                                 //'placement' => 'left',
                                 'success'=>'updateGrilla'
                                 //'success'=>'function(link,success,data){ if(success) window.location.reload();',
-                                
-                                
-                            )
-                            ),
+                            )*/
+                             ),
+                             
                             array(
                                 'name'=>'observacion',
                                 'header'=>'Obs.',
-                                'class'=>'booster.widgets.TbEditableColumn',
+                                /*'class'=>'booster.widgets.TbEditableColumn',
                                 'editable'=>array(
                                     'type'=>'text',
                                     'url'=>$this->createUrl('detalleOrdenCompra/editItem'),
-                                )
+                                )*/
                                 
                             ),
                             
@@ -324,35 +380,45 @@ $this->widget('booster.widgets.TbExtendedGridView',array(
                                 'name'=>'precio_unitario',
                                 'header'=>'P.U.',
                                 'htmlOptions'=>array('style'=> 'text-align: right'),
-                                'class' => 'booster.widgets.TbEditableColumn',
+                                /*'class' => 'booster.widgets.TbEditableColumn',
                                     'editable' => array(
                                         'type' => 'text',
                                         'url' => $this->createUrl('detalleOrdenCompra/editPrecioUnitario'),
                                         'success'=>'updateGrilla'
-                                    )
+                                    )*/
                             ),
                             array(
                                 'name'=>'subtotal',
+                                'class'=>'booster.widgets.TbTotalSumColumnCurrency',
+                                'footerHtmlOptions'=>array('style'=> 'text-align: right'),
                                 //'header'=>'Subtotal',
                                 'htmlOptions'=>array('style'=> 'text-align: right')
                             ),
                             array(
                                 'name'=>'impuesto',
                                 'header'=>'IGV',
+                                'class'=>'booster.widgets.TbTotalSumColumnCurrency',
+                                'footerHtmlOptions'=>array('style'=> 'text-align: right'),
                                 'htmlOptions'=>array('style'=> 'text-align: right')
                             ),
                             array(
                                 'name'=>'total',
                                 'header'=>'Total',
+                                'class'=>'booster.widgets.TbTotalSumColumnCurrency',
+                                'footerHtmlOptions'=>array('style'=> 'text-align: right'),
                                 'htmlOptions'=>array('style'=> 'text-align: right')
                             ),
                             
             array(
                 'class'=>'booster.widgets.TbButtonColumn',
-                'template'=>'{delete}',
+                'template'=>'{delete}{update}',
                 'buttons'=>array(
                     'delete'=>array(
                         'url'=>'Yii::app()->createUrl("detalleOrdenCompra/delete", array("id"=>$data->id))',
+                    ),
+                    'update'=>array(
+                        'url'=>'Yii::app()->createUrl("detalleOrdenCompra/update", array("id"=>$data->id))',
+                        'click'=>'function(){updateItem($(this).attr("href")); $("#dialogClassroom").dialog("open");return false;}'
                     )
                 ),
                 'deleteConfirmation'=>yii::t('app','Are you sure to delete this item?'),
