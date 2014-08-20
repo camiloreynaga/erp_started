@@ -105,6 +105,62 @@
     ");
 ?>
 
+
+<?php
+$this->beginWidget('zii.widgets.jui.CJuiDialog', array( // the dialog
+    'id'=>'dialogClassroom',
+    'options'=>array(
+        'title'=>'Editar Orden de Compra',
+        'autoOpen'=>false,
+        'modal'=>true,
+        'width'=>550,
+        'height'=>470,
+    ),
+));?>
+    <div class="divForForm"></div>
+<?php $this->endWidget(); ?>
+    
+<script type="text/javascript">
+    function updateItem(url)
+    {
+        <?php echo CHtml::ajax(array(
+            'url'=>'js:url',
+            'data'=> "js:$('#detalle-form').serialize()",
+            'type'=>'post',
+            'dataType'=>'json',
+            'success'=>"function(data)
+            {
+                if (data.status == 'failure')
+                {
+                    $('#dialogClassroom div.divForForm').html(data.div);
+                          // Here is the trick: on submit-> once again this function!
+                    //$('#dialogClassroom div.divForForm form').submit(updateItem);
+                }
+                else
+                {
+                    $('#dialogClassroom div.divForForm').html(data.div);
+                    setTimeout(\"$('#dialogClassroom').dialog('close') \",3000);
+                    $.fn.yiiGridView.update('detalle-orden-compra-grid');//update GRID!!! :D
+                }
+
+            } ",
+            ))?>;
+        return false;  
+    }
+    function loadForm()
+    {
+
+    }
+        
+    function clearForm()
+    {
+        $('#s2id_DetalleOrdenCompra_producto_id').select2('data', null);//reset select2
+        $("#DetalleOrdenCompra_cantidad").val(null);//
+        $("#DetalleOrdenCompra_precio_unitario").val(null);//
+        $("#DetalleOrdenCompra_observacion").val(null);
+    }
+</script>
+    
 <?php echo CHtml::link('Agregar Producto','#',array('class'=>'add-button btn')); //Advanced Search ?>
 <div class="search-form" style="display:none">
     <?php $this->renderPartial('_partialForm',array('model'=>$model)); ?>

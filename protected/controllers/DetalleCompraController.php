@@ -130,11 +130,18 @@ class DetalleCompraController extends Controller
             {
                 $model->attributes=$_POST['DetalleCompra'];
                 if($model->save())
-                $this->redirect(array('view','id'=>$model->id));
+                {
+                    echo CJSON::encode(array(
+                        'status'=>'success',
+                        'div'=>'La información fué guardada exitosamente.'
+                    ));
+                    Yii::app()->end();
+                }
             }
-
-            $this->render('update',array(
-            'model'=>$model,
+            echo CJSON::encode(
+                array(
+                    'status'=>'failure',
+                    'div'=>$this->renderPartial('_partialForm',array('model'=>$model),true)
             ));
         }
 /*

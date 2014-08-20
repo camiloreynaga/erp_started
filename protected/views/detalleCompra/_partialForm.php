@@ -1,5 +1,5 @@
 <?php $form=$this->beginWidget('booster.widgets.TbActiveForm',array(
-	'id'=>'detalle-compra-form',
+	'id'=>$model->isNewRecord?'detalle-compra-form':'detalle-form',
 	'enableAjaxValidation'=>true,
         'clientOptions' =>array(
             'validateOnSubmit' => true,
@@ -13,33 +13,28 @@
 
 
 
-<?php echo $form->errorSummary($model); ?>
-
-	<?php //echo $form->textFieldGroup($model,'compra_id',array('class'=>'span5')); ?>
-
-	<?php
+<?php 
+echo $form->errorSummary($model);
+$data=CHtml::listData(Producto::model()->getProductosStock(), "id","text");
+if($model->isNewRecord)
+{
         echo $form->select2Group(
-			$model,
-			'producto_id',
-			array(
-				'wrapperHtmlOptions' => array(
-					'class' => 'col-sm-5',
-				),
-				'widgetOptions' => array(
-                                    
-                                    'asDropDownList' => true,
-                                    //'data'      => CHtml::listData(Producto::model()->findAll('descontinuado=0'), "id","nombre"),
-                                    'data'      => CHtml::listData(Producto::model()->getProductosStock(), "id","text"),
-                                    'options' => array(
-                                            'placeholder' =>'Seleccione producto', 
-                                            //'tags'=>'de',
-                                            //'width' => '40%', 
-                                            'tokenSeparators' => array(',', ' ')
-                                    ),
-				)
-			)
-		);
-        //echo $form->textFieldGroup($model,'producto_id',array('class'=>'span5')); ?>
+                $model,'producto_id',
+                array(
+                    'wrapperHtmlOptions' => array('class' => 'col-sm-5'),
+                    'widgetOptions' => array(
+                        'asDropDownList' => true,
+                        'data'=> $data,
+                        'options' => array(
+                            'placeholder' =>'Seleccione producto', 
+                            'tokenSeparators' => array(',', ' ')
+                ))));
+}
+else
+{
+    echo $form->dropDownList($model,'producto_id',$data,array('prompt'=>'--Seleccione--'));
+}
+        ?>
 
 	<?php echo $form->textFieldGroup($model,'cantidad',array('class'=>'span5')); ?>
 
@@ -79,15 +74,11 @@
 
 	<?php echo $form->textFieldGroup($model,'precio_unitario',array('class'=>'span5','maxlength'=>10)); ?>
 
-	<?php //echo $form->textFieldGroup($model,'subtotal',array('class'=>'span5','maxlength'=>10)); ?>
-
-	<?php //echo $form->textFieldGroup($model,'impuesto',array('class'=>'span5','maxlength'=>10)); ?>
-
-	<?php //echo $form->textFieldGroup($model,'total',array('class'=>'span5','maxlength'=>10)); ?>
-
-
-<div class="form-actions">
-	<?php $this->widget('booster.widgets.TbButton', array(
+	<?php 
+        if($model->isNewRecord)
+        {?>
+            <div class="form-actions"> <?php
+            $this->widget('booster.widgets.TbButton', array(
 			'buttonType'=>'ajaxSubmit',
 			'context'=>'primary',
                         'url'=>CController::createUrl('detalleCompra/create',
@@ -111,7 +102,26 @@
                             }
                             }',
                             )
-		)); ?>
-</div>
-
-<?php $this->endWidget(); ?>
+		)); 
+        ?></div> <?php
+                 $this->endWidget();
+        }
+        else
+        {
+                 $this->widget('booster.widgets.TbButton', array(
+			'buttonType'=>'submit',
+			'context'=>'primary',
+			'label'=>$model->isNewRecord ? 'Create' : 'Save',
+		)); 
+                 $this->endWidget();
+                ?>
+            </div>
+            <script type="text/javascript">
+                $("#detalle-form").submit(
+                    function(e){
+                        e.preventDefault();
+                        updateItem($("#detalle-form").attr('action'));
+                        return false;
+                 });
+            </script>
+        <?php } ?>
