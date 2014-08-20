@@ -17,7 +17,7 @@ array('label'=>'Manage DetalleCompra','url'=>array('admin')),
 $compra= Compra::model()->findByPk($_GET['pid']);
 //$model = new Compra();
 //$model->getat
-echo $this->renderPartial('//Compra/_head', array('compra'=>$compra));
+echo $this->renderPartial('//compra/_head', array('compra'=>$compra));
 ?>
 <h4> <?php echo yii::t('app','Details').' '.yii::t('app','Purchase');?></h4>
 <?php 
