@@ -130,14 +130,6 @@
                                 'class'=>'CCheckBoxColumn', // Checkboxes
                                 'selectableRows'=>2,        // Allow multiple selections 
                                 ),
-                               // 'id',
-                               // 'orden_compra_id',
-                                //'cotizacion_id',
-    //                            array(
-    //                                //'name'=>'producto_id',
-    //                                'header'=>'laboratorio',
-    //                                'value'=>'$data->r_producto->r_fabricante->fabricante', 
-    //                            ),
                                 array(
                                     'name'=>'producto_id',
                                     'header'=>'Producto',
@@ -148,97 +140,29 @@
                                     'header'=>'Present.',
                                     'value'=>'$data->r_producto->r_presentacion->presentacion'
                                 ),
-                               
                                 array(
-                                'name' => 'cantidad',
-                                'header' => 'Cant.',
-                                'class' => 'booster.widgets.TbEditableColumn',
-                                //'headerHtmlOptions' => array('style' => 'width:200px'),
-
-                                'editable' => array(
-                                    'type' => 'text',
-                                    'url' => $this->createUrl('detalleCompra/editCantidad'),
-                                    //'options'=>array('class'=>'save-ajax-button'),
-                                    //'placement' => 'left',
-                                    'success'=>'updateGrilla',
-                                                                        
-                                    //'success'=>'function(link,success,data){ if(success) window.location.reload();',
-                                    )
+                                    'name' => 'cantidad',
+                                    'header' => 'Cant.',
                                 ),
                                 array(
-                                'name' => 'lote',
-                                'header' => 'Lote',
-                                'class' => 'booster.widgets.TbEditableColumn',
-                                //'headerHtmlOptions' => array('style' => 'width:200px'),
-
-                                'editable' => array(
-                                    'type' => 'text',
-                                    'url' => $this->createUrl('detalleCompra/editItem'),
-                                    //'success'=>'updateGrilla'
-                                    //'success'=>'function(link,success,data){ if(success) window.location.reload();',
-                                    )
-                                ),
-                                //'lote',
-                                array(
-                                'name' => 'fecha_vencimiento',
-                                'header' => 'F.V.',
-                                'class' => 'booster.widgets.TbEditableColumn',
-                                'editable' => array(
-                                    'type' => 'combodate',
-                                    'url' => $this->createUrl('detalleCompra/editItem'),
-                                    //'format'      => 'Y-m-d',//'YYYY-MM-DD', //in this format date sent to server  
-                                    'viewformat'  => 'MM-YYYY', //in this format date is displayed
-                                    'template'    => 'MM / YYYY', //template for dropdowns
-//                                    'options'     => array(
-//                                            'datepicker' => array('language' => yii::app()->params['language']) 
-//                                        ) 
-                                    'combodate'   => array('minYear' => 2015, 'maxYear' => 2030),
-                                    //'success'=>'updateGrilla'
-                                    //'success'=>'function(link,success,data){ if(success) window.location.reload();',
-                                    )
+                                    'name' => 'lote',
+                                    'header' => 'Lote',
                                 ),
                                 array(
-                                'name' => 'cantidad_bueno',
-                                'header' => 'B',
-                                'class' => 'booster.widgets.TbEditableColumn',
-                                'editable' => array(
-                                    'type' => 'text',
-                                    'url' => $this->createUrl('detalleCompra/editItem'),
-                                    //'success'=>'updateGrilla',
-//                                    'htmlOptions'=>array(
-//                                        'update'=>'".button-column"'
-//                                    )
-                                    
-                                    //'success'=>'function(link,success,data){ if(success) window.location.reload();',
-                                    )
+                                    'name' => 'fecha_vencimiento',
+                                    'header' => 'F.V.',
                                 ),
                                 array(
-                                'name' => 'cantidad_malo',
-                                'header' => 'M',
-                                'class' => 'booster.widgets.TbEditableColumn',
-                                'editable' => array(
-                                    'type' => 'text',
-                                    'url' => $this->createUrl('detalleCompra/editItem'),
-                                    'htmlOptions'=>array(
-                                        'style'=> 'text-align: right',
-                                        //'ajax'=>array('update'=>'#button-column',),
-                                        
-                                        ),
-                                    //'success'=>'updateRow'
-                                    //'success'=>'function(link,success,data){ if(success) window.location.reload();',
-                                    )
+                                    'name' => 'cantidad_bueno',
+                                    'header' => 'B',
+                                ),
+                                array(
+                                    'name' => 'cantidad_malo',
+                                    'header' => 'M',
                                 ),
                                 array(
                                     'name'=>'observacion',
                                     'header'=>'Obs.',
-                                    'class' => 'booster.widgets.TbEditableColumn',
-                                    'editable' => array(
-                                    'type' => 'textarea',
-                                    'url' => $this->createUrl('detalleCompra/editItem'),
-                                   // 'success'=>'updateGrilla'
-                                    //'success'=>'function(link,success,data){ if(success) window.location.reload();',
-                                    )
-
                                 ),
                                 array(
                                     'name'=>'estado',
@@ -248,40 +172,39 @@
                                 array(
                                     'name'=>'precio_unitario',
                                     'header'=>'P.U.',
-                                    'class' => 'booster.widgets.TbEditableColumn',
-                                    'editable' => array(
-                                    'type' => 'text',
-                                    'url' => $this->createUrl('detalleCompra/editPrecioUnitario'),
-                                    'htmlOptions'=>array('style'=> 'text-align: right'),
-                                    'success'=>'updateGrilla',
-                                     //'disabled'=>'($data->estado>2) ? false : true',
-                                     'apply' => '($data->estado>2) ? false : true', //deshabilita la edición 
-//                                      
-                                        
-                                )),
+                                ),
                                 array(
                                     'name'=>'subtotal',
                                     'header'=>'Subtotal',
-                                    'htmlOptions'=>array('style'=> 'text-align: right')
+                                    'htmlOptions'=>array('style'=> 'text-align: right'),
+                                    'class'=>'booster.widgets.TbTotalSumColumnCurrency',
+                                    'footerHtmlOptions'=>array('style'=> 'text-align: right'),
                                 ),
                                 array(
                                     'name'=>'impuesto',
                                     'header'=>'IGV',
-                                    'htmlOptions'=>array('style'=> 'text-align: right')
+                                    'htmlOptions'=>array('style'=> 'text-align: right'),
+                                    'class'=>'booster.widgets.TbTotalSumColumnCurrency',
+                                    'footerHtmlOptions'=>array('style'=> 'text-align: right'),
                                 ),
                                 array(
                                     'name'=>'total',
                                     'header'=>'Total',
-                                    'htmlOptions'=>array('style'=> 'text-align: right')
+                                    'htmlOptions'=>array('style'=> 'text-align: right'),
+                                    'class'=>'booster.widgets.TbTotalSumColumnCurrency',
+                                    'footerHtmlOptions'=>array('style'=> 'text-align: right'),
                                 ),
 
                 array(
                     'header'=>'Acción',
                     'class'=>'booster.widgets.TbButtonColumn',
-                    'template'=>'{delete} {obs}',
+                    'template'=>'{delete} {obs}{update}',
                     'buttons'=>array(
                         'delete'=>array(
                             'url'=>'Yii::app()->createUrl("detalleCompra/delete", array("id"=>$data->id))',
+                        ),
+                        'update'=>array(
+                            'click'=>'function(){updateItem($(this).attr("href")); $("#dialogClassroom").dialog("open");return false;}'
                         ),
                         'obs'=>array(
                             'label'=>'<i class="glyphicon glyphicon-exclamation-sign"></i>',
