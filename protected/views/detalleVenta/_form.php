@@ -6,34 +6,15 @@
                 // refresh your grid
                 $.fn.yiiGridView.update('detalle-venta-grid');
         }
-        //muestra errores del form luego de la validación
-        function formErrors(data,form){
-        var summary = '';
-        summary="<p>Please solve following errors:</p>";
-
-        $.each(data, function(key, val) {
-        $(form+" #"+key+"_em_").html(val.toString());
-        $(form+" #"+key+"_em_").show();
-
-        $("#"+key).parent().addClass("row error");
-        summary = summary + "<ul><li>" + val.toString() + "</li></ul>";
-        });
-        $(form+"_es_").html(summary.toString());
-        $(form+"_es_").show();
-
-        $("[id^='update-button']").show();
-        $('#ajax-status').hide();//css({display:'none'});
-        $('#ajax-status').text('');
-        }
         
-        //esconde los errores del form si la validación es correcta
-        function hideFormErrors(form){
-        //alert (form+"_es_");
-        $(form+"_es_").html('');
-        $(form+"_es_").hide();
-        $("[id$='_em_']").html('');
-        }
 </script>
+
+<?php
+$baseUrl = Yii::app()->baseUrl;
+$cs = Yii::app()->getClientScript();
+$cs->registerScriptFile($baseUrl.'/js/validacionAjaxForm.js',CClientScript::POS_HEAD);
+//$cs->registerCssFile($baseUrl.'/css/style.css');
+?>
 
 <?php
 //script para boton delete 
@@ -164,8 +145,9 @@ $("#delete").click(function(){
                             'success'=>'function(data){
                             if(data.status=="success")
                             {      
-                                    updateGrilla(data);
-                                    hideFormErrors(form="#detalle-venta-form");
+                                    window.location.reload();
+                                    //updateGrilla(data);
+                                    //hideFormErrors(form="#detalle-venta-form");
                                     //callback(status=data.status);
                                     
                             }else{
@@ -220,6 +202,7 @@ $("#delete").click(function(){
                     array(
                                 'name'=>'precio_unitario',
                                 'header'=>'P.U.',
+                                'footer'=>'Subtotal',
                                 'htmlOptions'=>array('style'=> 'text-align: right'),
                                 'class' => 'booster.widgets.TbEditableColumn',
                                     'editable' => array(
@@ -228,11 +211,15 @@ $("#delete").click(function(){
                                         'success'=>'updateGrilla'
                                     )
                             ),
+                            
                     array(
                                 'name'=>'subtotal',
                                 //'header'=>'Subtotal',
-                                'htmlOptions'=>array('style'=> 'text-align: right')
+                                'htmlOptions'=>array('style'=> 'text-align: right'),
+                                //'class'=>'booster.widgets.TbTotalSumColumnCurrency'
                             ),
+                            
+                    
                     
                     //'impuesto',
                     //'total',

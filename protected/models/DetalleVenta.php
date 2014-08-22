@@ -175,4 +175,41 @@ class DetalleVenta extends Erp_startedActiveRecord//CActiveRecord
 		
 		
 	}
+        
+        /**
+         * cambia de estado del item detalle compra y compra luego de guardar/actualizar
+         */
+        public function afterSave(){
+             if(!$this->isNewRecord)// verfica que no sea registro nuevo
+            {
+                 //obtiendo compra
+                 $_compra= Compra::model()->findByPk($this->compra_id);
+                //Verificando que si existen items Observados 
+                if($this->AllOK()) 
+                    $_compra->estado=1; //Revisado OK
+                else
+                    $_compra->estado=2; //observado
+                
+                
+                
+                //actualizando el total, base imponible e impuesto de la compra
+                $_total=$this->SumaTotal()['total'];
+                //$_bi=$_total/((int)Yii::app()->params['impuesto']*0.01 + 1);
+                $_bi=  Producto::model()->getSubtotal($_total);
+                $_compra->importe_total=$_total;//$this->SumaTotal()['total'];
+                $_compra->base_imponible=$_bi; 
+                $_compra->impuesto=$_total-$_bi;
+               
+                //Verificando que todos los item se hayan almacenado
+                if($this->AllIntoStore())
+                    $_compra->estado=4; // Cambiar estado a Almacenado
+                
+                $_compra->save(); //actualizando el estado de compra
+                
+                
+                
+                
+            }
+            parent::afterSave();
+        }
 }
