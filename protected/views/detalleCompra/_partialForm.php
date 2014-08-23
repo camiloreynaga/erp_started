@@ -15,7 +15,7 @@
 
 <?php 
 echo $form->errorSummary($model);
-$data=CHtml::listData(Producto::model()->getProductosStock(), "id","text");
+$data=CHtml::listData(Producto::model()->getProductos(), "id","text");
 if($model->isNewRecord)
 {
         echo $form->select2Group(

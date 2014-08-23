@@ -195,8 +195,7 @@ class DetalleCompra extends Erp_startedActiveRecord//CActiveRecord
 //        }
         
         /**
-         * actualiza la suma de los totales, subtotales e impuesto para la compra 
-         * actual
+         Obtiene la suma de totales de los items del detalle de compra.
          */
         public function SumaTotal(){
             
@@ -293,8 +292,8 @@ class DetalleCompra extends Erp_startedActiveRecord//CActiveRecord
          * cambia de estado del item detalle compra y compra luego de guardar/actualizar
          */
         public function afterSave(){
-             if(!$this->isNewRecord)// verfica que no sea registro nuevo
-            {
+            // if(!$this->isNewRecord)// verfica que no sea registro nuevo
+            //{
                  //obtiendo compra
                  $_compra= Compra::model()->findByPk($this->compra_id);
                 //Verificando que si existen items Observados 
@@ -322,7 +321,7 @@ class DetalleCompra extends Erp_startedActiveRecord//CActiveRecord
                 
                 
                 
-            }
+            //}
             parent::afterSave();
         }
 }

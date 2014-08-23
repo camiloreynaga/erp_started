@@ -58,6 +58,9 @@ class DetalleCompraController extends Controller
             ));
         }
         
+        /**
+         * Calcula  el total, subtotal Precio Unitario 
+         */
         protected function PuConIGV($model)
         {
             $model->total=$model->precio_unitario*$model->cantidad;
@@ -73,11 +76,11 @@ class DetalleCompraController extends Controller
         */
         public function actionCreate()
         {
+            //crea un item para el detalle de compra
             $model=new DetalleCompra;
             $model->compra_id= $this->_Compra->id;
             // Uncomment the following line if AJAX validation is needed
             // $this->performAjaxValidation($model);
-
             if(isset($_POST['DetalleCompra']))
             {
                 $model->attributes=$_POST['DetalleCompra'];
@@ -86,13 +89,14 @@ class DetalleCompraController extends Controller
                 $model->impuesto=$model->subtotal*((int)Yii::app()->params['impuesto']*0.01);
                 $model->total=$model->subtotal+$model->impuesto;
                  */
+                //Precio con IGV Incluido
                 $model->total=$model->precio_unitario*$model->cantidad;
                 $model->subtotal= round($model->total/((int)Yii::app()->params['impuesto']*0.01+1));
                 $model->impuesto= round($model->total-$model->subtotal);
                 
                 if($model->save())
                 {
-                    echo CJSON::encode(array(
+                        echo CJSON::encode(array(
                                 'status'=>'success', 
                                 ));
                            Yii::app()->end();// exit;
@@ -144,16 +148,16 @@ class DetalleCompraController extends Controller
                     'div'=>$this->renderPartial('_partialForm',array('model'=>$model),true)
             ));
         }
-/*
+        /**
          * Edita la cantidad de la columna 
          * además actualiza los calculos de subtotal,impuesto y total
          */
         public function actionEditCantidad()
         {
-         Yii::import('booster.components.TbEditableSaver');
-         $es = new TbEditableSaver('DetalleCompra');
-//         /$_cantidad= $es->value;
-          $es->onBeforeUpdate= function($event) {
+                    Yii::import('booster.components.TbEditableSaver');
+                    $es = new TbEditableSaver('DetalleCompra');
+           //         /$_cantidad= $es->value;
+                    $es->onBeforeUpdate= function($event) {
 
                    $model=$this->loadModel(yii::app()->request->getParam('pk')); //obteniendo el Model de detalleCompra
                    
@@ -216,6 +220,9 @@ class DetalleCompraController extends Controller
            // DetalleCompra::model()->actualizarEstado(yii::app()->request->getParam('pk'));
         }
         
+        /**
+         * 
+         */
         public function actionEditItem()
         {
          Yii::import('booster.components.TbEditableSaver');
@@ -229,8 +236,6 @@ class DetalleCompraController extends Controller
             };  
             
             $es->update();
-            
-            
         
         }
         
@@ -254,7 +259,7 @@ class DetalleCompraController extends Controller
                 throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
             }
 
-            /**
+        /**
             * Lists all models.
             */
         public function actionIndex()
@@ -306,6 +311,8 @@ class DetalleCompraController extends Controller
             }
         }
         
+        /**
+         */
         public function filterCompraContext($filterChain)
         {
             //set the project identifier based on either the GET or POST input
@@ -348,11 +355,10 @@ class DetalleCompraController extends Controller
                 throw new CHttpException(404,'The requested compra does not exist.');
                 }
             }
-            
             return $this->_Compra;
         }
         
-        /*
+        /**
          * finaliza El registro de compra
          */
          public function actionFinalizar($id)

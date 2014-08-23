@@ -177,39 +177,55 @@ class DetalleVenta extends Erp_startedActiveRecord//CActiveRecord
 	}
         
         /**
+         * Obtiene la suma de totales de los items del detalle de venta.
+         */
+        public function SumaTotal(){
+            
+            $criteria = new CDbCriteria();
+		$criteria->select='sum(total) as total'; //lote
+                //$criteria->addCondition('cantidad_disponible > 0');
+                $criteria->condition='venta_id='.$this->venta_id;
+               //$lista= $this->find($criteria);
+                return $this->find($criteria);
+        }
+        
+         /**
+         * verifica que todos los items esten fuera de almacen         */
+        public function AllOutStore()
+        {
+            // verficiar que todos los items hayan salido de almacen
+            $retorna = true;
+            $_count = DetalleVenta::model()->count('venta_id=:venta_id and estado!=:estado', array(':estado'=>4,':venta_id'=>$this->venta_id));
+            if($_count==0)
+                $retorna=true;
+            else {
+                $retorna=false;
+            }
+            return $retorna;
+                
+        }
+        
+        
+        /**
          * cambia de estado del item detalle compra y compra luego de guardar/actualizar
          */
         public function afterSave(){
-             if(!$this->isNewRecord)// verfica que no sea registro nuevo
-            {
-                 //obtiendo compra
-                 $_compra= Compra::model()->findByPk($this->compra_id);
-                //Verificando que si existen items Observados 
-                if($this->AllOK()) 
-                    $_compra->estado=1; //Revisado OK
-                else
-                    $_compra->estado=2; //observado
-                
-                
-                
-                //actualizando el total, base imponible e impuesto de la compra
-                $_total=$this->SumaTotal()['total'];
-                //$_bi=$_total/((int)Yii::app()->params['impuesto']*0.01 + 1);
-                $_bi=  Producto::model()->getSubtotal($_total);
-                $_compra->importe_total=$_total;//$this->SumaTotal()['total'];
-                $_compra->base_imponible=$_bi; 
-                $_compra->impuesto=$_total-$_bi;
-               
-                //Verificando que todos los item se hayan almacenado
-                if($this->AllIntoStore())
-                    $_compra->estado=4; // Cambiar estado a Almacenado
-                
-                $_compra->save(); //actualizando el estado de compra
-                
-                
-                
-                
-            }
+            //obtiendo venta
+            $_venta= Venta::model()->findByPk($this->venta_id);
+
+            //actualizando el total, base imponible e impuesto de la venta
+            $_total=$this->SumaTotal()['total'];
+            $_bi=  Producto::model()->getSubtotal($_total);
+            $_venta->importe_total=$_total;//$this->SumaTotal()['total'];
+            $_venta->base_imponible=$_bi; 
+            $_venta->impuesto=$_total-$_bi;
+
+            //Verificando que todos los item se hayan almacenado
+           // if($this->AllIntoStore())
+             //   $_venta->estado=4; // Cambiar estado a Almacenado
+
+            $_venta->save(); //actualizando el estado de venta
+
             parent::afterSave();
         }
 }

@@ -171,6 +171,12 @@ class DetalleVentaController extends Controller
             
             };
             
+            $es->onAfterUpdate=function($event){
+                $model=$this->loadModel(yii::app()->request->getParam('pk'));
+                //$model->
+                ProductoAlmacen::model()->actualizarCantidadDisponible($model,1); 
+            };
+            
             $es->update();
         }
         else
