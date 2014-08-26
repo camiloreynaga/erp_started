@@ -42,8 +42,11 @@ class DetalleVenta extends Erp_startedActiveRecord//CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
+                        array('cantidad','comprobarCantidadDisponible','on'=>'create'), // valida la cantidad ingresada
+                        array('cantidad','validaCantidadModificada','on'=>'update'), // valida la cantidad a reemplazar 
                         array('venta_id,producto_id,cantidad,precio_unitario,lote','required'),
 			array('venta_id, producto_id, cantidad, create_user_id, update_user_id', 'numerical', 'integerOnly'=>true),
+                        array('precio_unitario','numerical' ),
 			array('precio_unitario, subtotal, impuesto, total', 'length', 'max'=>10),
 			array('lote', 'length', 'max'=>50),
 			array('fecha_vencimiento, create_time, update_time', 'safe'),
@@ -89,6 +92,33 @@ class DetalleVenta extends Erp_startedActiveRecord//CActiveRecord
 			'update_user_id' => 'Update User',
 		);
 	}
+        /**
+         * Validación de cantidad disponible
+         */
+        public function comprobarCantidadDisponible($attribute,$params){
+            //Cantidad disponible >= cantidad
+            $_cantidad_disponible= ProductoAlmacen::model()->cantidad_lote2
+                    ($this->attributes['producto_id'],$this->attributes['lote']);
+            if($_cantidad_disponible < $this->attributes['cantidad'])
+            {
+                $this->addError($attribute, 'Cantidad ingresada es mayor a la cantidad disponible para venta. Cantidad disponible: '.$_cantidad_disponible);
+            }
+        }
+        
+        /**
+         * Validación de cantidad disponible para modificación
+         * (suma la cantidad disponible + la cantidad registrada).
+         */
+        public function validaCantidadModificada($attribute,$params){
+            $_cantidad_disponible= ProductoAlmacen::model()->cantidad_lote2
+                    ($this->attributes['producto_id'],$this->attributes['lote']);
+            $_cantidad_anterior = $this->findByPk($this->id)['cantidad'];
+            
+            if(($_cantidad_disponible + $_cantidad_anterior) < $this->attributes['cantidad'])
+            {
+                $this->addError($attribute, 'Cantidad ingresada es mayor a la cantidad disponible para venta. Cantidad disponible: '. ($_cantidad_disponible + $_cantidad_anterior).'.');
+            }
+        }
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.

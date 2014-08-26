@@ -224,13 +224,15 @@ class Producto extends Erp_startedActiveRecord// CActiveRecord
         public function getProductos()
         {
             $criteria= new CDbCriteria();
+            
             $criteria->condition='descontinuado=0';
             $criteria->with=array('r_fabricante');
             //$criteria->together=true;
             $_lab= Fabricante::model()->tablename();
+           
            // $criteria->select='t.id,lab.fabricante as lab,t.nombre,t.stock';
             $criteria->join='inner join '.$_lab.' lab on lab.id = t.fabricante_id ';
-            
+           
             $lista= $this->model()->findAll($criteria); 
               $resultados = array();
               foreach ($lista as $list){
@@ -252,6 +254,7 @@ class Producto extends Erp_startedActiveRecord// CActiveRecord
             $criteria->with=array('r_fabricante');
             //$criteria->together=true;
             $_lab= Fabricante::model()->tablename();
+            
            // $criteria->select='t.id,lab.fabricante as lab,t.nombre,t.stock';
             $criteria->join='inner join '.$_lab.' lab on lab.id = t.fabricante_id ';
             
@@ -261,6 +264,34 @@ class Producto extends Erp_startedActiveRecord// CActiveRecord
                 $resultados[] = array(
                          'id'=>$list->id,
                          'text'=> $list->nombre.'-'.$list->r_fabricante->fabricante. ' (STOCK:'.$list->stock.')',
+              ); 
+            
+              }
+              return $resultados;   
+        }
+        
+        /**
+         * Recuperar los productos con cantidad Disponible de venta.
+         */
+        public function getProductosStockDisponible()
+        {
+            $criteria= new CDbCriteria();
+            $criteria->condition='descontinuado=0 and stock>0';
+            $criteria->with=array('r_fabricante');
+            //$criteria->together=true;
+            //$_lab= Fabricante::model()->tablename();
+            $_producto_almacen= ProductoAlmacen::model()->tablename();
+            $criteria->select='t.id,t.fabricante_id ,t.nombre,sum(prod_alm.cantidad_disponible) as stock';
+            $criteria->group='producto_id';
+            //$criteria->join='inner join '.$_lab.' lab on lab.id = t.fabricante_id ';
+            $criteria->join='inner join '.$_producto_almacen.' prod_alm on prod_alm.producto_id= t.id';
+            
+            $lista= $this->model()->findAll($criteria); 
+              $resultados = array();
+              foreach ($lista as $list){
+                $resultados[] = array(
+                         'id'=>$list->id,
+                         'text'=> $list->nombre.' - '.$list->r_fabricante->fabricante. ' (DISPONIBLE:'.$list->stock.')',
               ); 
             
               }

@@ -5,6 +5,7 @@
                 $("#Items").html(data);
                 // refresh your grid
                 $.fn.yiiGridView.update('detalle-venta-grid');
+                window.location.reload();
         }
         
 </script>
@@ -76,7 +77,7 @@ $("#delete").click(function(){
                                     
                                     'asDropDownList' => true,
                                     //'data'      => CHtml::listData(Producto::model()->findAll('descontinuado=0'), "id","nombre"),
-                                    'data'      => CHtml::listData(Producto::model()->getProductosStock(), "id","text"),
+                                    'data'      => CHtml::listData(Producto::model()->getProductosStockDisponible(), "id","text"),
 					'options' => array(
 						'placeholder' =>'Seleccione producto', 
                                                 //'tags'=>'de',

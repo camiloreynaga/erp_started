@@ -27,6 +27,7 @@ class m140520_224733_create_begining_compras_tables extends CDbMigration
                 'ciudad'=>'varchar(50)',
                 'telefono'=>'varchar(50)',
                 'linea_credito'=>'decimal(10,2) DEFAULT 0',
+                'credito_disponible'=>'decimal(10,2) DEFAULT 0',
                 'activo'=>'bool DEFAULT 0', // 0=si ;1=no
                 
                 //

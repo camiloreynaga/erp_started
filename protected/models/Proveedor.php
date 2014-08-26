@@ -12,6 +12,7 @@
  * @property string $ciudad
  * @property string $telefono
  * @property string $linea_credito
+ * @property string $credito_disponible
  * @property integer $activo
  * @property string $create_time
  * @property integer $create_user_id
@@ -44,11 +45,11 @@ class Proveedor extends Erp_startedActiveRecord//CActiveRecord
 			array('nombre_rz, ciudad, telefono', 'length', 'max'=>50),
 			array('ruc', 'length', 'max'=>11),
 			array('contacto, direccion', 'length', 'max'=>100),
-			array('linea_credito', 'length', 'max'=>10),
+			array('linea_credito,credito_disponible', 'length', 'max'=>10),
 			array('create_time, update_time', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, nombre_rz, ruc, contacto, direccion, ciudad, telefono, linea_credito, activo, create_time, create_user_id, update_time, update_user_id', 'safe', 'on'=>'search'),
+			array('id, nombre_rz, ruc, contacto, direccion, ciudad, telefono, linea_credito,credito_disponible, activo, create_time, create_user_id, update_time, update_user_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -79,6 +80,7 @@ class Proveedor extends Erp_startedActiveRecord//CActiveRecord
 			'ciudad' => 'Ciudad',
 			'telefono' => 'Telefono',
 			'linea_credito' => 'Linea Credito',
+                        'credito_disponible'=>'Credito Disponible',
 			'activo' => 'Activo',
 			'create_time' => 'Create Time',
 			'create_user_id' => 'Create User',
@@ -113,6 +115,7 @@ class Proveedor extends Erp_startedActiveRecord//CActiveRecord
 		$criteria->compare('ciudad',$this->ciudad,true);
 		$criteria->compare('telefono',$this->telefono,true);
 		$criteria->compare('linea_credito',$this->linea_credito,true);
+                $criterio->compare('credito_disponible',$this->credito_disponible,true);
 		$criteria->compare('activo',$this->activo);
 		$criteria->compare('create_time',$this->create_time,true);
 		$criteria->compare('create_user_id',$this->create_user_id);

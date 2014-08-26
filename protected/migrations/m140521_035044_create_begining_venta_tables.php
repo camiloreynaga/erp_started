@@ -28,6 +28,7 @@ class m140521_035044_create_begining_venta_tables extends CDbMigration
                 'telefono'=>'varchar(50)',
                 'activo'=>'bool DEFAULT 0', // 0=si ;1=no
                 'linea_credito'=>'decimal(10,2) DEFAULT 0',
+                'credito_disponible'=>'decimal(10,2) DEFAULT 0',
 //
                 'create_time'=>'datetime DEFAULT NULL',
                 'create_user_id'=> 'int(11) DEFAULT NULL',

@@ -96,6 +96,7 @@ class DetalleCompraController extends Controller
                 
                 if($model->save())
                 {
+                        $model->actualizarEstado(); //Actualiza el estado del item para detalle de compra
                         echo CJSON::encode(array(
                                 'status'=>'success', 
                                 ));
@@ -133,8 +134,15 @@ class DetalleCompraController extends Controller
             if(isset($_POST['DetalleCompra']))
             {
                 $model->attributes=$_POST['DetalleCompra'];
+                
+                //Precio con IGV Incluido
+                $model->total=$model->precio_unitario*$model->cantidad;
+                $model->subtotal= round($model->total/((int)Yii::app()->params['impuesto']*0.01+1));
+                $model->impuesto= round($model->total-$model->subtotal);
+                
                 if($model->save())
                 {
+                    $model->actualizarEstado(); //Actualiza el estado del item para detalle de compra
                     echo CJSON::encode(array(
                         'status'=>'success',
                         'div'=>'La información fué guardada exitosamente.'
@@ -325,7 +333,7 @@ class DetalleCompraController extends Controller
                 if (isset ($_POST['pid']))
                     $Compra_Id=$_POST['pid'];
                 
-                $this->loadOrdenCompra($Compra_Id);
+                $this->loadCompra($Compra_Id);
                 
                 //complete the running of other filters and execute the requested action
                 $filterChain->run();
@@ -344,12 +352,12 @@ class DetalleCompraController extends Controller
         * @project_id the primary identifier of the associated Project
         * @return object the Project data model based on the primary key
         */
-        protected function loadOrdenCompra($oc_id)
+        protected function loadCompra($id)
         {
             //if the project property is null, create it based on input id 
             if($this->_Compra===null)
             {
-                $this->_Compra=  OrdenCompra::model()->findByPk($oc_id);
+                $this->_Compra=  Compra::model()->findByPk($id);
                 if ($this->_Compra===null)
                 {
                 throw new CHttpException(404,'The requested compra does not exist.');

@@ -53,6 +53,10 @@ return array(
    'Stock movements'=>'Movimientos en Almacén',
     
     //Sales
-    'Sale'=>'Venta'
+    'Sale'=>'Venta',
+    
+    //Credit
+    'This client do not have enough credit.'=>'Este cliente no tiene credito suficiente.',
+    'This Client do not have Credit line.'=>'Este cliente no tiene linea de credito',
 );
 ?>

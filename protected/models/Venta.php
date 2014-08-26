@@ -58,6 +58,7 @@ class Venta extends Erp_startedActiveRecord//CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
+                        array('forma_pago','comprobarLineaCredito'),
 			array('cliente_id, vendedor_id, forma_pago_id', 'required'),
 			array('cliente_id, vendedor_id, forma_pago_id, pedido_id,estado, estado_comprobante, estado_pago, create_user_id, update_user_id', 'numerical', 'integerOnly'=>true),
 			array('base_imponible, impuesto, importe_total', 'length', 'max'=>10),
@@ -67,7 +68,40 @@ class Venta extends Erp_startedActiveRecord//CActiveRecord
 			array('id, fecha_venta, cliente_id, vendedor_id, forma_pago_id, pedido_id, base_imponible, impuesto, importe_total, observacion,estado, estado_comprobante, estado_pago, create_time, create_user_id, update_time, update_user_id', 'safe', 'on'=>'search'),
 		);
 	}
-
+        
+        
+        /**
+         * validación para cantidad_bueno y cantidad_malo 
+         * @param type $attribute
+         * @param type $params
+         */
+        public function comprobarLineaCredito($attribute,$params){
+            if(!is_null($this->attributes['forma_pago_id'])&&!is_null($this->attributes['cliente_id']))
+            {
+                if($this->attributes['forma_pago_id']==1) //Verificando que forma de pago = credito
+                {
+                    $_cliente=Cliente::model()->findByPk($this->attributes['cliente_id']);
+                    if($_cliente->linea_credito >0) // si linea de credito > 0
+                    {
+                        if($_cliente->credito_disponible==0)
+                        {
+                            $this->addError ($attribute, yii::t('app',"This client do not have enough credit."));
+                        }
+                        //else
+                          //  $this->addError ($attribute, "Credit line, is not enough "); //
+                    }
+                    else
+                    {
+                        $this->addError ($attribute, yii::t('app',"This Client do not have Credit line.")); //
+                    }
+                        
+                        
+                }
+           
+            }
+        }
+        
+        
 	/**
 	 * @return array relational rules.
 	 */

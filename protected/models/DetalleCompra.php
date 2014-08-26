@@ -62,7 +62,8 @@ class DetalleCompra extends Erp_startedActiveRecord//CActiveRecord
                         array('cantidad_bueno,cantidad_malo','comprobarCantidad'),
                         array('cantidad_bueno,cantidad_malo','compare','compareAttribute'=>'cantidad','operator'=>'<='),
 			array('compra_id, producto_id, cantidad, cantidad_bueno, cantidad_malo, estado, create_user_id, update_user_id, comprobante_id', 'numerical', 'integerOnly'=>true),
-			array('compra_id,cantidad','required'),
+			array('precio_unitario','numerical'),
+                        array('compra_id,cantidad','required'),
                         array('lote', 'length', 'max'=>50),
 			array('precio_unitario, subtotal, impuesto, total', 'length', 'max'=>10),
 			array('fecha_vencimiento, observacion, create_time, update_time', 'safe'),
@@ -302,8 +303,7 @@ class DetalleCompra extends Erp_startedActiveRecord//CActiveRecord
                 else
                     $_compra->estado=2; //observado
                 
-                
-                
+                               
                 //actualizando el total, base imponible e impuesto de la compra
                 $_total=$this->SumaTotal()['total'];
                 //$_bi=$_total/((int)Yii::app()->params['impuesto']*0.01 + 1);
@@ -317,8 +317,6 @@ class DetalleCompra extends Erp_startedActiveRecord//CActiveRecord
                     $_compra->estado=4; // Cambiar estado a Almacenado
                 
                 $_compra->save(); //actualizando el estado de compra
-                
-                
                 
                 
             //}

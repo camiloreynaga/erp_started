@@ -76,7 +76,7 @@
             $model->almacen_id =1; // almacen principal
             $model->_lote=$_detalle->lote;
             $model->_fecha_vencimiento=$_detalle->fecha_vencimiento;
-            $model->operacion=0;
+            $model->operacion=0; // 0= ingreso 
             //estado almacenado
              //$model->setScenario('create');
             if($model->save())                 
@@ -238,7 +238,68 @@
                 $_producto->save();
             }
         }
+        /**
+         * Incrementa el stock
+         * actualiza producto Almacen, Producto
+         */
+        protected function IncreaseStock($model){
+            // determinando si suma o resta cantidad
+            $cantidad= $model->operacion==0 ? $model->cantidad : $model->cantidad*(-1); 
+            //buscando registro en almacen por almacen, producto y lote
+            $_producto_almacen= ProductoAlmacen::model()->findByAttributes(array(
+                                'almacen_id'=>$model->almacen_id,//$almacen,
+                                'producto_id'=>$model->producto_id,//$producto,
+                                'lote'=>$model->_lote,//$lote
+                                    ));
+            if(is_null($_producto_almacen))
+            {
+                $_producto_almacen = new ProductoAlmacen();
+                $_producto_almacen->almacen_id=$model->almacen_id;
+                $_producto_almacen->producto_id=$model->producto_id;
+                $_producto_almacen->lote=$model->_lote;
+                $_producto_almacen->fecha_vencimiento=$model->_fecha_vencimiento;
+                $_producto_almacen->cantidad_disponible+=$cantidad; //modificando la cantidad disponible
+                $_producto_almacen->cantidad_real+=$cantidad; // modificando la cantidad real
+            }
+            else
+            {
+                $_producto_almacen->cantidad_disponible+=$cantidad; //modificando la cantidad disponible
+                $_producto_almacen->cantidad_real+=$cantidad; // modificando la cantidad real
+            }    
+            if($_producto_almacen->save()) //guardando datos tbl_producto_almacen
+            {
+                $model->saldo_stock=$_producto_almacen->cantidad_real;//$cantidad; //registra el saldo stock para el movimiento de almacen
+                $model->save();
+                $_producto= Producto::model()->findByPk($model->producto_id); //obteniendo producto desde id
+                $_producto->stock+=$cantidad; // actualizando stock en producto
+                $_producto->save();
+            }
+        }
         
+        /**
+         * Decrementa el stock 
+         * actualiza producto Almacen, producto, 
+         */
+        protected function DecreaseStock($model)
+        {
+            $cantidad= $model->cantidad*(-1); 
+            $_producto_almacen= ProductoAlmacen::model()->findByAttributes(array(
+                                'almacen_id'=>$model->almacen_id,//$almacen,
+                                'producto_id'=>$model->producto_id,//$producto,
+                                'lote'=>$model->_lote,//$lote
+                                    ));
+            
+            $_producto_almacen->cantidad_real+=$cantidad;
+            if($_producto_almacen->save())
+            {
+                $model->saldo_stock= $_producto_almacen->cantidad_real;
+                $model->save();
+                 $_producto= Producto::model()->findByPk($model->producto_id); //obteniendo producto desde id
+                $_producto->stock+=$cantidad; // actualizando stock en producto
+                $_producto->save();
+            }
+                
+        }
 
         public function actionDetalleCompra()
         {

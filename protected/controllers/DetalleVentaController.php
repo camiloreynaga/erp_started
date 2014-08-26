@@ -63,7 +63,7 @@ class DetalleVentaController extends Controller
         */
         public function actionCreate()
         {
-            $model=new DetalleVenta;
+            $model=new DetalleVenta('create');
             $model->venta_id=$this->_venta->id;
             // Uncomment the following line if AJAX validation is needed
             // $this->performAjaxValidation($model);
@@ -76,10 +76,10 @@ class DetalleVentaController extends Controller
                 $model->impuesto= round($model->subtotal*((int)Yii::app()->params['impuesto']*0.01));
                 $model->total= round($model->subtotal+$model->impuesto);
                 //cantidad disponible para el producto almacen
-                $_cantidad_alm= ProductoAlmacen::model()->cantidad_lote2($model->producto_id,$model->lote);
+//                $_cantidad_alm= ProductoAlmacen::model()->cantidad_lote2($model->producto_id,$model->lote);
                 
-                if($_cantidad_alm>=$model->cantidad)
-                {
+//                if($_cantidad_alm>=$model->cantidad)
+//                {
                     if($model->save())
                     {
                         //actualizar la cantidad disponible en ProductoAlmacen
@@ -97,14 +97,14 @@ class DetalleVentaController extends Controller
                             echo $error;
                         Yii::app()->end();
                     }
-                }
-                else{
-                    echo CJSON::encode(array(
-                                'val' =>'La Cantidad ingresada excede a la cantidad disponible de '.$_cantidad_alm
-                            ));
-                           Yii::app()->end();// exit;
-                    //$model->addError('cantidad','La cantidad seleccionada excede el total disponible.');
-                }
+//                }
+//                else{
+//                    echo CJSON::encode(array(
+//                                'val' =>'La Cantidad ingresada excede a la cantidad disponible de '.$_cantidad_alm
+//                            ));
+//                           Yii::app()->end();// exit;
+//                    //$model->addError('cantidad','La cantidad seleccionada excede el total disponible.');
+//                }
             }
             else
             {
@@ -151,16 +151,22 @@ class DetalleVentaController extends Controller
          Yii::import('booster.components.TbEditableSaver');
          $es = new TbEditableSaver('DetalleVenta');
 //         /$_cantidad= $es->value;
+         $es->scenario='update';
          
-         $model=$this->loadModel(yii::app()->request->getParam('pk')); //obteniendo el Model de detalleCompra
-         $_cantidad=  yii::app()->request->getParam('value');
+         //$model=$this->loadModel(yii::app()->request->getParam('pk')); //obteniendo el Model de detalleCompra
+         //$_cantidad=yii::app()->request->getParam('value');
          
-         $_cantidad_alm= ProductoAlmacen::model()->cantidad_lote2($model->producto_id,$model->lote);
-        if($_cantidad_alm>=$_cantidad){
+//         $_cantidad_alm= ProductoAlmacen::model()->cantidad_lote2($model->producto_id,$model->lote);
+//        if($_cantidad_alm>=$_cantidad){
              $es->onBeforeUpdate= function($event) {
 
                    $model=$this->loadModel(yii::app()->request->getParam('pk')); //obteniendo el Model de detalleCompra
+                   
+                   //incrementando la cantidad anterior para cantidad en producto almacen
+                   ProductoAlmacen::model()->actualizarCantidadDisponible($model, 0);
+                   
                    $_cantidad=  yii::app()->request->getParam('value');
+                   
                    $_subtotal= round($model->precio_unitario*$_cantidad);//calculando el subtotal
                    $_impuesto= round($_subtotal*((int)Yii::app()->params['impuesto']*0.01)); //calculando impuesto
                    $_total=$_subtotal+$_impuesto; //calculando total
@@ -173,16 +179,16 @@ class DetalleVentaController extends Controller
             
             $es->onAfterUpdate=function($event){
                 $model=$this->loadModel(yii::app()->request->getParam('pk'));
-                //$model->
+                //actualizando cantidad en producto almacen
                 ProductoAlmacen::model()->actualizarCantidadDisponible($model,1); 
             };
             
             $es->update();
-        }
-        else
-        {
-            $es->error('La cantidad seleccionada excede el total disponible de '.$_cantidad_alm);
-        }
+//        }
+//        else
+//        {
+//            $es->error('La cantidad seleccionada excede el total disponible de '.$_cantidad_alm);
+//        }
                 
         
          

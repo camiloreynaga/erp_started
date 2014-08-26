@@ -167,4 +167,21 @@ class ProductoAlmacen extends Erp_startedActiveRecord//CActiveRecord
             $_producto_almacen->save();
         }
         
+        
+        /**
+         * actualiza la cantidad real en tbl_producto_almacen
+         */
+        public function actualizarCantidadReal($model,$_operacion)
+        {
+            $_cantidad = $_operacion==0 ? $model->cantidad : $model->cantidad*(-1);
+            $_producto_almacen = ProductoAlmacen::model()->findByAttributes(array(
+                                'almacen_id'=>1,
+                                'producto_id'=>$model->producto_id,
+                                'lote'=>$model->lote,
+                
+                                ));
+            $_producto_almacen->cantidad_real+=$_cantidad;
+            $_producto_almacen->save();
+        }
+        
 }
