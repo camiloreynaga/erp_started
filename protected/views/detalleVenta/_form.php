@@ -51,7 +51,9 @@ $("#delete").click(function(){
         
 )); ?>
 
-<p class="help-block"><?php echo yii::t('app','Fields with') ;?> <span class="required">*</span> <?php echo yii::t('app','are required.') ;?></p>
+<p class="help-block"><?php echo yii::t('app','Fields with') ;?> <span class="required">*</span> <?php echo yii::t('app','are required.') ;?>
+<?php echo ' -  Forma de pago: '. $model->r_venta->r_forma_pago->forma_pago .' Monto Disponible: '.$model->r_venta->r_cliente->credito_disponible; ?>
+</p>
 
 <?php echo $form->errorSummary($model); ?>
 
@@ -61,8 +63,10 @@ $("#delete").click(function(){
         $htmlOptions=array(
           'ajax'=>array(
               'url'=>CController::createUrl('detalleVenta/lotes'),
+              //'url'=>CController::createUrl('detalleVenta/precios'),
               'type'=>'POST',
               'update'=>'#DetalleVenta_lote',
+              //'update'=>'#precio',
           ),  
         );
         
@@ -85,6 +89,20 @@ $("#delete").click(function(){
 						'tokenSeparators' => array(',', ' ')
 					),
                                         'htmlOptions'=>$htmlOptions,
+                                     'events'=>array(
+                                            'change'=>'js:function(element){
+                                                        var id=element.val;
+                                                        
+                                                        $.ajax({
+                                                        type:"post",
+                                                        data:{producto_id:id},
+                                                        url:"'.CController::createUrl('detalleVenta/precios').'",
+                                                        success: function(data){
+                                                        $("#precio").html(data);
+                                                        }    
+                                                    })
+                                                }'
+                                            )
 				)
 			)
 		);
@@ -95,6 +113,25 @@ $("#delete").click(function(){
 	<?php echo $form->DropDownListGroup($model,'lote',
                 array(
                     'widgetOptions'=>array(
+                        'htmlOptions'=>array(
+//                            'ajax'=>array(
+//                            'url'=>CController::createUrl('detalleVenta/precios'),
+//                            'type'=>'POST',
+//                            'update'=>'#precio',
+//                            ),
+                        ),
+//                        'events'=>array(
+//                            'change'=>'js:function (element){
+//                                //var
+//                                $.ajax({
+//                                //data:
+//                                url:"'.CController::createUrl('detalleVenta/precios').'",
+//                                success: function(data){
+//                                $("#precio").html(data);
+//                                }    
+//                                })
+//                                }'
+//                        )
                     //'data'=>CHtml::listData(TipoComprobante::model()->getTiposComprobante(),'id','comprobante'),
                     )
                 )
@@ -103,7 +140,7 @@ $("#delete").click(function(){
         ?>
         
         <?php echo $form->textFieldGroup($model,'cantidad',array('class'=>'span5')); ?>
-
+        <div id="precio"></div>
         <?php echo $form->textFieldGroup($model,'precio_unitario',array('class'=>'span5','maxlength'=>10)); ?>  
 	<?php 
 //        echo $form->datepickerGroup(
@@ -203,8 +240,9 @@ $("#delete").click(function(){
                     array(
                                 'name'=>'precio_unitario',
                                 'header'=>'P.U.',
-                                'footer'=>'Subtotal',
+                               // 'footer'=>'SUBTOTAL',
                                 'htmlOptions'=>array('style'=> 'text-align: right'),
+                                'footerHtmlOptions'=>array('style'=> 'text-align: right'),
                                 'class' => 'booster.widgets.TbEditableColumn',
                                     'editable' => array(
                                         'type' => 'text',
@@ -212,11 +250,15 @@ $("#delete").click(function(){
                                         'success'=>'updateGrilla'
                                     )
                             ),
+                          'subtotal',
+                          'impuesto',
                             
                     array(
-                                'name'=>'subtotal',
+                                'name'=>'total', 
+                                'footer'=> $model->r_venta->importe_total, //DetalleVenta::model()->SumaTotal(),
                                 //'header'=>'Subtotal',
                                 'htmlOptions'=>array('style'=> 'text-align: right'),
+                                'footerHtmlOptions'=>array('style'=> 'text-align: right'),
                                 //'class'=>'booster.widgets.TbTotalSumColumnCurrency'
                             ),
                             
@@ -257,6 +299,16 @@ $("#delete").click(function(){
     ?>
 </div>
 
+<?php
+    echo CHtml::Button('Confirmar venta',
+             array(
+                 'submit'=>array('detalleVenta/finalizar',
+                     'id'=>$model->venta_id,
+                     ),
+                     'confirm'=>'Esta seguro de proceder con la venta?',
+                 )
+             );
+?>
 <?php
     echo CHtml::Button('Confirmar venta',
              array(

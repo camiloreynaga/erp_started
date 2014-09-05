@@ -16,8 +16,8 @@
 <?php 
 echo $form->errorSummary($model);
 $data=CHtml::listData(Producto::model()->getProductos(), "id","text");
-if($model->isNewRecord)
-{
+//if($model->isNewRecord)
+//{
         echo $form->select2Group(
                 $model,'producto_id',
                 array(
@@ -25,15 +25,17 @@ if($model->isNewRecord)
                     'widgetOptions' => array(
                         'asDropDownList' => true,
                         'data'=> $data,
+                        //'htmlOptions' => array('disabled' => true),
                         'options' => array(
                             'placeholder' =>'Seleccione producto', 
+                            
                             'tokenSeparators' => array(',', ' ')
                 ))));
-}
-else
-{
-    echo $form->dropDownList($model,'producto_id',$data,array('prompt'=>'--Seleccione--'));
-}
+//}
+//else
+//{
+    //echo $form->dropDownList($model,'producto_id',$data,array('prompt'=>'--Seleccione--'));
+//}
         ?>
 
 	<?php echo $form->textFieldGroup($model,'cantidad',array('class'=>'span5')); ?>
@@ -70,9 +72,9 @@ else
 
 	<?php //echo $form->textFieldGroup($model,'estado',array('class'=>'span5')); ?>
 
-	<?php echo $form->textAreaGroup($model,'observacion',array('rows'=>6, 'cols'=>50, 'class'=>'span8')); ?>
-
 	<?php echo $form->textFieldGroup($model,'precio_unitario',array('class'=>'span5','maxlength'=>10)); ?>
+        
+        <?php echo $form->textAreaGroup($model,'observacion',array('rows'=>6, 'cols'=>50, 'class'=>'span8')); ?>
 
 	<?php 
         if($model->isNewRecord)

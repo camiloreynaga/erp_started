@@ -213,21 +213,22 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog', array( // the dialog
                                     'name'=>'subtotal',
                                     'header'=>'Subtotal',
                                     'htmlOptions'=>array('style'=> 'text-align: right'),
-                                    'class'=>'booster.widgets.TbTotalSumColumnCurrency',
+                                    //'class'=>'booster.widgets.TbTotalSumColumnCurrency',
                                     'footerHtmlOptions'=>array('style'=> 'text-align: right'),
                                 ),
                                 array(
                                     'name'=>'impuesto',
                                     'header'=>'IGV',
                                     'htmlOptions'=>array('style'=> 'text-align: right'),
-                                    'class'=>'booster.widgets.TbTotalSumColumnCurrency',
+                                    //'class'=>'booster.widgets.TbTotalSumColumnCurrency',
                                     'footerHtmlOptions'=>array('style'=> 'text-align: right'),
                                 ),
                                 array(
                                     'name'=>'total',
+                                    'footer'=> $model->r_compra->importe_total,
                                     'header'=>'Total',
                                     'htmlOptions'=>array('style'=> 'text-align: right'),
-                                    'class'=>'booster.widgets.TbTotalSumColumnCurrency',
+                                    //'class'=>'booster.widgets.TbTotalSumColumnCurrency',
                                     'footerHtmlOptions'=>array('style'=> 'text-align: right'),
                                 ),
 
@@ -244,8 +245,9 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog', array( // the dialog
                         ),
                         'obs'=>array(
                             'label'=>'<i class="glyphicon glyphicon-exclamation-sign"></i>',
-                            'url'=>'Yii::app()->createUrl("detalleCompra/upObs")',
-                            'visible'=>'$data->cantidad_malo>0 || $data->cantidad_bueno < $data->cantidad ',
+                            //'url'=>'Yii::app()->createUrl("detalleCompra/upObs")',
+                            //'visible'=>'$data->cantidad_malo>0 || $data->cantidad_bueno < $data->cantidad ',
+                            'visible'=>'$data->estado==2',
                             'options'=>array(
                                 'title'=>'Observado',
                                 

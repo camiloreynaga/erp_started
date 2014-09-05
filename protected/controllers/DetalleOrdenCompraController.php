@@ -87,10 +87,10 @@ class DetalleOrdenCompraController extends Controller
                 if($tmp==0)
                 {
                     //$model->orden_compra_id=$id;
-                    $model->total= round($model->precio_unitario*$model->cantidad);
+                    $model->total= round($model->precio_unitario*$model->cantidad,2);
                     //$compraItem->cantidad_disponible=$compraItem->cantidad;//agregando la cantidad disponible
-                    $model->subtotal= round($model->total/((int)Yii::app()->params['impuesto']*0.01 + 1));
-                    $model->impuesto= round($model->total-$model->subtotal);
+                    $model->subtotal= round($model->total/((int)Yii::app()->params['impuesto']*0.01 + 1),2);
+                    $model->impuesto= round($model->total-$model->subtotal,2);
                     if($model->save())
                     {
                         echo CJSON::encode(array(
@@ -186,8 +186,8 @@ class DetalleOrdenCompraController extends Controller
 
                    $model=$this->loadModel(yii::app()->request->getParam('pk')); //obteniendo el Model de detalleCompra
                    $_cantidad=  yii::app()->request->getParam('value');
-                   $_total= round($model->precio_unitario*$_cantidad);//calculando el total
-                   $_subtotal= round($_total/((int)Yii::app()->params['impuesto']*0.01 +1)); //calculando subtotal
+                   $_total= round($model->precio_unitario*$_cantidad,2);//calculando el total
+                   $_subtotal= round($_total/((int)Yii::app()->params['impuesto']*0.01 +1),2); //calculando subtotal
                    $_impuesto=$_total-$_subtotal; //calculando impuesto
                     
                    $event->sender->setAttribute('subtotal', $_subtotal);//Actualizando Cantidad

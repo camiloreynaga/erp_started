@@ -140,7 +140,9 @@ class ProductoAlmacen extends Erp_startedActiveRecord//CActiveRecord
          */
         public function cantidad_lote2($_producto,$_lote)
         {
-            $criteria = new CDbCriteria();
+            if(empty($_producto)!=true && empty($_lote)!=true)
+            {
+                $criteria = new CDbCriteria();
             $criteria->condition = 'producto_id='.$_producto.' and lote='."'".$_lote."'";
             $cantidad_lote=0;
             //$tmp= $this->findAll('producto_id=:id_producto and lote=:lote',array(':id_producto'=>$_producto,':lote'=>$_lote));
@@ -150,9 +152,14 @@ class ProductoAlmacen extends Erp_startedActiveRecord//CActiveRecord
                 $cantidad_lote+=$r->cantidad_disponible;
             }
             return $cantidad_lote;
+            }
+            
         }
         /**
          * actualiza la cantidad disponible en tbl_producto_almacen
+         * 0= incrementar otro valor decrementa
+         * $model = modelo para detalle venta
+         * $operacion = 0=suma otro valor resta
          */
         public function actualizarCantidadDisponible($model,$_operacion)
         {

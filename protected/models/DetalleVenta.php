@@ -42,6 +42,7 @@ class DetalleVenta extends Erp_startedActiveRecord//CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
+                        array('precio_unitario','validarCreditoDisponible'),
                         array('cantidad','comprobarCantidadDisponible','on'=>'create'), // valida la cantidad ingresada
                         array('cantidad','validaCantidadModificada','on'=>'update'), // valida la cantidad a reemplazar 
                         array('venta_id,producto_id,cantidad,precio_unitario,lote','required'),
@@ -97,12 +98,12 @@ class DetalleVenta extends Erp_startedActiveRecord//CActiveRecord
          */
         public function comprobarCantidadDisponible($attribute,$params){
             //Cantidad disponible >= cantidad
-            $_cantidad_disponible= ProductoAlmacen::model()->cantidad_lote2
-                    ($this->attributes['producto_id'],$this->attributes['lote']);
-            if($_cantidad_disponible < $this->attributes['cantidad'])
-            {
-                $this->addError($attribute, 'Cantidad ingresada es mayor a la cantidad disponible para venta. Cantidad disponible: '.$_cantidad_disponible);
-            }
+                $_cantidad_disponible= ProductoAlmacen::model()->cantidad_lote2
+                        ($this->attributes['producto_id'],$this->attributes['lote']);
+                if($_cantidad_disponible < $this->attributes['cantidad'])
+                {
+                    $this->addError($attribute, 'Cantidad ingresada es mayor a la cantidad disponible para venta. Cantidad disponible: '.$_cantidad_disponible);
+                }
         }
         
         /**
@@ -110,13 +111,39 @@ class DetalleVenta extends Erp_startedActiveRecord//CActiveRecord
          * (suma la cantidad disponible + la cantidad registrada).
          */
         public function validaCantidadModificada($attribute,$params){
-            $_cantidad_disponible= ProductoAlmacen::model()->cantidad_lote2
-                    ($this->attributes['producto_id'],$this->attributes['lote']);
-            $_cantidad_anterior = $this->findByPk($this->id)['cantidad'];
             
-            if(($_cantidad_disponible + $_cantidad_anterior) < $this->attributes['cantidad'])
+                $_cantidad_disponible= ProductoAlmacen::model()->cantidad_lote2
+                    ($this->attributes['producto_id'],$this->attributes['lote']);
+                $_cantidad_anterior = $this->findByPk($this->id)['cantidad'];
+
+                if(($_cantidad_disponible + $_cantidad_anterior) < $this->attributes['cantidad'])
+                {
+                    $this->addError($attribute, 'Cantidad ingresada es mayor a la cantidad disponible para venta. Cantidad disponible: '. ($_cantidad_disponible + $_cantidad_anterior).'.');
+                }
+            
+            
+        }
+        /**
+         * Validación de Credito disponible cuando forma de pago es credito
+         * @param type $attribute
+         * @param type $params
+         */
+        public function validarCreditoDisponible($attribute,$params)
+        {
+            //obteniendo venta
+            $_venta=Venta::model()->findByPk($this->venta_id);
+            //obteniendo el credito disponible
+            $_cliente= Cliente::model()->findByPk($_venta->cliente_id);
+            $_credito_disponible= $_cliente->credito_disponible;
+            
+            $_forma_pago=$_venta->forma_pago_id;
+            //comprueba que forma de pago es credito (id= 1)
+            if($_forma_pago==1)
             {
-                $this->addError($attribute, 'Cantidad ingresada es mayor a la cantidad disponible para venta. Cantidad disponible: '. ($_cantidad_disponible + $_cantidad_anterior).'.');
+                if($_credito_disponible< $this->attributes['cantidad']* $this->attributes['precio_unitario'])
+                {
+                    $this->addError($attribute, 'Credito Disponible insuficiente. Credito disponible: '.$_credito_disponible );
+                }
             }
         }
 
@@ -196,7 +223,7 @@ class DetalleVenta extends Erp_startedActiveRecord//CActiveRecord
                 foreach ($lista as $list){
                     $resultados[] = array(
                              'lote'=>$list->lote, 
-                             'text'=> 'LOTE:' .strtoupper($list->lote).' FV: '.$list->fecha_vencimiento. ' #'.$list->cantidad_disponible.'(UNDS)',
+                             'text'=> strtoupper($list->lote). ' [ #'.$list->cantidad_disponible.' - vence: '.$list->fecha_vencimiento.']',
                     ); 
                     
                 }
@@ -216,7 +243,7 @@ class DetalleVenta extends Erp_startedActiveRecord//CActiveRecord
                 //$criteria->addCondition('cantidad_disponible > 0');
                 $criteria->condition='venta_id='.$this->venta_id;
                //$lista= $this->find($criteria);
-                return $this->find($criteria);
+                return $this->find($criteria)['total'];
         }
         
          /**
@@ -235,6 +262,18 @@ class DetalleVenta extends Erp_startedActiveRecord//CActiveRecord
                 
         }
         
+        /**
+         * Obtiene el último precio de venta para un cliente
+         */
+        public function LastSalePrice($id_producto)
+        {
+            //$id_cliente
+            $criteria = new CDbCriteria();
+            $criteria->select='precio_unitario';
+            $criteria->condition='producto_id='.$id_producto.' and venta_id='.$this->venta_id;
+            $criteria->limit=1;
+            return $this->find($criteria)['precio_unitario'];
+        }
         
         /**
          * cambia de estado del item detalle compra y compra luego de guardar/actualizar
@@ -244,7 +283,7 @@ class DetalleVenta extends Erp_startedActiveRecord//CActiveRecord
             $_venta= Venta::model()->findByPk($this->venta_id);
 
             //actualizando el total, base imponible e impuesto de la venta
-            $_total=$this->SumaTotal()['total'];
+            $_total=$this->SumaTotal();
             $_bi=  Producto::model()->getSubtotal($_total);
             $_venta->importe_total=$_total;//$this->SumaTotal()['total'];
             $_venta->base_imponible=$_bi; 

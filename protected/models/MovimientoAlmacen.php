@@ -176,4 +176,5 @@ class MovimientoAlmacen extends Erp_startedActiveRecord//CActiveRecord
             return ProductoAlmacen::model()->findAll($criteria);
             //$criteria
         }
+        
 }

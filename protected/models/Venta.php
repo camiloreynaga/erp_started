@@ -35,11 +35,11 @@ class Venta extends Erp_startedActiveRecord//CActiveRecord
          * 
          */
          public $_estado=array(
-            '0'=>'PENDIENTE', // PENDIENTE DE REVISADO 
-            '1'=>'FACTURADO', // , // COMPROBANTE REGISTRADO
-            '2'=>'OBSERVADO', // ALGUN DATO REQUERIDO PENDIENTE
-            '3'=>'ANULADO',
-            '4'=>'DESPACHADO'
+            '0'=>'PENDIENTE', // VENTA EN PROCESO  (PENDIENTE) 
+            '1'=>'CONFIRMADO', // VENTA CONFIRMADO( SUCEPTIBLE A DESPACHO Y FACTURACION)
+            '2'=>'FACTURADO', // VENTA FACTURADA
+            //'3'=>'ANULADO', // VENTA ANULADA
+            '4'=>'DESPACHADO' //VENTA DESPACHADA
          );
     
 	/**
@@ -196,8 +196,8 @@ class Venta extends Erp_startedActiveRecord//CActiveRecord
 	}
         
         /**
-         * retorna las ordenes de compra pendientes
-         * @return type array de resultado ordenes de compra
+         * retorna las ventas pendientes
+         * @return type array de resultado ventas
          */
         public function getVenta()
         {

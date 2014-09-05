@@ -31,7 +31,7 @@
             'users'=>array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-            'actions'=>array('create','update'),
+            'actions'=>array('create','update','lineaCredito'),
             'users'=>array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -148,7 +148,32 @@
         'model'=>$model,
         ));
         }
-
+        
+        /**
+         * Muestra la linea de credito y credito disponible por cliente
+         */
+        public function actionLineaCredito()
+        {
+            //$model = $this->lo
+            $id_cliente = $_POST['Venta']['cliente_id'];
+            $_forma_pago=$_POST['Venta']['forma_pago_id'];
+            $_cliente= Cliente::model()->findByPk($id_cliente);
+            $_linea_credito= $_cliente->linea_credito;
+            $_credito_disponible= $_cliente->credito_disponible;
+            if($_forma_pago==1)
+            {
+                if($_linea_credito>0)
+                echo CHtml::encode("Credito disponible: ".$_credito_disponible." de: ".$_linea_credito);
+            else
+                echo CHtml::encode("CLIENTE SIN LINEA DE CREDITO");
+            }
+            else {
+                echo CHtml::encode("");
+            }
+            
+            
+        }
+        
         /**
         * Returns the data model based on the primary key given in the GET variable.
         * If the data model is not found, an HTTP exception will be raised.
@@ -156,10 +181,10 @@
         */
         public function loadModel($id)
         {
-        $model=Venta::model()->findByPk($id);
-        if($model===null)
-        throw new CHttpException(404,'The requested page does not exist.');
-        return $model;
+            $model=Venta::model()->findByPk($id);
+            if($model===null)
+            throw new CHttpException(404,'The requested page does not exist.');
+            return $model;
         }
 
         /**
@@ -168,10 +193,13 @@
         */
         protected function performAjaxValidation($model)
         {
-        if(isset($_POST['ajax']) && $_POST['ajax']==='venta-form')
-        {
-        echo CActiveForm::validate($model);
-        Yii::app()->end();
+            if(isset($_POST['ajax']) && $_POST['ajax']==='venta-form')
+            {
+            echo CActiveForm::validate($model);
+            Yii::app()->end();
+            }
         }
-        }
-        }
+        
+        
+        
+    }

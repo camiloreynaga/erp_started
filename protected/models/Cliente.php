@@ -115,7 +115,7 @@ class Cliente extends Erp_startedActiveRecord//CActiveRecord
 		$criteria->compare('telefono',$this->telefono,true);
 		$criteria->compare('activo',$this->activo);
 		$criteria->compare('linea_credito',$this->linea_credito,true);
-                $criteria->compare('credito_disponible',$this->Credito_disponible);
+                $criteria->compare('credito_disponible',$this->credito_disponible);
 		$criteria->compare('create_time',$this->create_time,true);
 		$criteria->compare('create_user_id',$this->create_user_id);
 		$criteria->compare('update_time',$this->update_time,true);
@@ -137,11 +137,28 @@ class Cliente extends Erp_startedActiveRecord//CActiveRecord
 		return parent::model($className);
 	}
         
+        /**
+         * muestra los clientes con estado activo
+         * @return type
+         */
          public function getClientes()
         {
             $criteria= new CDbCriteria();
             $criteria->condition='activo=0';
             
             return $this->findAll($criteria);
+        }
+        /**
+         * Actualiza la cantidad disponible
+         * @param type $model= modelo de detalle de venta
+         * @param type $operacion = 0 para sumar otro valor para restar
+         */
+        public function actualizarCreditoDisponible($model,$operacion)
+        {
+            $_monto = $operacion==0 ? $model->cantidad*$model->precio_unitario : 
+                $model->cantidad*$model->precio_unitario*(-1);
+            $_cliente = $this->findByPk($model->r_venta->cliente_id);
+            $_cliente->credito_disponible+=$_monto;
+            $_cliente->save();
         }
 }

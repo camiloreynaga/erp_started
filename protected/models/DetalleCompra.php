@@ -205,7 +205,7 @@ class DetalleCompra extends Erp_startedActiveRecord//CActiveRecord
                 //$criteria->addCondition('cantidad_disponible > 0');
                 $criteria->condition='compra_id='.$this->compra_id;
                //$lista= $this->find($criteria);
-                return $this->find($criteria);
+                return $this->find($criteria)['total'];
 //                $resultados = array();
 //                foreach ($lista as $list){
 //                    $resultados[] = array(
@@ -232,6 +232,7 @@ class DetalleCompra extends Erp_startedActiveRecord//CActiveRecord
             //verifica si cantidad_bueno = cantidad
             if(is_null($model->cantidad_bueno) || $model->cantidad_bueno<$model->cantidad) 
                  $retorna= false;
+            //verifica si existen algun item "malo"
             if($model->cantidad_malo>0) //!is_null($model->cantidad_malo)
                  $retorna= false;
             if(is_null($model->fecha_vencimiento))
@@ -244,9 +245,9 @@ class DetalleCompra extends Erp_startedActiveRecord//CActiveRecord
          */
         public function AllOK()
         {
-            // verficiar que todos los item sean diferentes de observado
+            // verficiar que todos los item esten en estado OK de observado
             $retorna = true;
-            $_count = DetalleCompra::model()->count('compra_id=:compra_id and estado=:estado', array(':estado'=>2,':compra_id'=>$this->compra_id));
+            $_count = DetalleCompra::model()->count('compra_id=:compra_id and estado!=:estado', array(':estado'=>1,':compra_id'=>$this->compra_id));
             if($_count==0)
                 $retorna=true;
             else {
@@ -305,7 +306,7 @@ class DetalleCompra extends Erp_startedActiveRecord//CActiveRecord
                 
                                
                 //actualizando el total, base imponible e impuesto de la compra
-                $_total=$this->SumaTotal()['total'];
+                $_total=$this->SumaTotal();
                 //$_bi=$_total/((int)Yii::app()->params['impuesto']*0.01 + 1);
                 $_bi=  Producto::model()->getSubtotal($_total);
                 $_compra->importe_total=$_total;//$this->SumaTotal()['total'];

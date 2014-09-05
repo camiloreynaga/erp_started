@@ -64,8 +64,8 @@ class DetalleCompraController extends Controller
         protected function PuConIGV($model)
         {
             $model->total=$model->precio_unitario*$model->cantidad;
-            $model->subtotal= round($model->total/((int)Yii::app()->params['impuesto']*0.01+1));
-            $model->impuesto= round($model->total-$model->impuesto);
+            $model->subtotal= round($model->total/((int)Yii::app()->params['impuesto']*0.01+1),2);
+            $model->impuesto= round($model->total-$model->impuesto,2);
             
             return $model;
         }
@@ -91,8 +91,8 @@ class DetalleCompraController extends Controller
                  */
                 //Precio con IGV Incluido
                 $model->total=$model->precio_unitario*$model->cantidad;
-                $model->subtotal= round($model->total/((int)Yii::app()->params['impuesto']*0.01+1));
-                $model->impuesto= round($model->total-$model->subtotal);
+                $model->subtotal= round($model->total/((int)Yii::app()->params['impuesto']*0.01+1),2);
+                $model->impuesto= round($model->total-$model->subtotal,2);
                 
                 if($model->save())
                 {
@@ -137,8 +137,8 @@ class DetalleCompraController extends Controller
                 
                 //Precio con IGV Incluido
                 $model->total=$model->precio_unitario*$model->cantidad;
-                $model->subtotal= round($model->total/((int)Yii::app()->params['impuesto']*0.01+1));
-                $model->impuesto= round($model->total-$model->subtotal);
+                $model->subtotal= round($model->total/((int)Yii::app()->params['impuesto']*0.01+1),2);
+                $model->impuesto= round($model->total-$model->subtotal,2);
                 
                 if($model->save())
                 {
@@ -173,9 +173,9 @@ class DetalleCompraController extends Controller
                    
                    //$this->PuConIGV($model);
                    // IGV INCLUIDO
-                   $_total=$model->precio_unitario*$_cantidad;//calculando el subtotal
-                   $_subtotal= round($_total/((int)Yii::app()->params['impuesto']*0.01 + 1)); //calculando impuesto
-                   $_impuesto= round($_total-$_subtotal); //calculando total
+                   $_total=round($model->precio_unitario*$_cantidad,2);//calculando el total
+                   $_subtotal= round($_total/((int)Yii::app()->params['impuesto']*0.01 + 1),2); //calculando subtotal
+                   $_impuesto= round($_total-$_subtotal,2); //calculando subtotal
                     
                    
                    $event->sender->setAttribute('subtotal', $_subtotal);//Actualizando Cantidad
@@ -206,9 +206,9 @@ class DetalleCompraController extends Controller
                    $model=$this->loadModel(yii::app()->request->getParam('pk')); //obteniendo el Model de detalleCompra
                    $_precioUnitario=  yii::app()->request->getParam('value');
                    
-                   $_total=$model->cantidad*$_precioUnitario;//calculando el subtotal
-                   $_subtotal= round($_total/((int)Yii::app()->params['impuesto']*0.01 + 1)); //calculando impuesto
-                   $_impuesto= round($_total-$_subtotal); //calculando total
+                   $_total= round($model->cantidad*$_precioUnitario,2);//calculando el subtotal
+                   $_subtotal= round($_total/((int)Yii::app()->params['impuesto']*0.01 + 1),2); //calculando impuesto
+                   $_impuesto= round($_total-$_subtotal,2); //calculando total
                     
                    $event->sender->setAttribute('subtotal', $_subtotal);//Actualizando Cantidad
                    $event->sender->setAttribute('impuesto', $_impuesto);//Actualizando impuesto
@@ -256,8 +256,23 @@ class DetalleCompraController extends Controller
         {
             if(Yii::app()->request->isPostRequest)
             {
+                $detalle_compra= $this->loadModel($id);
+                
+                $_compra= Compra::model()->findByPk($detalle_compra->compra_id);
+                
+                
                 // we only allow deletion via POST request
-                $this->loadModel($id)->delete();
+                //$this->loadModel($id)
+                $detalle_compra->delete();
+                
+                //actualizando el total, base imponible e impuesto de la compra
+                $_total=$detalle_compra->SumaTotal();
+                $_bi= Producto::model()->getSubtotal($_total);
+                $_compra->importe_total=$_total;//$this->SumaTotal()['total'];
+                $_compra->base_imponible=$_bi; 
+                $_compra->impuesto=$_total-$_bi;
+                //Verificando que todos los item se hayan almacenado
+                $_compra->save();
 
                 // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
                 if(!isset($_GET['ajax']))

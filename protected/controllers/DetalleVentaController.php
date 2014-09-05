@@ -33,7 +33,7 @@ class DetalleVentaController extends Controller
             'users'=>array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-            'actions'=>array('create','update','lotes','editCantidad','editPrecioUnitario','batchDelete','finalizar'),
+            'actions'=>array('create','update','lotes','precios','editCantidad','editPrecioUnitario','batchDelete','finalizar'),
             'users'=>array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -72,9 +72,10 @@ class DetalleVentaController extends Controller
             {
                 $model->attributes=$_POST['DetalleVenta'];
                 $model->fecha_vencimiento= ProductoAlmacen::model()->getFecha_vencimiento($model->producto_id,$model->lote);
-                $model->subtotal=$model->precio_unitario*$model->cantidad;
-                $model->impuesto= round($model->subtotal*((int)Yii::app()->params['impuesto']*0.01));
-                $model->total= round($model->subtotal+$model->impuesto);
+                
+                $model->total=$model->precio_unitario*$model->cantidad;
+                $model->subtotal= round($model->total/((int)Yii::app()->params['impuesto']*0.01+1),2);
+                $model->impuesto= round($model->total-$model->subtotal,2);
                 //cantidad disponible para el producto almacen
 //                $_cantidad_alm= ProductoAlmacen::model()->cantidad_lote2($model->producto_id,$model->lote);
                 
@@ -82,9 +83,9 @@ class DetalleVentaController extends Controller
 //                {
                     if($model->save())
                     {
-                        //actualizar la cantidad disponible en ProductoAlmacen
+                        //actualizar la cantidad disponible en ProductoAlmacen - almacen principal por default
                         ProductoAlmacen::model()->actualizarCantidadDisponible($model,1); 
-                        
+                        Cliente::model()->actualizarCreditoDisponible($model, 1);
                         echo CJSON::encode(array(
                         'status'=>'success', 
                         ));
@@ -164,12 +165,14 @@ class DetalleVentaController extends Controller
                    
                    //incrementando la cantidad anterior para cantidad en producto almacen
                    ProductoAlmacen::model()->actualizarCantidadDisponible($model, 0);
+                   //incrementando el credito disponible para para el cliente
+                   Cliente::model()->actualizarCreditoDisponible($model, 0);
                    
                    $_cantidad=  yii::app()->request->getParam('value');
                    
-                   $_subtotal= round($model->precio_unitario*$_cantidad);//calculando el subtotal
-                   $_impuesto= round($_subtotal*((int)Yii::app()->params['impuesto']*0.01)); //calculando impuesto
-                   $_total=$_subtotal+$_impuesto; //calculando total
+                   $_total= round($model->precio_unitario*$_cantidad,2);//calculando el total
+                   $_subtotal= round($_total/((int)Yii::app()->params['impuesto']*0.01+1),2); //calculando subtotal
+                   $_impuesto=round($_total-$_subtotal,2); //calculando subtotal
                     
                    $event->sender->setAttribute('subtotal', $_subtotal);//Actualizando Cantidad
                    $event->sender->setAttribute('impuesto', $_impuesto);//Actualizando impuesto
@@ -181,6 +184,8 @@ class DetalleVentaController extends Controller
                 $model=$this->loadModel(yii::app()->request->getParam('pk'));
                 //actualizando cantidad en producto almacen
                 ProductoAlmacen::model()->actualizarCantidadDisponible($model,1); 
+                //actualizando el credito disponible para el cliente.
+                Cliente::model()->actualizarCreditoDisponible($model, 1);
             };
             
             $es->update();
@@ -206,15 +211,25 @@ class DetalleVentaController extends Controller
           $es->onBeforeUpdate= function($event) {
 
                    $model=$this->loadModel(yii::app()->request->getParam('pk')); //obteniendo el Model de detalleCompra
+                   
+                   //incrementando el credito disponible para para el cliente
+                   Cliente::model()->actualizarCreditoDisponible($model, 0);
+                   
                    $_precioUnitario=  yii::app()->request->getParam('value');
-                   $_subtotal= round($model->cantidad*$_precioUnitario);//calculando el subtotal
-                   $_impuesto= round($_subtotal*((int)Yii::app()->params['impuesto']*0.01)); //calculando impuesto
-                   $_total=$_subtotal+$_impuesto; //calculando total
+                   
+                   $_total= round($model->cantidad*$_precioUnitario,2);//calculando el subtotal
+                   $_subtotal= round($_total/((int)Yii::app()->params['impuesto']*0.01+1),2); //calculando impuesto
+                   $_impuesto= round($_total-$_subtotal,2); //calculando total
                     
                    $event->sender->setAttribute('subtotal', $_subtotal);//Actualizando Cantidad
                    $event->sender->setAttribute('impuesto', $_impuesto);//Actualizando impuesto
                    $event->sender->setAttribute('total', $_total); //actualizando total
             
+            };
+          $es->onAfterUpdate=function($event){
+                $model=$this->loadModel(yii::app()->request->getParam('pk'));
+                //actualizando el credito disponible para el cliente.
+                Cliente::model()->actualizarCreditoDisponible($model, 1);
             };
             
             $es->update();
@@ -243,6 +258,8 @@ class DetalleVentaController extends Controller
                         $model = $this->loadModel($id);
                         //actualiza la cantidad disponible
                         ProductoAlmacen::model()->actualizarCantidadDisponible($model,0); 
+                        //actualizando el credito disponible
+                        Cliente::model()->actualizarCreditoDisponible($model,0);
                         ($model->delete() == true) ? $successCount++ : $failureCount++;
                     }
 //                    echo CJSON::encode(array('status' => 'success',
@@ -267,23 +284,38 @@ class DetalleVentaController extends Controller
         {
             if(Yii::app()->request->isPostRequest)
             {
+                $detalle_venta= $this->loadModel($id);
+                  //actualizar la cantidad disponible en ProductoAlmacen
+                ProductoAlmacen::model()->actualizarCantidadDisponible($detalle_venta,0); 
+                //actualizando credito disponible en cliente
+                Cliente::model()->actualizarCreditoDisponible($detalle_venta,0);
                 
-             $detalle_venta= $this->loadModel($id);
-              //actualizar la cantidad disponible en ProductoAlmacen
-            ProductoAlmacen::model()->actualizarCantidadDisponible($detalle_venta,0); 
-             
-            // we only allow deletion via POST request
-            $detalle_venta->delete();
-           // $this->loadModel($id)->delete();
-            
-            
-            
-            // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-            if(!isset($_GET['ajax']))
-            $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+                //actualizar importe, subtotal, impuesto.
+                //obtiendo venta
+                $_venta= Venta::model()->findByPk($detalle_venta->venta_id);
+                
+                //we only allow deletion via POST request
+                $detalle_venta->delete();
+                
+                //actualizando el total, base imponible e impuesto de la venta
+                $_total=$detalle_venta->SumaTotal();
+                $_bi=  Producto::model()->getSubtotal($_total);
+                $_venta->importe_total=$_total;//$this->SumaTotal()['total'];
+                $_venta->base_imponible=$_bi; 
+                $_venta->impuesto=$_total-$_bi;
+                $_venta->save();
+
+                
+                // $this->loadModel($id)->delete();
+
+
+
+                // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+                if(!isset($_GET['ajax']))
+                $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
             }
             else
-            throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+                throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
         }
 
         /**
@@ -343,18 +375,34 @@ class DetalleVentaController extends Controller
          */
         public function actionLotes()
         {
-            //if(isset($_POST['DetalleVenta']))
+            if(isset($_POST['DetalleVenta']))
+            {
                 $id_producto= $_POST['DetalleVenta']['producto_id'];
-                
                 $lista= DetalleVenta::model()->getListLote($id_producto);
                 $lista=CHtml::listData($lista, 'lote', 'text');
                 foreach($lista as $valor => $descripcion)
                 {
                     echo CHtml::tag('option',array('value'=>$valor),  CHtml::encode($descripcion),TRUE);
                 }
+             }
             //echo CHtml::tag('option',array('value'=>'0'),  CHtml::encode('select'),TRUE);
         }
         
+        /**
+         * Retorna los precios de venta regular y el ultimo precio de venta 
+         */
+        public function actionPrecios()
+        {
+            if(isset($_POST['producto_id']))
+            {
+                $id_producto= $_POST['producto_id']; //obteniendo ID de producto
+                //obteniendo venta_id
+                // $_venta_id= $this->getVenta();
+                //$lista= DetalleVenta::model()->getListLote($id_producto);
+                $_precio_regular= Producto::model()->findByPk($id_producto)->precio_venta;
+                echo CHtml::encode("Precio regular: ".$_precio_regular );
+            }
+        }
         
         public function filterVentaContext($filterChain)
         {
@@ -404,6 +452,9 @@ class DetalleVentaController extends Controller
         
         public function actionFinalizar($id)
         {
+            $venta = Venta::model()->findByPk($id);
+            $venta->_estado=1; // cambia estado de venta a confirmado(1)
+            
             $this->redirect(array('venta/view','id'=>$id));
         }
 }

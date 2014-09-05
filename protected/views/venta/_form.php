@@ -9,9 +9,19 @@
 
 	<?php //echo $form->datepickerGroup($model,'fecha_venta',array('options'=>array(),'htmlOptions'=>array('class'=>'span5')),array('prepend'=>'<i class="icon-calendar"></i>','append'=>'Click on Month/Year at top to select a different year or type in (mm/dd/yyyy).')); ?>
         
-        <?php echo $form->textFieldGroup($model,'pedido_id',array('class'=>'span5')); ?>
+        <?php // echo $form->textFieldGroup($model,'pedido_id',array('class'=>'span5')); ?>
         
 	<?php 
+        
+        $htmlOptions=array(
+          'ajax'=>array(
+              'url'=>CController::createUrl('Venta/lineaCredito'),
+              //'url'=>CController::createUrl('detalleVenta/precios'),
+              'type'=>'POST',
+              'update'=>'#linea_credito',
+          ),  
+        );
+        
         
         echo $form->select2Group(
 			$model,
@@ -30,6 +40,7 @@
                                                 //'width' => '40%', 
 						'tokenSeparators' => array(',', ' ')
 					),
+                                    'htmlOptions'=>$htmlOptions,
 				)
 			)
 		);
@@ -61,6 +72,8 @@
 
 	<?php 
         
+        
+        
         echo $form->select2Group(
 			$model,
 			'forma_pago_id',
@@ -78,6 +91,7 @@
                                                 //'width' => '40%', 
 						'tokenSeparators' => array(',', ' ')
 					),
+                                    'htmlOptions'=>$htmlOptions,
 				)
 			)
 		);
@@ -85,6 +99,7 @@
         //echo $form->textFieldGroup($model,'forma_pago_id',array('class'=>'span5')); 
         
         ?>
+        <div id="linea_credito"></div>
 	<?php echo $form->textAreaGroup($model,'observacion',array('rows'=>6, 'cols'=>50, 'class'=>'span8')); ?>
 
 	
