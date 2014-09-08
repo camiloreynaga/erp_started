@@ -1,7 +1,7 @@
 <?php
 $this->breadcrumbs=array(
-	'Compras'=>array('admin'),
-	'Create',
+	yii::t('app','Purchase')=>array('admin'),
+	yii::t('app','Create')
 );
 
 $this->menu=array(

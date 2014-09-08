@@ -7,7 +7,8 @@ $this->breadcrumbs=array(
 $this->menu=array(
 //array('label'=>'List MovimientoAlmacen','url'=>array('index')),
 array('label'=>yii::t('app','Register').' '.yii::t('app','Movement'),'url'=>array('create')),
-array('label'=>yii::t('app','Process').' '. yii::t('app','Purchase'),'url'=>array('ingresarCompra')),    
+array('label'=>yii::t('app','Process').' '. yii::t('app','Purchase'),'url'=>array('ingresarCompra')),   
+array('label'=>yii::t('app','Process').' '. yii::t('app','Sale'),'url'=>array('sacarVenta')),       
 );
 
 Yii::app()->clientScript->registerScript('search', "

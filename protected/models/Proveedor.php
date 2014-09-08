@@ -115,7 +115,7 @@ class Proveedor extends Erp_startedActiveRecord//CActiveRecord
 		$criteria->compare('ciudad',$this->ciudad,true);
 		$criteria->compare('telefono',$this->telefono,true);
 		$criteria->compare('linea_credito',$this->linea_credito,true);
-                $criterio->compare('credito_disponible',$this->credito_disponible,true);
+                $criteria->compare('credito_disponible',$this->credito_disponible,true);
 		$criteria->compare('activo',$this->activo);
 		$criteria->compare('create_time',$this->create_time,true);
 		$criteria->compare('create_user_id',$this->create_user_id);

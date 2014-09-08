@@ -155,10 +155,14 @@ class Cliente extends Erp_startedActiveRecord//CActiveRecord
          */
         public function actualizarCreditoDisponible($model,$operacion)
         {
-            $_monto = $operacion==0 ? $model->cantidad*$model->precio_unitario : 
+            if($model->r_venta->forma_pago_id==1){
+                $_monto = $operacion==0 ? $model->cantidad*$model->precio_unitario : 
                 $model->cantidad*$model->precio_unitario*(-1);
-            $_cliente = $this->findByPk($model->r_venta->cliente_id);
-            $_cliente->credito_disponible+=$_monto;
-            $_cliente->save();
+                $_cliente = $this->findByPk($model->r_venta->cliente_id);
+                $_cliente->credito_disponible+=$_monto;
+                $_cliente->save();
+
+            }
+            
         }
 }

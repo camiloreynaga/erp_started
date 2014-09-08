@@ -92,11 +92,11 @@ $cs->registerScriptFile($baseUrl.'/js/validacionAjaxForm.js',CClientScript::POS_
 $this->beginWidget('zii.widgets.jui.CJuiDialog', array( // the dialog
     'id'=>'dialogClassroom',
     'options'=>array(
-        'title'=>'Editar Orden de Compra',
+        'title'=>'Editar detalle de Compra',
         'autoOpen'=>false,
         'modal'=>true,
         'width'=>550,
-        'height'=>470,
+        'height'=>670,
     ),
 ));?>
     <div class="divForForm"></div>

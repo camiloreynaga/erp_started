@@ -41,7 +41,7 @@ return array(
     'Purchase'=>'Compra',
     'Put date'=>'Ingrese fecha',
     'Select an purchase order'=>'Elija una Orden de compra',
-    'Store purchase'=>'Registrar Ingreso de Compra',
+    'Store purchase'=>'Registrar Ingreso por Compra',
     //Product
     'Select product'=>'Seleccione producto',
     
@@ -54,6 +54,7 @@ return array(
     
     //Sales
     'Sale'=>'Venta',
+    'Send Sale'=>'Registrar Salida por Venta',
     
     //Credit
     'This client do not have enough credit.'=>'Este cliente no tiene credito suficiente.',

@@ -73,6 +73,7 @@ class DetalleVentaController extends Controller
                 $model->attributes=$_POST['DetalleVenta'];
                 $model->fecha_vencimiento= ProductoAlmacen::model()->getFecha_vencimiento($model->producto_id,$model->lote);
                 
+                $model->estado=0; // estado pendiente de despacho
                 $model->total=$model->precio_unitario*$model->cantidad;
                 $model->subtotal= round($model->total/((int)Yii::app()->params['impuesto']*0.01+1),2);
                 $model->impuesto= round($model->total-$model->subtotal,2);
@@ -85,6 +86,7 @@ class DetalleVentaController extends Controller
                     {
                         //actualizar la cantidad disponible en ProductoAlmacen - almacen principal por default
                         ProductoAlmacen::model()->actualizarCantidadDisponible($model,1); 
+                        //actualizar credito disponible
                         Cliente::model()->actualizarCreditoDisponible($model, 1);
                         echo CJSON::encode(array(
                         'status'=>'success', 
@@ -449,12 +451,15 @@ class DetalleVentaController extends Controller
             return $this->_venta;
         }
         
-        
+        /**
+         * finaliza la venta y cambia el estado a confirmado ( estado=1)
+         * @param type $id = id de la venta
+         */
         public function actionFinalizar($id)
         {
             $venta = Venta::model()->findByPk($id);
-            $venta->_estado=1; // cambia estado de venta a confirmado(1)
-            
+            $venta->estado=1; // cambia estado de venta a confirmado(1)
+            $venta->save();
             $this->redirect(array('venta/view','id'=>$id));
         }
 }

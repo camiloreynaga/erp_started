@@ -5,6 +5,7 @@
                 $("#Items").html(data);
                 // refresh your grid
                 $.fn.yiiGridView.update('comprobante-compra-grid');
+                window.location.reload();
         }
        //muestra errores del form luego de la validación
         function formErrors(data,form){
@@ -284,6 +285,7 @@
 
 ?>
 <div >
+<br>    
 <?php $this->widget('booster.widgets.TbButton', array(
 			'buttonType'=>'ajaxSubmit',
 			'context'=>'success',

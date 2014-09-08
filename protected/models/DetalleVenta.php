@@ -14,6 +14,7 @@
  * @property string $total
  * @property string $lote
  * @property string $fecha_vencimiento
+ * @property integer $estado 
  * @property string $create_time
  * @property integer $create_user_id
  * @property string $update_time
@@ -26,6 +27,16 @@
  */
 class DetalleVenta extends Erp_startedActiveRecord//CActiveRecord
 {
+    
+    
+        public $_estado=array(
+            '0'=>'PENDIENTE', // PENDIENTE DE ENTREGA 
+            '1'=>'DESPACHADO', // , // COMPROBANTE REGISTRADO
+           // '2'=>'OBSERVADO', // ALGUN DATO REQUERIDO PENDIENTE
+            //'3'=>'ANULADO',
+            //'4'=>'ALMACENADO'
+         );
+    
 	/**
 	 * @return string the associated database table name
 	 */
@@ -53,7 +64,7 @@ class DetalleVenta extends Erp_startedActiveRecord//CActiveRecord
 			array('fecha_vencimiento, create_time, update_time', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, venta_id, producto_id, cantidad, precio_unitario, subtotal, impuesto, total, lote, fecha_vencimiento, create_time, create_user_id, update_time, update_user_id', 'safe', 'on'=>'search'),
+			array('id, venta_id, producto_id, cantidad, precio_unitario, subtotal, impuesto, total, lote, fecha_vencimiento,estado, create_time, create_user_id, update_time, update_user_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -87,6 +98,7 @@ class DetalleVenta extends Erp_startedActiveRecord//CActiveRecord
 			'total' => 'Total',
 			'lote' => 'Lote',
 			'fecha_vencimiento' => 'Fecha Vencimiento',
+                        'estado'=>'estado',
 			'create_time' => 'Create Time',
 			'create_user_id' => 'Create User',
 			'update_time' => 'Update Time',
@@ -175,6 +187,7 @@ class DetalleVenta extends Erp_startedActiveRecord//CActiveRecord
 		$criteria->compare('total',$this->total,true);
 		$criteria->compare('lote',$this->lote,true);
 		$criteria->compare('fecha_vencimiento',$this->fecha_vencimiento,true);
+                $criteria->compare('estado', $this->estado);
 		$criteria->compare('create_time',$this->create_time,true);
 		$criteria->compare('create_user_id',$this->create_user_id);
 		$criteria->compare('update_time',$this->update_time,true);

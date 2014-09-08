@@ -5,15 +5,15 @@
  * and open the template in the editor.
  */
 ?>
-<h1><?php echo yii::t('app', 'Store purchase') ?></h1>
+<h1><?php echo yii::t('app', 'Send Sale') ?></h1>
 
 <?php
-    $compra= Compra::model();
-    $compra->estado=1; // filtra a los compra con estado = Revisado 
+    $venta= Venta::model();
+    $venta->estado=1; // filtra a los venta con estado = confirmado 
     $this->widget('booster.widgets.TbGridView',array(
-    'id'=>'compra-grid',
-    'dataProvider'=>$compra->search(),
-    //'filter'=>$compra,
+    'id'=>'venta-grid',
+    'dataProvider'=>$venta->search(),
+    //'filter'=>$venta,
     'columns'=>array(
                     array(
                         'name'=>'id',
@@ -21,10 +21,10 @@
                             'width'=>'50px',
                         )
                     ),
-                    'fecha_compra',
+                    'fecha_venta',
                     array(
-                        'name'=>'proveedor_id',
-                        'value'=>'$data->r_proveedor->nombre_rz'
+                        'name'=>'cliente_id',
+                        'value'=>'$data->r_cliente->nombre_rz'
                     ),
 
                     array(
@@ -49,7 +49,7 @@
                     'template'=>'{select}',
                     'buttons'=>array(
                         'select'=>array(
-                            'url'=>'Yii::app()->createUrl("MovimientoAlmacen/ingresarCompra", array("id"=>$data->id))'
+                            'url'=>'Yii::app()->createUrl("MovimientoAlmacen/sacarVenta", array("id"=>$data->id))'
                         ),
                     ),    
                     'htmlOptions'=>array(
@@ -61,17 +61,17 @@
 ?>
 
 
-<h3> <?php echo yii::t('app','Details').' '. yii::t('app','Purchase').' '; echo  isset($_GET['id'])? $_GET['id'] : "";
+<h3> <?php echo yii::t('app','Details').' '. yii::t('app','Sale').' '; echo  isset($_GET['id'])? $_GET['id'] : "";
 //isset($_GET['id'])? $pk= $_GET['id'] : $pk= "";
-//$_compra= $compra->findByPk($pk) ;
-//echo ' '.$_compra['id'].' '. $compra->r_proveedor->$_compra['proveedor_id'];
+//$_compra= $venta->findByPk($pk) ;
+//echo ' '.$_compra['id'].' '. $venta->r_proveedor->$_compra['proveedor_id'];
 ?></h3>
 <?php 
-    $model= DetalleCompra::model();   
-    $model->estado=1;
-    $model->compra_id= isset($_GET['id'])? $_GET['id']: 0;
+    $model= DetalleVenta::model();   
+    $model->estado=0; // filtra a todos los items con estado = Pendiente
+    $model->venta_id= isset($_GET['id'])? $_GET['id']: 0;
     $this->widget('booster.widgets.TbExtendedGridView',array(
-                'id'=>'detalle-orden-compra-grid',
+                'id'=>'detalle-orden-venta-grid',
                 'type'=>'striped bordered',
                 'fixedHeader' => true,
                 'headerOffset' => 40,
@@ -87,7 +87,7 @@
                                 'selectableRows'=>2,        // Allow multiple selections 
                                 ),
                                // 'id',
-                                'compra_id',
+                                'venta_id',
                                 //'cotizacion_id',
     //                            array(
     //                                //'name'=>'producto_id',
@@ -153,28 +153,7 @@
 //                                    //'success'=>'function(link,success,data){ if(success) window.location.reload();',
 //                                    )
                                 ),
-                                array(
-                                'name' => 'cantidad_bueno',
-                                'header' => 'B',
-//                                'class' => 'booster.widgets.TbEditableColumn',
-//                                'editable' => array(
-//                                    'type' => 'text',
-//                                    'url' => $this->createUrl('detalleCompra/editItem'),
-//                                   // 'success'=>'updateGrilla'
-//                                    //'success'=>'function(link,success,data){ if(success) window.location.reload();',
-//                                    )
-                                ),
-                                array(
-                                'name' => 'cantidad_malo',
-                                'header' => 'M',
-//                                'class' => 'booster.widgets.TbEditableColumn',
-//                                'editable' => array(
-//                                    'type' => 'text',
-//                                    'url' => $this->createUrl('detalleCompra/editItem'),
-//                                   // 'success'=>'updateGrilla'
-//                                    //'success'=>'function(link,success,data){ if(success) window.location.reload();',
-//                                    )
-                                ),
+                                
                                 array(
                                     'name'=>'observacion',
                                     'header'=>'Obs.',
@@ -187,7 +166,7 @@
 //                                    )
 
                                 ),
-                                //'estado',
+                                'estado',
                                 array(
                                     'name'=>'precio_unitario',
                                     'header'=>'P.U.',
@@ -222,22 +201,22 @@
                                         'er'=>
                                             array(
                                                 'label'=>'<i class="glyphicon glyphicon-check"></i>',
-                                                'url'=>'Yii::app()->createUrl("movimientoAlmacen/RegistrarCompra", array("id"=>$data->id))',
+                                                'url'=>'Yii::app()->createUrl("movimientoAlmacen/RegistrarVenta", array("id"=>$data->id))',
                                                 'click'=>"function(){
-                                                            $.fn.yiiGridView.update('detalle-orden-compra-grid', {
+                                                            $.fn.yiiGridView.update('detalle-orden-venta-grid', {
                                                                 type:'POST',
                                                                 url:$(this).attr('href'),
                                                                 success:function(data) {
                                                                       $('#AjFlash').html(data).fadeIn().animate({opacity: 1.0}, 3000).fadeOut('slow');
 
-                                                                      $.fn.yiiGridView.update('detalle-orden-compra-grid');
+                                                                      $.fn.yiiGridView.update('detalle-orden-venta-grid');
                                                                 }
                                                             })
                                                             return false;
                                                       }",
                                                 'options'=>array(
-                                                    'title'=>'ingresar',
-                                                    'confirm'=>'Ingresar ?',
+                                                    'title'=>'Sacar',
+                                                    'confirm'=>'Sacar ?',
 //                                                    'ajax'=>array(
 //                                                        'type'=>'POST',
 //                                                        'url'=>'Yii::app()->createUrl("movimientoAlmacen/RegistrarCompra", array("id"=>$data->id))',

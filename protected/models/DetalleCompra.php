@@ -60,6 +60,7 @@ class DetalleCompra extends Erp_startedActiveRecord//CActiveRecord
 		// will receive user inputs.
 		return array(
                         array('cantidad_bueno,cantidad_malo','comprobarCantidad'),
+                       // array('fecha_vencimiento','date'),
                         array('cantidad_bueno,cantidad_malo','compare','compareAttribute'=>'cantidad','operator'=>'<='),
 			array('compra_id, producto_id, cantidad, cantidad_bueno, cantidad_malo, estado, create_user_id, update_user_id, comprobante_id', 'numerical', 'integerOnly'=>true),
 			array('precio_unitario','numerical'),

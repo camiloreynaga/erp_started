@@ -31,7 +31,7 @@
             'users'=>array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-            'actions'=>array('create','update','detalleCompra','lotesIngreso','operacion','IngresarCompra','RegistrarCompra'),
+            'actions'=>array('create','update','detalleCompra','lotesIngreso','operacion','IngresarCompra','RegistrarCompra','SacarVenta','RegistrarVenta'),
             'users'=>array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -69,7 +69,7 @@
             
             $model->fecha_movimiento=date('Y-m-d');
             $model->producto_id= $_detalle->producto_id; //* requerido
-            $model->cantidad= $_detalle->cantidad_bueno; //*requerido
+            $model->cantidad= $_detalle->cantidad_bueno; //*requerido - ingresa la cantidad items en estado bueno
             $model->motivo_movimiento_id=1; //*requerido
             $model->detalle_compra_id=$id;
             $model->observacion= $_detalle->observacion;
@@ -98,7 +98,45 @@
             
         }
         
-        /*
+        
+        public function actionRegistrarVenta($id)
+        {
+            $model=new MovimientoAlmacen();
+            // Uncomment the following line if AJAX validation is needed
+            // $this->performAjaxValidation($model);
+            $_detalle = DetalleVenta::model()->findByPk($id); // del detalle de compra    
+            
+            $model->fecha_movimiento=date('Y-m-d');
+            $model->producto_id= $_detalle->producto_id; //* requerido
+            $model->cantidad= $_detalle->cantidad; //*requerido - ingresa la cantidad items en estado bueno
+            $model->motivo_movimiento_id=2; //*requerido
+            $model->detalle_venta_id=$id;
+            $model->almacen_id =1; // almacen principal
+            $model->_lote=$_detalle->lote;
+            $model->_fecha_vencimiento=$_detalle->fecha_vencimiento;
+            $model->operacion=1; // 1= salida 
+            //estado almacenado
+             //$model->setScenario('create');
+            if($model->save())                 
+                {
+                    $this->DecreaseStock($model); //actualiza el stock 
+                    $_detalle->estado=1; // actualizar el estado del item a despachado
+                    $_detalle->save();
+                    echo "Registro agregado";
+                }
+                //$this->redirect(array('view','id'=>$model->id));
+//            }
+//            else {
+//                $this->render('_compraForm',array(
+//                //'model'=>$model,
+//                ));
+//            }
+            if(!isset($_GET['ajax']))
+                $this->redirect(Yii::app()->request->urlReferrer);
+            
+        }
+        
+        /**
          * registra los items de las compras
          */
         public function actionIngresarCompra()
@@ -123,6 +161,12 @@
             
         }
         
+        public function actionSacarVenta()
+        {
+            $this->layout='//layouts/column1';
+            $this->render('_ventaForm',array(
+                ));
+        }
         
         /**
         * Creates a new model.
@@ -203,6 +247,7 @@
         /**
          * Actualiza/registra cantidad_disponible/cantidad_real que se encuentra en tbl_producto_almacen
          * cuando se registra una compra como movimiento de almacen 
+         * @param type $model = modelo movimientoAlmacen
          */
         protected function ActualizaStock($model)
         {

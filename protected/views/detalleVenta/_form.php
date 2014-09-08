@@ -52,7 +52,11 @@ $("#delete").click(function(){
 )); ?>
 
 <p class="help-block"><?php echo yii::t('app','Fields with') ;?> <span class="required">*</span> <?php echo yii::t('app','are required.') ;?>
-<?php echo ' -  Forma de pago: '. $model->r_venta->r_forma_pago->forma_pago .' Monto Disponible: '.$model->r_venta->r_cliente->credito_disponible; ?>
+<?php echo ' -  Forma de pago: <span class="required" >'. $model->r_venta->r_forma_pago->forma_pago .'</span>';?>
+      <?php 
+      $_cred_disp= $model->r_venta->forma_pago_id==1 ? ' <span class="required" > - monto disponible: '.$model->r_venta->r_cliente->credito_disponible.'</span>' : ""; 
+      echo $_cred_disp;
+      ?>  
 </p>
 
 <?php echo $form->errorSummary($model); ?>
@@ -298,9 +302,9 @@ $("#delete").click(function(){
             ));
     ?>
 </div>
-
+<br>
 <?php
-    echo CHtml::Button('Confirmar venta',
+    echo CHtml::Button('Confirmar ',
              array(
                  'submit'=>array('detalleVenta/finalizar',
                      'id'=>$model->venta_id,
@@ -310,12 +314,13 @@ $("#delete").click(function(){
              );
 ?>
 <?php
-    echo CHtml::Button('Confirmar venta',
+    echo CHtml::Button('Cancelar venta',
              array(
                  'submit'=>array('detalleVenta/finalizar',
                      'id'=>$model->venta_id,
+                     
                      ),
-                     'confirm'=>'Esta seguro de proceder con la venta?',
+                     'confirm'=>'Esta seguro de cancelar con la venta?',
                  )
              );
 ?>

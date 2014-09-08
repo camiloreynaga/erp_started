@@ -1,19 +1,19 @@
 <?php
 $this->breadcrumbs=array(
-	'Ventas'=>array('index'),
+        Yii::t('app', 'Sale')=>array('admin'),
 	$model->id,
 );
 
 $this->menu=array(
 //array('label'=>'List Venta','url'=>array('index')),
 array('label'=>yii::t('app','Create').' '.yii::t('app','Sale'),'url'=>array('create')),
-array('label'=>yii::t('app','Update').' '.yii::t('app','Sale'),'url'=>array('update','id'=>$model->id)),
-array('label'=>yii::t('app','Delete').' '.yii::t('app','Sale'),'url'=>'#','linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
+array('label'=>yii::t('app','Update').' '.yii::t('app','Sale'),'url'=>array('//detalleVenta/create','pid'=>$model->id)),
+//array('label'=>yii::t('app','Delete').' '.yii::t('app','Sale'),'url'=>'#','linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
 array('label'=>yii::t('app','Manage').' '.yii::t('app','Sale'),'url'=>array('admin')),
 );
 ?>
 
-<h1>View Venta #<?php echo $model->id; ?></h1>
+<h1><?php echo Yii::t('app','View').' '. Yii::t('app', 'Sale').' # '. $model->id; ?></h1>
 
 <?php $this->widget('booster.widgets.TbDetailView',array(
 'data'=>$model,
@@ -33,7 +33,7 @@ array('label'=>yii::t('app','Manage').' '.yii::t('app','Sale'),'url'=>array('adm
                     'value'=>$model->r_forma_pago->forma_pago
                 ),
 		
-		'pedido_id',
+		//'pedido_id',
 		'base_imponible',
 		'impuesto',
 		'importe_total',
