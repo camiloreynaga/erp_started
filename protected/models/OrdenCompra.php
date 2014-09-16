@@ -22,11 +22,11 @@
 class OrdenCompra extends Erp_startedActiveRecord//CActiveRecord
 {
         public $_estado = array(
-            '0'=>'PENDIENTE',
-            '1'=>'CONFIRMADO',
-            '2'=>'PROCESADO',
-            '3'=>'ANULADO',
-            '4'=>'RECEPCIONADO'
+            '0'=>'PENDIENTE', //orden de compra reciend creada
+            '1'=>'CONFIRMADO', //orden de compra con el detalle confirmado
+            '2'=>'PROCESADO', // orden de compra revisado por el supervisor y procesado para solicitar compra
+            '3'=>'ANULADO', //
+            '4'=>'RECEPCIONADO' //OC recepcionado 
         );
     
 	/**
