@@ -178,7 +178,8 @@ class Venta extends Erp_startedActiveRecord//CActiveRecord
 		$criteria->compare('create_user_id',$this->create_user_id);
 		$criteria->compare('update_time',$this->update_time,true);
 		$criteria->compare('update_user_id',$this->update_user_id);
-
+                
+                $criteria->order='t.id DESC';
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));

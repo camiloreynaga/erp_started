@@ -11,6 +11,8 @@ $form=$this->beginWidget('booster.widgets.TbActiveForm',array(
 <p class="help-block"><?php echo yii::t('app','Fields with');?> <span class="required">*</span> <?php echo yii::t('app','are required.')?></p>
 <?php 
         echo $form->errorSummary($model); 
+        if($model->isNewRecord)
+        {
         echo $form->select2Group($model,'producto_id',
                 array(
                     'wrapperHtmlOptions' => array('class' => 'col-sm-5'),
@@ -21,6 +23,11 @@ $form=$this->beginWidget('booster.widgets.TbActiveForm',array(
                             'placeholder' =>yii::t('app','Select product'),
                             'tokenSeparators' => array(',', ' ')
                             ))));
+         }
+        else
+        {
+            echo $model->r_producto->nombre; //$form->dropDownList($model,'producto_id',$data,array('prompt'=>'--Seleccione--'));
+        }
 	echo $form->textFieldGroup($model,'cantidad',array('class'=>'span5'));
         echo $form->textFieldGroup($model,'precio_unitario',array('class'=>'span5'));
         echo $form->textAreaGroup($model,'observacion');?>
