@@ -28,10 +28,10 @@
             return array(
             array('allow',  // allow all users to perform 'index' and 'view' actions
             'actions'=>array('index','view'),
-            'users'=>array('*'),
+            'users'=>array('@'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-            'actions'=>array('create','update','detalleCompra','lotesIngreso','operacion','IngresarCompra','RegistrarCompra','SacarVenta','RegistrarVenta'),
+            'actions'=>array('create','update','admin','detalleCompra','lotesIngreso','operacion','IngresarCompra','RegistrarCompra','SacarVenta','RegistrarVenta'),
             'users'=>array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions

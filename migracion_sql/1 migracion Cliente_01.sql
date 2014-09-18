@@ -26,6 +26,6 @@ telefono_contacto,
 0,
 fecha_registro,
 1,
-fecha_registro,
+now(),
 1
 from drogueria2.cliente
