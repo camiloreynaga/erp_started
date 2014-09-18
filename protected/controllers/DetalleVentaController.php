@@ -75,7 +75,7 @@ class DetalleVentaController extends Controller
                 
                 $model->estado=0; // estado pendiente de despacho
                 $model->total=$model->precio_unitario*$model->cantidad;
-                $model->subtotal= round($model->total/((int)Yii::app()->params['impuesto']*0.01+1),2);
+                $model->subtotal= $_subtotal= Producto::model()->getSubtotal($_total); //round($model->total/((int)Yii::app()->params['impuesto']*0.01+1),2);
                 $model->impuesto= round($model->total-$model->subtotal,2);
                 //cantidad disponible para el producto almacen
 //                $_cantidad_alm= ProductoAlmacen::model()->cantidad_lote2($model->producto_id,$model->lote);
@@ -173,7 +173,7 @@ class DetalleVentaController extends Controller
                    $_cantidad=  yii::app()->request->getParam('value');
                    
                    $_total= round($model->precio_unitario*$_cantidad,2);//calculando el total
-                   $_subtotal= round($_total/((int)Yii::app()->params['impuesto']*0.01+1),2); //calculando subtotal
+                   $_subtotal= Producto::model()->getSubtotal($_total);// round($_total/((int)Yii::app()->params['impuesto']*0.01+1),2); //calculando subtotal
                    $_impuesto=round($_total-$_subtotal,2); //calculando subtotal
                     
                    $event->sender->setAttribute('subtotal', $_subtotal);//Actualizando Cantidad
@@ -209,6 +209,7 @@ class DetalleVentaController extends Controller
         {
          Yii::import('booster.components.TbEditableSaver');
          $es = new TbEditableSaver('DetalleVenta');
+         $es->scenario='update';
 //         /$_cantidad= $es->value;
           $es->onBeforeUpdate= function($event) {
 
@@ -220,7 +221,7 @@ class DetalleVentaController extends Controller
                    $_precioUnitario=  yii::app()->request->getParam('value');
                    
                    $_total= round($model->cantidad*$_precioUnitario,2);//calculando el subtotal
-                   $_subtotal= round($_total/((int)Yii::app()->params['impuesto']*0.01+1),2); //calculando impuesto
+                   $_subtotal= $_subtotal= Producto::model()->getSubtotal($_total); //round($_total/((int)Yii::app()->params['impuesto']*0.01+1),2); //calculando impuesto
                    $_impuesto= round($_total-$_subtotal,2); //calculando total
                     
                    $event->sender->setAttribute('subtotal', $_subtotal);//Actualizando Cantidad
