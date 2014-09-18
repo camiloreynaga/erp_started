@@ -309,6 +309,6 @@ class Producto extends Erp_startedActiveRecord// CActiveRecord
          * calcula el impuesto para el monto
          */
         public function getImpuesto($monto){
-            return round($monto * ((int)Yii::app()->params['impuesto']*0.01 + 1),2);
+            return round($monto * ((int)Yii::app()->params['impuesto']*0.01),2);
         }
 }

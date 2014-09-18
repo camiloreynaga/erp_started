@@ -19,11 +19,13 @@
 
 	<?php echo $form->textFieldGroup($model,'telefono',array('class'=>'span5','maxlength'=>50)); ?>
 
-	<?php echo $form->textFieldGroup($model,'activo',array('class'=>'span5')); ?>
-
-	<?php echo $form->textFieldGroup($model,'linea_credito',array('class'=>'span5','maxlength'=>10)); ?>
-
 	
+	<?php echo $form->textFieldGroup($model,'linea_credito',array('class'=>'span5','maxlength'=>10)); ?>
+        
+        <?php echo $form->textFieldGroup($model,'credito_disponible',array('class'=>'span5','maxlength'=>10)); ?>
+        
+        <?php // echo $form->textFieldGroup($model,'activo',array('class'=>'span5')); ?>
+
 
 <div class="form-actions">
 	<?php $this->widget('booster.widgets.TbButton', array(

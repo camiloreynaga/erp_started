@@ -31,7 +31,11 @@ $("#delete").click(function(){
                 $.ajax({
                         data:{ids:checked},
                         url:"'.CController::createUrl('detalleVenta/batchDelete').'",
-                        success:function(data){$("#detalle-venta-grid").yiiGridView("update",{});},              
+                        
+                        success:function(data){
+                            window.location.reload();
+                        //$("#detalle-venta-grid").yiiGridView("update",{});
+                        },              
                 });
         }
         });
@@ -294,7 +298,7 @@ $("#delete").click(function(){
 <div >
     
     <?php  $this->widget('booster.widgets.TbButton',array( // Button to delete
-            'label' => 'Delete Selected Items',
+            'label' => yii::t('app','Delete Selected Items'),
             'context' => 'danger',
             'size' => 'small',
             'id' => 'delete',
@@ -314,13 +318,13 @@ $("#delete").click(function(){
              );
 ?>
 <?php
-    echo CHtml::Button('Cancelar venta',
-             array(
-                 'submit'=>array('detalleVenta/finalizar',
-                     'id'=>$model->venta_id,
-                     
-                     ),
-                     'confirm'=>'Esta seguro de cancelar con la venta?',
-                 )
-             );
+//    echo CHtml::Button('Cancelar venta',
+//             array(
+//                 'submit'=>array('detalleVenta/finalizar',
+//                     'id'=>$model->venta_id,
+//                     
+//                     ),
+//                     'confirm'=>'Esta seguro de cancelar con la venta?',
+//                 )
+//             );
 ?>

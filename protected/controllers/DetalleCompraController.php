@@ -89,10 +89,10 @@ class DetalleCompraController extends Controller
                 $model->impuesto=$model->subtotal*((int)Yii::app()->params['impuesto']*0.01);
                 $model->total=$model->subtotal+$model->impuesto;
                  */
-                //Precio con IGV Incluido
-                $model->total=$model->precio_unitario*$model->cantidad;
-                $model->subtotal= round($model->total/((int)Yii::app()->params['impuesto']*0.01+1),2);
-                $model->impuesto= round($model->total-$model->subtotal,2);
+                //Precio SIN IGV Incluido
+                $model->subtotal= round($model->precio_unitario*$model->cantidad,2);
+                $model->impuesto= Producto::model()->getImpuesto($model->subtotal); //  round($model->total/((int)Yii::app()->params['impuesto']*0.01 + 1),2);
+                $model->total= round($model->impuesto+$model->subtotal,2);
                 
                 if($model->save())
                 {
@@ -135,10 +135,10 @@ class DetalleCompraController extends Controller
             {
                 $model->attributes=$_POST['DetalleCompra'];
                 
-                //Precio con IGV Incluido
-                $model->total=$model->precio_unitario*$model->cantidad;
-                $model->subtotal= round($model->total/((int)Yii::app()->params['impuesto']*0.01+1),2);
-                $model->impuesto= round($model->total-$model->subtotal,2);
+                //Precio SIN IGV Incluido
+                $model->subtotal= round($model->precio_unitario*$model->cantidad,2);
+                $model->impuesto= Producto::model()->getImpuesto($model->subtotal); //  round($model->total/((int)Yii::app()->params['impuesto']*0.01 + 1),2);
+                $model->total= round($model->impuesto+$model->subtotal,2);
                 
                 if($model->save())
                 {

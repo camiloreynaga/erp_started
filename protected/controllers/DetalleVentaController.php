@@ -75,7 +75,7 @@ class DetalleVentaController extends Controller
                 
                 $model->estado=0; // estado pendiente de despacho
                 $model->total=$model->precio_unitario*$model->cantidad;
-                $model->subtotal= $_subtotal= Producto::model()->getSubtotal($_total); //round($model->total/((int)Yii::app()->params['impuesto']*0.01+1),2);
+                $model->subtotal= $_subtotal= Producto::model()->getSubtotal($model->total); //round($model->total/((int)Yii::app()->params['impuesto']*0.01+1),2);
                 $model->impuesto= round($model->total-$model->subtotal,2);
                 //cantidad disponible para el producto almacen
 //                $_cantidad_alm= ProductoAlmacen::model()->cantidad_lote2($model->producto_id,$model->lote);
@@ -263,8 +263,25 @@ class DetalleVentaController extends Controller
                         ProductoAlmacen::model()->actualizarCantidadDisponible($model,0); 
                         //actualizando el credito disponible
                         Cliente::model()->actualizarCreditoDisponible($model,0);
+                        
+                        //actualizar importe, subtotal, impuesto.
+                        //obtiendo venta
+                        $_venta= Venta::model()->findByPk($model->venta_id);
+                        
                         ($model->delete() == true) ? $successCount++ : $failureCount++;
+                        
+                        //actualizando el total, base imponible e impuesto de la venta
+                        $_total=$model->SumaTotal();
+                        $_bi=  Producto::model()->getSubtotal($_total);
+                        $_venta->importe_total=$_total;//$this->SumaTotal()['total'];
+                        $_venta->base_imponible=$_bi; 
+                        $_venta->impuesto=$_total-$_bi;
+                        $_venta->save();
+                        
                     }
+                    
+                    
+                    
 //                    echo CJSON::encode(array('status' => 'success',
 //                        'data' => array(
 //                            'successCount' => $successCount,
