@@ -16,6 +16,7 @@ class m140521_035044_create_begining_venta_tables extends CDbMigration
 	// Use safeUp/safeDown to do migration with transaction
 	public function safeUp()
 	{
+            
             //tabla cliente
             $this->createTable('tbl_cliente',array(
                 'id'=>'pk',
@@ -25,24 +26,60 @@ class m140521_035044_create_begining_venta_tables extends CDbMigration
                 'direccion'=>'varchar(100)',
                 'ciudad'=>'varchar(50)',
                 'telefono'=>'varchar(50)',
-                //
-                 'create_time'=>'datetime DEFAULT NULL',
+                'activo'=>'bool DEFAULT 0', // 0=si ;1=no
+                'linea_credito'=>'decimal(10,2) DEFAULT 0',
+                'credito_disponible'=>'decimal(10,2) DEFAULT 0',
+//
+                'create_time'=>'datetime DEFAULT NULL',
                 'create_user_id'=> 'int(11) DEFAULT NULL',
                 'update_time'=>'datetime DEFAULT NULL',
                 'update_user_id'=>'int(11) DEFAULT NULL',
             ),'ENGINE=InnoDB');
             
+            //nota de pedido
+            $this->createTable('tbl_pedido',array(
+                'id'=>'pk',
+                'fecha_pedido'=>'date DEFAULT NULL', //fecha de emision
+                'cliente_id'=>'int(11)',
+                'vendedor_id'=>'int(11) NOT NULL', // Registro de preventista
+                'cotizacion_id'=>'int(11) DEFAULT NULL', //cotización venta
+                'observaciones'=>'text DEFAULT NULL',
+                'estado'=>'SmallInt(6)', // 0=pendiente,1=proceso,2=terminado,3=cancelado
+                'create_time'=>'datetime DEFAULT NULL',
+                'create_user_id'=> 'int(11) DEFAULT NULL',
+                'update_time'=>'datetime DEFAULT NULL',
+                'update_user_id'=>'int(11) DEFAULT NULL',
+            ),'ENGINE=InnoDB');
+            
+//            Detalle de orden de compra
+            $this->createTable('tbl_detalle_pedido',array(
+                'id'=>'pk',
+                'pedido_id'=>'int(11)',
+                //'cotizacion_id'=>'int(11) DEFAULT NULL',
+                'producto_id'=>'int(11)',
+                'cantidad'=>'int(11)',
+                'observacion'=>'text DEFAULT NULL',
+                'precio_unitario'=>'decimal(10,2)',
+                'subtotal'=>'decimal(10,2)',
+                'impuesto'=>'decimal(10,2)',
+                'total'=>'decimal(10,2)',
+            ), 'ENGINE=InnoDB');
             
             // tabla venta
             $this->createTable('tbl_venta',array(
                 'id'=>'pk',
-                'fecha_venta'=>'datetime DEFAULT NULL', // fecha emision comprobante
+                'fecha_venta'=>'date DEFAULT NULL', // fecha emision comprobante
                 'cliente_id'=>'int(11) NOT NULL', // fk de registro de proveedores
                 'vendedor_id'=>'int(11) NOT NULL', // Registro de preventista
+                'forma_pago_id'=>'int(11) NOT NULL', // contado / credito/ letra.
+                'pedido_id'=>'int(11)', //relacion de pedido - venta
                 'base_imponible'=>'decimal(10,2)',
                 'impuesto'=>'decimal(10,2) DEFAULT NULL' ,
                 'importe_total'=>'decimal(10,2) DEFAULT NULL',
                 'observacion'=>'text DEFAULT NULL',
+                'estado'=>'SmallInt(6)', // 0=pendiente,1=proceso,2=terminado,3=cancelado
+                'estado_comprobante'=>'SmallInt(6)',
+                'estado_pago'=>'SmallInt(6)',
                 'create_time'=>'datetime DEFAULT NULL',
                 'create_user_id'=> 'int(11) DEFAULT NULL',
                 'update_time'=>'datetime DEFAULT NULL',
@@ -60,7 +97,13 @@ class m140521_035044_create_begining_venta_tables extends CDbMigration
                 'impuesto'=>'decimal(10,2)',
                 'total'=>'decimal(10,2)',
                 'lote'=>'varchar(50)',// 
-                'fecha_vencimiento'=>'DATE'//
+                'fecha_vencimiento'=>'DATE',//
+                'estado'=>'SmallInt(6)', // 0=pendiente, 1= terminado
+                //
+                'create_time'=>'datetime DEFAULT NULL',
+                'create_user_id'=> 'int(11) DEFAULT NULL',
+                'update_time'=>'datetime DEFAULT NULL',
+                'update_user_id'=>'int(11) DEFAULT NULL',
             ), 'ENGINE=InnoDB');
             //tabla cuenta por cobrar
             //
@@ -71,6 +114,7 @@ class m140521_035044_create_begining_venta_tables extends CDbMigration
                 'estado'=>'SmallInt(6)',
                 'fecha_pago'=>'Date',
                 'fecha_vencimiento'=>'Date',
+                'medio_pago'=>'int(11)',
                 'interes'=>'decimal(10,2)',
                 'create_time' => 'datetime DEFAULT NULL',
                 'create_user_id' => 'int(11) DEFAULT NULL',
@@ -91,7 +135,8 @@ class m140521_035044_create_begining_venta_tables extends CDbMigration
             $this->addForeignKey('fk_detalle_producto_venta','tbl_detalle_venta','producto_id','tbl_producto', 'id', 'CASCADE', 'RESTRICT');
             //cuenta por pagar con compra
             $this->addForeignKey('fk_cuenta_cobrar_venta', 'tbl_cuenta_cobrar', 'venta_id', 'tbl_venta', 'id','CASCADE', 'RESTRICT');
-            
+            //pedido detalle de pedido
+            $this->addForeignKey('fk_pedido_detalle','tbl_detalle_pedido','pedido_id','tbl_pedido','id','CASCADE', 'RESTRICT');
         }
         
         
@@ -102,14 +147,14 @@ class m140521_035044_create_begining_venta_tables extends CDbMigration
             $this->dropForeignKey('fk_detalle_venta', 'tbl_detalle_venta');
             $this->dropForeignKey('fk_detalle_producto_venta', 'tbl_detalle_venta');
             $this->dropForeignKey('fk_cuenta_cobrar_venta', 'tbl_cuenta_cobrar');
-            
+            $this->dropForeignKey('fk_pedido_detalle', 'tbl_detalle_pedido');
             
             $this->dropTable('tbl_cliente');
-           
             $this->dropTable('tbl_venta');
             $this->dropTable('tbl_detalle_venta');
             $this->dropTable('tbl_cuenta_cobrar');
-            
+            $this->dropTable('tbl_pedido');
+            $this->dropTable('tbl_detalle_pedido');
 	}
 	
 }

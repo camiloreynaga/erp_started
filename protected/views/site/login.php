@@ -22,7 +22,7 @@ $this->breadcrumbs=array(
 	),
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+	<p class="note"><?php echo yii::t('app','Fields with') ;?> <span class="required">*</span> <?php echo yii::t('app','are required.') ;?></p>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'username'); ?>

@@ -17,9 +17,11 @@ return array(
 		// uncomment the following to use a MySQL database
 		*/
 		'db'=>array(
-			'connectionString' => 'mysql:host=localhost;dbname=erp_started',
+			'connectionString' => 'mysql:host=localhost;dbname=erp_started2',
+                        //'connectionString' => 'mysql:host=192.168.1.34;dbname=erp_started2',
 			'emulatePrepare' => true,
-			'username' => 'admkiwi',
+			//'username' => 'cr',
+                        'username'=>'root',
 			'password' => 'adonde',
 			'charset' => 'utf8',
 		),
@@ -33,5 +35,12 @@ return array(
 				),
 			),
 		),
+                'authManager'=>array(
+                    'class'=>'CDbAuthManager',
+                    'connectionID'=>'db',
+                    'itemTable'=>'tbl_auth_item',
+                    'itemChildTable'=>'tbl_auth_item_child',
+                    'assignmentTable'=>'tbl_auth_assignment',
+                ),
 	),
 );

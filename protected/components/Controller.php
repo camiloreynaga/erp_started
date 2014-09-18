@@ -20,4 +20,31 @@ class Controller extends CController
 	 * for more details on how to specify this property.
 	 */
 	public $breadcrumbs=array();
+        
+        public function accessRules() {
+             parent::accessRules();
+            return array(
+                array('allow', //allow all users to perfom 'index' and 'view' actions
+                    'controllers'=>array('Caracteristica','empleado','fabricante','presentacion','producto','proveedor','tipoProducto'),
+                    'actions'=>array('index','view'),
+                    'users'=>array('@')
+                    ),
+                array('allow', //allow authenticated user to perform 'create' and 'update' actions
+                    'controllers'=>array('caracteristica','empleado','fabricante','presentacion','producto','proveedor','tipoProducto'),
+                    'actions'=>array('create','update'),
+                    'users'=>'@'
+                    ),
+                array('allow', //allow admin user to perform 'admin' and 'delete' actions
+                    'controllers'=>array('caracteristica','empleado','fabricante','presentacion','producto','proveedor','tipoProducto'),
+                    'actions'=>array('admin','delete'),
+                    'users'=>array('admin'),
+                    ),
+                array('deny', // deny all users
+                    'controllers'=>array('caracteristica','empleado','fabricante','presentacion','producto','proveedor','tipoProducto'),
+                    'users'=>array('*'),
+                    ),
+            );
+           
+        }
+        
 }

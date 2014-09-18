@@ -1,0 +1,32 @@
+<div class="view">
+
+		<b><?php echo CHtml::encode($data->getAttributeLabel('id')); ?>:</b>
+	<?php echo CHtml::link(CHtml::encode($data->id),array('view','id'=>$data->id)); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($data->getAttributeLabel('guia_remision_id')); ?>:</b>
+	<?php echo CHtml::encode($data->guia_remision_id); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($data->getAttributeLabel('producto_id')); ?>:</b>
+	<?php echo CHtml::encode($data->producto_id); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($data->getAttributeLabel('descripcion')); ?>:</b>
+	<?php echo CHtml::encode($data->descripcion); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($data->getAttributeLabel('cantidad')); ?>:</b>
+	<?php echo CHtml::encode($data->cantidad); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($data->getAttributeLabel('unidad_medida')); ?>:</b>
+	<?php echo CHtml::encode($data->unidad_medida); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($data->getAttributeLabel('peso')); ?>:</b>
+	<?php echo CHtml::encode($data->peso); ?>
+	<br />
+
+
+</div>

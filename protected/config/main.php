@@ -1,4 +1,6 @@
 <?php
+//Yii::setPathOfAlias('bootstrap', dirname(__FILE__).'/../extensions/bootstrap');
+Yii::setPathOfAlias('booster', dirname(__FILE__).'/../extensions/booster');
 
 // uncomment the following to define a path alias
 // Yii::setPathOfAlias('local','path/to/local-folder');
@@ -6,11 +8,14 @@
 // This is the main Web application configuration. Any writable
 // CWebApplication properties can be configured here.
 return array(
+        //'theme'=>'bootstrap',
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-	'name'=>'My Web Application',
+	'name'=>'ERP APP',
+        'language'=>'es',
+        //'sourceLanguage'=>'en',
 
 	// preloading 'log' component
-	'preload'=>array('log'),
+	'preload'=>array('log','booster'),
 
 	// autoloading model and component classes
 	'import'=>array(
@@ -24,8 +29,10 @@ return array(
 		'gii'=>array(
 			'class'=>'system.gii.GiiModule',
 			'password'=>'gii',
+                        
 			// If removed, Gii defaults to localhost only. Edit carefully to taste.
 			'ipFilters'=>array('127.0.0.1','::1'),
+                        'generatorPaths'=>array('booster.gii'),
 		),
 		
 	),
@@ -54,13 +61,15 @@ return array(
 		// uncomment the following to use a MySQL database
 	
 		'db'=>array(
-			'connectionString' => 'mysql:host=localhost;dbname=erp_started',
+			'connectionString' => 'mysql:host=localhost;dbname=erp_started2',
 			'emulatePrepare' => true,
-			'username' => 'admkiwi',
+			'username' => 'root',
 			'password' => 'adonde',
 			'charset' => 'utf8',
 		),
-		
+		'coreMessage'=>array(
+                    'basePath'=>'protected/messages',
+                ),
 		'errorHandler'=>array(
 			// use 'site/error' action to display errors
 			'errorAction'=>'site/error',
@@ -80,6 +89,19 @@ return array(
 				*/
 			),
 		),
+                'authManager'=>array(
+                    'class'=>'CDbAuthManager',
+                    'connectionID'=>'db',
+                    'itemTable'=>'tbl_auth_item',
+                    'itemChildTable'=>'tbl_auth_item_child',
+                    'assignmentTable'=>'tbl_auth_assignment',
+                ),
+                'booster'=>array(
+                    'class'=>'ext.booster.components.Booster',
+                    //'class'=>'path.alias.to.booster.components.Booster',
+                    'responsiveCss'=>true
+                ),
+            
 	),
 
 	// application-level parameters that can be accessed
@@ -87,5 +109,7 @@ return array(
 	'params'=>array(
 		// this is used in contact page
 		'adminEmail'=>'webmaster@example.com',
+                'impuesto'=>'18',
+                'language'=>'es'
 	),
 );
