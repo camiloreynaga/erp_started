@@ -53,7 +53,8 @@ class DetalleVenta extends Erp_startedActiveRecord//CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-                        array('precio_unitario','validarCreditoDisponible'),
+                        array('precio_unitario','validarCreditoDisponible','on'=>'create'),
+                        array('precio_unitario','validarCreditoModificado','on'=>'update'),
                         array('cantidad','comprobarCantidadDisponible','on'=>'create'), // valida la cantidad ingresada
                         array('cantidad','validaCantidadModificada','on'=>'update'), // valida la cantidad a reemplazar 
                         array('venta_id,producto_id,cantidad,precio_unitario,lote','required'),
@@ -136,7 +137,35 @@ class DetalleVenta extends Erp_startedActiveRecord//CActiveRecord
             
         }
         /**
-         * Validación de Credito disponible cuando forma de pago es credito
+         * Validación de Credito disponible cuando forma de pago es credito, escenario create
+         * @param type $attribute
+         * @param type $params
+         */
+        public function validarCreditoModificado($attribute,$params)
+        {
+            //obteniendo venta
+            $_venta=Venta::model()->findByPk($this->venta_id);
+            //obteniendo el credito disponible
+            $_cliente= Cliente::model()->findByPk($_venta->cliente_id);
+            $_credito_disponible= $_cliente->credito_disponible;
+            
+            $_precio_anterior = $this->findByPk($this->id)['precio_unitario'];
+            $_cantidad_anterior = $this->findByPk($this->id)['cantidad'];
+            
+            
+            $_forma_pago=$_venta->forma_pago_id;
+            //comprueba que forma de pago es credito (id= 1)
+            if($_forma_pago==1)
+            {
+                if($_credito_disponible + ($_precio_anterior*$_cantidad_anterior) < $this->attributes['cantidad']* $this->attributes['precio_unitario'])
+                {
+                    $this->addError($attribute, 'Credito Disponible insuficiente. Credito disponible: '.$_credito_disponible );
+                }
+            }
+        }
+        
+        /**
+         * Validación de Credito disponible cuando forma de pago es credito, escenario update
          * @param type $attribute
          * @param type $params
          */
@@ -158,6 +187,7 @@ class DetalleVenta extends Erp_startedActiveRecord//CActiveRecord
                 }
             }
         }
+        
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
