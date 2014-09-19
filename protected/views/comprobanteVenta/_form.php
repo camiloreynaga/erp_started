@@ -15,7 +15,7 @@
 
 	<?php //echo $form->datepickerGroup($model,'fecha_cancelacion',array('options'=>array(),'htmlOptions'=>array('class'=>'span5')),array('prepend'=>'<i class="icon-calendar"></i>','append'=>'Click on Month/Year at top to select a different year or type in (mm/dd/yyyy).')); ?>
 
-	<?php echo $form->textFieldGroup($model,'serie',array('class'=>'span5','maxlength'=>5)); ?>
+	<?php echo $form->textFieldGroup($model,'serie',array('val'=>'001' ,'class'=>'span5','maxlength'=>5)); ?>
 
 	<?php echo $form->textFieldGroup($model,'numero',array('class'=>'span5','maxlength'=>10)); ?>
 

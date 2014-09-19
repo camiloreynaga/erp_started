@@ -51,5 +51,27 @@ array('label'=>yii::t('app','Manage').' '.yii::t('app','Sale'),'url'=>array('adm
 <?php
 $this->renderPartial('//DetalleVenta/_viewDetalleVenta',array('model'=>DetalleVenta::model(),'pid'=>$model->id));
 
+
+
+Yii::app()->clientScript->registerScript('billing', "
+$('.search-button').click(function(){
+$('.search-form').toggle();
+return false;
+});
+$('.search-form form').submit(function(){
+$.fn.yiiGridView.update('detalle-venta-grid', {
+data: $(this).serialize()
+});
+return false;
+});
+");
 ?>
+
+<?php //echo CHtml::link('Registrar Facturar','#',array('class'=>'search-button btn')); ?>
+<div class="search-form" style="display:none">
+	<?php // $this->renderPartial('//comprobanteVenta/_form',array(
+	//'model'=>  ComprobanteVenta::model(),
+//)); ?>
+</div>
+
 <a href="facturacion2/factura.php?id_venta=<?php echo $model->id; ?>" target="blank" >Facturar</a></p>

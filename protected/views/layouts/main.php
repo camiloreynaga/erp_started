@@ -65,7 +65,7 @@
                                     'items'=>array(
                                         array('label'=>'Cargos','url'=>array('/cargo/admin')),
                                         array('label'=>'Empleados','url'=>array('/empleado/admin')),
-                                        array('label'=>'Usuarios','url'=>array('/usuario/admin')),
+                                     //   array('label'=>'Usuarios','url'=>array('/usuario/admin')),
                                     )
                                     ),    
                                 array('label'=>'Sistema',
