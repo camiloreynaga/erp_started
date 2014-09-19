@@ -219,4 +219,21 @@ class Venta extends Erp_startedActiveRecord//CActiveRecord
               }
               return $resultados;   
         }
+        
+        /**
+         * Elimina todos los items del detalle de venta
+         */
+        public function deleteDetaills()
+        {
+            $detalles = $this->r_detalle_venta;
+            foreach($detalles as $detalle_venta)
+            {
+                 //$detalle_venta= $this->loadModel($detalle);
+                  //actualizar la cantidad disponible en ProductoAlmacen
+                ProductoAlmacen::model()->actualizarCantidadDisponible($detalle_venta,0); 
+                //actualizando credito disponible en cliente
+                Cliente::model()->actualizarCreditoDisponible($detalle_venta,0);
+            }
+            DetalleVenta::model()->deleteAll('venta_id=:venta_id',array(':venta_id'=>  $this->id));
+        }
 }

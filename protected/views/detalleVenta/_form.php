@@ -56,10 +56,10 @@ $("#delete").click(function(){
 )); ?>
 
 <p class="help-block"><?php echo yii::t('app','Fields with') ;?> <span class="required">*</span> <?php echo yii::t('app','are required.') ;?>
-<?php echo ' -  Forma de pago: <span class="required" >'. $model->r_venta->r_forma_pago->forma_pago .'</span>';?>
+<?php // echo ' -  Forma de pago: <span class="required" >'. $model->r_venta->r_forma_pago->forma_pago .'</span>';?>
       <?php 
-      $_cred_disp= $model->r_venta->forma_pago_id==1 ? ' <span class="required" > - monto disponible: '.$model->r_venta->r_cliente->credito_disponible.'</span>' : ""; 
-      echo $_cred_disp;
+//      $_cred_disp= $model->r_venta->forma_pago_id==1 ? ' <span class="required" > - monto disponible: '.$model->r_venta->r_cliente->credito_disponible.'</span>' : ""; 
+//      echo $_cred_disp;
       ?>  
 </p>
 
@@ -328,3 +328,12 @@ $("#delete").click(function(){
 //                 )
 //             );
 ?>
+<?php // echo CHtml::ajaxButton('Cancelar venta',array('//venta/delete','id'=>$model->venta_id, ),
+//                 array(
+//                      'type' => 'post',
+//                      'success'=>'function(data){location.href="'.CController::createUrl('/venta/admin').'"}'
+//                ),
+//                array(
+//                 'confirm'=>'Esta seguro de eliminar/cancelar la venta en proceso?',
+//             ));
+         ?>

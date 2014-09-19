@@ -340,4 +340,6 @@ class DetalleVenta extends Erp_startedActiveRecord//CActiveRecord
 
             parent::afterSave();
         }
+        
+        
 }
