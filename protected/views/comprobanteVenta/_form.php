@@ -38,7 +38,7 @@ $cs->registerScriptFile($baseUrl.'/js/validacionAjaxForm.js',CClientScript::POS_
 	<?php echo $form->textFieldGroup($model,'serie',array(
                 'widgetOptions' => array(
                     'htmlOptions' => array(
-                        'value'=>'001',
+                        'value'=>'101',
                         //'disabled' => true
                         )
 				),

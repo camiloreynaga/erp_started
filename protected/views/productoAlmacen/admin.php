@@ -45,6 +45,10 @@ return false;
 'columns'=>array(
 		'id',
 		'almacen_id',
+                array(
+                    'name'=>'almacen_id',
+                    'value'=>r_
+                ),
 		'producto_id',
 		'lote',
 		'fecha_vencimiento',
