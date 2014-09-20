@@ -58,20 +58,24 @@ $('.search-button').click(function(){
 $('.search-form').toggle();
 return false;
 });
-$('.search-form form').submit(function(){
-$.fn.yiiGridView.update('detalle-venta-grid', {
-data: $(this).serialize()
-});
-return false;
-});
+//$('.search-form form').submit(function(){
+//    $.fn.yiiGridView.update('detalle-venta-grid', 
+//    {
+//    data: $(this).serialize()
+//    });
+//    return false;
+//});
 ");
 ?>
 
-<?php //echo CHtml::link('Registrar Facturar','#',array('class'=>'search-button btn')); ?>
+<?php echo CHtml::link('Registrar Facturar','#',array('class'=>'search-button btn')); ?>
 <div class="search-form" style="display:none">
-	<?php // $this->renderPartial('//comprobanteVenta/_form',array(
-	//'model'=>  ComprobanteVenta::model(),
-//)); ?>
+	<?php  $this->renderPartial('//comprobanteVenta/_form',array(
+	'model'=>ComprobanteVenta::model(),
+         'venta_id'=>$model->id,
+         //'fecha_emision'=>$model->fecha_venta,   
+         //'tipo_comprobante_id'=>1, //1 = factura   
+)); ?>
 </div>
 
 <a href="facturacion2/factura.php?id_venta=<?php echo $model->id; ?>" target="blank" >Facturar</a></p>

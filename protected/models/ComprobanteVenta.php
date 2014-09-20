@@ -41,6 +41,7 @@ class ComprobanteVenta extends Erp_startedActiveRecord//CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
+                        //array('tipo_comprobante_id, serie, numero','unique'),
 			array('venta_id, tipo_comprobante_id, serie, numero', 'required'),
 			array('venta_id, tipo_comprobante_id, estado, create_user_id, update_user_id', 'numerical', 'integerOnly'=>true),
 			array('serie', 'length', 'max'=>5),
@@ -137,4 +138,16 @@ class ComprobanteVenta extends Erp_startedActiveRecord//CActiveRecord
 	{
 		return parent::model($className);
 	}
+        
+        
+        public function getNroFactura()
+        {
+            $criteria = new CDbCriteria();
+            $criteria->select='max(numero)';
+            
+            return  $criteria;
+            //return $criteria(0) ;
+            
+            //$this->numero
+        }
 }
