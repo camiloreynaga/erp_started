@@ -31,7 +31,7 @@ public $layout='//layouts/column2';
                 'users'=>array('@'),
                 ),
                 array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions'=>array('create','update','search','filtroProducto','filtroProductoStock','admin'),
+                'actions'=>array('create','update','search','filtroProducto','filtroProductoStock','EditItem','admin'),
                 'users'=>array('@'),
                 ),
                 array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -100,6 +100,25 @@ public $layout='//layouts/column2';
             $this->render('update',array(
             'model'=>$model,
             ));
+        }
+        
+        /**
+         * actualiza un item de tipo texto cualquiera
+         */
+        public function actionEditItem()
+        {
+         Yii::import('booster.components.TbEditableSaver');
+         $es = new TbEditableSaver('Producto');
+         
+         //actualiza el estado del item de detalle de compra
+//         $es->onAfterUpdate= function($event) {
+//
+//             $model=$this->loadModel(yii::app()->request->getParam('pk')); //obteniendo el Model de detalleCompra
+//             $model->actualizarEstado();    
+//            };  
+            
+            $es->update();
+        
         }
 
         /**

@@ -52,8 +52,10 @@ array('label'=>'Manage Producto','url'=>array('admin')),
                     'name'=>'descontinuado',
                     'value'=>$model->descontinuado==0?'NO':'SI'
                 ),
-		'precio',
-		'ventaUnd',
+                'precio_venta',
+                'precio_compra',
+                'porcentaje_ganancia',
+		//'ventaUnd',
 		'observacion',
 		'create_time',
 		array(

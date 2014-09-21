@@ -51,8 +51,6 @@ return false;
                         'width'=>'50px',
                     )
                 ),    
-		
-		
                 array(
                     'name'=>'nombre',
                     'header'=>'Producto',
@@ -93,13 +91,26 @@ return false;
                     'value'=>'$data->r_fabricante->fabricante'
                 ),
                 'stock',
+                array(
+                    'name'=>'precio_venta',
+                    //'widgetOptions'=>array(
+                      //  ,
+//                    ),
+                    
+                    'class'=>'booster.widgets.TbEditableColumn',
+                        'editable'=>array(
+                            'type'=>'text',
+                            //'inputClass'=>'inline',
+                            'url' => $this->createUrl('producto/editItem'),
+                        )
+                ),
 		
 		/*
 		'fabricante_id',
 		'minimo_stock',
 		
 		'descontinado',
-		'precio',
+		
 		'ventaUnd',
 		'observacion',
 		'create_time',

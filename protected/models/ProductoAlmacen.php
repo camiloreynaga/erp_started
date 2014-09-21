@@ -52,7 +52,8 @@ class ProductoAlmacen extends Erp_startedActiveRecord//CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-                    'r_almacen' => array(self::HAS_MANY, 'ComprobanteVenta', 'venta_id'),
+                    'r_almacen' => array(self::BELONGS_TO, 'Almacen', 'almacen_id'),
+                    'r_producto'=> array(self::BELONGS_TO, 'Producto','producto_id'),
 		);
 	}
 
@@ -93,10 +94,10 @@ class ProductoAlmacen extends Erp_startedActiveRecord//CActiveRecord
 		// @todo Please modify the following code to remove attributes that should not be searched.
 
 		$criteria=new CDbCriteria;
-
+                $criteria->with=array('r_producto');
 		$criteria->compare('id',$this->id);
 		$criteria->compare('almacen_id',$this->almacen_id);
-		$criteria->compare('producto_id',$this->producto_id);
+		$criteria->compare('r_producto.nombre',$this->producto_id,true);
 		$criteria->compare('lote',$this->lote,true);
 		$criteria->compare('fecha_vencimiento',$this->fecha_vencimiento,true);
 		$criteria->compare('cantidad_disponible',$this->cantidad_disponible);

@@ -24,7 +24,7 @@ $cs->registerScriptFile($baseUrl.'/js/validacionAjaxForm.js',CClientScript::POS_
 
 	<?php 
         echo $form->hiddenField($model,'venta_id',array(
-            'value'=>$venta_id,
+            'value'=>$_GET['id'],
         )); 
 
          ?>
@@ -64,18 +64,16 @@ $cs->registerScriptFile($baseUrl.'/js/validacionAjaxForm.js',CClientScript::POS_
 	
 
 <div class="form-actions">
-	
-
     <?php
             $this->widget('booster.widgets.TbButton', array(
 			'buttonType'=>'ajaxSubmit',
 			'context'=>'primary',
                         'url'=>CController::createUrl('comprobanteVenta/create',
                                 array(
-                                    //'pid'=>$venta_id
+                                    //'id'=>$model->venta_id
                                     )
                                 ),
-			'label'=>$model->isNewRecord ? 'Create' : 'Save',
+			'label'=> yii::t('app','Save' ) ,
                         
                         'ajaxOptions'=>array(
                             'dataType'=>'json',

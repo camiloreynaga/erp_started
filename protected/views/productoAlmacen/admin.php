@@ -44,12 +44,15 @@ return false;
 'filter'=>$model,
 'columns'=>array(
 		'id',
-		'almacen_id',
+		//'almacen_id',
                 array(
                     'name'=>'almacen_id',
-                    'value'=>r_
+                    'value'=>'$data->r_almacen->almacen'
                 ),
-		'producto_id',
+		array(
+                    'name'=>'producto_id',
+                    'value'=>'$data->r_producto->nombre'
+                ),
 		'lote',
 		'fecha_vencimiento',
 		'cantidad_disponible',
@@ -59,8 +62,9 @@ return false;
 		'update_time',
 		'update_user_id',
 		*/
-array(
-'class'=>'booster.widgets.TbButtonColumn',
-),
+//                array(
+//                'class'=>'booster.widgets.TbButtonColumn',
+//                'template'=>'{view}'
+//                ),
 ),
 )); ?>

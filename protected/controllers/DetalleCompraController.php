@@ -229,7 +229,7 @@ class DetalleCompraController extends Controller
         }
         
         /**
-         * 
+         * actualiza un item de tipo texto cualquiera
          */
         public function actionEditItem()
         {

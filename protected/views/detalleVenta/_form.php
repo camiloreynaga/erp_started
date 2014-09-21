@@ -182,7 +182,7 @@ $("#delete").click(function(){
                         'url'=>CController::createUrl('detalleVenta/create',
                                 array('pid'=>$model->venta_id)
                                 ),
-			'label'=> 'Add Item',//$orden_compra->isNewRecord ? 'Create' : 'Save',
+			'label'=> yii::t('app', 'Add Item') ,//$orden_compra->isNewRecord ? 'Create' : 'Save',
                         'id'=>'update',
                         'ajaxOptions'=>array(
                             'dataType'=>'json',
