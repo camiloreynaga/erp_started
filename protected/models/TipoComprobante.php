@@ -53,7 +53,7 @@ class TipoComprobante extends Erp_startedActiveRecord//CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'r_comprobanteCompras' => array(self::HAS_MANY, 'ComprobanteCompra', 'tipo_comprobante_id'),
+			'r_comprobante_compra' => array(self::HAS_MANY, 'ComprobanteCompra', 'tipo_comprobante_id'),
 			'r_comprobanteVentas' => array(self::HAS_MANY, 'ComprobanteVenta', 'tipo_comprobante_id'),
 		);
 	}

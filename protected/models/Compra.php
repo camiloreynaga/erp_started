@@ -75,7 +75,7 @@ class Compra extends Erp_startedActiveRecord//CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'r_proveedor' => array(self::BELONGS_TO, 'Proveedor', 'proveedor_id'),
-			'r_comprobanteCompras' => array(self::HAS_MANY, 'ComprobanteCompra', 'compra_id'),
+			'r_comprobante_compra' => array(self::HAS_MANY, 'ComprobanteCompra', 'compra_id'),
 			'r_cuentaPagars' => array(self::HAS_MANY, 'CuentaPagar', 'compra_id'),
 			'r_detalleCompras' => array(self::HAS_MANY, 'DetalleCompra', 'compra_id'),
 		);

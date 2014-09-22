@@ -104,12 +104,18 @@ return false;
                             'url' => $this->createUrl('producto/editItem'),
                         )
                 ),
+                array(
+                    'name'=>'descontinuado',
+                    'value'=>'$data->_estado[$data->descontinuado]'
+                    //'value'=>'$data->descontinuado'
+                ),
+                
 		
 		/*
 		'fabricante_id',
 		'minimo_stock',
 		
-		'descontinado',
+		
 		
 		'ventaUnd',
 		'observacion',

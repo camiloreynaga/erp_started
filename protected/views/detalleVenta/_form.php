@@ -149,7 +149,11 @@ $("#delete").click(function(){
         
         <?php echo $form->textFieldGroup($model,'cantidad',array('class'=>'span5')); ?>
         <div id="precio"></div>
-        <?php echo $form->textFieldGroup($model,'precio_unitario',array('class'=>'span5','maxlength'=>10)); ?>  
+        <?php echo $form->textFieldGroup($model,'precio_unitario',
+                array(
+                    
+                    'class'=>'span5',
+                    'maxlength'=>10)); ?>  
 	<?php 
 //        echo $form->datepickerGroup(
 //                $model,

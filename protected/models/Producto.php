@@ -38,6 +38,12 @@
  */
 class Producto extends Erp_startedActiveRecord// CActiveRecord
 {
+        
+        public $_estado=array(
+            '0'=>'NO',
+            '1'=>'SI'
+        );
+        
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
