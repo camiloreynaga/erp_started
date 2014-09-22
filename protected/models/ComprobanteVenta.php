@@ -25,6 +25,13 @@
  */
 class ComprobanteVenta extends Erp_startedActiveRecord//CActiveRecord
 {
+        public $_estado= 
+        array(
+            '0'=>'pendiente',
+            '1'=>'impreso',
+            '2'=>'anulado'
+        );
+    
 	/**
 	 * @return string the associated database table name
 	 */
