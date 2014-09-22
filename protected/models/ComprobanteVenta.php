@@ -140,14 +140,5 @@ class ComprobanteVenta extends Erp_startedActiveRecord//CActiveRecord
 	}
         
         
-        public function getNroFactura()
-        {
-            $criteria = new CDbCriteria();
-            $criteria->select='max(numero)';
-            
-            return  $criteria;
-            //return $criteria(0) ;
-            
-            //$this->numero
-        }
+        
 }

@@ -31,7 +31,7 @@
             'users'=>array('@'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-            'actions'=>array('create','update','lineaCredito','admin'),
+            'actions'=>array('create','update','lineaCredito','GenerarFactura','admin'),
             'users'=>array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -50,9 +50,9 @@
         */
         public function actionView($id)
         {
-        $this->render('view',array(
-        'model'=>$this->loadModel($id),
-        ));
+            $this->render('view',array(
+            'model'=>$this->loadModel($id),
+            ));
         }
 
         /**
@@ -86,23 +86,51 @@
         */
         public function actionUpdate($id)
         {
-        $model=$this->loadModel($id);
+            $model=$this->loadModel($id);
 
-        // Uncomment the following line if AJAX validation is needed
-        // $this->performAjaxValidation($model);
+            // Uncomment the following line if AJAX validation is needed
+            // $this->performAjaxValidation($model);
 
-        if(isset($_POST['Venta']))
+            if(isset($_POST['Venta']))
+            {
+                $model->attributes=$_POST['Venta'];
+                if($model->save())
+                $this->redirect(array('view','id'=>$model->id));
+            }
+
+            $this->render('update',array(
+            'model'=>$model,
+            ));
+        }
+        
+        /**
+         * Generar la factura para la venta
+         * @param type $id
+         */
+        public function actionGenerarFactura($id)
         {
-        $model->attributes=$_POST['Venta'];
-        if($model->save())
-        $this->redirect(array('view','id'=>$model->id));
+             $model=$this->loadModel($id); // obteniendo modelo venta
+             $comprobante = new ComprobanteVenta();
+             $comprobante->venta_id=$id;
+             $comprobante->tipo_comprobante_id=1;
+             $comprobante->fecha_emision=$model->fecha_venta;
+             $comprobante->serie=101;
+             $comprobante->numero= SerieNumero::model()->getNroFactura()['numero']+1;        
+             
+             $comprobante->estado=0;
+             $model->estado_comprobante=1; // comprobante registrado
+             if($comprobante->save())
+             {
+                 SerieNumero::model()->updateByPk(1,array('numero'=>$comprobante->numero)); 
+                         
+                 $model->save();
+                 
+             }
+             //$this->createUrl($route, $params)
+             
+             //crea una factura cada 30 items
         }
-
-        $this->render('update',array(
-        'model'=>$model,
-        ));
-        }
-
+        
         /**
         * Deletes a particular model.
         * If deletion is successful, the browser will be redirected to the 'admin' page.

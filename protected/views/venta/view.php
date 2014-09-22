@@ -55,29 +55,46 @@ $this->renderPartial('//DetalleVenta/_viewDetalleVenta',array('model'=>DetalleVe
 
 
 
-Yii::app()->clientScript->registerScript('billing', "
-$('.search-button').click(function(){
-$('.search-form').toggle();
-return false;
-});
-//$('.search-form form').submit(function(){
-//    $.fn.yiiGridView.update('detalle-venta-grid', 
-//    {
-//    data: $(this).serialize()
-//    });
-//    return false;
-//});
-");
+//echo
+ 
+//foreach ($h as $i)
+//{
+//echo $i['numero'];
+//}
+//endforeach;
 ?>
 
-<?php echo CHtml::link('Registrar Facturar','#',array('class'=>'search-button btn')); ?>
-<div class="search-form" style="display:none">
-	<?php  $this->renderPartial('//comprobanteVenta/_form',array(
-	'model'=>ComprobanteVenta::model(),
-         'venta_id'=>$model->id,
-         //'fecha_emision'=>$model->fecha_venta,   
-         //'tipo_comprobante_id'=>1, //1 = factura   
-)); ?>
-</div>
 
-<a href="facturacion2/factura.php?id_venta=<?php echo $model->id; ?>" target="blank" >Facturar</a></p>
+
+
+<?php if ($model->estado_comprobante==0) { 
+    
+                echo "siguiente factura: ";
+                echo SerieNumero::model()->getNroFactura()['numero']+1;
+                
+        ?>
+
+        <?php        
+    echo CHtml::ajaxButton('Facturar',array('venta/generarFactura','id'=>$model->id, ),
+                 array(
+                      'type' => 'post',
+                      'success'=>'function(data){ window.open("facturacion2/factura.php?id_venta='.$model->id.'"); window.location.reload();}'
+                     //'success'=>'function(data){ window.open("'.CController::createUrl('facturacion2/factura.php?id_venta='.$model->id).'")}'
+                ),
+                array(
+                'confirm'=>'Esta seguro de Generar la factura?',
+             )); 
+?>
+    <?php   
+                
+             
+            }
+            else
+            {
+                
+            
+?>
+<br>
+<a href="facturacion2/factura.php?id_venta=<?php  echo $model->id; ?>" target="blank" >Ver Factura</a>
+
+            <?php }?>

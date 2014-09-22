@@ -37,7 +37,7 @@
                                         array('label'=>'Presentaciones','url'=>array('/presentacion/admin')),
                                         array('label'=>'Tipos de producto','url'=>array('/tipoProducto/admin')),
                                         array('label'=>'Fabricantes','url'=>array('/fabricante/admin')),
-                                        array('label'=>'Caracteristica','url'=>array('/caracteristica/admin')),
+                                        //array('label'=>'Caracteristica','url'=>array('/caracteristica/admin')),
                                         array('label'=>'Unidades de Medida','url'=>array('/unidadMedida/admin')),
                                         array('label'=>'Productos','url'=>array('/producto/admin')),
                                     
