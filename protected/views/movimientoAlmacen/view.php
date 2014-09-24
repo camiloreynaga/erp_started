@@ -5,11 +5,17 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-array('label'=>'List MovimientoAlmacen','url'=>array('index')),
-array('label'=>'Create MovimientoAlmacen','url'=>array('create')),
-array('label'=>'Update MovimientoAlmacen','url'=>array('update','id'=>$model->id)),
-array('label'=>'Delete MovimientoAlmacen','url'=>'#','linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-array('label'=>'Manage MovimientoAlmacen','url'=>array('admin')),
+    //array('label'=>'List MovimientoAlmacen','url'=>array('index')),
+    //array('label'=>'Create MovimientoAlmacen','url'=>array('create')),
+    array('label'=>yii::t('app','Process').' '. yii::t('app','Sale'),'url'=>array('sacarVenta')), 
+    array('label'=>yii::t('app','Process').' '. yii::t('app','Purchase'),'url'=>array('ingresarCompra')),   
+        
+    array('label'=>yii::t('app','check-in'),'url'=>array('ingreso')),
+
+    array('label'=>yii::t('app','check-out'),'url'=>array('salida')),
+    //array('label'=>'Update MovimientoAlmacen','url'=>array('update','id'=>$model->id)),
+    //array('label'=>'Delete MovimientoAlmacen','url'=>'#','linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
+    array('label'=>'Manage MovimientoAlmacen','url'=>array('admin')),
 );
 ?>
 
@@ -20,18 +26,38 @@ array('label'=>'Manage MovimientoAlmacen','url'=>array('admin')),
 'attributes'=>array(
 		'id',
 		'fecha_movimiento',
-		'producto_id',
+                array(
+                    'name'=>'producto_id',
+                    'value'=>$model->r_producto->nombre
+                ),
 		'cantidad',
-		'motivo_movimiento_id',
-		'detalle_compra_id',
-		'detalle_venta_id',
+                array(
+                    'name'=>'motivo_movimiento_id',
+                    'value'=>$model->r_motivo_movimiento->movimiento
+                ),
+		//'detalle_compra_id',
+		//'detalle_venta_id',
 		'observacion',
-		'almacen_id',
+                array(
+                    'name'=>'almacen_id',
+                    'value'=>$model->r_almacen->almacen
+                ),
+		
 		'saldo_stock',
-		'operacion',
+                array(
+                    'name'=>'operacion',
+                    'value'=>$model->_operacion[$model->operacion]
+                ),
+		
 		'create_time',
-		'create_user_id',
+		array(
+                  'name'=>'create_user_id',
+                  'value'=>Usuario::model()->getUsuario($model->create_user_id),
+                ),
 		'update_time',
-		'update_user_id',
+                array(
+                    'name'=>'update_user_id',
+                    'value'=>Usuario::model()->getUsuario($model->update_user_id),
+                ),
 ),
 )); ?>
