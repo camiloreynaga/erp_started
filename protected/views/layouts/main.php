@@ -46,8 +46,8 @@
                                     ),
                                 array('label'=>'Almacen',
                                     'items'=>array(
-                                        array('label'=>'Ubicaciones','url'=>array('/ubicacion/admin')),
-                                        array('label'=>'Almacenes','url'=>array('/almacen/admin')),
+                                       // array('label'=>'Ubicaciones','url'=>array('/ubicacion/admin')),
+                                        //array('label'=>'Almacenes','url'=>array('/almacen/admin')),
                                         array('label'=>'Motivos de movimiento','url'=>array('/motivoMovimiento/admin')),
                                         array('label'=>'Ingreso/Salida','url'=>array('/movimientoAlmacen/admin')),
                                         array('label'=>'Productos x almacen','url'=>array('/productoAlmacen/admin')),

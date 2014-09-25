@@ -9,7 +9,7 @@ $this->breadcrumbs=array(
 $this->menu=array(
 //array('label'=>'List Venta','url'=>array('index')),
 array('label'=>yii::t('app','Create').' '.yii::t('app','Sale'),'url'=>array('create')),
-array('label'=>yii::t('app','Update').' '.yii::t('app','Sale'),'url'=>array('//detalleVenta/create','pid'=>$model->id),'visible'=>$model->estado<2&&$model->estado_comprobante=0),
+array('label'=>yii::t('app','Update').' '.yii::t('app','Sale'),'url'=>array('//detalleVenta/create','pid'=>$model->id),'visible'=>$model->estado<2&&$model->estado_comprobante==0),
 //array('label'=>yii::t('app','Delete').' '.yii::t('app','Sale'),'url'=>'#','linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
 array('label'=>yii::t('app','Manage').' '.yii::t('app','Sale'),'url'=>array('admin')),
 );

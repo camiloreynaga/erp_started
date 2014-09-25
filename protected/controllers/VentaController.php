@@ -36,7 +36,7 @@
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
             'actions'=>array('admin','delete'),
-            'users'=>array('admin'),
+            'users'=>array('admin','deysi','mayra'),
             ),
             array('deny',  // deny all users
             'users'=>array('*'),
@@ -70,6 +70,8 @@
             {
                 $model->attributes=$_POST['Venta'];
                 $model->estado='0';
+                $model->estado_comprobante='0';
+                $model->estado_pago='0';
                 if($model->save())
                 $this->redirect(array('/DetalleVenta/create','pid'=>$model->id));
             }

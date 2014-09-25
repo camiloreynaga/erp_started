@@ -80,7 +80,7 @@ return false;
                     'template'=>'{view} {update} {delete}',
                 'buttons'=>array(
                     'update'=>array(
-                        'visible'=>'$data->estado<2 && $data->estado_comprobante=0', //'$data->estado==0 || $data->estado==2 ',
+                        'visible'=>'$data->estado<2 && $data->estado_comprobante==0', //'$data->estado==0 || $data->estado==2 ',
                         'url'=>'Yii::app()->createUrl("//detalleVenta/create", array("pid"=>$data->id))'
                         //'url'=>$this->createUrl('//detalleCompra/create',array('pid'=>$model->id)) 
                     ),

@@ -146,7 +146,17 @@ class Cliente extends Erp_startedActiveRecord//CActiveRecord
             $criteria= new CDbCriteria();
             $criteria->condition='activo=0';
             
-            return $this->findAll($criteria);
+            //return $this->findAll($criteria);
+            $lista= $this->model()->findAll($criteria); 
+            $resultados = array();
+              foreach ($lista as $list){
+                $resultados[] = array(
+                         'id'=>$list->id,
+                         'text'=> $list->nombre_rz.' - '.$list->ciudad,
+              ); 
+            
+              }
+              return $resultados;  
         }
         /**
          * Actualiza la cantidad disponible
