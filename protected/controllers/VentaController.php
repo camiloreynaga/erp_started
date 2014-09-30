@@ -119,10 +119,11 @@
              $comprobante->serie=101;
              $comprobante->numero= SerieNumero::model()->getNroFactura()['numero']+1;        
              
-             $comprobante->estado=0;
+             $comprobante->estado=0; //estado de comprobaten pendiente de pago
              $model->estado_comprobante=1; // comprobante registrado
              if($comprobante->save())
              {
+                 //actualiza el numero de comprobante
                  SerieNumero::model()->updateByPk(1,array('numero'=>$comprobante->numero)); 
                          
                  $model->save();
@@ -140,21 +141,21 @@
         */
         public function actionDelete($id)
         {
-        if(Yii::app()->request->isPostRequest)
-        {
-        // we only allow deletion via POST request
-            $model=  $this->loadModel($id);
-            $model->deleteDetaills();
-            $model->delete();
-                    
-       // $this->loadModel($id)->delete();
+            if(Yii::app()->request->isPostRequest)
+            {
+            // we only allow deletion via POST request
+                $model=  $this->loadModel($id);
+                $model->deleteDetaills();
+                $model->delete();
 
-        // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-        if(!isset($_GET['ajax']))
-        $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
-        }
-        else
-        throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+           // $this->loadModel($id)->delete();
+
+            // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+            if(!isset($_GET['ajax']))
+            $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+            }
+            else
+            throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
         }
 
         /**

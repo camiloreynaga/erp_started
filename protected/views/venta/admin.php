@@ -85,7 +85,7 @@ return false;
                         //'url'=>$this->createUrl('//detalleCompra/create',array('pid'=>$model->id)) 
                     ),
                     'delete'=>array(
-                        'visible'=>'$data->estado==0 '
+                        'visible'=>'$data->estado==0 && $data->estado_comprobante==0'
                     )
                 ),
                     'htmlOptions'=>array(

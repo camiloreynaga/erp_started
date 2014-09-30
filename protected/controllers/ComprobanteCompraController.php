@@ -63,6 +63,7 @@ class ComprobanteCompraController extends Controller
         */
         public function actionCreate()
         {
+            $this->layout='//layouts/column1';
             $model=new ComprobanteCompra;
             $model->compra_id= $this->_Compra->id;
             // Uncomment the following line if AJAX validation is needed
@@ -247,7 +248,7 @@ class ComprobanteCompraController extends Controller
                 if (isset ($_POST['pid']))
                     $Compra_Id=$_POST['pid'];
                 
-                $this->loadOrdenCompra($Compra_Id);
+                $this->loadCompra($Compra_Id);
                 
                 //complete the running of other filters and execute the requested action
                 $filterChain->run();
@@ -256,7 +257,7 @@ class ComprobanteCompraController extends Controller
         /**
         * Returns the project model instance to which this issue belongs
         */
-        public function getOrdenCompra()
+        public function getCompra()
         {
             return $this->_Compra;
         }
@@ -266,12 +267,12 @@ class ComprobanteCompraController extends Controller
         * @project_id the primary identifier of the associated Project
         * @return object the Project data model based on the primary key
         */
-        protected function loadOrdenCompra($oc_id)
+        protected function loadCompra($oc_id)
         {
             //if the project property is null, create it based on input id 
             if($this->_Compra===null)
             {
-                $this->_Compra=  OrdenCompra::model()->findByPk($oc_id);
+                $this->_Compra= Compra::model()->findByPk($oc_id);
                 if ($this->_Compra===null)
                 {
                 throw new CHttpException(404,'The requested compra does not exist.');

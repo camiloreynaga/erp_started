@@ -38,7 +38,7 @@ class Venta extends Erp_startedActiveRecord//CActiveRecord
             '0'=>'PENDIENTE', // VENTA EN PROCESO  (PENDIENTE) 
             '1'=>'CONFIRMADO', // VENTA CONFIRMADO( SUCEPTIBLE A DESPACHO Y FACTURACION)
             '2'=>'FACTURADO', // VENTA FACTURADA
-            //'3'=>'ANULADO', // VENTA ANULADA
+            '3'=>'ANULADO', // VENTA ANULADA
             '4'=>'DESPACHADO' //VENTA DESPACHADA
          );
     
@@ -235,5 +235,15 @@ class Venta extends Erp_startedActiveRecord//CActiveRecord
                 Cliente::model()->actualizarCreditoDisponible($detalle_venta,0);
             }
             DetalleVenta::model()->deleteAll('venta_id=:venta_id',array(':venta_id'=>  $this->id));
+        }
+        
+        /**
+         * obtiene el numero de item en el detalle de la venta
+         * @return type string
+         */
+        public function countItems()
+        {
+            return DetalleVenta::model()->count('venta_id=:venta_id',array(':venta_id'=>  $this->id));
+                    
         }
 }

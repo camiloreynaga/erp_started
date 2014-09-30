@@ -37,7 +37,7 @@ class ComprobanteVentaController extends Controller
             'users'=>array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
-            'actions'=>array('admin','delete'),
+            'actions'=>array('admin','delete','anularFactura'),
             'users'=>array('@','admin'),
             ),
             array('deny',  // deny all users
@@ -111,6 +111,30 @@ class ComprobanteVentaController extends Controller
         'model'=>$model,
         ));
     }
+    
+        /**
+        * Anula el comprobate de venta
+        * @param type $id id del comprobante
+        */
+       public function actionAnularFactura($id)
+       {
+            $model=$this->loadModel($id); // obteniendo modelo de comprbante venta
+            $venta = Venta::model()->findByPk($model->venta_id); // cargando venta
+            //
+            $model->estado=2; //estado de comprobaten anulado
+            $venta->estado_comprobante=0; // cambiar el estado de comprobante a pendiente
+            if($model->save())
+            {
+               // SerieNumero::model()->updateByPk(1,array('numero'=>$venta->numero)); 
+
+                $venta->save();
+
+            }
+            $this->redirect(array('//venta/view','id'=>$model->venta_id));
+            //$this->createUrl($route, $params)
+
+            //crea una factura cada 30 items
+       }
 
     /**
     * Deletes a particular model.
@@ -190,11 +214,11 @@ class ComprobanteVentaController extends Controller
             //request variables, since we allow both types for our actions
             
             $Venta_Id=null;
-            if (isset($_GET['id']))
-                $Venta_Id=$_GET['id'];
+            if (isset($_GET['pid']))
+                $Venta_Id=$_GET['pid'];
             else
-                if (isset ($_POST['venta_id']))
-                    $Venta_Id=$_POST['venta_id'];
+                if (isset ($_POST['pid']))
+                    $Venta_Id=$_POST['pid'];
                 
                 $this->loadVenta($Venta_Id);
                 

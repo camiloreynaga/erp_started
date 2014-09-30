@@ -322,15 +322,20 @@ $("#delete").click(function(){
              );
 ?>
 <?php
-//    echo CHtml::Button('Cancelar venta',
-//             array(
-//                 'submit'=>array('detalleVenta/finalizar',
-//                     'id'=>$model->venta_id,
-//                     
-//                     ),
-//                     'confirm'=>'Esta seguro de cancelar con la venta?',
-//                 )
-//             );
+// evaluando que estado de venta = 0 (pendiente) y estado_comprobante=0 (pendiente de facturacion)
+if ($model->r_venta->estado==0 && $model->r_venta->estado_comprobante==0) 
+    {
+    
+
+    echo CHtml::Button('Cancelar venta',
+             array(
+                 'submit'=>array('Venta/delete',
+                     'id'=>$model->venta_id,
+                     ),
+                     'confirm'=>'Esta seguro de cancelar la venta?',
+                 )
+             );
+    }
 ?>
 <?php // echo CHtml::ajaxButton('Cancelar venta',array('//venta/delete','id'=>$model->venta_id, ),
 //                 array(

@@ -27,9 +27,9 @@ class ComprobanteVenta extends Erp_startedActiveRecord//CActiveRecord
 {
         public $_estado= 
         array(
-            '0'=>'pendiente',
-            '1'=>'impreso',
-            '2'=>'anulado'
+            '0'=>'PENDIENTE',
+            '1'=>'PAGADO',
+            '2'=>'ANULADO'
         );
     
 	/**
@@ -70,7 +70,7 @@ class ComprobanteVenta extends Erp_startedActiveRecord//CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'r_venta' => array(self::BELONGS_TO, 'Venta', 'venta_id'),
-			'r_tipoComprobante' => array(self::BELONGS_TO, 'TipoComprobante', 'tipo_comprobante_id'),
+			'r_tipo_comprobante' => array(self::BELONGS_TO, 'TipoComprobante', 'tipo_comprobante_id'),
 		);
 	}
 
