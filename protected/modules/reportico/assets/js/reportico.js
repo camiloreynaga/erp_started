@@ -6,6 +6,9 @@ var reportico_ajax_script = "index.php";
 */
 function setupDynamicGrids()
 {
+    if (typeof reportico_dynamic_grids === 'undefined') {
+        return;
+    }
     if (  reportico_jquery.type(reportico_dynamic_grids) != 'undefined' )
     if ( reportico_dynamic_grids )
     {
@@ -131,7 +134,7 @@ reportico_jquery(document).on('click', '.swMiniMaintainSubmit', function(event)
 	var expandpanel = reportico_jquery('#swPrpExpandCell');
     reportico_jquery(loadpanel).addClass("modal-loading");
 
-    forms = reportico_jquery(this).closest('.swMntForm,.swPrpForm,form');
+    forms = reportico_jquery(this).closest('#reportico_container').find(".swPrpForm");
     if (    reportico_jquery.type(reportico_ajax_script) === 'undefined' )
     {
         var ajaxaction = reportico_jquery(forms).prop("action");
@@ -164,7 +167,7 @@ reportico_jquery(document).on('click', '.swMiniMaintainSubmit', function(event)
           {
             reportico_jquery('#reporticoModal').modal('hide');
             reportico_jquery('.modal-backdrop').remove();
-            reportico_jquery('.swPrpBody').removeClass('modal-open');
+            reportico_jquery('#reportico_container').closest('body').removeClass('modal-open');
           }
           else
             reportico_jquery('#reporticoModal').hide();
@@ -204,12 +207,13 @@ reportico_jquery(document).on('click', '.swMiniMaintain', function(event)
     else
     {
         ajaxaction = reportico_ajax_script;
-    }		  
+    }
 
     maintainButton = reportico_jquery(this).prop("name"); 
     reportico_jquery(".reportico-modal-title").html(reportico_jquery(this).prop("title")); 
     bits = maintainButton.split("_");
-    params="execute_mode=MAINTAIN&partialMaintain=" + maintainButton + "&partial_template=mini&submit_" + bits[0] + "_SHOW=1";
+	params = forms.serialize();
+    params += "&execute_mode=MAINTAIN&partialMaintain=" + maintainButton + "&partial_template=mini&submit_" + bits[0] + "_SHOW=1";
     params += "&reportico_ajax_called=1";
 
     if ( reportico_ajax_mode == 1 )
@@ -368,7 +372,9 @@ reportico_jquery(document).on('click', '.swAdminButton, .swAdminButton2, .swMenu
                 var windowSizeArray = [ "width=200,height=200",
                           "width=300,height=400,scrollbars=yes" ];
 
-                var url = ajaxaction +"&" + params;
+                var url = ajaxaction +"?" + params;
+                if ( reportico_ajax_mode == 1 )
+                    url = ajaxaction +"&" + params;
                 var windowName = "popUp";//reportico_jquery(this).prop("name");
                 var windowSize = windowSizeArray[reportico_jquery(this).prop("rel")];
                 window.open(url, windowName, "width=200,height=200");
@@ -571,6 +577,8 @@ reportico_jquery(document).on('click', '.swPrintBox,.prepareAjaxExecute,#prepare
                   "width=300,height=400,scrollbars=yes" ];
 
         var url = ajaxaction +"?" + params;
+        if ( reportico_ajax_mode == 1 )
+            url = ajaxaction +"&" + params;
         var windowName = "popUp";//reportico_jquery(this).prop("name");
         var windowSize = windowSizeArray[reportico_jquery(this).prop("rel")];
         window.open(url, windowName, "width=200,height=200");

@@ -89,6 +89,12 @@
                                         array('label'=>'Cuentas por Pagar','url'=>array('/cuentaPagar/admin')),
                                     )
                                     ), 
+                                array('label'=>'Reportes',
+                                    'items'=>array(
+                                        array('label'=>'reportes','url'=>array('/reportes/index')),
+                                        //array('label'=>'Cuentas por Pagar','url'=>array('/cuentaPagar/admin')),
+                                    )
+                                    ), 
                                    
 				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
 				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
