@@ -71,7 +71,7 @@ class Venta extends Erp_startedActiveRecord//CActiveRecord
         
         
         /**
-         * validación para cantidad_bueno y cantidad_malo 
+         * validación para linea de credito, y credito disponible  
          * @param type $attribute
          * @param type $params
          */

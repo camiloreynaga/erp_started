@@ -59,6 +59,7 @@ return array(
     //Credit
     'This client do not have enough credit.'=>'Este cliente no tiene credito suficiente.',
     'This Client do not have Credit line.'=>'Este cliente no tiene linea de credito',
+    'This credit line amount is minus that credit used, credit used '=>'El monto de la linea de credito es menor al credito usado, credito usado.',
     
    //Int /Out
     'check-in'=>'Ingreso',

@@ -40,6 +40,7 @@ class Cliente extends Erp_startedActiveRecord//CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
+                        array('linea_credito','validarLineaCredito','on'=>'update'),
 			array('ruc', 'required'),
 			array('activo, create_user_id, update_user_id', 'numerical', 'integerOnly'=>true),
 			array('nombre_rz, contacto, direccion', 'length', 'max'=>100),
@@ -52,6 +53,27 @@ class Cliente extends Erp_startedActiveRecord//CActiveRecord
 			array('id, nombre_rz, ruc, contacto, direccion, ciudad, telefono, activo, linea_credito, credito_disponible, create_time, create_user_id, update_time, update_user_id', 'safe', 'on'=>'search'),
 		);
 	}
+        
+        /**
+         * Valida que el monto de linea de credito sea mayor al monto de credtio usado
+         * @param type $attribute
+         * @param type $params
+         */
+        public function validarLineaCredito($attribute,$params){
+            if($this->linea_credito >0) // si linea de credito > 0
+                    {
+                        $_credito_usado= $this->linea_credito-$this->credito_disponible;    
+
+                        if($_credito_usado>$this->linea_credito)
+                        {
+                            $this->addError ($attribute, yii::t('app',"This credit line amount is minus that credit used, credit used ").$_credito_usado);
+                        }
+                    }
+//                    else
+//                    {
+//                        $this->addError ($attribute, yii::t('app',"This Client do not have Credit line.")); //
+//                    }
+        }
 
 	/**
 	 * @return array relational rules.
