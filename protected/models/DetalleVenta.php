@@ -295,7 +295,7 @@ class DetalleVenta extends Erp_startedActiveRecord//CActiveRecord
         {
             // verficiar que todos los items hayan salido de almacen
             $retorna = true;
-            $_count = DetalleVenta::model()->count('venta_id=:venta_id and estado!=:estado', array(':estado'=>4,':venta_id'=>$this->venta_id));
+            $_count = DetalleVenta::model()->count('venta_id=:venta_id and estado!=:estado', array(':estado'=>1,':venta_id'=>$this->venta_id));
             if($_count==0)
                 $retorna=true;
             else {
@@ -333,8 +333,8 @@ class DetalleVenta extends Erp_startedActiveRecord//CActiveRecord
             $_venta->impuesto=$_total-$_bi;
 
             //Verificando que todos los item se hayan almacenado
-           // if($this->AllIntoStore())
-             //   $_venta->estado=4; // Cambiar estado a Almacenado
+           if($this->AllOutStore())
+                $_venta->estado=4; // Cambiar estado a Almacenado
 
             $_venta->save(); //actualizando el estado de venta
 
