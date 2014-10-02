@@ -136,6 +136,8 @@ class Venta extends Erp_startedActiveRecord//CActiveRecord
 			'importe_total' => 'Importe Total',
 			'observacion' => 'Observacion',
                         'estado' => 'Estado',
+                        'estado_pago'=> 'Estado pago',
+                        'estado_comprobante'=>'Estado comprobante',
 			'create_time' => 'Create Time',
 			'create_user_id' => 'Create User',
 			'update_time' => 'Update Time',
@@ -235,6 +237,25 @@ class Venta extends Erp_startedActiveRecord//CActiveRecord
                 Cliente::model()->actualizarCreditoDisponible($detalle_venta,0);
             }
             DetalleVenta::model()->deleteAll('venta_id=:venta_id',array(':venta_id'=>  $this->id));
+        }
+        
+        /**
+         * anula todos los items del detalle de venta
+         * actualiza el credito disponible del cliente
+         */
+        public function anularDetaills()
+        {
+            $detalles = $this->r_detalle_venta;
+            foreach($detalles as $detalle_venta)
+            {
+                //actualizar la cantidad disponible en ProductoAlmacen
+                //ProductoAlmacen::model()->actualizarCantidadDisponible($detalle_venta,0); 
+                
+                //actualizando credito disponible en cliente
+                Cliente::model()->actualizarCreditoDisponible($detalle_venta,0);
+            }
+            
+            //DetalleVenta::model()->deleteAll('venta_id=:venta_id',array(':venta_id'=>  $this->id));
         }
         
         /**

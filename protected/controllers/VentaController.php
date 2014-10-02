@@ -35,7 +35,7 @@
             'users'=>array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
-            'actions'=>array('admin','delete'),
+            'actions'=>array('admin','delete','anularVenta'),
             'users'=>array('admin','deysi','mayra'),
             ),
             array('deny',  // deny all users
@@ -157,16 +157,40 @@
             else
             throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
         }
+        
+        /**
+         * 
+         */
+        public function actionAnularVenta($id)
+        {
+//             if(Yii::app()->request->isPostRequest)
+//            {
+            // we only allow deletion via POST request
+                $model= $this->loadModel($id);
+                $model->anularDetaills();
+                $model->estado=3; // cambiar estado a anulado
+                //$model->deleteDetaills();
+                $model->save();
+                
+                $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+                // $this->loadModel($id)->delete();
+
+                 // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+                
+//            }
+//            else
+//            throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+        }
 
         /**
         * Lists all models.
         */
         public function actionIndex()
         {
-        $dataProvider=new CActiveDataProvider('Venta');
-        $this->render('index',array(
-        'dataProvider'=>$dataProvider,
-        ));
+            $dataProvider=new CActiveDataProvider('Venta');
+            $this->render('index',array(
+            'dataProvider'=>$dataProvider,
+            ));
         }
 
         /**
