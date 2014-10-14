@@ -37,7 +37,7 @@ class ComprobanteVentaController extends Controller
             'users'=>array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
-            'actions'=>array('admin','delete','anularFactura'),
+            'actions'=>array('admin','delete','anularFactura','EditItem'),
             'users'=>array('@','admin'),
             ),
             array('deny',  // deny all users
@@ -111,6 +111,25 @@ class ComprobanteVentaController extends Controller
         'model'=>$model,
         ));
     }
+        
+    /**
+    * actualiza un item de tipo texto cualquiera
+    */
+   public function actionEditItem()
+   {
+    Yii::import('booster.components.TbEditableSaver');
+    $es = new TbEditableSaver('ComprobanteVenta');
+
+    //actualiza el estado del item de detalle de compra
+//         $es->onAfterUpdate= function($event) {
+//
+//             $model=$this->loadModel(yii::app()->request->getParam('pk')); //obteniendo el Model de detalleCompra
+//             $model->actualizarEstado();    
+//            };  
+
+       $es->update();
+
+   }
     
         /**
         * Anula el comprobate de venta
@@ -121,7 +140,7 @@ class ComprobanteVentaController extends Controller
             $model=$this->loadModel($id); // obteniendo modelo de comprbante venta
             $venta = Venta::model()->findByPk($model->venta_id); // cargando venta
             //
-            $model->estado=2; //estado de comprobaten anulado
+            $model->estado=2; //estado de comprobante anulado
             $venta->estado_comprobante=0; // cambiar el estado de comprobante a pendiente
             if($model->save())
             {

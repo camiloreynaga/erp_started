@@ -23,7 +23,18 @@ $model->venta_id=$pid;
 		'fecha_emision',
 		'fecha_cancelacion',
 		'serie',
-                'numero',
+                array(
+                    'name'=>'numero',
+                    'value'=>'$data->numero',
+                    'class'=>'booster.widgets.TbEditableColumn',
+                        'editable'=>array(
+                            'type'=>'text',
+                            //'inputClass'=>'inline',
+                            'url' => $this->createUrl('ComprobanteVenta/editItem'),
+                        )
+                ),
+                
+                
                 array(
                     'name'=>'estado',
                     'value'=>'$data->_estado[$data->estado]'

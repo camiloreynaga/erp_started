@@ -15,8 +15,8 @@
  * @property string $importe_total
  * @property string $observacion
  * @property integer $estado
- * @property integer $estado_comprobante
- * @property integer $estado_pago
+ * @property integer $estado_comprobante :0=pendiente ; 1=emitido
+ * @property integer $estado_pago :0=pendiente;1=pagado
  * @property string $create_time
  * @property integer $create_user_id
  * @property string $update_time
