@@ -70,7 +70,7 @@ class Producto extends Erp_startedActiveRecord// CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('nombre', 'required'),
+			array('nombre,tipo_producto_id, presentacion_id, unidad_medida_id, fabricante_id', 'required'),
 			array('tipo_producto_id, presentacion_id, unidad_medida_id, fabricante_id, minimo_stock, stock, descontinuado, create_user_id, update_user_id', 'numerical', 'integerOnly'=>true),
 			array('precio_venta, precio_compra, porcentaje_ganancia', 'numerical'),
 			array('nombre', 'length', 'max'=>100),
