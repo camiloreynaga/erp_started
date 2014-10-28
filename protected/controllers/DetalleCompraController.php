@@ -357,7 +357,7 @@ class DetalleCompraController extends Controller
         /**
         * Returns the project model instance to which this issue belongs
         */
-        public function getOrdenCompra()
+        public function getCompra()
         {
             return $this->_Compra;
         }

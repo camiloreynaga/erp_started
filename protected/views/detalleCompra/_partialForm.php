@@ -43,8 +43,8 @@
 	<?php echo $form->textFieldGroup($model,'lote',array('class'=>'span5','maxlength'=>50)); ?>
 
 	<?php
-        if($model->isNewRecord)
-        {
+//        if($model->isNewRecord)
+//        {
             echo $form->datepickerGroup($model,
                 'fecha_vencimiento'
                 ,array(
@@ -67,17 +67,17 @@
 				'prepend' => '<i class="glyphicon glyphicon-calendar"></i>'
 			)
 		);
-        }
-        else
-        {
-            echo $form->textFieldGroup($model,'fecha_vencimiento',
-                    array(
-                        'maxlength'=>10,
-                        'hint'=>'aaaa-mm-dd Ej. 2018-09-01'
-                        )
-                    
-                    );
-        }
+//        }
+//        else
+//        {
+//            echo $form->textFieldGroup($model,'fecha_vencimiento',
+//                    array(
+//                        'maxlength'=>10,
+//                        'hint'=>'aaaa-mm-dd Ej. 2018-09-01'
+//                        )
+//                    
+//                    );
+//        }
             
         
         

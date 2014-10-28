@@ -85,7 +85,7 @@
                                     ),
                                 array('label'=>'Cuentas',
                                     'items'=>array(
-                                        array('label'=>'Cuentas por Cobrar','url'=>array('/cuentaCobrar/admin')),
+                                        array('label'=>'Cuentas por Cobrar','url'=>array('/cuentaCobrar/Create')),
                                         array('label'=>'Cuentas por Pagar','url'=>array('/cuentaPagar/admin')),
                                     )
                                     ), 
