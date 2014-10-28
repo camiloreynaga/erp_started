@@ -348,7 +348,7 @@ $this->widget('booster.widgets.TbExtendedGridView',array(
                             array(
                                 'name'=>'presentacion_id',
                                 'header'=>'Presentacion',
-                                'value'=>'$data->r_producto->r_presentacion->presentacion'
+                                'value'=>'isset($data->r_producto->r_presentacion->presentacion)?$data->r_producto->r_presentacion->presentacion:null'
                             ),
                             array(
                             'name' => 'cantidad',
@@ -479,4 +479,3 @@ $this->widget('booster.widgets.TbExtendedGridView',array(
               
     
 </div>
-
