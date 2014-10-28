@@ -13,7 +13,7 @@
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('tipo_producto_id')); ?>:</b>
-	<?php echo CHtml::encode($data->r_tipoProducto->tipo_producto); ?>
+	<?php echo null?"":CHtml::encode($data->r_tipoProducto->tipo_producto); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('presentacion_id')); ?>:</b>

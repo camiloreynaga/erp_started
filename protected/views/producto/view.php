@@ -29,21 +29,21 @@ array('label'=>'Manage Producto','url'=>array('admin')),
                 ),
 		array(
                     'name'=>'tipo_producto_id',
-                    'value'=>$model->r_tipoProducto->tipo_producto,
+                    'value'=>  isset($model->r_tipoProducto->tipo_producto)?$model->r_tipoProducto->tipo_producto: null,
                 ),
 		array(
                   'name'=> 'presentacion_id',
-                   'value'=>$model->r_presentacion->presentacion
+                   'value'=>isset($model->r_presentacion->presentacion)?$model->r_presentacion->presentacion:null
                 ),
                 array(
                     'name'=>'fabricante_id',
-                    'value'=>$model->r_fabricante->fabricante
+                    'value'=>isset($model->r_fabricante->fabricante)?$model->r_fabricante->fabricante:null
                 ),
     
     
 		array(
                     'name'=>'unidad_medida_id',
-                    'value'=>$model->r_unidadMedida->unidad_medida
+                    'value'=>isset($model->r_unidadMedida->unidad_medida)?$model->r_unidadMedida->unidad_medida:null
                 ),
 		
 		'minimo_stock',

@@ -60,7 +60,7 @@ return false;
 		array(
                     'name'=>'tipo_producto_id',
                     'header'=>'Tipo Producto',
-                    'value'=>'$data->r_tipoProducto->tipo_producto',
+                    'value'=>'isset($data->r_tipoProducto->tipo_producto)?$data->r_tipoProducto->tipo_producto:null',
 //                    'filter'=> $this->widget('booster.widgets.TbSelect2',
 //                            array(
 //                                    'name' => 'tipo_producto_id',
@@ -78,17 +78,17 @@ return false;
                 array(
                     'name'=>'presentacion_id',
                     'header'=>'Presentación',
-                    'value'=>'$data->r_presentacion->presentacion'
+                    'value'=>'isset($data->r_presentacion->presentacion)?$data->r_presentacion->presentacion:null'
                 ),
                 array(
                     'name'=>'unidad_medida_id',
                     'header'=>'Medida',
-                    'value'=>'$data->r_unidadMedida->unidad_medida'
+                    'value'=>'isset($data->r_unidadMedida->unidad_medida)?$data->r_unidadMedida->unidad_medida:null'
                 ),
                 array(
                     'name'=>'fabricante_id',
                     'header'=>'Laboratorio',
-                    'value'=>'$data->r_fabricante->fabricante'
+                    'value'=>'isset($data->r_fabricante->fabricante)?$data->r_fabricante->fabricante:null'
                 ),
                 'stock',
                 array(
