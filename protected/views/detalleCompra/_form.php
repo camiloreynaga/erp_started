@@ -174,7 +174,7 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog', array( // the dialog
                                 array(
                                     'name'=>'presentacion_id',
                                     'header'=>'Present.',
-                                    'value'=>'$data->r_producto->r_presentacion->presentacion'
+                                    'value'=>'isset($data->r_producto->r_presentacion->presentacion)?$data->r_producto->r_presentacion->presentacion:null'
                                 ),
                                 array(
                                     'name' => 'cantidad',
