@@ -54,6 +54,12 @@ return false;
 		'contacto',
 		'direccion',
 		'ciudad',
+                array(
+                    'name'=>'activo',
+                    'value'=>'$data->_estado[$data->activo]',
+                    'filter'=>  array_merge(array(''=>yii::t('app','ALL')),$model->_estado)
+                    //'value'=>'$data->descontinuado'
+                ),
 		/*
 		'telefono',
 		'linea_credito',

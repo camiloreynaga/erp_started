@@ -106,7 +106,8 @@ return false;
                 ),
                 array(
                     'name'=>'descontinuado',
-                    'value'=>'$data->_estado[$data->descontinuado]'
+                    'value'=>'$data->_estado[$data->descontinuado]',
+                    'filter'=>  array_merge(array(''=>yii::t('app','ALL')),$model->_estado)
                     //'value'=>'$data->descontinuado'
                 ),
                 
