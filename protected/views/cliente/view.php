@@ -32,6 +32,10 @@ array('label'=>'Manage Cliente','url'=>array('admin')),
                     'label'=>'Credito Usado',
                     'value'=>$model->linea_credito-$model->credito_disponible,
                 ),
+                array(
+                    'name'=>'activo',
+                    'value'=>$model->activo==0?'SI':'NO'
+                ),
 		'create_time',
 		'create_user_id',
 		'update_time',

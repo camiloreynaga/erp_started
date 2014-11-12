@@ -26,6 +26,10 @@ array('label'=>'Manage Proveedor','url'=>array('admin')),
 		'ciudad',
 		'telefono',
 		'linea_credito',
+                array(
+                    'name'=>'activo',
+                    'value'=>$model->activo==0?'SI':'NO'
+                ),
                 'create_time',
                 array(
                   'name'=>'create_user_id',

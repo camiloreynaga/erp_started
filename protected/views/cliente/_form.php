@@ -24,7 +24,22 @@
         
         <?php echo $form->textFieldGroup($model,'credito_disponible',array('class'=>'span5','maxlength'=>10)); ?>
         
-        <?php // echo $form->textFieldGroup($model,'activo',array('class'=>'span5')); ?>
+        <?php echo $form->switchGroup($model,'activo',
+                array('class'=>'span5',
+                        'widgetOptions'=>array(
+                            'options'=>array(
+                                'size'=>'small',
+                                'onText'=>'NO',
+                                'offText'=>'SI',
+                                'onColor' => 'danger',
+                                'offColor' => 'primary', 
+                                )
+                    )
+                )
+                
+                );
+
+// echo $form->textFieldGroup($model,'activo',array('class'=>'span5')); ?>
 
 
 <div class="form-actions">
