@@ -64,5 +64,7 @@ return array(
    //Int /Out
     'check-in'=>'Ingreso',
     'check-out'=>'Salida',
+    // Cuentas por cobrar
+    'payment'=>'Pago',
 );
 ?>

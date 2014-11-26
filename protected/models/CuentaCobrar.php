@@ -22,6 +22,15 @@
  */
 class CuentaCobrar extends Erp_startedActiveRecord//CActiveRecord
 {
+    
+        /*estado de compra
+         * 
+         */
+         public $_estado=array(
+            '0'=>'PENDIENTE', // PENDIENTE DE PAGO 
+            '1'=>'PAGADO', // PAGADO
+         );
+    
 	/**
 	 * @return string the associated database table name
 	 */
@@ -38,7 +47,10 @@ class CuentaCobrar extends Erp_startedActiveRecord//CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
+                        array('fecha_pago, medio_pago', 'required','on'=>'pagar'), // para cuando se realiza el pago
 			array('venta_id', 'required'),
+                        //array('monto, estado, fecha_vencimiento', 'required'),
+                        array('monto, estado, fecha_vencimiento', 'required','on'=>'create'),
 			array('venta_id, estado, medio_pago, create_user_id, update_user_id', 'numerical', 'integerOnly'=>true),
 			array('monto, interes', 'length', 'max'=>10),
 			array('fecha_pago, fecha_vencimiento, create_time, update_time', 'safe'),
