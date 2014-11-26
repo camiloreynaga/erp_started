@@ -117,26 +117,23 @@ class CuentaCobrarController extends Controller
     */
     public function actionUpdate($id)
     {
-        
         $model=$this->loadModel($id);
-        //$model->setScenario('pagar');
+        $model->setScenario('pagar');
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
-
         if(isset($_POST['CuentaCobrar']))
         {
-        $model->estado=1;    
-        $model->attributes=$_POST['CuentaCobrar'];
-        if($model->save())
-            //if(Yii::app()->request->isAjaxRequest)
-                {
-
-                    echo CJSON::encode(array(
-                        'status'=>'success',
-                        'div'=>"Successfully Added.."
-                    ));
-                   Yii::app()->end();
-                }
+            $model->estado=1;    
+            $model->attributes=$_POST['CuentaCobrar'];
+            if($model->save())
+                //if(Yii::app()->request->isAjaxRequest)
+                    {
+                        echo CJSON::encode(array(
+                            'status'=>'success',
+                            'div'=>"Successfully Added.."
+                        ));
+                       Yii::app()->end();
+                    }
         //$this->redirect(array('view','id'=>$model->id));
         }
         //if(Yii::app()->request->isAjaxRequest)
@@ -144,11 +141,10 @@ class CuentaCobrarController extends Controller
             echo CJSON::encode(
                     array(
                         'status'=>'failure',
-                        'div'=>$this->renderPartial('_form',array('model'=>$model),true)
+                        'div'=>$this->renderPartial('_partialForm',array('model'=>$model),true)
                 ));
             //$this->renderPartial('_form',array('model'=>$model),true)
        // }
-        
     }
 
     /**

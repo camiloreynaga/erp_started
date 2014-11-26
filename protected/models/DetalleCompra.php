@@ -241,6 +241,7 @@ class DetalleCompra extends Erp_startedActiveRecord//CActiveRecord
             
             return $retorna;
         }
+        
         /**
          * verifica que no exista items observados
          */
@@ -275,7 +276,6 @@ class DetalleCompra extends Erp_startedActiveRecord//CActiveRecord
                 
         }
         
-        
         /**
          * Actualiza el estado de un item del detalle de compra
          */
@@ -304,8 +304,6 @@ class DetalleCompra extends Erp_startedActiveRecord//CActiveRecord
                     $_compra->estado=1; //Revisado OK
                 else
                     $_compra->estado=2; //observado
-                
-                               
                 //actualizando el total, base imponible e impuesto de la compra
                 $_total=$this->SumaTotal();
                 //$_bi=$_total/((int)Yii::app()->params['impuesto']*0.01 + 1);
@@ -313,14 +311,10 @@ class DetalleCompra extends Erp_startedActiveRecord//CActiveRecord
                 $_compra->importe_total=$_total;//$this->SumaTotal()['total'];
                 $_compra->base_imponible=$_bi; 
                 $_compra->impuesto=$_total-$_bi;
-               
                 //Verificando que todos los item se hayan almacenado
                 if($this->AllIntoStore())
                     $_compra->estado=4; // Cambiar estado a Almacenado
-                
                 $_compra->save(); //actualizando el estado de compra
-                
-                
             //}
             parent::afterSave();
         }

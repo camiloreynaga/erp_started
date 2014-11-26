@@ -1,8 +1,13 @@
 <div class="form">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'cuenta-cobrar-form',
-	'enableAjaxValidation'=>false,
+	'id'=>'cuenta-form',
+	'enableAjaxValidation'=>true,
+            'clientOptions' =>array(
+            'validateOnSubmit' => true,
+            'validateOnChange' => false,
+            'validateOnType' => false
+            )
 )); ?>
 	<p class="note"><?php echo yii::t('app','Fields with') ;?> <span class="required">*</span><?php echo yii::t('app','are required.') ;?></p>
    
@@ -10,15 +15,15 @@
    
         <div class="row">
 		<?php echo $form->labelEx($model,'monto',array('style'=>'padding-right:75px;float:left;')); ?>
-                <?php //echo Chtml::encode($model->monto); ?>
-		<?php echo $form->textField($model,'monto'); ?>
+                <?php echo Chtml::encode($model->monto); ?>
+		<?php //echo $form->textField($model,'monto'); ?>
 		<?php echo $form->error($model,'monto'); ?>
 	</div>
         
         <div class="row">
 		<?php echo $form->labelEx($model,'fecha_vencimiento',array('style'=>'padding-right:75px;float:left;')); ?>
-                <?php //echo Chtml::encode($model->fecha_vencimiento); ?>
-		<?php echo $form->textField($model,'fecha_vencimiento'); ?>
+                <?php echo Chtml::encode($model->fecha_vencimiento); ?>
+		<?php //echo $form->textField($model,'fecha_vencimiento'); ?>
 		<?php echo $form->error($model,'fecha_vencimiento'); ?>
 	</div>
         
@@ -55,10 +60,10 @@
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Crear compra' : 'Guardar cambios'); ?>
 	</div>
         <script type="text/javascript">
-                $("#cuenta-cobrar-form").submit(
+                $("#cuenta-form").submit(
                     function(e){
                         e.preventDefault();
-                        updateItem($("#cuenta-cobrar-form").attr('action'));
+                        updateItem($("#cuenta-form").attr('action'));
                         return false;
                  });
             </script>

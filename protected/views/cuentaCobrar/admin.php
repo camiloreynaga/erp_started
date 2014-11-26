@@ -42,39 +42,37 @@
 <?php
 
 $model->venta_id=isset($_GET['pid'])? $_GET['pid']: 0; // $_GET['pid'];
-$this->widget('booster.widgets.TbGridView',array(
-            'id'=>'cuenta-cobrar-grid',
-            'type'=>'striped bordered',
-            //'fixedHeader' => true,
-            //'headerOffset' => 40,    
-            'dataProvider'=>$model->search(),
-            //'filter'=>$model,
-            'columns'=>array(
-
-                                 array(
-                                'class'=>'CCheckBoxColumn', // Checkboxes
-                                'selectableRows'=>2,        // Allow multiple selections 
-                                ),
-                               // 'id',
-                                'monto',
-                                'fecha_vencimiento',
-                                'fecha_pago',
-                                'medio_pago',
-                                'estado',
-                                
-                                array(
-                                    'header'=>'Acción',
-                                    'class'=>'booster.widgets.TbButtonColumn',
-                                    'template'=>'{er}',
-                                    'buttons'=>array(
-                                        'er'=>
-                                            array(
-                                                'label'=>'<i class="glyphicon glyphicon-usd"></i>',
-                                                'url'=>'Yii::app()->createUrl("cuentaCobrar/update", array("id"=>$data->id))',
+$this->widget('booster.widgets.TbExtendedGridView',array(
+    'id'=>'cuenta-cobrar-grid',
+    'type'=>'striped bordered',
+    //'fixedHeader' => true,
+    //'headerOffset' => 40,    
+    'dataProvider'=>$model->search(),
+    //'filter'=>$model,
+    'columns'=>array(
+            array(
+           'class'=>'CCheckBoxColumn', // Checkboxes
+           'selectableRows'=>2,        // Allow multiple selections 
+           ),
+          // 'id',
+           'monto',
+           'fecha_vencimiento',
+           'fecha_pago',
+           'medio_pago',
+           'estado',
+           array(
+               'header'=>'Acción',
+               'class'=>'booster.widgets.TbButtonColumn',
+               'template'=>'{pay}',
+               'buttons'=>array(
+                   'pay'=>
+                       array(
+                           'label'=>'<i class="glyphicon glyphicon-usd"></i>',
+                           'url'=>'Yii::app()->createUrl("cuentaCobrar/update", array("id"=>$data->id))',
 //                                                'options'=>array(
 //                                                   
 //                                                ),
-                                                
+
 //                                                'click'=>"function(){
 //                                                            $.fn.yiiGridView.update('cuenta-cobrar-grid', {
 //                                                                type:'POST',
@@ -87,19 +85,14 @@ $this->widget('booster.widgets.TbGridView',array(
 //                                                            })
 //                                                            return false;
 //                                                      }",
-                                                'click'=>'function(){updateItem($(this).attr("href")); $("#dialogClassroom").dialog("open");return false;}',
-                                                'options'=>array(
-                                                   'title'=>'Pagar',
-                                                   //'confirm'=>'Pagar ?',
-                                                ),
-                                            ),
-                                    ),
-                                ),
-
-              
-                ),
+                           'click'=>'function(){updateItem($(this).attr("href")); $("#dialogClassroom").dialog("open");return false;}',
+                           'options'=>array(
+                              'title'=>'Pagar',
+                              //'confirm'=>'Pagar ?',
+                           ),
+                       ),
+               ),
+           ),
+        ),
 )); 
-
-
-
 ?>

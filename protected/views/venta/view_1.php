@@ -1,5 +1,4 @@
 
-	
 <?php
 $this->breadcrumbs=array(
         Yii::t('app', 'Sale')=>array('admin'),
@@ -63,6 +62,7 @@ $this->renderPartial('//ComprobanteVenta/_viewComprobante',array('model'=>  Comp
   if( $model->countItems()>0){
   
     if ($model->estado_comprobante==0 ) { 
+    
                 echo "siguiente factura: ";
                 echo SerieNumero::model()->getNroFactura()['numero']+1;
         ?>
@@ -91,7 +91,13 @@ $this->renderPartial('//ComprobanteVenta/_viewComprobante',array('model'=>  Comp
             <?php } // end else
             }// end if
             ?>
-<!--setenado el nombre de la impresora-->
-        <?php echo CHtml::link('Print',array('print','id'=>$model->id),array('class'=>'btnPrint', 'style'=>'margin-left: 10px;')); ?>
+        
+<?php echo CHtml::link('Print',array('print'),array('class'=>'btnPrint', 'style'=>'margin-left: 10px;')); ?>
 
+        <?php
+        $this->renderPartial('_ticket',array(),false,true);
+        ?>
+        
+        <div>
        
+        </div> 

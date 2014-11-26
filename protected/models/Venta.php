@@ -267,4 +267,6 @@ class Venta extends Erp_startedActiveRecord//CActiveRecord
             return DetalleVenta::model()->count('venta_id=:venta_id',array(':venta_id'=>  $this->id));
                     
         }
+        
+        
 }

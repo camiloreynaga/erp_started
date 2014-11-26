@@ -160,6 +160,7 @@ class DetalleOrdenCompraController extends Controller
             ));
 
         }
+        
         public function actionUpdateItem($id)
         {
             $model=$this->loadModel($id);
@@ -169,6 +170,7 @@ class DetalleOrdenCompraController extends Controller
             }
             echo CJSON::encode();
         }
+        
         /*
          * edita la una celda de la grilla
          */
@@ -399,7 +401,6 @@ class DetalleOrdenCompraController extends Controller
                 throw new CHttpException(404,'The requested orden compra does not exist.');
                 }
             }
-            
             return $this->_ordenCompra;
         }
         

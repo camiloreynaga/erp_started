@@ -31,7 +31,7 @@
             'users'=>array('@'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-            'actions'=>array('create','update','lineaCredito','GenerarFactura','admin'),
+            'actions'=>array('create','update','lineaCredito','GenerarFactura','admin','print'),
             'users'=>array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -51,7 +51,7 @@
         public function actionView($id)
         {
             $this->render('view',array(
-            'model'=>$this->loadModel($id),
+            'model'=>$this->loadModel($id)
             ));
         }
 
@@ -132,6 +132,11 @@
              //$this->createUrl($route, $params)
              
              //crea una factura cada 30 items
+        }
+        
+        public function actionPrint()
+        {
+            $this->renderPartial('_ticket',array(),false,true);
         }
         
         /**
