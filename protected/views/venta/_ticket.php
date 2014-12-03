@@ -2,7 +2,6 @@
 
 <?php
 $_header="\x1B\x40 \x1B\x21\x08";
-
 $rz="PLASTIPLAS S.R.L.";
 $ruc="RUC: 20491097176";
 $direccion="DIREC: AV. MARISCAL CASTILLA NRO. 100 CUSCO - URUBAMBA - URUBAMBA";
@@ -16,7 +15,7 @@ $lista = DetalleVenta::model()->findAll('venta_id=:venta_id',array(':venta_id'=>
 $venta = Venta::model()->findByPk($pid);
 $detalle=array();
 foreach($lista as $list){
-    $detalle[]= $list->cantidad.' '.$list->r_producto->nombre.' '.$list->precio_unitario // producto_id,
+    $detalle[]= $list->r_producto->nombre.'\r\n'.$list->cantidad.'               '.$list->precio_unitario.'     '.$list->total // producto_id,
     ;
 }
 print_r($detalle);
@@ -529,16 +528,21 @@ $_pu=null;
             qz.append(_direccion); // direccion
             qz.append(_salto); // saldo linea
             qz.append(" --------------------------------\r\n ");
-            qz.append(_salto);        
-            qz.append("Cant.  Descripcion  Dscto  Importe");
+            qz.append(_salto); 
+            qz.append("\x1B\x50");
+            qz.append("Cant.  Descripcion  P.U.  Importe");
+            qz.append("---------------------------------\r\n ");
             for(var i=0;i<_length;i++)
-            {
+            {   
+                
                 qz.append(_salto);
                 qz.append(_cant[i]);
                 
             }
+            qz.append("\x1B\x54");
             qz.append(_salto);
             qz.append("\x1B\x21\x08");
+            qz.append("=================================\r\n");
             qz.append("IGV: ");
             qz.append(_igv);
             qz.append(_salto);

@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="language" content="en" />
+	<meta name="language" content="es" />
 
 	<!-- blueprint CSS framework -->
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/screen.css" media="screen, projection" />
@@ -27,7 +27,10 @@
 	</div><!-- header -->
 
 	<div id="mainMbmenu">
-		<?php $this->widget('application.extensions.mbmenu.MbMenu',array(
+		<?php 
+                
+                //$this->widget('zii.widgets.CMenu',array(
+                $this->widget('application.extensions.mbmenu.MbMenu',array(
 			'items'=>array(
 				array('label'=>'Home', 'url'=>array('/site/index')),
 				//array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
@@ -43,7 +46,7 @@
                                     
                                 
                                         ),
-                                    ),
+                                     ),
                                 array('label'=>'Almacen',
                                     'items'=>array(
                                        // array('label'=>'Ubicaciones','url'=>array('/ubicacion/admin')),
@@ -94,7 +97,7 @@
                                         array('label'=>'reportes','url'=>array('/reportes/index')),
                                         //array('label'=>'Cuentas por Pagar','url'=>array('/cuentaPagar/admin')),
                                     )
-                                    ), 
+                                    ),
                                    
 				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
 				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)

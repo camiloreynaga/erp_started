@@ -12,7 +12,7 @@ return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'ERP APP',
         'language'=>'es',
-        //'sourceLanguage'=>'en',
+        //'theme'=>'chame_blue', 
 
 	// preloading 'log' component
 	'preload'=>array('log','booster'),
@@ -110,7 +110,7 @@ return array(
 	// using Yii::app()->params['paramName']
 	'params'=>array(
 		// this is used in contact page
-		'adminEmail'=>'webmaster@example.com',
+		'adminEmail'=>'info@kiwisoluciones.com',
                 'impuesto'=>'18',
                 'language'=>'es'
 	),
