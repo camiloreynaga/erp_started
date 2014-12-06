@@ -37,17 +37,17 @@
 
       <div class="nav-collapse collapse pull-right">
         <?php 
-//        $this->widget('zii.widgets.CMenu',array(
-//          'htmlOptions'=>array("class"=>"nav"),
-//          'items'=>array(
-//            array('label'=>'Home', 'url'=>array('/site/index')),
-//            array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
-//            array('label'=>'Contact', 'url'=>array('/site/contact')),
-//            array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
-//            array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
-//          ),
-//        ));
-        
+        $this->widget('zii.widgets.CMenu',array(
+          'htmlOptions'=>array("class"=>"nav"),
+          'items'=>array(
+            array('label'=>'Home', 'url'=>array('/site/index')),
+            array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
+            array('label'=>'Contact', 'url'=>array('/site/contact')),
+            array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
+            array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
+          ),
+        ));
+        /*
         $this->widget('zii.widgets.CMenu',array(
                 //$this->widget('application.extensions.mbmenu.MbMenu',array(
 			'items'=>array(
@@ -116,17 +116,43 @@
                                         array('label'=>'reportes','url'=>array('/reportes/index')),
                                         //array('label'=>'Cuentas por Pagar','url'=>array('/cuentaPagar/admin')),
                                     )
-                                    ),*/ 
+                                    ),
                                    
 				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
 				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
 			),
                         
-		)); ?>
+		)); */
         
         ?>
 
       </div><!--/.nav-collapse -->
+      
+      <?php 
+//            echo CHtml::openTag('div', array('class' => 'bs-navbar-top-example'));
+//            $this->widget(
+//                'booster.widgets.TbNavbar',
+//                array(
+//                    'brand' => 'Title',
+//                    'brandOptions' => array('style' => 'width:auto;margin-left: 0px;'),
+//                    'fixed' => 'top',
+//                    'fluid' => true,
+//                    'htmlOptions' => array('style' => 'position:absolute'),
+//                    'items' => array(
+//                        array(
+//                            'class' => 'booster.widgets.TbMenu',
+//                            'type' => 'navbar',
+//                            'items' => array(
+//                                array('label' => 'Home', 'url' => '#', 'active' => true),
+//                                array('label' => 'Link', 'url' => '#'),
+//                                array('label' => 'Link', 'url' => '#'),
+//                            )
+//                        )
+//                    )
+//                )
+//            );
+//            echo CHtml::closeTag('div');
+      ?>
 
     </div>
   </div>

@@ -12,7 +12,7 @@ return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'ERP APP',
         'language'=>'es',
-        //'theme'=>'chame_blue', 
+        'theme'=>'kiwi', 
 
 	// preloading 'log' component
 	'preload'=>array('log','booster'),

@@ -7,7 +7,43 @@
 
 
 return array(
-    //menu
+    //menu principal
+    'Home'=>'Inicio',
+    'Maintenance'=>'Mantenimiento',
+    'Presentations'=>'Presentaciones',
+    'Product types'=>'Tipos de producto',
+    'Brand'=>'Marca',
+    'Measurement units'=>'Unidades de medida',
+    'Products'=>'Productos',
+    
+    'Storage'=>'Almacén',
+    'In/Out'=>'Ingreso/Salida',
+    'Products for storage'=>'Productos por almacén',
+    
+    'Documents'=>'Documentos',
+    'Types of receipts'=>'Tipos de Comprobante',
+    'Referral guide'=>'Guías de remisión',
+    'Credit notes'=>'Notas de crédito',
+    
+    'Staff'=>'Empleados',
+    'Positions'=>'Cargos',
+    'Employees'=>'Empleados',
+    
+    'System maintance'=>'Mantenimiento',
+    'Providers'=>'Proveedores',
+    'Clients'=>'Clientes',
+    
+    'Purchase orders'=>'Ordenes de compra',
+    'Purchases'=>'Compras',
+    'Orders'=>'Pedidos',
+    'Sales'=>'Ventas',
+    
+    'Accounts'=>'Cuentas',
+    'Accounts receivable'=>'Cuentas por cobrar',
+    'Accounts payable'=>'Cuentas por pagar',
+    
+    'Reports'=>'Reportes',
+    //menu 
     'Operations'=>'Operaciones',
     'Create'=>'Crear',
     'Manage'=>'Administrar',
@@ -66,5 +102,6 @@ return array(
     'check-out'=>'Salida',
     // Cuentas por cobrar
     'payment'=>'Pago',
+    
 );
 ?>
