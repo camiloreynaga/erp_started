@@ -1,15 +1,15 @@
 <?php
 $this->breadcrumbs=array(
-	'Unidad Medidas',
+        yii::t('app','Unidad Medidas'),
 );
 
 $this->menu=array(
-array('label'=>'Create UnidadMedida','url'=>array('create')),
-array('label'=>'Manage UnidadMedida','url'=>array('admin')),
+array('label'=>yii::t('app','Create').' '.yii::t('app','UnidadMedida'),'url'=>array('create')),
+array('label'=>yii::t('app','Manage').' '.yii::t('app','UnidadMedida'),'url'=>array('admin')),
 );
 ?>
 
-<h1>Unidad Medidas</h1>
+<h1><?php echo yii::t('app','Unidad Medidas'); ?></h1>
 
 <?php $this->widget('booster.widgets.TbListView',array(
 'dataProvider'=>$dataProvider,
