@@ -23,7 +23,7 @@
 		<?php echo "<?php \$this->widget('booster.widgets.TbButton', array(
 			'buttonType' => 'submit',
 			'context'=>'primary',
-			'label'=>'Search',
+			'label'=>yii::t('app','Search'),
 		)); ?>\n"; ?>
 	</div>
 

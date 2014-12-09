@@ -1,13 +1,6 @@
 <?php
-/**
- * This is the template for generating a controller class file for CRUD feature.
- * The following variables are available in this template:
- * - $this: the BootCrudCode object
- */
-?>
-<?php echo "<?php\n"; ?>
 
-class <?php echo $this->controllerClass; ?> extends <?php echo $this->baseControllerClass . "\n"; ?>
+class UserController extends Controller
 {
     /**
     * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -35,15 +28,18 @@ class <?php echo $this->controllerClass; ?> extends <?php echo $this->baseContro
         return array(
             array('allow',  // allow all users to perform 'index' and 'view' actions
                 'actions'=>array('index','view'),
-                'users'=>array('*'),
+                'roles'=>array('root'),
+                //'users'=>array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
                 'actions'=>array('create','update'),
-                'users'=>array('@'),
+               // 'users'=>array('@'),
+                'roles'=>array('root'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
                 'actions'=>array('admin','delete'),
-                'users'=>array('admin'),
+                'roles'=>array('root'),
+                //'users'=>array('admin'),
             ),
             array('deny',  // deny all users
                 'users'=>array('*'),
@@ -68,16 +64,16 @@ class <?php echo $this->controllerClass; ?> extends <?php echo $this->baseContro
     */
     public function actionCreate()
     {
-        $model=new <?php echo $this->modelClass; ?>;
+        $model=new User;
 
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
 
-        if(isset($_POST['<?php echo $this->modelClass; ?>']))
+        if(isset($_POST['User']))
         {
-            $model->attributes=$_POST['<?php echo $this->modelClass; ?>'];
+            $model->attributes=$_POST['User'];
             if($model->save())
-                $this->redirect(array('view','id'=>$model-><?php echo $this->tableSchema->primaryKey; ?>));
+                $this->redirect(array('view','id'=>$model->id));
         }
 
         $this->render('create',array(
@@ -97,11 +93,11 @@ class <?php echo $this->controllerClass; ?> extends <?php echo $this->baseContro
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
 
-        if(isset($_POST['<?php echo $this->modelClass; ?>']))
+        if(isset($_POST['User']))
         {
-            $model->attributes=$_POST['<?php echo $this->modelClass; ?>'];
+            $model->attributes=$_POST['User'];
             if($model->save())
-                $this->redirect(array('view','id'=>$model-><?php echo $this->tableSchema->primaryKey; ?>));
+                $this->redirect(array('view','id'=>$model->id));
         }
 
         $this->render('update',array(
@@ -134,7 +130,7 @@ class <?php echo $this->controllerClass; ?> extends <?php echo $this->baseContro
     */
     public function actionIndex()
     {
-        $dataProvider=new CActiveDataProvider('<?php echo $this->modelClass; ?>');
+        $dataProvider=new CActiveDataProvider('User');
         $this->render('index',array(
             'dataProvider'=>$dataProvider,
         ));
@@ -145,10 +141,10 @@ class <?php echo $this->controllerClass; ?> extends <?php echo $this->baseContro
     */
     public function actionAdmin()
     {
-        $model=new <?php echo $this->modelClass; ?>('search');
+        $model=new User('search');
         $model->unsetAttributes();  // clear any default values
-        if(isset($_GET['<?php echo $this->modelClass; ?>']))
-            $model->attributes=$_GET['<?php echo $this->modelClass; ?>'];
+        if(isset($_GET['User']))
+            $model->attributes=$_GET['User'];
 
         $this->render('admin',array(
             'model'=>$model,
@@ -162,7 +158,7 @@ class <?php echo $this->controllerClass; ?> extends <?php echo $this->baseContro
     */
     public function loadModel($id)
     {
-        $model=<?php echo $this->modelClass; ?>::model()->findByPk($id);
+        $model=User::model()->findByPk($id);
         if($model===null)
             throw new CHttpException(404,'The requested page does not exist.');
         return $model;
@@ -174,7 +170,7 @@ class <?php echo $this->controllerClass; ?> extends <?php echo $this->baseContro
         */
     protected function performAjaxValidation($model)
     {
-        if(isset($_POST['ajax']) && $_POST['ajax']==='<?php echo $this->class2id($this->modelClass); ?>-form')
+        if(isset($_POST['ajax']) && $_POST['ajax']==='user-form')
         {
             echo CActiveForm::validate($model);
             Yii::app()->end();

@@ -9,7 +9,7 @@
 	'enableAjaxValidation'=>false,
 )); ?>\n"; ?>
 
-<p class="help-block">Fields with <span class="required">*</span> are required.</p>
+<p class="help-block"><?php echo "<?php echo yii::t('app','Fields with');?>";?> <span class="required">*</span> <?php echo "<?php echo yii::t('app','are required.') ;?>";?></p>
 
 <?php echo "<?php echo \$form->errorSummary(\$model); ?>\n"; ?>
 
@@ -28,7 +28,7 @@ foreach ($this->tableSchema->columns as $column) {
 	<?php echo "<?php \$this->widget('booster.widgets.TbButton', array(
 			'buttonType'=>'submit',
 			'context'=>'primary',
-			'label'=>\$model->isNewRecord ? 'Create' : 'Save',
+			'label'=>\$model->isNewRecord ? yii::t('app','Create') : yii::t('app','Save'),
 		)); ?>\n"; ?>
 </div>
 

@@ -1,6 +1,6 @@
 <?php
 return array (
-  'template' => 'default',
+  'template' => 'traslate',
   'connectionId' => 'db',
   'tablePrefix' => 'tbl_',
   'modelPath' => 'application.models',

@@ -23,7 +23,7 @@ public $layout='//layouts/column2';
         * This method is used by the 'accessControl' filter.
         * @return array access control rules
         */
-        public function accessRules()
+        public function accessRules() 
         {
             return array(
                 array('allow',  // allow all users to perform 'index' and 'view' actions

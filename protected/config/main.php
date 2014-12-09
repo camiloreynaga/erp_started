@@ -32,7 +32,10 @@ return array(
                         
 			// If removed, Gii defaults to localhost only. Edit carefully to taste.
 			'ipFilters'=>array('127.0.0.1','::1'),
-                        'generatorPaths'=>array('booster.gii'),
+                        'generatorPaths'=>array(
+                            'booster.gii.model',
+                            'booster.gii'
+                            ),
 		),
             //Reportico
             'reportico'=>array(),
@@ -43,7 +46,7 @@ return array(
 	'components'=>array(
 		'user'=>array(
 			// enable cookie-based authentication
-			'allowAutoLogin'=>true,
+			//'allowAutoLogin'=>true,
 		),
 		// uncomment the following to enable URLs in path-format
 		/*
@@ -112,6 +115,6 @@ return array(
 		// this is used in contact page
 		'adminEmail'=>'info@kiwisoluciones.com',
                 'impuesto'=>'18',
-                'language'=>'es'
+                'language'=>'es_pe'
 	),
 );

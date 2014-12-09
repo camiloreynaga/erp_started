@@ -21,18 +21,23 @@ class Controller extends CController
 	 */
 	public $breadcrumbs=array();
         
+        
+        /**
+        * Specifies the access control rules.
+        * This method is used by the 'accessControl' filter.
+        * @return array access control rules
+        */
 //        public function accessRules() {
-//             parent::accessRules();
 //            return array(
 //                array('allow', //allow all users to perfom 'index' and 'view' actions
-//                    'controllers'=>array('Caracteristica','empleado','fabricante','presentacion','producto','proveedor','tipoProducto'),
+//                    'controllers'=>array('caracteristica','empleado','fabricante','presentacion','producto','proveedor','tipoProducto'),
 //                    'actions'=>array('index','view'),
 //                    'users'=>array('@')
 //                    ),
 //                array('allow', //allow authenticated user to perform 'create' and 'update' actions
 //                    'controllers'=>array('caracteristica','empleado','fabricante','presentacion','producto','proveedor','tipoProducto'),
 //                    'actions'=>array('create','update'),
-//                    'users'=>'@'
+//                    'users'=>array('@')
 //                    ),
 //                array('allow', //allow admin user to perform 'admin' and 'delete' actions
 //                    'controllers'=>array('caracteristica','empleado','fabricante','presentacion','producto','proveedor','tipoProducto'),
@@ -44,7 +49,6 @@ class Controller extends CController
 //                    'users'=>array('*'),
 //                    ),
 //            );
-//           
 //        }
         
 }

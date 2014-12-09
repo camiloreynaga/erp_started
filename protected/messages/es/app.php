@@ -43,7 +43,7 @@ return array(
     'Accounts payable'=>'Cuentas por pagar',
     
     'Reports'=>'Reportes',
-    //menu 
+    //Operations menu 
     'Operations'=>'Operaciones',
     'Create'=>'Crear',
     'Manage'=>'Administrar',
@@ -56,7 +56,18 @@ return array(
     'are required.'=>'son requeridos.',
     'No items selected.'=>'Ningun Items Seleccionado.',
     'Do you want to delete these'=>'Desea borrar estos',
+    //Forms
+    'Advanced Search'=>'Búsqueda avanzada',
+    'Search'=>'Buscar',
+    'Unknow'=>'Desconocido',
     //Messages
+    //admin
+    'You may optionally enter a comparison operator'=>'Ud. puede ingresar un operador de comparación',
+    'or'=>'o',
+    'at the beginning of each of your search values to specify how the comparison should be done.'=>'al inicio de cada valor de búsqueda para especificar como se va a realizar la comparación.',
+    //delete
+    'Are you sure you want to delete this item?' => '¿Está seguro que desea borrar este elemento?',
+        
     'Are you sure to delete this item?'=>'¿Esta seguro de eliminar este item?',
     'Delete Selected Items'=>'Borrar Items seleccionados',
     'Are you sure to process this purchase?'=>'¿Esta seguro de proceder con la orden compra?',
