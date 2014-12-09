@@ -114,5 +114,7 @@ return array(
     // Cuentas por cobrar
     'payment'=>'Pago',
     
+    //presentaciones
+    'Presentacion'=>'Presentación',
 );
 ?>

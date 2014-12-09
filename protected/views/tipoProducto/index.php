@@ -1,15 +1,15 @@
 <?php
 $this->breadcrumbs=array(
-	'Tipo Productos',
+        yii::t('app','Tipo Productos'),
 );
 
 $this->menu=array(
-array('label'=>'Create TipoProducto','url'=>array('create')),
-array('label'=>'Manage TipoProducto','url'=>array('admin')),
+array('label'=>yii::t('app','Create').' '.yii::t('app','TipoProducto'),'url'=>array('create')),
+array('label'=>yii::t('app','Manage').' '.yii::t('app','TipoProducto'),'url'=>array('admin')),
 );
 ?>
 
-<h1>Tipo Productos</h1>
+<h1><?php echo yii::t('app','Tipo Productos'); ?></h1>
 
 <?php $this->widget('booster.widgets.TbListView',array(
 'dataProvider'=>$dataProvider,

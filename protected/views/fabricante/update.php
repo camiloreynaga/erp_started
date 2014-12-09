@@ -1,18 +1,18 @@
 <?php
 $this->breadcrumbs=array(
-	'Fabricantes'=>array('index'),
+	yii::t('app','Fabricantes')=>array('index'),
 	$model->id=>array('view','id'=>$model->id),
-	'Update',
+	yii::t('app','Update'),
 );
 
 	$this->menu=array(
-	array('label'=>'List Fabricante','url'=>array('index')),
-	array('label'=>'Create Fabricante','url'=>array('create')),
-	array('label'=>'View Fabricante','url'=>array('view','id'=>$model->id)),
-	array('label'=>'Manage Fabricante','url'=>array('admin')),
+        array('label'=>yii::t('app','List').' '.yii::t('app','Fabricante'),'url'=>array('index')),
+	array('label'=>yii::t('app','Create').' '.yii::t('app','Fabricante'),'url'=>array('create')),
+        array('label'=>yii::t('app','View').' '.yii::t('app','Fabricante'),'url'=>array('view','id'=>$model->id)),
+        array('label'=>yii::t('app','Manage').' '.yii::t('app','Fabricante'),'url'=>array('admin')),
 	);
 	?>
 
-	<h1>Update Fabricante <?php echo $model->id; ?></h1>
+	<h1> <?php echo yii::t('app','Update');?> <?php echo yii::t('app','Fabricante');?> <?php echo $model->id; ?></h1>
 
 <?php echo $this->renderPartial('_form',array('model'=>$model)); ?>
