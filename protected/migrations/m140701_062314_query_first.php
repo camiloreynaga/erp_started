@@ -16,6 +16,7 @@ class m140701_062314_query_first extends CDbMigration
 	// Use safeUp/safeDown to do migration with transaction
 	public function safeUp()
 	{
+            
             $this->insert('tbl_empleado',array(
                 'id'=>1,
                 'nombre'=>'root',
@@ -27,7 +28,7 @@ class m140701_062314_query_first extends CDbMigration
                 'update_time'=>date("Y-m-d H:i:s"),
             ));
             
-            $this->insert('tbl_usuario', array(
+            $this->insert('tbl_user', array(
                 'id'=>1,
                 'username' => 'admin',
                 'email' => 'camilo.reynaga@gmail.com',
@@ -41,7 +42,7 @@ class m140701_062314_query_first extends CDbMigration
 	public function safeDown()
 	{
             $this->delete('tbl_empleado');
-            $this->delete('tbl_usuario');
+            $this->delete('tbl_user');
 	}
 	
 }
