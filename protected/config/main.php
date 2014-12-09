@@ -37,6 +37,7 @@ return array(
                             'booster.gii'
                             ),
 		),
+            'admin',
             //Reportico
             'reportico'=>array(),
 		
