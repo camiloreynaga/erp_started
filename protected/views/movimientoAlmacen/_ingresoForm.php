@@ -27,6 +27,7 @@ $this->menu=array(
 
 <?php $form=$this->beginWidget('booster.widgets.TbActiveForm',array(
 	'id'=>'ingreso-almacen-form',
+        //'action'=>'Ingreso',
 //	'enableAjaxValidation'=>true,
 //    'clientOptions' =>array(
 //            'validateOnSubmit' => true),

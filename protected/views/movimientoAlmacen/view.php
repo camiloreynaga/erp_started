@@ -52,12 +52,12 @@ $this->menu=array(
 		'create_time',
 		array(
                   'name'=>'create_user_id',
-                  'value'=>Usuario::model()->getUsuario($model->create_user_id),
+                  'value'=>  User::model()->getUsuario($model->create_user_id),
                 ),
 		'update_time',
                 array(
                     'name'=>'update_user_id',
-                    'value'=>Usuario::model()->getUsuario($model->update_user_id),
+                    'value'=>User::model()->getUsuario($model->update_user_id),
                 ),
 ),
 )); ?>

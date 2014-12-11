@@ -1,15 +1,15 @@
 <?php
 $this->breadcrumbs=array(
-	'Cuenta Pagars'=>array('index'),
-	'Create',
+        yii::t('app','Cuenta Pagars')=>array('index'),
+	yii::t('app','Create'),
 );
 
 $this->menu=array(
-array('label'=>'List CuentaPagar','url'=>array('index')),
-array('label'=>'Manage CuentaPagar','url'=>array('admin')),
+array('label'=>yii::t('app','List').' '.yii::t('app','CuentaPagar'),'url'=>array('index')),
+array('label'=>yii::t('app','Manage').' '.yii::t('app','CuentaPagar'),'url'=>array('admin')),
 );
 ?>
 
-<h1>Create CuentaPagar</h1>
+<h1> <?php echo yii::t('app','Create');?> <?php echo yii::t('app','CuentaPagar'); ?></h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

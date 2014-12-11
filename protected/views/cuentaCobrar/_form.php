@@ -203,7 +203,7 @@ $form=$this->beginWidget('booster.widgets.TbActiveForm',array(
                  $this->widget('booster.widgets.TbButton', array(
 			'buttonType'=>'submit',
 			'context'=>'primary',
-			'label'=>$model->isNewRecord ? 'Create' : 'Save',
+			'label'=>$model->isNewRecord ? yii::t('app','Create') : yii::t('app','Save'),
 		)); 
                  //$this->endWidget();
                 ?>

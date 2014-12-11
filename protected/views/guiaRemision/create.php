@@ -1,15 +1,15 @@
 <?php
 $this->breadcrumbs=array(
-	'Guia Remisions'=>array('index'),
-	'Create',
+        yii::t('app','Guia Remisions')=>array('index'),
+	yii::t('app','Create'),
 );
 
 $this->menu=array(
-array('label'=>'List GuiaRemision','url'=>array('index')),
-array('label'=>'Manage GuiaRemision','url'=>array('admin')),
+array('label'=>yii::t('app','List').' '.yii::t('app','GuiaRemision'),'url'=>array('index')),
+array('label'=>yii::t('app','Manage').' '.yii::t('app','GuiaRemision'),'url'=>array('admin')),
 );
 ?>
 
-<h1>Create GuiaRemision</h1>
+<h1> <?php echo yii::t('app','Create');?> <?php echo yii::t('app','GuiaRemision'); ?></h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

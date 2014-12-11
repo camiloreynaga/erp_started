@@ -71,7 +71,7 @@
         
         
         /**
-         * registra el ingreso a almacen de una fial del detalle de compra
+         * registra el ingreso a almacen de una fila del detalle de compra
          */
         public function actionRegistrarCompra($id)
         {
@@ -111,7 +111,9 @@
             
         }
         
-        
+        /*
+         * 
+         */
         public function actionRegistrarVenta($id)
         {
             $model=new MovimientoAlmacen();

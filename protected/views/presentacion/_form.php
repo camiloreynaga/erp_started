@@ -11,15 +11,23 @@
 
 	<?php echo $form->textFieldGroup($model,'abreviatura',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5','maxlength'=>50)))); ?>
 
-	<?php echo $form->textFieldGroup($model,'activo',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
+	<?php 
+        
+            echo $form->switchGroup($model,'activo',
+                array('class'=>'span5',
+                        'widgetOptions'=>array(
+                            'options'=>array(
+                                'size'=>'small',
+                                'onText'=>'NO',
+                                'offText'=>'SI',
+                                'onColor' => 'danger',
+                                'offColor' => 'primary', 
+                                )
+                        )
+                    )
+                );
+        ?>
 
-	<?php echo $form->textFieldGroup($model,'create_time',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
-
-	<?php echo $form->textFieldGroup($model,'create_user_id',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
-
-	<?php echo $form->textFieldGroup($model,'update_time',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
-
-	<?php echo $form->textFieldGroup($model,'update_user_id',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
 
 <div class="form-actions">
 	<?php $this->widget('booster.widgets.TbButton', array(

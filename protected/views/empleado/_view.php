@@ -16,6 +16,10 @@
 	<?php echo CHtml::encode($data->ap_materno); ?>
 	<br />
 
+	<b><?php echo CHtml::encode($data->getAttributeLabel('fecha_nacimiento')); ?>:</b>
+	<?php echo CHtml::encode($data->fecha_nacimiento); ?>
+	<br />
+
 	<b><?php echo CHtml::encode($data->getAttributeLabel('doc_identidad')); ?>:</b>
 	<?php echo CHtml::encode($data->doc_identidad); ?>
 	<br />
@@ -24,17 +28,17 @@
 	<?php echo CHtml::encode($data->direccion); ?>
 	<br />
 
+	<?php /*
 	<b><?php echo CHtml::encode($data->getAttributeLabel('telefono')); ?>:</b>
 	<?php echo CHtml::encode($data->telefono); ?>
 	<br />
 
-	<?php /*
 	<b><?php echo CHtml::encode($data->getAttributeLabel('movil')); ?>:</b>
 	<?php echo CHtml::encode($data->movil); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('fecha_nacimiento')); ?>:</b>
-	<?php echo CHtml::encode($data->fecha_nacimiento); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('cargo_id')); ?>:</b>
+	<?php echo CHtml::encode($data->cargo_id); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('create_time')); ?>:</b>

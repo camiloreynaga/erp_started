@@ -1,18 +1,18 @@
 <?php
 $this->breadcrumbs=array(
-	'Clientes'=>array('index'),
+	yii::t('app','Clientes')=>array('index'),
 	$model->id=>array('view','id'=>$model->id),
-	'Update',
+	yii::t('app','Update'),
 );
 
 	$this->menu=array(
-	array('label'=>'List Cliente','url'=>array('index')),
-	array('label'=>'Create Cliente','url'=>array('create')),
-	array('label'=>'View Cliente','url'=>array('view','id'=>$model->id)),
-	array('label'=>'Manage Cliente','url'=>array('admin')),
+        array('label'=>yii::t('app','List').' '.yii::t('app','Cliente'),'url'=>array('index')),
+	array('label'=>yii::t('app','Create').' '.yii::t('app','Cliente'),'url'=>array('create')),
+        array('label'=>yii::t('app','View').' '.yii::t('app','Cliente'),'url'=>array('view','id'=>$model->id)),
+        array('label'=>yii::t('app','Manage').' '.yii::t('app','Cliente'),'url'=>array('admin')),
 	);
 	?>
 
-	<h1>Update Cliente <?php echo $model->id; ?></h1>
+	<h1> <?php echo yii::t('app','Update');?> <?php echo yii::t('app','Cliente');?> <?php echo $model->id; ?></h1>
 
 <?php echo $this->renderPartial('_form',array('model'=>$model)); ?>

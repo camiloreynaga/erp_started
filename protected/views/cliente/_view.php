@@ -37,6 +37,10 @@
 	<?php echo CHtml::encode($data->linea_credito); ?>
 	<br />
 
+	<b><?php echo CHtml::encode($data->getAttributeLabel('credito_disponible')); ?>:</b>
+	<?php echo CHtml::encode($data->credito_disponible); ?>
+	<br />
+
 	<b><?php echo CHtml::encode($data->getAttributeLabel('create_time')); ?>:</b>
 	<?php echo CHtml::encode($data->create_time); ?>
 	<br />
