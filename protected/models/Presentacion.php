@@ -91,7 +91,7 @@ class Presentacion extends Erp_startedActiveRecord//CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
+		$criteria->compare('t.id',$this->id);
 		$criteria->compare('presentacion',$this->presentacion,true);
 		$criteria->compare('abreviatura',$this->abreviatura,true);
 		$criteria->compare('activo',$this->activo);

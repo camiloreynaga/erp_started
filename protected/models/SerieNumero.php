@@ -74,7 +74,7 @@ class SerieNumero extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
+		$criteria->compare('t.id',$this->id);
 		$criteria->compare('serie',$this->serie,true);
 		$criteria->compare('numero',$this->numero,true);
 

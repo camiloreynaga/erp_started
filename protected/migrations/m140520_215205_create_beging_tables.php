@@ -40,6 +40,9 @@ class m140520_215205_create_beging_tables extends CDbMigration
                 'id'=>'pk',
                 'unidad_medida'=>'varchar(50) NOT NULL',
                 'nonmenclatura'=>'varchar(10) NOT NULL',
+                'cantidad_equivalente'=>'decimal(10,2)',
+                'unidad_equivalente'=>'int(11)',
+                
                 'activo'=>'bool DEFAULT 0', // 0=si ;1=no
                 //
                 'create_time'=>'datetime DEFAULT NULL',

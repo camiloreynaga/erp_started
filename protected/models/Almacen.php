@@ -94,7 +94,7 @@ class Almacen extends Erp_startedActiveRecord//CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
+		$criteria->compare('t.id',$this->id);
 		$criteria->compare('almacen',$this->almacen,true);
 		$criteria->compare('direccion',$this->direccion,true);
 		$criteria->compare('ubicacion_id',$this->ubicacion_id);

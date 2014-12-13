@@ -143,7 +143,7 @@ class Producto extends Erp_startedActiveRecord// CActiveRecord
                 //$_lab= Fabricante::model()->tablename();
                // $criteria->join='inner join '.$_lab.' lab on lab.id = t.fabricante_id ';
                         
-		$criteria->compare('id',$this->id);
+		$criteria->compare('t.id',$this->id);
 		$criteria->compare('nombre',$this->nombre,true);
 		$criteria->compare('descripcion',$this->descripcion,true);
 		$criteria->compare('r_tipoProducto.tipo_producto',$this->tipo_producto_id,true);

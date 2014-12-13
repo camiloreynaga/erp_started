@@ -89,7 +89,7 @@ class MotivoMovimiento extends Erp_startedActiveRecord//CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
+		$criteria->compare('t.id',$this->id);
 		$criteria->compare('movimiento',$this->movimiento,true);
 		$criteria->compare('tipo_movimiento',$this->tipo_movimiento);
 		$criteria->compare('create_time',$this->create_time,true);

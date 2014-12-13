@@ -107,7 +107,7 @@ class Empleado extends Erp_startedActiveRecord//CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
+		$criteria->compare('t.id',$this->id);
 		$criteria->compare('nombre',$this->nombre,true);
 		$criteria->compare('ap_paterno',$this->ap_paterno,true);
 		$criteria->compare('ap_materno',$this->ap_materno,true);

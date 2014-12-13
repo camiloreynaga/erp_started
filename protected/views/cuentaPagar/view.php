@@ -26,8 +26,14 @@ $this->breadcrumbs=array(
 		'fecha_vencimiento',
 		'interes',
 		'create_time',
-		'create_user_id',
+                array(
+                  'name'=>'create_user_id',
+                  'value'=>User::model()->getUsuario($model->create_user_id),
+                ),
 		'update_time',
-		'update_user_id',
+                array(
+                    'name'=>'update_user_id',
+                    'value'=>User::model()->getUsuario($model->update_user_id),
+                ),
         ),
 )); ?>

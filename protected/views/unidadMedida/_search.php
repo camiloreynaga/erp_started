@@ -9,6 +9,10 @@
 
 		<?php echo $form->textFieldGroup($model,'nonmenclatura',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5','maxlength'=>10)))); ?>
 
+		<?php echo $form->textFieldGroup($model,'cantidad_equivalente',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5','maxlength'=>10)))); ?>
+
+		<?php echo $form->textFieldGroup($model,'unidad_equivalente',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
+
 		<?php echo $form->textFieldGroup($model,'activo',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
 
 		<?php echo $form->textFieldGroup($model,'create_time',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>

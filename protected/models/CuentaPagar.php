@@ -97,7 +97,7 @@ class CuentaPagar extends Erp_startedActiveRecord//CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
+		$criteria->compare('t.id',$this->id);
 		$criteria->compare('compra_id',$this->compra_id);
 		$criteria->compare('monto',$this->monto,true);
 		$criteria->compare('estado',$this->estado);

@@ -23,7 +23,8 @@ class m140701_062314_query_first extends CDbMigration
                 'ap_paterno'=>'root',
                 'fecha_nacimiento'=> date("Y-m-d H:i:s"),
                 'doc_identidad'=>'0',
-                
+                'create_user_id'=>'1',
+                'update_user_id'=>'1',
                 'create_time'=>date("Y-m-d H:i:s"),
                 'update_time'=>date("Y-m-d H:i:s"),
             ));
@@ -34,6 +35,46 @@ class m140701_062314_query_first extends CDbMigration
                 'email' => 'camilo.reynaga@gmail.com',
                 'password' => md5('admin'),
                 'empleado_id'=>1,
+                'create_user_id'=>'1',
+                'update_user_id'=>'1',
+                'create_time'=>date("Y-m-d H:i:s"),
+                'update_time'=>date("Y-m-d H:i:s"),
+            ));
+            
+             #insert default cargos 
+            $this->insert('tbl_cargo',array(
+                'id'=>1,
+                'cargo'=>'Administrador',
+                'activo'=>'0',
+                'create_user_id'=>'1',
+                'update_user_id'=>'1',
+                'create_time'=>date("Y-m-d H:i:s"),
+                'update_time'=>date("Y-m-d H:i:s"),
+            ));
+            $this->insert('tbl_cargo',array(
+                'id'=>2,
+                'cargo'=>'Facturador',
+                'activo'=>'0',
+                'create_user_id'=>'1',
+                'update_user_id'=>'1',
+                'create_time'=>date("Y-m-d H:i:s"),
+                'update_time'=>date("Y-m-d H:i:s"),
+            ));
+            $this->insert('tbl_cargo',array(
+                'id'=>3,
+                'cargo'=>'Almacenero',
+                'activo'=>'0',
+                'create_user_id'=>'1',
+                'update_user_id'=>'1',
+                'create_time'=>date("Y-m-d H:i:s"),
+                'update_time'=>date("Y-m-d H:i:s"),
+            ));
+            $this->insert('tbl_cargo',array(
+                'id'=>4,
+                'cargo'=>'Preventista',
+                'activo'=>'0',
+                'create_user_id'=>'1',
+                'update_user_id'=>'1',
                 'create_time'=>date("Y-m-d H:i:s"),
                 'update_time'=>date("Y-m-d H:i:s"),
             ));
@@ -43,6 +84,7 @@ class m140701_062314_query_first extends CDbMigration
 	{
             $this->delete('tbl_empleado');
             $this->delete('tbl_user');
+            $this->delete('tbl_cargo');
 	}
 	
 }

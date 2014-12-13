@@ -7,6 +7,8 @@
  * @property integer $id
  * @property string $unidad_medida
  * @property string $nonmenclatura
+ * @property string $cantidad_equivalente
+ * @property integer $unidad_equivalente
  * @property integer $activo
  * @property string $create_time
  * @property integer $create_user_id
@@ -15,8 +17,9 @@
  *
  * The followings are the available model relations:
  * @property Producto[] $productos
+ * @property UndMedProduct[] $undMedProducts
  */
-class UnidadMedida extends Erp_startedActiveRecord//CActiveRecord
+class UnidadMedida extends Erp_startedActiveRecord// CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
@@ -35,13 +38,13 @@ class UnidadMedida extends Erp_startedActiveRecord//CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('unidad_medida, nonmenclatura', 'required'),
-			array('activo, create_user_id, update_user_id', 'numerical', 'integerOnly'=>true),
+			array('unidad_equivalente, activo, create_user_id, update_user_id', 'numerical', 'integerOnly'=>true),
 			array('unidad_medida', 'length', 'max'=>50),
-			array('nonmenclatura', 'length', 'max'=>10),
+			array('nonmenclatura, cantidad_equivalente', 'length', 'max'=>10),
 			array('create_time, update_time', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, unidad_medida, nonmenclatura, activo, create_time, create_user_id, update_time, update_user_id', 'safe', 'on'=>'search'),
+			array('id, unidad_medida, nonmenclatura, cantidad_equivalente, unidad_equivalente, activo, create_time, create_user_id, update_time, update_user_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -54,6 +57,8 @@ class UnidadMedida extends Erp_startedActiveRecord//CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'r_productos' => array(self::HAS_MANY, 'Producto', 'unidad_medida_id'),
+			'r_undMedProducts' => array(self::HAS_MANY, 'UndMedProduct', 'und_medida_id'),
+                        'r_unidadMedida' => array(self::BELONGS_TO, 'UnidadMedida', 'unidad_equivalente'),
 		);
 	}
 
@@ -63,14 +68,16 @@ class UnidadMedida extends Erp_startedActiveRecord//CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
-			'unidad_medida' => 'Unidad Medida',
-			'nonmenclatura' => 'Nonmenclatura',
-			'activo' => 'Activo',
-			'create_time' => 'Create Time',
-			'create_user_id' => 'Create User',
-			'update_time' => 'Update Time',
-			'update_user_id' => 'Update User',
+			'id' => yii::t('app','ID'),
+			'unidad_medida' => yii::t('app','Unidad Medida'),
+			'nonmenclatura' => yii::t('app','Nonmenclatura'),
+			'cantidad_equivalente' => yii::t('app','Cantidad Equivalente'),
+			'unidad_equivalente' => yii::t('app','Unidad Equivalente'),
+			'activo' => yii::t('app','Activo'),
+			'create_time' => yii::t('app','Create Time'),
+			'create_user_id' => yii::t('app','Create User'),
+			'update_time' => yii::t('app','Update Time'),
+			'update_user_id' => yii::t('app','Update User'),
 		);
 	}
 
@@ -92,9 +99,11 @@ class UnidadMedida extends Erp_startedActiveRecord//CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
+		$criteria->compare('t.id',$this->id);
 		$criteria->compare('unidad_medida',$this->unidad_medida,true);
 		$criteria->compare('nonmenclatura',$this->nonmenclatura,true);
+		$criteria->compare('cantidad_equivalente',$this->cantidad_equivalente,true);
+		$criteria->compare('unidad_equivalente',$this->unidad_equivalente);
 		$criteria->compare('activo',$this->activo);
 		$criteria->compare('create_time',$this->create_time,true);
 		$criteria->compare('create_user_id',$this->create_user_id);

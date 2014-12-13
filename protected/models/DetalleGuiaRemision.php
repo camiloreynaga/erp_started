@@ -88,7 +88,7 @@ class DetalleGuiaRemision extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
+		$criteria->compare('t.id',$this->id);
 		$criteria->compare('guia_remision_id',$this->guia_remision_id);
 		$criteria->compare('producto_id',$this->producto_id);
 		$criteria->compare('descripcion',$this->descripcion,true);

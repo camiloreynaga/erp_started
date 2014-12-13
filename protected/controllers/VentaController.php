@@ -115,7 +115,7 @@
              $comprobante = new ComprobanteVenta();
              $comprobante->venta_id=$id;
              $comprobante->tipo_comprobante_id=1;
-             $comprobante->fecha_emision=$model->fecha_venta;
+             $comprobante->fecha_emision=date('Y-m-d');//$model->fecha_venta;
              $comprobante->serie=101;
              $comprobante->numero= SerieNumero::model()->getNroFactura()['numero']+1;        
              

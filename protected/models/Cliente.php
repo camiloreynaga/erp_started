@@ -133,7 +133,7 @@ class Cliente extends Erp_startedActiveRecord//CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
+		$criteria->compare('t.id',$this->id);
 		$criteria->compare('nombre_rz',$this->nombre_rz,true);
 		$criteria->compare('ruc',$this->ruc,true);
 		$criteria->compare('contacto',$this->contacto,true);

@@ -50,6 +50,12 @@ return false;
                 ), 
 		'unidad_medida',
 		'nonmenclatura',
+                'cantidad_equivalente',
+                array(
+                    'name'=>'unidad_equivalente',
+                   
+                    'value'=>'$data->r_unidadMedida->unidad_medida',
+                ),
 //		'create_time',
 //		'create_user_id',
 //		'update_time',

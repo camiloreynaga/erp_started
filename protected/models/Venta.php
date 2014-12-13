@@ -162,8 +162,9 @@ class Venta extends Erp_startedActiveRecord//CActiveRecord
 		// @todo Please modify the following code to remove attributes that should not be searched.
 
 		$criteria=new CDbCriteria;
+                //$criteria->alias='venta';
                 $criteria->with= array('r_cliente','r_forma_pago','r_empleado');
-		$criteria->compare('id',$this->id);
+		$criteria->compare('t.id',$this->id);
 		$criteria->compare('fecha_venta',$this->fecha_venta,true);
 		$criteria->compare('r_cliente.nombre_rz',$this->cliente_id,true);
 		$criteria->compare('r_empleado.nombre',$this->vendedor_id,true);

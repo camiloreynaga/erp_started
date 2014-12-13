@@ -95,7 +95,7 @@ class ProductoAlmacen extends Erp_startedActiveRecord//CActiveRecord
 
 		$criteria=new CDbCriteria;
                 $criteria->with=array('r_producto');
-		$criteria->compare('id',$this->id);
+		$criteria->compare('t.id',$this->id);
 		$criteria->compare('almacen_id',$this->almacen_id);
 		$criteria->compare('r_producto.nombre',$this->producto_id,true);
 		$criteria->compare('lote',$this->lote,true);

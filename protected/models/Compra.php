@@ -121,7 +121,7 @@ class Compra extends Erp_startedActiveRecord//CActiveRecord
 
 		$criteria=new CDbCriteria;
                 $criteria->with=array('r_proveedor');
-		$criteria->compare('id',$this->id);
+		$criteria->compare('t.id',$this->id);
 		$criteria->compare('fecha_compra',$this->fecha_compra,true);
 		$criteria->compare('r_proveedor.nombre_rz',$this->proveedor_id,true);
 		$criteria->compare('base_imponible',$this->base_imponible,true);

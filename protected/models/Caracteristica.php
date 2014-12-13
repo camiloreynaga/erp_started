@@ -15,7 +15,7 @@
  * The followings are the available model relations:
  * @property CaracteristicaProducto[] $caracteristicaProductos
  */
-class Caracteristica extends Erp_startedActiveRecord//CActiveRecord
+class Caracteristica extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
@@ -60,13 +60,13 @@ class Caracteristica extends Erp_startedActiveRecord//CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
-			'caracteristica' => 'Caracteristica',
-			'activo' => 'Activo',
-			'create_time' => 'Create Time',
-			'create_user_id' => 'Create User',
-			'update_time' => 'Update Time',
-			'update_user_id' => 'Update User',
+			'id' => yii::t('app','ID'),
+			'caracteristica' => yii::t('app','Caracteristica'),
+			'activo' => yii::t('app','Activo'),
+			'create_time' => yii::t('app','Create Time'),
+			'create_user_id' => yii::t('app','Create User'),
+			'update_time' => yii::t('app','Update Time'),
+			'update_user_id' => yii::t('app','Update User'),
 		);
 	}
 
@@ -88,7 +88,7 @@ class Caracteristica extends Erp_startedActiveRecord//CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
+		$criteria->compare('t.id',$this->id);
 		$criteria->compare('caracteristica',$this->caracteristica,true);
 		$criteria->compare('activo',$this->activo);
 		$criteria->compare('create_time',$this->create_time,true);
