@@ -1,33 +1,5 @@
 
 
-<?php
-$_header="\x1B\x40 \x1B\x21\x08";
-$rz="PLASTIPLAS S.R.L.";
-$ruc="RUC: 20491097176";
-$direccion="DIREC: AV. MARISCAL CASTILLA NRO. 100 CUSCO - URUBAMBA - URUBAMBA";
-$_asterik=" *************************************** \r\n";
-$_line=" ---------------------------------------\r\n ";
-$footer=" \r\n \r\n \x1D\x56\x41 \x1B\x40";
-
-
-$pid=$_GET['id'];
-$lista = DetalleVenta::model()->findAll('venta_id=:venta_id',array(':venta_id'=>$pid));
-$venta = Venta::model()->findByPk($pid);
-$detalle=array();
-foreach($lista as $list){
-    $detalle[]= $list->r_producto->nombre.'\r\n'.$list->cantidad.'               '.$list->precio_unitario.'     '.$list->total // producto_id,
-    ;
-}
-print_r($detalle);
-
-echo count($detalle);
-//echo $detalle[0]['cant'];
-$_cant=null;
-$_descrip=null;
-$_pu=null;
-
-?>
-
 <!-- License:  LGPL 2.1 or QZ INDUSTRIES SOURCE CODE LICENSE -->
 <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/deployJava.js"></script>
 <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery-1.10.2.js"></script>
@@ -480,99 +452,14 @@ $_pu=null;
 					p.value + '" not found.');
                                         
                                     }
+				
+				
 				// Remove reference to this function
 				window['qzDoneFinding'] = null;
 			};
 		}
 	}
         
-        /*
-         * Test function to print to POS
-         */
-         
-       
         
-        function print() {
-        
-        //
-        var _header= "<?php echo $_header;?>";
-        var _rz="<?php echo $rz;?>";
-        var _direccion = "<?php echo $direccion;?>"
-        var _ruc="<?php echo $ruc;?>"
-        var _salto=" \r\n";
-        var _date="<?php echo date('d/m/Y').' '.date('H:i:s');?>"
-        
-        var _length="<?php echo count($detalle);?>" 
-        
-        var _cant = [];
-       <?php for($i=0;$i<count($detalle);$i++){ ?>
-        _cant.push("<?php echo $detalle[$i]; ?>");
-        <?php }?>
-        var _descrip="<?php echo $_descrip;?>";
-        var _pu="<?php echo $_pu;?>";
-        
-        var _igv="<?php echo $venta->impuesto; ?>";
-        var _total="<?php echo $venta->importe_total; ?>";
-        
-        selectPrinter('factura');
-         // Send characters/raw commands to applet using "append"
-         // Hint:  Carriage Return = \r, New Line = \n, Escape Double Quotes= \"
-            qz.append("\x1B\x40"); // 1
-            qz.append("\x1B\x21\x08"); // 2
-            qz.append(_rz); //razon social
-            qz.append(_salto); // salto linea
-            qz.append(_ruc); // ruc
-            qz.append(_salto); // salto linea
-            qz.append(_direccion); // direccion
-            qz.append(_salto); // saldo linea
-            qz.append(" --------------------------------\r\n ");
-            qz.append(_salto); 
-            qz.append("\x1B\x50");
-            qz.append("Cant.  Descripcion  P.U.  Importe");
-            qz.append("---------------------------------\r\n ");
-            for(var i=0;i<_length;i++)
-            {   
-                
-                qz.append(_salto);
-                qz.append(_cant[i]);
-                
-            }
-            qz.append("\x1B\x54");
-            qz.append(_salto);
-            qz.append("\x1B\x21\x08");
-            qz.append("=================================\r\n");
-            qz.append("IGV: ");
-            qz.append(_igv);
-            qz.append(_salto);
-            qz.append("TOTAL: ");
-            qz.append(_total);
-            qz.append(_salto);
-            qz.append("\x1B\x21\x01"); // 3
-            //qz.append(_cant);
-            //qz.append(_descrip);
-            //qz.append(_line); 
-            qz.append("fecha/hora: "+_date);
-            qz.append(" \r\n");
-            qz.append(" \r\n");
-            
-            qz.append("\x1D\x56\x41"); // 4
-            qz.append("\x1B\x40"); // 5
-            
-            //chr();
-
-         // Send characters/raw commands to printer
-         qz.print();
-        //cutPaper();
-      }
       
 </script>
-	
-
-	
-
-<!--setenado el nombre de la impresora-->
-        <input id="printer" type="hidden" value="factura" size="15"><br />
-        
-        <input type=button onClick="print()" value="Print Test Cr"><br><br>
-
-        

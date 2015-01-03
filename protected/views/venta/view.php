@@ -1,4 +1,3 @@
-
 	
 <?php
 $this->breadcrumbs=array(
@@ -52,11 +51,13 @@ array('label'=>yii::t('app','Manage').' '.yii::t('app','Sale'),'url'=>array('adm
 )); ?>
 <strong>DETALLE</strong>
 <?php
-$this->renderPartial('//DetalleVenta/_viewDetalleVenta',array('model'=>DetalleVenta::model(),'pid'=>$model->id));
+//$this->renderPartial('//DetalleVenta/_viewDetalleVenta',array('model'=>DetalleVenta::model(),'pid'=>$model->id));
+$this->renderPartial('_viewDetalleVenta',array('model'=>DetalleVenta::model(),'pid'=>$model->id));
 ?>
 <strong>COMPROBANTE</strong>
     <?php
-$this->renderPartial('//ComprobanteVenta/_viewComprobante',array('model'=>  ComprobanteVenta::model(),'pid'=>$model->id));
+//$this->renderPartial('//ComprobanteVenta/_viewComprobante',array('model'=>  ComprobanteVenta::model(),'pid'=>$model->id));
+$this->renderPartial('_viewComprobante',array('model'=>  ComprobanteVenta::model(),'pid'=>$model->id));
 ?>
 
 <?php 
@@ -94,4 +95,4 @@ $this->renderPartial('//ComprobanteVenta/_viewComprobante',array('model'=>  Comp
 <!--setenado el nombre de la impresora-->
         <?php echo CHtml::link('Print',array('print','id'=>$model->id),array('class'=>'btnPrint', 'style'=>'margin-left: 10px;')); ?>
 
-       
+<?php $this->renderPartial('_ticket',array('model'=>  ComprobanteVenta::model(),'pid'=>$model->id));?>

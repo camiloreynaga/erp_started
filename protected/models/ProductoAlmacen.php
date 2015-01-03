@@ -138,6 +138,29 @@ class ProductoAlmacen extends Erp_startedActiveRecord//CActiveRecord
         }
         
         /**
+         * Devuelve la cantidad disponible para un producto por lote
+         * @param type $_producto
+         * @param type $_lote
+         * @return type
+         */
+        public function cantidad_producto($_producto)
+        {
+            if(empty($_producto)!=true)
+            {
+                $criteria = new CDbCriteria();
+                $criteria->condition = 'producto_id='.$_producto;
+                $cantidad_producto=0;
+                $tmp= $this->findAll($criteria);
+                foreach($tmp as $r)
+                {
+                    $cantidad_producto+=$r->cantidad_disponible;
+                }
+                return $cantidad_producto;
+            }
+            
+        }
+        
+        /**
          * devuelve la cantidad disponible para un producto por lote
          */
         public function cantidad_lote2($_producto,$_lote)

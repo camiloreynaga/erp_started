@@ -31,7 +31,7 @@
             'users'=>array('@'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-            'actions'=>array('create','update','lineaCredito','GenerarFactura','admin','print'),
+            'actions'=>array('create','update','lineaCredito','GenerarFactura','admin','print','createVenta'),
             'users'=>array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -50,6 +50,7 @@
         */
         public function actionView($id)
         {
+            $this->layout='//layouts/print';
             $this->render('view',array(
             'model'=>$this->loadModel($id)
             ));
@@ -80,7 +81,7 @@
             'model'=>$model,
             ));
         }
-
+            
         /**
         * Updates a particular model.
         * If update is successful, the browser will be redirected to the 'view' page.
@@ -136,6 +137,7 @@
         
         public function actionPrint()
         {
+            $this->layout='//layouts/print';
             $this->renderPartial('_ticket',array(),false,true);
         }
         
@@ -264,6 +266,38 @@
             }
         }
         
+        #metodos para punto de venta
         
+        /**
+        * Creates a new model to point of sale.
+        * If creation is successful, the browser will be redirected to the 'view' page.
+        */
+        public function actionCreateVenta()
+        {
+            $model=new Venta;
+            $model->fecha_venta=date('Y-m-d');
+            // Uncomment the following line if AJAX validation is needed
+            // $this->performAjaxValidation($model);
+
+//            if(isset($_POST['Venta']))
+//            {
+                //$model->attributes=$_POST['Venta'];
+                //$model->id= yii::app()->;
+                $model->cliente_id=1;// cliente por default para ventas pendientes
+                $model->vendedor_id=yii::app()->user->id ;
+                $model->forma_pago_id=2; // forma de pago por deafult contado
+                $model->estado='0'; // estado de venta pendiente
+                $model->estado_comprobante='0'; //estado de registro de comprabante pendiente
+                $model->estado_pago='0'; //estado de pago pendiente
+                 
+                
+                
+                if($model->save())
+                //$model->save();
+                $this->redirect(array('/DetalleVenta/create','pid'=>$model->id));
+//            }
+                else
+            $this->render('create',array('model'=>$model,));
+        }
         
     }

@@ -78,6 +78,19 @@ class m140701_062314_query_first extends CDbMigration
                 'create_time'=>date("Y-m-d H:i:s"),
                 'update_time'=>date("Y-m-d H:i:s"),
             ));
+            //data de ingreso inicial de clientes
+            $this->insert('tbl_cliente',array(
+                'id'=>'1',
+                'nombre_rz'=>'SIN NOMBRE',
+                'ruc'=>'00000000000',
+                'linea_credito'=>0,
+                'credito_disponible'=>0,
+                'activo'=>'0',
+                'create_user_id'=>'1',
+                'update_user_id'=>'1',
+                'create_time'=>date("Y-m-d H:i:s"),
+                'update_time'=>date("Y-m-d H:i:s"),
+            ));
 	}
 
 	public function safeDown()
@@ -85,6 +98,7 @@ class m140701_062314_query_first extends CDbMigration
             $this->delete('tbl_empleado');
             $this->delete('tbl_user');
             $this->delete('tbl_cargo');
+            $this->delete('tbl_cliente');
 	}
 	
 }

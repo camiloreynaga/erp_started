@@ -53,6 +53,7 @@ class DetalleVenta extends Erp_startedActiveRecord//CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
+                        array('cantidad','CantidadDisponibleProducto','on'=>'create_venta2'),//validación para punto de venta
                         array('precio_unitario','validarCreditoDisponible','on'=>'create'),
                         array('cantidad,precio_unitario','validarCreditoModificado','on'=>'update'),
                         array('cantidad','comprobarCantidadDisponible','on'=>'create'), // valida la cantidad ingresada
@@ -106,8 +107,26 @@ class DetalleVenta extends Erp_startedActiveRecord//CActiveRecord
 			'update_user_id' => 'Update User',
 		);
 	}
+        
         /**
-         * Validación de cantidad disponible
+         * Validate quantity available for all lotes from product 
+         * @param type $attribute
+         * @param type $params
+         */
+        public function CantidadDisponibleProducto($attribute,$params){
+            //Cantidad disponible >= cantidad
+                $_cantidad_disponible= ProductoAlmacen::model()->cantidad_producto
+                        ($this->attributes['producto_id']);
+                if($_cantidad_disponible < $this->attributes['cantidad'])
+                {
+                    $this->addError($attribute, 'Cantidad ingresada es mayor a la cantidad disponible para venta. Cantidad disponible: '.$_cantidad_disponible);
+                }
+        }
+        
+        
+        /**
+         * Validación de cantidad disponible por producto y lote
+         * validate quantity available for product and lote
          */
         public function comprobarCantidadDisponible($attribute,$params){
             //Cantidad disponible >= cantidad
