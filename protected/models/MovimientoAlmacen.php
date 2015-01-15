@@ -172,8 +172,17 @@ class MovimientoAlmacen extends Erp_startedActiveRecord//CActiveRecord
         {
             $criteria = new CDbCriteria();
             $criteria->condition='almacen_id='.$almacen_id.' and producto_id='.$producto_id;
-            $criteria->select='lote';
-            return ProductoAlmacen::model()->findAll($criteria);
+            $criteria->select='lote,cantidad_disponible';
+            $lista=ProductoAlmacen::model()->findAll($criteria);
+            $resultados = array();
+                foreach ($lista as $list){
+                    $resultados[] = array(
+                             'lote'=>$list->lote, 
+                             'text'=> strtoupper($list->lote). ' [ #'.$list->cantidad_disponible.']',
+                    ); 
+                    
+                }
+              return $resultados; 
             //$criteria
         }
         
