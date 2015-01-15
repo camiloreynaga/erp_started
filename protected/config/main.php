@@ -13,6 +13,7 @@ return array(
 	'name'=>'ERP APP',
         'language'=>'es',
         'theme'=>'fardisur', 
+        //'theme'=>'kiwi',
 
 	// preloading 'log' component
 	'preload'=>array('log','booster'),

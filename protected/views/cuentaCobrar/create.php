@@ -27,6 +27,6 @@ echo $this->renderPartial('_venta', array('venta'=>$venta));  ?>
 
 <?php 
 //echo $this->renderPartial('_ventaForm', array('model'=>$model));
-echo $this->renderPartial('_form', array('model'=>$model)); ?>
+echo $this->renderPartial('_form_pay', array('model'=>$model)); ?>
 <?php //echo $this->renderPartial('admin', array('model'=>$model)); ?>
 

@@ -1,6 +1,5 @@
 <?php
 
-//$_labels=Venta::model()->attributeLabels();
 
 $this->widget('booster.widgets.TbDetailView',array(
 'data'=>$venta,
@@ -24,6 +23,10 @@ $this->widget('booster.widgets.TbDetailView',array(
                 array(
                     'name'=>'importe_total', //$_labels[],
                     'value'=>$venta->importe_total
+                ),
+                array(
+                    'name'=>'deuda',
+                    'value'=>$venta->importe_total-CuentaCobrar::model()->monto_pagado_venta_credito($venta->id,1),
                 )
 //		'observacion',
 //                array(

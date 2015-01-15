@@ -24,6 +24,7 @@
  */
 class Cliente extends Erp_startedActiveRecord//CActiveRecord
 {   
+        //estado activo
         public $_estado=array(
             '0'=>'SI',
             '1'=>'NO'
@@ -186,7 +187,7 @@ class Cliente extends Erp_startedActiveRecord//CActiveRecord
               return $resultados;  
         }
         /**
-         * Actualiza la cantidad disponible
+         * Actualiza el monto de linea de credito usado
          * @param type $model= modelo de detalle de venta
          * @param type $operacion = 0 para sumar otro valor para restar
          */
@@ -202,4 +203,26 @@ class Cliente extends Erp_startedActiveRecord//CActiveRecord
             }
             
         }
+        
+        
+        /**
+         * Acrtualizar el credito usado de un cliente
+         * @param type $venta_id: id de la venta
+         * @param type $operacion: 0=suma; 1=resta
+         * @param type $monto_pago: monto a considerar
+         */
+        public function actualizarCreditoDisponible_2($venta_id,$operacion,$monto_pago)
+        {
+            $model=Venta::model()->findByPk($venta_id);
+            if($model->forma_pago_id==1){
+                $_monto = $operacion==0 ? $monto_pago : 
+                $monto_pago*(-1);
+                $_cliente = $this->findByPk($model->cliente_id);
+                $_cliente->credito_disponible+=$_monto;
+                $_cliente->save();
+
+            }
+            
+        }
+        
 }

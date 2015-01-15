@@ -166,7 +166,7 @@ $form=$this->beginWidget('booster.widgets.TbActiveForm',array(
                       echo $form->textFieldGroup($model,'medio_pago',array('class'=>'span5'));
         ?>
 
-	<?php // echo $form->textFieldGroup($model,'interes',array('class'=>'span5','maxlength'=>10)); ?>
+	<?php // echo $form->textFieldGroup($model,'descuento',array('class'=>'span5','maxlength'=>10)); ?>
 
         <?php 
         if($model->isNewRecord)
@@ -245,7 +245,10 @@ $this->widget('booster.widgets.TbExtendedGridView',array(
            'fecha_vencimiento',
            'fecha_pago',
            'medio_pago',
-           'estado',
+           array(
+               'name'=>'estado',
+               'value'=>'$data->_estado[$data->estado]'
+           ),
            array(
                'header'=>'Acción',
                'class'=>'booster.widgets.TbButtonColumn',

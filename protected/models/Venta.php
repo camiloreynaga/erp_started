@@ -94,10 +94,7 @@ class Venta extends Erp_startedActiveRecord//CActiveRecord
                     {
                         $this->addError ($attribute, yii::t('app',"This Client do not have Credit line.")); //
                     }
-                        
-                        
                 }
-           
             }
         }
         

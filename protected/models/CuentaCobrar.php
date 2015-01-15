@@ -11,7 +11,8 @@
  * @property string $fecha_pago
  * @property string $fecha_vencimiento
  * @property integer $medio_pago
- * @property string $interes
+ * @property string $descuento
+ * @property string $observacion
  * @property string $create_time
  * @property integer $create_user_id
  * @property string $update_time
@@ -30,6 +31,11 @@ class CuentaCobrar extends Erp_startedActiveRecord//CActiveRecord
             '0'=>'PENDIENTE', // PENDIENTE DE PAGO 
             '1'=>'PAGADO', // PAGADO
          );
+         
+         public $_medio_pago=array(
+            '1'=>'EFECTIVO',
+            '2'=>'OTRO'
+        );
     
 	/**
 	 * @return string the associated database table name
@@ -47,18 +53,49 @@ class CuentaCobrar extends Erp_startedActiveRecord//CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-                        array('fecha_pago, medio_pago', 'required','on'=>'pagar'), // para cuando se realiza el pago
+                        array('monto','comprobarMontoPago'),
+                        array('fecha_pago, monto, estado', 'required','on'=>'pagar'), // para cuando se realiza el pago
 			array('venta_id', 'required'),
-                        //array('monto, estado, fecha_vencimiento', 'required'),
-                        array('monto, estado, fecha_vencimiento', 'required','on'=>'create'),
+                        //array('monto, estado, fecha_pago', 'required'),
+                        array('monto, estado, fecha_vencimiento', 'required','on'=>'create'), //para cuando se registro en el cronograma
 			array('venta_id, estado, medio_pago, create_user_id, update_user_id', 'numerical', 'integerOnly'=>true),
-			array('monto, interes', 'length', 'max'=>10),
+			array('monto, descuento', 'length', 'max'=>10),
 			array('fecha_pago, fecha_vencimiento, create_time, update_time', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, venta_id, monto, estado, fecha_pago, fecha_vencimiento, medio_pago, interes, create_time, create_user_id, update_time, update_user_id', 'safe', 'on'=>'search'),
+			array('id, venta_id, monto, estado, fecha_pago, fecha_vencimiento, medio_pago, descuento,observacion, create_time, create_user_id, update_time, update_user_id', 'safe', 'on'=>'search'),
 		);
 	}
+        
+        /**
+         * validación para el monto ingresado sea igual o menor al que el cliente debe  
+         * @param type $attribute
+         * @param type $params
+         */
+        public function comprobarMontoPago($attribute,$params){
+            if(!is_null($this->attributes['venta_id']))
+            {
+                    //$_cliente=Cliente::model()->findByPk($this->attributes['cliente_id']);
+                    $_venta=  Venta::model()->findByPk($this->attributes['venta_id']);
+                    //obtiene la deuda actucal = importe total - pagos realizados (cuenta_cobrar:estado=1)
+                    $_deuda= $_venta->importe_total - $this->monto_pagado_venta_credito($_venta->id,1);
+                    if($this->monto==0) // si linea de credito > 0
+                    {
+                        $this->addError($attribute, yii::t('app',"This is a invalid mount.")); //
+                    }
+                    else
+                    {
+                        if($this->monto> $_deuda)
+                        {
+                            $this->addError ($attribute, yii::t('app',"This is a invalid mount, exceed the current debt.").' '. $_deuda);
+                        }
+                        //else
+                          //  $this->addError ($attribute, "Credit line, is not enough "); //
+                        
+                    }
+            }
+        }
+        
 
 	/**
 	 * @return array relational rules.
@@ -85,7 +122,8 @@ class CuentaCobrar extends Erp_startedActiveRecord//CActiveRecord
 			'fecha_pago' => 'Fecha Pago',
 			'fecha_vencimiento' => 'Fecha Vencimiento',
 			'medio_pago' => 'Medio Pago',
-			'interes' => 'Interes',
+			'descuento' => 'Descuento',
+                        'observacion'=>'Observacion',
 			'create_time' => 'Create Time',
 			'create_user_id' => 'Create User',
 			'update_time' => 'Update Time',
@@ -118,7 +156,8 @@ class CuentaCobrar extends Erp_startedActiveRecord//CActiveRecord
 		$criteria->compare('fecha_pago',$this->fecha_pago,true);
 		$criteria->compare('fecha_vencimiento',$this->fecha_vencimiento,true);
 		$criteria->compare('medio_pago',$this->medio_pago);
-		$criteria->compare('interes',$this->interes,true);
+		$criteria->compare('descuento',$this->descuento,true);
+                $criteria->compare('observacion',$this->observacion,true);
 		$criteria->compare('create_time',$this->create_time,true);
 		$criteria->compare('create_user_id',$this->create_user_id);
 		$criteria->compare('update_time',$this->update_time,true);
@@ -139,4 +178,28 @@ class CuentaCobrar extends Erp_startedActiveRecord//CActiveRecord
 	{
 		return parent::model($className);
 	}
+        
+        /**
+         * devuelve la suma de montos que un cliente ha pagado por una venta al credito
+         * @param type $_venta 
+         * @param type $_estado 
+         * @return type decimal: sum montos pagados
+         */
+        public function monto_pagado_venta_credito($_venta,$_estado)
+        {
+            if(empty($_venta)!=true && empty($_estado)!=true)
+            {
+                $criteria = new CDbCriteria();
+            $criteria->condition = 'venta_id='.$_venta.' and estado='."'".$_estado."'";
+            $monto_pagado=0;
+            //$tmp= $this->findAll('producto_id=:id_producto and lote=:lote',array(':id_producto'=>$_producto,':lote'=>$_lote));
+            $tmp= $this->findAll($criteria);
+            foreach($tmp as $r)
+            {
+                $monto_pagado+=$r->monto;
+            }
+            return $monto_pagado;
+            }
+            
+        }
 }

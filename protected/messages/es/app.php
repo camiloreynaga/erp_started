@@ -113,8 +113,12 @@ return array(
     'check-out'=>'Salida',
     // Cuentas por cobrar
     'payment'=>'Pago',
-    
+    'This is a invalid mount.'=>'Este es un monto invalido.',
+    'This is a invalid mount, exceed the current debt.'=>'Este es un monto invalido, Excede la deuda actual de:',
     //presentaciones
     'Presentacion'=>'Presentación',
+    //pay
+    'Are you sure to register this pay?'=>'¿Está seguro de registrar este pago?',
+    
 );
 ?>

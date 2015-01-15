@@ -25,7 +25,7 @@ $this->breadcrumbs=array(
 		'fecha_pago',
 		'fecha_vencimiento',
 		'medio_pago',
-		'interes',
+		'descuento',
 		'create_time',
                 array(
                   'name'=>'create_user_id',

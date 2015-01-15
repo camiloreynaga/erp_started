@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<XMI xmlns:UML="omg.org/UML/1.4" xmi.version="2.0">
+   <XMI.header>
+      <XMI.metamodel xmi.name="UML" xmi.version="1.4"/>
+		<XMI.documentation>
+			<XMI.exporter>
+				Embarcadero's Describe
+			</XMI.exporter>
+			<XMI.exporterVersion>
+				6.0
+			</XMI.exporterVersion>
+		</XMI.documentation>
+   </XMI.header>
+
+   <XMI.content>
+   <UML:Profile xmi.id="DCE.874AC278-CCE3-8622-59BB-B99787ECA90E" name="Unnamed" isCloned="true" href=".\Erp_started_uml.etup#//*[@xmi.id=&apos;DCE.874AC278-CCE3-8622-59BB-B99787ECA90E&apos;]" isDirty="false"><UML:Element.ownedElement>
+<UML:Stereotype xmi.id="DCE.C8399BDD-22D5-5902-A6BE-84FAD0356129" name="interface" owner="__uri_.\Erp_started_uml.etup#//*[@xmi.id=&apos;DCE.874AC278-CCE3-8622-59BB-B99787ECA90E&apos;]"/>
+<UML:Stereotype xmi.id="DCE.005E3935-E667-2107-A56C-E3B62740F9B1" name="boundary" owner="__uri_.\Erp_started_uml.etup#//*[@xmi.id=&apos;DCE.874AC278-CCE3-8622-59BB-B99787ECA90E&apos;]"/>
+<UML:Stereotype xmi.id="DCE.E85D1760-9DED-2488-5863-B26B79B252D7" name="entity" owner="__uri_.\Erp_started_uml.etup#//*[@xmi.id=&apos;DCE.874AC278-CCE3-8622-59BB-B99787ECA90E&apos;]"/>
+<UML:Stereotype xmi.id="DCE.BC6DB8D0-09E4-BE7C-7EA3-2A1D8F6F9D4C" name="controller" owner="__uri_.\Erp_started_uml.etup#//*[@xmi.id=&apos;DCE.874AC278-CCE3-8622-59BB-B99787ECA90E&apos;]"/>
+<UML:Stereotype xmi.id="DCE.E85B31EA-4D6B-0EB8-812E-52F23E2E717B" name="controller" owner="__uri_.\Erp_started_uml.etup#//*[@xmi.id=&apos;DCE.874AC278-CCE3-8622-59BB-B99787ECA90E&apos;]"/>
+<UML:Stereotype xmi.id="DCE.62D1102F-DBD0-75EE-8AB1-8E9B3E0C9118" name="boundary" owner="__uri_.\Erp_started_uml.etup#//*[@xmi.id=&apos;DCE.874AC278-CCE3-8622-59BB-B99787ECA90E&apos;]"/>
+<UML:Stereotype xmi.id="DCE.508FA053-DB76-38C4-5D79-AEF6C6475860" name="boundary" owner="__uri_.\Erp_started_uml.etup#//*[@xmi.id=&apos;DCE.874AC278-CCE3-8622-59BB-B99787ECA90E&apos;]"/>
+<UML:Stereotype xmi.id="DCE.28A57B34-92EF-1890-44FC-6BDF86B6B515" name="boundary" owner="__uri_.\Erp_started_uml.etup#//*[@xmi.id=&apos;DCE.874AC278-CCE3-8622-59BB-B99787ECA90E&apos;]"/>
+<UML:Stereotype xmi.id="DCE.20EDDA55-39A6-67D7-CBE1-1770B17ADA1F" name="controller" owner="__uri_.\Erp_started_uml.etup#//*[@xmi.id=&apos;DCE.874AC278-CCE3-8622-59BB-B99787ECA90E&apos;]"/>
+<UML:Stereotype xmi.id="DCE.AC0FFBD8-DC87-0623-11F4-BFFD273EDA2A" name="boundary" owner="__uri_.\Erp_started_uml.etup#//*[@xmi.id=&apos;DCE.874AC278-CCE3-8622-59BB-B99787ECA90E&apos;]"/></UML:Element.ownedElement></UML:Profile></XMI.content>
+</XMI>

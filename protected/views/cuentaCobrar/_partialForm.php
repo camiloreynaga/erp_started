@@ -106,7 +106,7 @@ $form=$this->beginWidget('booster.widgets.TbActiveForm',array(
         
         ?>
 
-	<?php // echo $form->textFieldGroup($model,'interes',array('class'=>'span5','maxlength'=>10)); ?>
+	<?php // echo $form->textFieldGroup($model,'descuento',array('class'=>'span5','maxlength'=>10)); ?>
     <div class="form-actions">
         <?php 
                 $this->widget('booster.widgets.TbButton', array(

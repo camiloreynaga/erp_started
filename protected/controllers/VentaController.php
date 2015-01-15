@@ -50,7 +50,7 @@
         */
         public function actionView($id)
         {
-            $this->layout='//layouts/print';
+            //$this->layout='//layouts/print';
             $this->render('view',array(
             'model'=>$this->loadModel($id)
             ));

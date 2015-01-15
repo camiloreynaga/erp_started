@@ -7,7 +7,7 @@
  * @property integer $id
  * @property integer $venta_id
  * @property integer $tipo_comprobante_id
- * @property string $fecha_emision
+ * @property string $fecha_emision 
  * @property string $fecha_cancelacion
  * @property string $serie
  * @property string $numero
@@ -145,6 +145,15 @@ class ComprobanteVenta extends Erp_startedActiveRecord//CActiveRecord
 	{
 		return parent::model($className);
 	}
+        
+        /**
+         * obtiene la fecha de emision
+         * @return type
+         */
+        public function getFechaEmision($id)
+        {
+            return isset($id)? $this->findByAttributes(array('venta_id'=>$id)) : yii::t('app','NULL');
+        }
         
         
         

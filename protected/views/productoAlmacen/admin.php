@@ -56,6 +56,7 @@ return false;
 		'lote',
 		'fecha_vencimiento',
 		'cantidad_disponible',
+                'cantidad_real',
 		/*
 		'create_time',
 		'create_user_id',

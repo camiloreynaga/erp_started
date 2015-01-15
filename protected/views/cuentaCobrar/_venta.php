@@ -10,10 +10,12 @@
     $venta->estado=4; // filtra a los venta con estado = despachado 
     $venta->estado_pago=0; //filtra las ventas con estado pago= pendiente
     $venta->estado_comprobante=1; // filtra las ventas con comprobante emitidos; estado comprobante =1
-    $this->widget('booster.widgets.TbGridView',array(
+    //$this->widget('booster.widgets.TbGridView',array(
+    $this->widget('zii.widgets.grid.CGridView',array(    
     'id'=>'venta-grid',
     'dataProvider'=>$venta->search(),
-    //'filter'=>$venta,
+    'ajaxUrl'=>array('Venta/search&id='.$venta->id),
+    'filter'=>$venta,
     'columns'=>array(
 //                    array(
 //                        'name'=>'id',
@@ -27,10 +29,10 @@
                         'value'=>'$data->r_cliente->nombre_rz'
                     ),
 
-                    array(
-                        'name'=>'estado',
-                        'value'=>'$data->_estado[$data->estado]'
-                    ),
+//                    array(
+//                        'name'=>'estado',
+//                        'value'=>'$data->_estado[$data->estado]'
+//                    ),
                     'observacion',
                     'importe_total',
                     /*

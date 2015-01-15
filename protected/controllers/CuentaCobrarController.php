@@ -33,7 +33,7 @@ class CuentaCobrarController extends Controller
         'users'=>array('@'),
         ),
         array('allow', // allow authenticated user to perform 'create' and 'update' actions
-        'actions'=>array('create','update','admin','CuentaPendiente'),
+        'actions'=>array('create','update','admin','CuentaPendiente','RegistrarPago'),
         'users'=>array('@'),
         ),
         array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -108,6 +108,58 @@ class CuentaCobrarController extends Controller
         //}
 
         
+    }
+    
+    
+    /**
+    * Creates a new model.
+    * with estatus pay, set up pay date and amount.
+    */
+    public function actionRegistrarPago()
+    {
+        $model=new CuentaCobrar('pagar');
+        if(isset($_GET['pid']))
+        $model->venta_id=$_GET['pid'];
+        
+        // Uncomment the following line if AJAX validation is needed
+        // $this->performAjaxValidation($model);
+        if(isset($_POST['CuentaCobrar']))
+        {
+            $model->attributes=$_POST['CuentaCobrar'];
+            $model->estado=1; // pagado 
+            
+            //obteniendo la fecha del comprobante de venta
+            //$comprobante_venta= ComprobanteVenta::model()->getFechaEmision($_GET['pid']);
+            //$comprobante_venta->
+            //$fecha_emision=ComprobanteVenta::model()->getFechaEmision($_GET['pid']);
+           //sumando 25 dias a la fecha de emision de comprobante
+            
+           // $datearray= explode("/",$fecha_emision);
+           // $date_finish = date( "Y-m-d ", mktime(0,0,0,$datearray[1],$datearray[0]+25,$datearray[2]));
+            
+            //$model->fecha_vencimiento=$fecha_emision;//$date_finish;
+            $model->observacion=$_GET['pid'];
+            $model->medio_pago=1; //efectivo 
+            if($model->save())
+            {
+                //actualizar linea de credito
+                Cliente::model()->actualizarCreditoDisponible_2($model->venta_id, 0,$model->monto);
+                //$this->redirect(array('Create','pid'=>$model->venta_id));
+                echo CJSON::encode(array(
+                                    'status'=>'success', 
+                                    ));
+                               Yii::app()->end();// exit;
+            }
+            else {
+                $error = CActiveForm::validate($model);
+                                            if($error!='[]')
+                                                echo $error;
+                                            Yii::app()->end();
+            }
+        }
+            $this->render('create',array(
+            'model'=>$model,
+            ));
     }
 
     /**

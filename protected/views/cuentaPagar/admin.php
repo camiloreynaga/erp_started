@@ -49,7 +49,7 @@ return false;
 		'fecha_pago',
 		'fecha_vencimiento',
 		/*
-		'interes',
+		'descuento',
 		'create_time',
 		'create_user_id',
 		'update_time',

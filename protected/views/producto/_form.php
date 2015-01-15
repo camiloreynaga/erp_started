@@ -134,4 +134,4 @@
 
 <?php $this->endWidget(); ?>
 
-<?php $this->renderPartial('//CaracteristicaProducto/_form',array('model'=>CaracteristicaProducto::model())) ?>    
+<?php //$this->renderPartial('//CaracteristicaProducto/_form',array('model'=>CaracteristicaProducto::model())) ?>    

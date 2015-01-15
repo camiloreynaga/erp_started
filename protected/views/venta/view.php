@@ -95,4 +95,4 @@ $this->renderPartial('_viewComprobante',array('model'=>  ComprobanteVenta::model
 <!--setenado el nombre de la impresora-->
         <?php echo CHtml::link('Print',array('print','id'=>$model->id),array('class'=>'btnPrint', 'style'=>'margin-left: 10px;')); ?>
 
-<?php $this->renderPartial('_ticket',array('model'=>  ComprobanteVenta::model(),'pid'=>$model->id));?>
+<?php //$this->renderPartial('_ticket',array('model'=>  ComprobanteVenta::model(),'pid'=>$model->id));?>
