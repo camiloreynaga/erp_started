@@ -218,7 +218,7 @@
             $id_producto= $_POST['MovimientoAlmacen']['producto_id'];
             $id_almacen= $_POST['MovimientoAlmacen']['almacen_id'];    
                 $lista= MovimientoAlmacen::model()->getLoteIngreso($id_almacen,$id_producto);
-                $lista=CHtml::listData($lista, 'lote', 'lote');
+                $lista=CHtml::listData($lista, 'lote', 'text');
                 foreach($lista as $valor => $descripcion)
                 {
                     echo CHtml::tag('option',array('value'=>$valor),  CHtml::encode($descripcion),TRUE);
