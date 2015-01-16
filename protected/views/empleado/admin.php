@@ -62,8 +62,18 @@ return false;
 		'update_time',
 		'update_user_id',
 		*/
-array(
-'class'=>'booster.widgets.TbButtonColumn',
-),
-),
+        array(
+        'class'=>'booster.widgets.TbButtonColumn',
+            'template'=>'{view}{update}{delete}',
+            'buttons'=>array(
+                'update'=>array(
+                    'visible'=>'$data->id>1'
+                ),
+                'delete'=>array(
+                    'visible'=>'$data->id>1'
+                )
+            )
+            
+        ),
+    ),
 )); ?>

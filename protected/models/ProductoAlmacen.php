@@ -140,7 +140,6 @@ class ProductoAlmacen extends Erp_startedActiveRecord//CActiveRecord
         /**
          * Devuelve la cantidad disponible para un producto por lote
          * @param type $_producto
-         * @param type $_lote
          * @return type
          */
         public function cantidad_producto($_producto)
@@ -160,9 +159,12 @@ class ProductoAlmacen extends Erp_startedActiveRecord//CActiveRecord
             
         }
         
-        /**
+       /**
          * devuelve la cantidad disponible para un producto por lote
-         */
+        * @param type $_producto
+        * @param type $_lote
+        * @return type
+        */
         public function cantidad_lote2($_producto,$_lote)
         {
             if(empty($_producto)!=true && empty($_lote)!=true)

@@ -1,21 +1,17 @@
 <?php
 
-/*
- * To change this template, choose Tools | Templates
+/* 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-?>
-<?php
-    //$venta=new Venta('search');
-    $venta->estado=4; // filtra a los venta con estado = despachado 
-    $venta->estado_pago=0; //filtra las ventas con estado pago= pendiente
-    $venta->estado_comprobante=1; // filtra las ventas con comprobante emitidos; estado comprobante =1
-    //$this->widget('booster.widgets.TbGridView',array(
-    $this->widget('zii.widgets.grid.CGridView',array(    
+
+$this->widget('zii.widgets.grid.CGridView',array(    
     'id'=>'venta-grid',
     'dataProvider'=>$venta->search(),
     'filter'=>$venta,
-    //'ajaxUrl'=>Yii::app()->createUrl('Venta/search'),
+    'ajaxUrl'=>Yii::app()->createUrl('Venta/search'),
+    //'ajaxUrl'=>Yii::app()->createUrl( 'Something/search' ),
     'columns'=>array(
 //                    array(
 //                        'name'=>'id',
@@ -61,4 +57,5 @@
                     ),
     ),
     )); 
+
 ?>

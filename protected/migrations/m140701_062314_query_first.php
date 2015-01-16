@@ -17,29 +17,7 @@ class m140701_062314_query_first extends CDbMigration
 	public function safeUp()
 	{
             
-            $this->insert('tbl_empleado',array(
-                'id'=>1,
-                'nombre'=>'root',
-                'ap_paterno'=>'root',
-                'fecha_nacimiento'=> date("Y-m-d H:i:s"),
-                'doc_identidad'=>'0',
-                'create_user_id'=>'1',
-                'update_user_id'=>'1',
-                'create_time'=>date("Y-m-d H:i:s"),
-                'update_time'=>date("Y-m-d H:i:s"),
-            ));
             
-            $this->insert('tbl_user', array(
-                'id'=>1,
-                'username' => 'admin',
-                'email' => 'camilo.reynaga@gmail.com',
-                'password' => md5('admin'),
-                'empleado_id'=>1,
-                'create_user_id'=>'1',
-                'update_user_id'=>'1',
-                'create_time'=>date("Y-m-d H:i:s"),
-                'update_time'=>date("Y-m-d H:i:s"),
-            ));
             
              #insert default cargos 
             $this->insert('tbl_cargo',array(
@@ -78,6 +56,33 @@ class m140701_062314_query_first extends CDbMigration
                 'create_time'=>date("Y-m-d H:i:s"),
                 'update_time'=>date("Y-m-d H:i:s"),
             ));
+            //empleados
+            $this->insert('tbl_empleado',array(
+                'id'=>1,
+                'nombre'=>'root',
+                'ap_paterno'=>'root',
+                'fecha_nacimiento'=> date("Y-m-d H:i:s"),
+                'cargo_id'=>'1',
+                'doc_identidad'=>'0',
+                'create_user_id'=>'1',
+                'update_user_id'=>'1',
+                'create_time'=>date("Y-m-d H:i:s"),
+                'update_time'=>date("Y-m-d H:i:s"),
+            ));
+            
+            $this->insert('tbl_user', array(
+                'id'=>1,
+                'username' => 'admin',
+                'email' => 'camilo.reynaga@gmail.com',
+                'password' => md5('admin'),
+                'empleado_id'=>1,
+                'create_user_id'=>'1',
+                'update_user_id'=>'1',
+                'create_time'=>date("Y-m-d H:i:s"),
+                'update_time'=>date("Y-m-d H:i:s"),
+            ));
+            
+            
             //data de ingreso inicial de clientes
             $this->insert('tbl_cliente',array(
                 'id'=>'1',

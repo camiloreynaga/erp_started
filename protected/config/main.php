@@ -69,7 +69,8 @@ return array(
 	
 		'db'=>array(
 			//'connectionString' => 'mysql:host=localhost;dbname=erp_plastiplas',
-                        'connectionString' => 'mysql:host=localhost;dbname=erp_started2',
+                        'connectionString' => 'mysql:host=localhost;dbname=erp_rizo',
+                        //'connectionString' => 'mysql:host=localhost;dbname=erp_started2',
 			'emulatePrepare' => true,
 			'username' => 'root',
 			'password' => 'adonde',

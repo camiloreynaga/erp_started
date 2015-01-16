@@ -46,14 +46,19 @@ return false;
 		'username',
 		'email',
 		'password',
-		'empleado_id',
+                array(
+                    'name'=>'empleado_id',
+                    'value'=>'$data->r_empleado->nombre'
+                ),
 		'last_login_time',
-		/*
+                /*
 		'create_time',
 		'create_user_id',
 		'update_time',
 		'update_user_id',
 		*/
+    
+    
 array(
 'class'=>'booster.widgets.TbButtonColumn',
 ),

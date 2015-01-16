@@ -60,6 +60,7 @@ return array(
     'Advanced Search'=>'Búsqueda avanzada',
     'Search'=>'Buscar',
     'Unknow'=>'Desconocido',
+    'Please select option.'=>'Por favor seleccione una opción.',
     //Messages
     //admin
     'You may optionally enter a comparison operator'=>'Ud. puede ingresar un operador de comparación',

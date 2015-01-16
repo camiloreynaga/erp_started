@@ -31,7 +31,7 @@
             'users'=>array('@'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-            'actions'=>array('create','update','lineaCredito','GenerarFactura','admin','print','createVenta'),
+            'actions'=>array('create','update','lineaCredito','GenerarFactura','admin','print','createVenta','Search'),
             'users'=>array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -166,7 +166,7 @@
         }
         
         /**
-         * 
+         *Anula una venta y actualiza los stock del almacen. 
          */
         public function actionAnularVenta($id)
         {
@@ -299,5 +299,17 @@
                 else
             $this->render('create',array('model'=>$model,));
         }
-        
+        /**
+         * permite realizar un busqueda en el modleo venta.
+         */
+        public function actionSearch()
+	{
+                $venta=new Venta('search');
+                $venta->estado=4; // filtra a los venta con estado = despachado 
+                $venta->estado_pago=0; //filtra las ventas con estado pago= pendiente
+                $venta->estado_comprobante=1; // filtra las ventas con comprobante emitidos; estado comprobante =1
+                $this->renderPartial('_gridSearch',array(
+                        'venta'=>$venta,
+                ));
+	}
     }

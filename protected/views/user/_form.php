@@ -18,7 +18,26 @@
         
 
 	
-	<?php echo $form->textFieldGroup($model,'empleado_id',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
+	<?php //echo $form->textFieldGroup($model,'empleado_id',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); 
+        
+        echo $form->select2Group(
+                $model,
+                'empleado_id',
+                    array(
+                         'wrapperHtmlOptions'=>array(
+                             'class'=> 'col-sm-5',
+                         ),
+                        'widgetOptions'=>array(
+                            'asDropDownList'=>true,
+                            'data'=>  CHtml::listData(Empleado::model()->getEmpleados_sin_usuario(),'id','text'),
+                            'options'=>array(
+                                'placeholder'=>yii::t('app','Please select option.'),
+                            )
+                        )
+                    )
+                )
+        
+        ?>
 
 
 <div class="form-actions">

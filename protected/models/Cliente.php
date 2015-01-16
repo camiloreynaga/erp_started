@@ -187,7 +187,7 @@ class Cliente extends Erp_startedActiveRecord//CActiveRecord
               return $resultados;  
         }
         /**
-         * Actualiza el monto de linea de credito usado
+         * Actualiza el monto de linea de credito usado , valida que la forma de pago sea credito =1
          * @param type $model= modelo de detalle de venta
          * @param type $operacion = 0 para sumar otro valor para restar
          */

@@ -141,7 +141,6 @@ class Venta extends Erp_startedActiveRecord//CActiveRecord
 			'update_user_id' => 'Update User',
 		);
 	}
-
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 *
@@ -157,9 +156,8 @@ class Venta extends Erp_startedActiveRecord//CActiveRecord
 	public function search()
 	{
 		// @todo Please modify the following code to remove attributes that should not be searched.
-
 		$criteria=new CDbCriteria;
-                //$criteria->alias='venta';
+                $criteria->alias='venta';
                 $criteria->with= array('r_cliente','r_forma_pago','r_empleado');
 		$criteria->compare('t.id',$this->id);
 		$criteria->compare('fecha_venta',$this->fecha_venta,true);
@@ -178,8 +176,7 @@ class Venta extends Erp_startedActiveRecord//CActiveRecord
 		$criteria->compare('create_user_id',$this->create_user_id);
 		$criteria->compare('update_time',$this->update_time,true);
 		$criteria->compare('update_user_id',$this->update_user_id);
-                
-                $criteria->order='t.id DESC';
+                //$criteria->order='t.id DESC';
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
@@ -228,10 +225,9 @@ class Venta extends Erp_startedActiveRecord//CActiveRecord
             $detalles = $this->r_detalle_venta;
             foreach($detalles as $detalle_venta)
             {
-                 //$detalle_venta= $this->loadModel($detalle);
                   //actualizar la cantidad disponible en ProductoAlmacen
                 ProductoAlmacen::model()->actualizarCantidadDisponible($detalle_venta,0); 
-                //actualizando credito disponible en cliente
+                //actualizando credito disponible en cliente si el medio de pago es credito (1)
                 Cliente::model()->actualizarCreditoDisponible($detalle_venta,0);
             }
             DetalleVenta::model()->deleteAll('venta_id=:venta_id',array(':venta_id'=>  $this->id));
@@ -247,7 +243,7 @@ class Venta extends Erp_startedActiveRecord//CActiveRecord
             foreach($detalles as $detalle_venta)
             {
                 //actualizar la cantidad disponible en ProductoAlmacen
-                //ProductoAlmacen::model()->actualizarCantidadDisponible($detalle_venta,0); 
+                ProductoAlmacen::model()->actualizarCantidadDisponible($detalle_venta,0); 
                 
                 //actualizando credito disponible en cliente
                 Cliente::model()->actualizarCreditoDisponible($detalle_venta,0);
