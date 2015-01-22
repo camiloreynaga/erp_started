@@ -19,10 +19,33 @@ $model->venta_id=$pid;
                     'name'=>'tipo_comprobante_id',
                     'value'=>'$data->r_tipo_comprobante->comprobante'
                 ),
-		
+//                array(
+//                    'name'=>'tipo_comprobante_id',
+//                    'value'=>'$data->r_tipo_comprobante->comprobante',
+//                    'class'=>'booster.widgets.TbEditableColumn',
+//                        'editable'=>array(
+//                            'type'=>'select',
+//                            //'inputClass'=>'inline',
+//                            'url' => $this->createUrl('ComprobanteVenta/editItem'),
+//                            'source'=>$this->createUrl('ComprobanteVenta/getTipoComprobante'),
+//                            
+//                        )
+//                ),    
+    
 		'fecha_emision',
 		'fecha_cancelacion',
-		'serie',
+		//'serie',
+                array(
+                    'name'=>'serie',
+                    'value'=>'$data->serie',
+                    'class'=>'booster.widgets.TbEditableColumn',
+                        'editable'=>array(
+                            'type'=>'text',
+                            //'inputClass'=>'inline',
+                            'url' => $this->createUrl('ComprobanteVenta/editItem'),
+                        )
+                ),
+    
                 array(
                     'name'=>'numero',
                     'value'=>'$data->numero',

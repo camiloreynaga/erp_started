@@ -115,9 +115,20 @@ class TipoComprobante extends Erp_startedActiveRecord//CActiveRecord
 	{
 		return parent::model($className);
 	}
+        
+        /**
+         * recupera todos los tipos de comprobante
+         */
         public function getTiposComprobante(){
-            //$criteria = new CDbCriteria();
-            //$criteria->='activo=0';
-            return $this->findAll();
+            
+            
+            $criteria=new CDbCriteria();
+            //$criteria->order='caracteristica';
+            //$criteria->condition='activo=0';
+            return $this->findAll($criteria);
+            
+//            //$criteria = new CDbCriteria();
+//            //$criteria->='activo=0';
+//            return $this->findAll();
         }
 }

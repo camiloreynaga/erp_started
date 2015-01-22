@@ -3290,3 +3290,99 @@ REQUEST_URI=/Erp_started/index.php?Venta%5Bfecha_venta%5D=&Venta%5Bcliente_id%5D
 HTTP_REFERER=http://localhost/Erp_started/index.php?r=cuentaCobrar/Create
 ---
 2015/01/16 16:51:11 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'erp_rizo.tbl_migration' doesn't exist. The SQL statement executed was: SHOW FULL COLUMNS FROM `tbl_migration`.
+2015/01/22 09:02:18 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'No es posible resolver la solicitud "serie"' in D:\xampp\htdocs\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('serie')
+#1 D:\xampp\htdocs\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\xampp\htdocs\erp_started\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/Erp_started/index.php?r=serie
+---
+2015/01/22 09:04:09 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'No es posible resolver la solicitud "serie_numero"' in D:\xampp\htdocs\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('serie_numero')
+#1 D:\xampp\htdocs\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\xampp\htdocs\erp_started\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/Erp_started/index.php?r=serie_numero
+---
+2015/01/22 17:09:10 [error] [php] include(Editable.php): failed to open stream: No such file or directory (D:\xampp\htdocs\yii\framework\YiiBase.php:427)
+Stack trace:
+#0 D:\xampp\htdocs\erp_started\protected\controllers\ComprobanteVentaController.php(279): spl_autoload_call()
+#1 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): ComprobanteVentaController->actionGetTipoComprobante()
+#2 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#3 D:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): ComprobanteVentaController->runAction()
+#4 D:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#5 D:\xampp\htdocs\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#6 D:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): ComprobanteVentaController->filterAccessControl()
+#7 D:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#8 D:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#9 D:\xampp\htdocs\yii\framework\web\CController.php(265): ComprobanteVentaController->runActionWithFilters()
+#10 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): ComprobanteVentaController->run()
+#11 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#12 D:\xampp\htdocs\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#13 D:\xampp\htdocs\erp_started\index.php(13): CWebApplication->run()
+REQUEST_URI=/Erp_started/index.php?r=ComprobanteVenta/getTipoComprobante&_=1421942950060
+in D:\xampp\htdocs\erp_started\protected\controllers\ComprobanteVentaController.php (279)
+in D:\xampp\htdocs\erp_started\index.php (13)
+2015/01/22 17:09:32 [error] [php] include(Editable.php): failed to open stream: No such file or directory (D:\xampp\htdocs\yii\framework\YiiBase.php:427)
+Stack trace:
+#0 D:\xampp\htdocs\erp_started\protected\controllers\ComprobanteVentaController.php(279): spl_autoload_call()
+#1 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): ComprobanteVentaController->actionGetTipoComprobante()
+#2 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#3 D:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): ComprobanteVentaController->runAction()
+#4 D:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#5 D:\xampp\htdocs\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#6 D:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): ComprobanteVentaController->filterAccessControl()
+#7 D:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#8 D:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#9 D:\xampp\htdocs\yii\framework\web\CController.php(265): ComprobanteVentaController->runActionWithFilters()
+#10 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): ComprobanteVentaController->run()
+#11 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#12 D:\xampp\htdocs\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#13 D:\xampp\htdocs\erp_started\index.php(13): CWebApplication->run()
+REQUEST_URI=/Erp_started/index.php?r=ComprobanteVenta/getTipoComprobante&_=1421942972384
+in D:\xampp\htdocs\erp_started\protected\controllers\ComprobanteVentaController.php (279)
+in D:\xampp\htdocs\erp_started\index.php (13)
+2015/01/22 17:20:46 [error] [php] include(editable.php): failed to open stream: No such file or directory (D:\xampp\htdocs\yii\framework\YiiBase.php:427)
+Stack trace:
+#0 D:\xampp\htdocs\erp_started\protected\views\venta\_viewComprobante.php(31): spl_autoload_call()
+#1 D:\xampp\htdocs\yii\framework\web\CBaseController.php(126): require()
+#2 D:\xampp\htdocs\yii\framework\web\CBaseController.php(95): VentaController->renderInternal()
+#3 D:\xampp\htdocs\yii\framework\web\CController.php(869): VentaController->renderFile()
+#4 D:\xampp\htdocs\erp_started\protected\views\venta\view.php(60): VentaController->renderPartial()
+#5 D:\xampp\htdocs\yii\framework\web\CBaseController.php(126): require()
+#6 D:\xampp\htdocs\yii\framework\web\CBaseController.php(95): VentaController->renderInternal()
+#7 D:\xampp\htdocs\yii\framework\web\CController.php(869): VentaController->renderFile()
+#8 D:\xampp\htdocs\yii\framework\web\CController.php(782): VentaController->renderPartial()
+#9 D:\xampp\htdocs\erp_started\protected\controllers\VentaController.php(56): VentaController->render()
+#10 unknown(0): VentaController->actionView()
+#11 D:\xampp\htdocs\yii\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs()
+#12 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#13 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#14 D:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): VentaController->runAction()
+#15 D:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#16 D:\xampp\htdocs\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#17 D:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): VentaController->filterAccessControl()
+#18 D:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#19 D:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#20 D:\xampp\htdocs\yii\framework\web\CController.php(265): VentaController->runActionWithFilters()
+#21 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): VentaController->run()
+#22 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#23 D:\xampp\htdocs\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#24 D:\xampp\htdocs\erp_started\index.php(13): CWebApplication->run()
+REQUEST_URI=/Erp_started/index.php?r=venta/view&id=1
+in D:\xampp\htdocs\erp_started\protected\views\venta\_viewComprobante.php (31)
+in D:\xampp\htdocs\erp_started\protected\views\venta\view.php (60)
+in D:\xampp\htdocs\erp_started\protected\controllers\VentaController.php (56)
+2015/01/22 17:23:25 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'El sistema no ha podido encontrar la acción "getTipoComprobante" solicitada.' in D:\xampp\htdocs\yii\framework\web\CController.php:483
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\CController.php(270): CController->missingAction('getTipoComproba...')
+#1 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('getTipoComproba...')
+#2 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('ComprobanteVent...')
+#3 D:\xampp\htdocs\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\erp_started\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/Erp_started/index.php?r=ComprobanteVenta/getTipoComprobante&_=1421943804858
+HTTP_REFERER=http://localhost/Erp_started/index.php?r=venta/view&id=1
+---

@@ -42,9 +42,36 @@
 
 	<?php echo $form->textFieldGroup($model,'movil',array('class'=>'span5','maxlength'=>50)); ?>
 
-	<?php echo $form->datepickerGroup($model,'fecha_nacimiento',array('options'=>array(),'htmlOptions'=>array('class'=>'span5')),array('prepend'=>'<i class="icon-calendar"></i>','append'=>'Click on Month/Year at top to select a different year or type in (mm/dd/yyyy).')); ?>
+	<?php
+//        echo $form->datepickerGroup($model,'fecha_nacimiento',
+//                array(
+//                    'options'=>array(),
+//                    'htmlOptions'=>array('class'=>'span5')),
+//                    array('prepend'=>'<i class="icon-calendar"></i>',
+//                        'append'=>'Click on Month/Year at top to select a different year or type in (mm/dd/yyyy).')); 
+        ?>
         
-       
+       <?php echo $form->datepickerGroup(
+                $model,
+                'fecha_nacimiento',
+                array(
+                    'widgetOptions'=> array(
+                        'options'=>array(
+                            //'language' => 'es',
+                            //'format'=>'dd/mm/yyyy',
+                             'format'=>'yyyy-mm-dd',
+                             'autoclose'=>true,
+                             'todayHighlight'=>true,
+                            
+                        ),
+                       //'htmlOptions'=>array('class'=>'span5')
+                        ),
+                        'hint' => yii::t('app','Put date'),
+                        'prepend' => '<i class="glyphicon glyphicon-calendar"></i>'
+                    )
+                ) ;
+        
+        ?>
 
 <div class="form-actions">
 	<?php $this->widget('booster.widgets.TbButton', array(

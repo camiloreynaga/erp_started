@@ -37,7 +37,7 @@ class ComprobanteVentaController extends Controller
             'users'=>array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
-            'actions'=>array('admin','delete','anularFactura','EditItem'),
+            'actions'=>array('admin','delete','anularFactura','EditItem','GetTipoComprobante'),
             'users'=>array('@','admin'),
             ),
             array('deny',  // deny all users
@@ -270,5 +270,12 @@ class ComprobanteVentaController extends Controller
             }
             
             return $this->_venta;
+        }
+        
+        //new fucntion for Rizo
+        
+        public function actionGetTipoComprobante()
+        {
+            echo CJSON::encode(TipoComprobante::model()->findAll(), 'id', 'comprobante'); 
         }
 }
