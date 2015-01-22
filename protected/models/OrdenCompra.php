@@ -108,7 +108,7 @@ class OrdenCompra extends Erp_startedActiveRecord//CActiveRecord
 
 		$criteria=new CDbCriteria;
                 $criteria->with=array('r_proveedor');
-		$criteria->compare('id',$this->id);
+		$criteria->compare('t.id',$this->id);
 		$criteria->compare('fecha_orden',$this->fecha_orden,true);
 		$criteria->compare('r_proveedor.nombre_rz',$this->proveedor_id,true);
                 $criteria->compare('cotizacion_id',$this->cotizacion_id);

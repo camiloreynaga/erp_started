@@ -53,8 +53,9 @@ class DetalleVenta extends Erp_startedActiveRecord//CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
+                        array('cantidad','CantidadDisponibleProducto','on'=>'create_venta2'),//validación para punto de venta
                         array('precio_unitario','validarCreditoDisponible','on'=>'create'),
-                        array('precio_unitario','validarCreditoModificado','on'=>'update'),
+                        array('cantidad,precio_unitario','validarCreditoModificado','on'=>'update'),
                         array('cantidad','comprobarCantidadDisponible','on'=>'create'), // valida la cantidad ingresada
                         array('cantidad','validaCantidadModificada','on'=>'update'), // valida la cantidad a reemplazar 
                         array('venta_id,producto_id,cantidad,precio_unitario,lote','required'),
@@ -106,8 +107,26 @@ class DetalleVenta extends Erp_startedActiveRecord//CActiveRecord
 			'update_user_id' => 'Update User',
 		);
 	}
+        
         /**
-         * Validación de cantidad disponible
+         * Validate quantity available for all lotes from product 
+         * @param type $attribute
+         * @param type $params
+         */
+        public function CantidadDisponibleProducto($attribute,$params){
+            //Cantidad disponible >= cantidad
+                $_cantidad_disponible= ProductoAlmacen::model()->cantidad_producto
+                        ($this->attributes['producto_id']);
+                if($_cantidad_disponible < $this->attributes['cantidad'])
+                {
+                    $this->addError($attribute, 'Cantidad ingresada es mayor a la cantidad disponible para venta. Cantidad disponible: '.$_cantidad_disponible);
+                }
+        }
+        
+        
+        /**
+         * Validación de cantidad disponible por producto y lote
+         * validate quantity available for product and lote
          */
         public function comprobarCantidadDisponible($attribute,$params){
             //Cantidad disponible >= cantidad
@@ -137,7 +156,7 @@ class DetalleVenta extends Erp_startedActiveRecord//CActiveRecord
             
         }
         /**
-         * Validación de Credito disponible cuando forma de pago es credito, escenario create
+         * Validación de Credito disponible cuando forma de pago es credito, escenario update
          * @param type $attribute
          * @param type $params
          */
@@ -165,7 +184,7 @@ class DetalleVenta extends Erp_startedActiveRecord//CActiveRecord
         }
         
         /**
-         * Validación de Credito disponible cuando forma de pago es credito, escenario update
+         * Validación de Credito disponible cuando forma de pago es credito, escenario create
          * @param type $attribute
          * @param type $params
          */
@@ -207,7 +226,7 @@ class DetalleVenta extends Erp_startedActiveRecord//CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
+		$criteria->compare('t.id',$this->id);
 		$criteria->compare('venta_id',$this->venta_id);
 		$criteria->compare('producto_id',$this->producto_id);
 		$criteria->compare('cantidad',$this->cantidad);
@@ -295,7 +314,7 @@ class DetalleVenta extends Erp_startedActiveRecord//CActiveRecord
         {
             // verficiar que todos los items hayan salido de almacen
             $retorna = true;
-            $_count = DetalleVenta::model()->count('venta_id=:venta_id and estado!=:estado', array(':estado'=>4,':venta_id'=>$this->venta_id));
+            $_count = DetalleVenta::model()->count('venta_id=:venta_id and estado!=:estado', array(':estado'=>1,':venta_id'=>$this->venta_id));
             if($_count==0)
                 $retorna=true;
             else {
@@ -333,11 +352,13 @@ class DetalleVenta extends Erp_startedActiveRecord//CActiveRecord
             $_venta->impuesto=$_total-$_bi;
 
             //Verificando que todos los item se hayan almacenado
-           // if($this->AllIntoStore())
-             //   $_venta->estado=4; // Cambiar estado a Almacenado
+           if($this->AllOutStore())
+                $_venta->estado=4; // Cambiar estado a Almacenado
 
             $_venta->save(); //actualizando el estado de venta
 
             parent::afterSave();
         }
+        
+        
 }

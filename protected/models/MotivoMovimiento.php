@@ -89,7 +89,7 @@ class MotivoMovimiento extends Erp_startedActiveRecord//CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
+		$criteria->compare('t.id',$this->id);
 		$criteria->compare('movimiento',$this->movimiento,true);
 		$criteria->compare('tipo_movimiento',$this->tipo_movimiento);
 		$criteria->compare('create_time',$this->create_time,true);
@@ -112,11 +112,27 @@ class MotivoMovimiento extends Erp_startedActiveRecord//CActiveRecord
 	{
 		return parent::model($className);
 	}
-        
+        /**
+         * obtiene todo los movimientos registrados
+         * @param type $operacion 0=ingreo : 1=salida
+         * @return type
+         */
         public function getMovimientos($operacion)
         {
            $criteria = new CDbCriteria();
             $criteria->condition='tipo_movimiento='.$operacion;
+            return $this->findAll($criteria);
+            
+        }
+        /**
+         * obtienes los movimeintos registrados adicionales a compra y venta.
+         * @param type $operacion 0=ingreo : 1=salida
+         * @return type
+         */
+         public function getMovimientosAdicionales($operacion)
+        {
+           $criteria = new CDbCriteria();
+            $criteria->condition='tipo_movimiento='.$operacion. ' and id>2';
             return $this->findAll($criteria);
             
         }

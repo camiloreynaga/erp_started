@@ -19,17 +19,44 @@
 
 	<?php echo $form->textFieldGroup($model,'telefono',array('class'=>'span5','maxlength'=>50)); ?>
 
-	<?php echo $form->textFieldGroup($model,'activo',array('class'=>'span5')); ?>
-
-	<?php echo $form->textFieldGroup($model,'linea_credito',array('class'=>'span5','maxlength'=>10)); ?>
-
 	
+	<?php echo $form->textFieldGroup($model,'linea_credito',array('class'=>'span5','maxlength'=>10)); ?>
+        
+        <?php echo $form->textFieldGroup($model,'credito_disponible',
+                array(
+                        'wrapperHtmlOptions' => array(
+                                'class' => 'col-sm-5',
+                            ),
+                        'widgetOptions' => array(
+                                'htmlOptions' => array('disabled' => true)
+                        )
+                    )
+                    
+                ); ?>
+        
+        <?php echo $form->switchGroup($model,'activo',
+                array('class'=>'span5',
+                        'widgetOptions'=>array(
+                            'options'=>array(
+                                'size'=>'small',
+                                'onText'=>'NO',
+                                'offText'=>'SI',
+                                'onColor' => 'danger',
+                                'offColor' => 'primary', 
+                                )
+                    )
+                )
+                
+                );
+
+// echo $form->textFieldGroup($model,'activo',array('class'=>'span5')); ?>
+
 
 <div class="form-actions">
 	<?php $this->widget('booster.widgets.TbButton', array(
 			'buttonType'=>'submit',
 			'context'=>'primary',
-			'label'=>$model->isNewRecord ? 'Create' : 'Save',
+			'label'=>$model->isNewRecord ? yii::t('app','Create') : yii::t('app','Save'),
 		)); ?>
 </div>
 

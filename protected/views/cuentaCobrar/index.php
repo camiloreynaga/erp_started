@@ -1,15 +1,15 @@
 <?php
 $this->breadcrumbs=array(
-	'Cuenta Cobrars',
+        yii::t('app','Cuenta Cobrars'),
 );
 
 $this->menu=array(
-array('label'=>'Create CuentaCobrar','url'=>array('create')),
-array('label'=>'Manage CuentaCobrar','url'=>array('admin')),
+array('label'=>yii::t('app','Create').' '.yii::t('app','CuentaCobrar'),'url'=>array('create')),
+array('label'=>yii::t('app','Manage').' '.yii::t('app','CuentaCobrar'),'url'=>array('admin')),
 );
 ?>
 
-<h1>Cuenta Cobrars</h1>
+<h1><?php echo yii::t('app','Cuenta Cobrars'); ?></h1>
 
 <?php $this->widget('booster.widgets.TbListView',array(
 'dataProvider'=>$dataProvider,

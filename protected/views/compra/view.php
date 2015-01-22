@@ -7,7 +7,7 @@ $this->breadcrumbs=array(
 $this->menu=array(
 //array('label'=>'List Compra','url'=>array('index')),
 array('label'=>Yii::t('app','Create').' '. Yii::t('app', 'Purchase'),'url'=>array('create')),
-array('label'=>Yii::t('app','Update').' '. Yii::t('app', 'Purchase'),'url'=>array('//detalleCompra/create','pid'=>$model->id)), //Yii::app()->createUrl("//detalleCompra/create", array("pid"=>$data->id))
+array('label'=>Yii::t('app','Update').' '. Yii::t('app', 'Purchase'),'url'=>array('//detalleCompra/create','pid'=>$model->id),'visible'=>$model->estado<3), //Yii::app()->createUrl("//detalleCompra/create", array("pid"=>$data->id))
 //array('label'=>'Delete Compra','url'=>'#','linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
 array('label'=>Yii::t('app','Manage').' '. Yii::t('app', 'Purchase'),'url'=>array('admin')),
 );

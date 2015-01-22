@@ -17,7 +17,9 @@ return array(
 		// uncomment the following to use a MySQL database
 		*/
 		'db'=>array(
-			'connectionString' => 'mysql:host=localhost;dbname=erp_started2',
+                    
+                        'connectionString' => 'mysql:host=localhost;dbname=erp_rizo',
+			//'connectionString' => 'mysql:host=localhost;dbname=erp_plastiplas',
                         //'connectionString' => 'mysql:host=192.168.1.34;dbname=erp_started2',
 			'emulatePrepare' => true,
 			//'username' => 'cr',

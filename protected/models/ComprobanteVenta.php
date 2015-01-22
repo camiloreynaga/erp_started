@@ -7,7 +7,7 @@
  * @property integer $id
  * @property integer $venta_id
  * @property integer $tipo_comprobante_id
- * @property string $fecha_emision
+ * @property string $fecha_emision 
  * @property string $fecha_cancelacion
  * @property string $serie
  * @property string $numero
@@ -25,6 +25,13 @@
  */
 class ComprobanteVenta extends Erp_startedActiveRecord//CActiveRecord
 {
+        public $_estado= 
+        array(
+            '0'=>'PENDIENTE',
+            '1'=>'PAGADO',
+            '2'=>'ANULADO'
+        );
+    
 	/**
 	 * @return string the associated database table name
 	 */
@@ -41,6 +48,7 @@ class ComprobanteVenta extends Erp_startedActiveRecord//CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
+                        //array('tipo_comprobante_id, serie, numero','unique'),
 			array('venta_id, tipo_comprobante_id, serie, numero', 'required'),
 			array('venta_id, tipo_comprobante_id, estado, create_user_id, update_user_id', 'numerical', 'integerOnly'=>true),
 			array('serie', 'length', 'max'=>5),
@@ -62,7 +70,7 @@ class ComprobanteVenta extends Erp_startedActiveRecord//CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'r_venta' => array(self::BELONGS_TO, 'Venta', 'venta_id'),
-			'r_tipoComprobante' => array(self::BELONGS_TO, 'TipoComprobante', 'tipo_comprobante_id'),
+			'r_tipo_comprobante' => array(self::BELONGS_TO, 'TipoComprobante', 'tipo_comprobante_id'),
 		);
 	}
 
@@ -107,7 +115,7 @@ class ComprobanteVenta extends Erp_startedActiveRecord//CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
+		$criteria->compare('t.id',$this->id);
 		$criteria->compare('venta_id',$this->venta_id);
 		$criteria->compare('tipo_comprobante_id',$this->tipo_comprobante_id);
 		$criteria->compare('fecha_emision',$this->fecha_emision,true);
@@ -137,4 +145,16 @@ class ComprobanteVenta extends Erp_startedActiveRecord//CActiveRecord
 	{
 		return parent::model($className);
 	}
+        
+        /**
+         * obtiene la fecha de emision
+         * @return type
+         */
+        public function getFechaEmision($id)
+        {
+            return isset($id)? $this->findByAttributes(array('venta_id'=>$id)) : yii::t('app','NULL');
+        }
+        
+        
+        
 }

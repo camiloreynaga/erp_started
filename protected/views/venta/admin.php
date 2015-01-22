@@ -59,7 +59,12 @@ return false;
                     'name'=>'forma_pago_id',
                     'value'=>'$data->r_forma_pago->forma_pago'
                 ),
-                //'estado',
+                array(
+                    'name'=>'estado',
+                    'value'=>'$data->_estado[$data->estado]',
+                    'filter'=>  array_merge(array(''=>yii::t('app','ALL')),$model->_estado),
+                    
+                ),
                 'importe_total',
 		//'observacion',
 		//'pedido_id',
@@ -77,16 +82,23 @@ return false;
                 
                 array(
                 'class'=>'booster.widgets.TbButtonColumn',
-                    'template'=>'{view} {update} {delete}',
+                    'template'=>'{view} {update} {delete} {anular}',
                 'buttons'=>array(
                     'update'=>array(
-                        'visible'=>'$data->estado<2', //'$data->estado==0 || $data->estado==2 ',
+                        'visible'=>'$data->estado<2 && $data->estado_comprobante==0', //'$data->estado==0 || $data->estado==2 ',
                         'url'=>'Yii::app()->createUrl("//detalleVenta/create", array("pid"=>$data->id))'
-                        //'url'=>$this->createUrl('//detalleCompra/create',array('pid'=>$model->id)) 
                     ),
                     'delete'=>array(
-                        'visible'=>'$data->estado==0'
-                    )
+                        'visible'=>'$data->estado==0 && $data->estado_comprobante==0'
+                    ),
+                     'anular'=>array(
+                        'visible'=>'$data->estado>0 && $data->estado!=3  && $data->estado_comprobante==0', //'$data->estado==0 || $data->estado==2 ',
+                        'url'=>'Yii::app()->createUrl("//venta/anularVenta", array("id"=>$data->id))',
+                         'options'=>array(
+                                                    'title'=>'Anular',
+                                                    'confirm'=>'seguro que desea anular venta?',
+                             )
+                    ),
                 ),
                     'htmlOptions'=>array(
                         'width'=>'70px',

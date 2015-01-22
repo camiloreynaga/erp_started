@@ -4,6 +4,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+
 ?>
 
 <?php
@@ -41,7 +42,7 @@ $this->widget('booster.widgets.TbGridView',array(
                 array(
                     'name'=>'guia_remision_transportista',
                     'header'=>'GR Transportista'
-                )
+                ),
 		
 		
 		/*'create_time',
@@ -49,6 +50,9 @@ $this->widget('booster.widgets.TbGridView',array(
 		'update_time',
 		'update_user_id',
 		*/
+    
 
 ),
 )); ?>
+
+<?php echo CHtml::link(CHtml::encode('Actualizar Comprobante'),array('/ComprobanteCompra/create','pid'=>$pid)); ?>

@@ -3,7 +3,7 @@ function Conectarse()
 {
 $db_host="localhost"; // Host al que conectar, habitualmente es el �localhost�
 
-$db_nombre="erp_started2"; // Nombre de la Base de Datos que se desea utilizar
+$db_nombre="erp_plastiplas"; // Nombre de la Base de Datos que se desea utilizar
 
 $db_user="root"; // Nombre del usuario con permisos para acceder
 

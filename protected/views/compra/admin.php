@@ -52,6 +52,10 @@ return false;
                     )
                 ),
 		'fecha_compra',
+//                array(
+//                    //'name'=>'comprobante_id',
+//                    'value'=>'$data->r_comprobante_compra->numero'
+//                ),
                 array(
                     'name'=>'proveedor_id',
                     'value'=>'$data->r_proveedor->nombre_rz'

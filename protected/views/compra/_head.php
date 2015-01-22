@@ -8,6 +8,7 @@
 
 
 ?>
+
 <div class="view">
     <div class="left-column" style="padding-right: 75px;height: 70px;">
         <b><?php echo CHtml::encode($compra->getAttributeLabel('id')); ?>:</b>

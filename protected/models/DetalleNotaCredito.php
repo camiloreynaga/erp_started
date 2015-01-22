@@ -89,7 +89,7 @@ class DetalleNotaCredito extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
+		$criteria->compare('t.id',$this->id);
 		$criteria->compare('nota_credito_id',$this->nota_credito_id);
 		$criteria->compare('producto_id',$this->producto_id);
 		$criteria->compare('cantidad',$this->cantidad);

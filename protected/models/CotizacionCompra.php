@@ -91,7 +91,7 @@ class CotizacionCompra extends Erp_startedActiveRecord//CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
+		$criteria->compare('t.id',$this->id);
 		$criteria->compare('fecha_cotizacion',$this->fecha_cotizacion,true);
 		$criteria->compare('proveedor_id',$this->proveedor_id);
 		$criteria->compare('validez',$this->validez,true);

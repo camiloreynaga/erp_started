@@ -9,7 +9,9 @@ array('label'=>'List DetalleVenta','url'=>array('index')),
 array('label'=>'Manage DetalleVenta','url'=>array('admin')),
 );
 ?>
-
+<?php 
+$this->renderPartial('_headVenta',array('model'=>$model));
+?>
 <h1>Create DetalleVenta</h1>
 
-<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php echo $this->renderPartial('_form_venta2', array('model'=>$model)); ?>

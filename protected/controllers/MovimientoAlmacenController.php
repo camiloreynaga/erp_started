@@ -31,12 +31,25 @@
             'users'=>array('@'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-            'actions'=>array('create','update','admin','detalleCompra','lotesIngreso','operacion','IngresarCompra','RegistrarCompra','SacarVenta','RegistrarVenta'),
+            'actions'=>array(
+                'create',
+                'update',
+                'admin',
+                'detalleCompra',
+                'lotesIngreso',
+                'operacion',
+                'IngresarCompra',
+                'RegistrarCompra',
+                'SacarVenta',
+                'RegistrarVenta',
+                'ingreso',
+                'salida'
+                ),
             'users'=>array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
             'actions'=>array('admin','delete'),
-            'users'=>array('admin'),
+            'roles'=>array('root'),
             ),
             array('deny',  // deny all users
             'users'=>array('*'),
@@ -58,7 +71,7 @@
         
         
         /**
-         * registra el ingreso a almacen de una fial del detalle de compra
+         * registra el ingreso a almacen de una fila del detalle de compra
          */
         public function actionRegistrarCompra($id)
         {
@@ -98,7 +111,9 @@
             
         }
         
-        
+        /*
+         * 
+         */
         public function actionRegistrarVenta($id)
         {
             $model=new MovimientoAlmacen();
@@ -137,35 +152,76 @@
         }
         
         /**
-         * registra los items de las compras
+         * renderiza la interfaz para ingresa compras
          */
         public function actionIngresarCompra()
         {
             $this->layout='//layouts/column1';
-            //$model=new MovimientoAlmacen;
-            
-            // Uncomment the following line if AJAX validation is needed
-            // $this->performAjaxValidation($model);
-
-//            if(isset($_POST['MovimientoAlmacen']))
-//            {
-            
-                //$this->redirect(array('view','id'=>$model->id));
-//            }
-//            else {
                 $this->render('_compraForm',array(
-                //'model'=>$model,
                 ));
-//            }
-
             
         }
-        
+        /**
+         * renderiza la interfaz para ingresa ventas
+         */
         public function actionSacarVenta()
         {
             $this->layout='//layouts/column1';
             $this->render('_ventaForm',array(
                 ));
+        }
+        
+        public function actionIngreso()
+        {
+            $model=new MovimientoAlmacen;
+
+            // Uncomment the following line if AJAX validation is needed
+            //$this->performAjaxValidation($model);
+            if(isset($_POST['MovimientoAlmacen']))
+            {
+            $model->attributes=$_POST['MovimientoAlmacen'];
+            $model->almacen_id =1; // almacen principal
+            $model->fecha_movimiento=date('Y-m-d');
+            if($model->save())                 
+                {
+                   // $model->_lote;
+                    $this->ActualizaStock($model);
+                    $this->redirect(array('view','id'=>$model->id));
+                }
+                
+            }
+            //$this->layout='//layouts/column1';
+            $this->render('_ingresoForm',array(
+                'model'=>$model,
+                ));
+        }
+        
+         public function actionSalida()
+        {
+             $model=new MovimientoAlmacen;
+
+            // Uncomment the following line if AJAX validation is needed
+            //$this->performAjaxValidation($model);
+            if(isset($_POST['MovimientoAlmacen']))
+            {
+            $model->attributes=$_POST['MovimientoAlmacen'];
+            $model->almacen_id =1; // almacen principal
+            $model->_fecha_vencimiento=ProductoAlmacen::model()->getFecha_vencimiento($model->producto_id,$model->_lote);
+            $model->fecha_movimiento=date('Y-m-d');
+            if($model->save())                 
+                {
+                   // $model->_lote;
+                    $this->ActualizaStock($model);
+                    $this->redirect(array('view','id'=>$model->id));
+                }
+                
+            }
+            //$this->layout='//layouts/column1';
+            $this->render('_salidaForm',array(
+                'model'=>$model,
+                ));
+            
+            
         }
         
         /**
@@ -177,10 +233,11 @@
             $model=new MovimientoAlmacen;
 
             // Uncomment the following line if AJAX validation is needed
-            $this->performAjaxValidation($model);
+            //$this->performAjaxValidation($model);
             if(isset($_POST['MovimientoAlmacen']))
             {
             $model->attributes=$_POST['MovimientoAlmacen'];
+            $model->almacen_id =1; // almacen principal
             $model->fecha_movimiento=date('Y-m-d');
             if($model->save())                 
                 {
@@ -196,6 +253,9 @@
                 ));
             //}
         }
+        
+        
+        
         /**
          * carga los motivos de movimiento a partir de la operación elegida (ingreso=0 /salida=1)
          */
@@ -247,6 +307,7 @@
         /**
          * Actualiza/registra cantidad_disponible/cantidad_real que se encuentra en tbl_producto_almacen
          * cuando se registra una compra como movimiento de almacen 
+         * 
          * @param type $model = modelo movimientoAlmacen
          */
         protected function ActualizaStock($model)
@@ -259,7 +320,7 @@
                                 'producto_id'=>$model->producto_id,//$producto,
                                 'lote'=>$model->_lote,//$lote
                                     ));
-            if(is_null($_producto_almacen))
+            if(is_null($_producto_almacen)) // si no no encuentra ningun registro crea el producto en la tbl_productoAlmacen
             {
                 $_producto_almacen = new ProductoAlmacen();
                 $_producto_almacen->almacen_id=$model->almacen_id;
@@ -346,6 +407,9 @@
                 
         }
 
+        /**
+         * 
+         */
         public function actionDetalleCompra()
         {
             //$id_producto= $_POST['DetalleVenta']['producto_id'];

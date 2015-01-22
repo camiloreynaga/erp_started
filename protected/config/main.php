@@ -12,12 +12,13 @@ return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'ERP APP',
         'language'=>'es',
-        //'sourceLanguage'=>'en',
+        'theme'=>'fardisur', 
+        //'theme'=>'kiwi',
 
 	// preloading 'log' component
 	'preload'=>array('log','booster'),
 
-	// autoloading model and component classes
+	// autoloading model and component classes....
 	'import'=>array(
 		'application.models.*',
 		'application.components.*',
@@ -32,8 +33,14 @@ return array(
                         
 			// If removed, Gii defaults to localhost only. Edit carefully to taste.
 			'ipFilters'=>array('127.0.0.1','::1'),
-                        'generatorPaths'=>array('booster.gii'),
+                        'generatorPaths'=>array(
+                            'booster.gii.model',
+                            'booster.gii'
+                            ),
 		),
+            'admin',
+            //Reportico
+            'reportico'=>array(),
 		
 	),
 
@@ -41,7 +48,7 @@ return array(
 	'components'=>array(
 		'user'=>array(
 			// enable cookie-based authentication
-			'allowAutoLogin'=>true,
+			//'allowAutoLogin'=>true,
 		),
 		// uncomment the following to enable URLs in path-format
 		/*
@@ -61,7 +68,9 @@ return array(
 		// uncomment the following to use a MySQL database
 	
 		'db'=>array(
-			'connectionString' => 'mysql:host=localhost;dbname=erp_started2',
+			//'connectionString' => 'mysql:host=localhost;dbname=erp_plastiplas',
+                        //'connectionString' => 'mysql:host=localhost;dbname=erp_rizo',
+                        'connectionString' => 'mysql:host=localhost;dbname=erp_started2',
 			'emulatePrepare' => true,
 			'username' => 'root',
 			'password' => 'adonde',
@@ -108,8 +117,8 @@ return array(
 	// using Yii::app()->params['paramName']
 	'params'=>array(
 		// this is used in contact page
-		'adminEmail'=>'webmaster@example.com',
+		'adminEmail'=>'info@kiwisoluciones.com',
                 'impuesto'=>'18',
-                'language'=>'es'
+                'language'=>'es_pe'
 	),
 );

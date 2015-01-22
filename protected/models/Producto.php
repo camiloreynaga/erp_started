@@ -38,6 +38,12 @@
  */
 class Producto extends Erp_startedActiveRecord// CActiveRecord
 {
+        
+        public $_estado=array(
+            '0'=>'NO',
+            '1'=>'SI'
+        );
+        
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -64,7 +70,7 @@ class Producto extends Erp_startedActiveRecord// CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('nombre', 'required'),
+			array('nombre,tipo_producto_id, presentacion_id, unidad_medida_id, fabricante_id', 'required'),
 			array('tipo_producto_id, presentacion_id, unidad_medida_id, fabricante_id, minimo_stock, stock, descontinuado, create_user_id, update_user_id', 'numerical', 'integerOnly'=>true),
 			array('precio_venta, precio_compra, porcentaje_ganancia', 'numerical'),
 			array('nombre', 'length', 'max'=>100),
@@ -137,7 +143,7 @@ class Producto extends Erp_startedActiveRecord// CActiveRecord
                 //$_lab= Fabricante::model()->tablename();
                // $criteria->join='inner join '.$_lab.' lab on lab.id = t.fabricante_id ';
                         
-		$criteria->compare('id',$this->id);
+		$criteria->compare('t.id',$this->id);
 		$criteria->compare('nombre',$this->nombre,true);
 		$criteria->compare('descripcion',$this->descripcion,true);
 		$criteria->compare('r_tipoProducto.tipo_producto',$this->tipo_producto_id,true);
@@ -309,6 +315,6 @@ class Producto extends Erp_startedActiveRecord// CActiveRecord
          * calcula el impuesto para el monto
          */
         public function getImpuesto($monto){
-            return round($monto * ((int)Yii::app()->params['impuesto']*0.01 + 1),2);
+            return round($monto * ((int)Yii::app()->params['impuesto']*0.01),2);
         }
 }

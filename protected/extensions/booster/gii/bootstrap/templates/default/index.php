@@ -8,17 +8,17 @@
 echo "<?php\n";
 $label = $this->pluralize($this->class2name($this->modelClass));
 echo "\$this->breadcrumbs=array(
-	'$label',
+        yii::t('app','$label'),
 );\n";
 ?>
 
 $this->menu=array(
-array('label'=>'Create <?php echo $this->modelClass; ?>','url'=>array('create')),
-array('label'=>'Manage <?php echo $this->modelClass; ?>','url'=>array('admin')),
+array('label'=>yii::t('app','Create').' '.yii::t('app','<?php echo $this->modelClass; ?>'),'url'=>array('create')),
+array('label'=>yii::t('app','Manage').' '.yii::t('app','<?php echo $this->modelClass; ?>'),'url'=>array('admin')),
 );
 ?>
 
-<h1><?php echo $label; ?></h1>
+<h1><?php echo "<?php echo yii::t('app','$label'); ?>";?></h1>
 
 <?php echo "<?php"; ?> $this->widget('booster.widgets.TbListView',array(
 'dataProvider'=>$dataProvider,

@@ -1,15 +1,15 @@
 <?php
 $this->breadcrumbs=array(
-	'Empleados'=>array('index'),
-	'Create',
+        yii::t('app','Empleados')=>array('index'),
+	yii::t('app','Create'),
 );
 
 $this->menu=array(
-array('label'=>'List Empleado','url'=>array('index')),
-array('label'=>'Manage Empleado','url'=>array('admin')),
+array('label'=>yii::t('app','List').' '.yii::t('app','Empleado'),'url'=>array('index')),
+array('label'=>yii::t('app','Manage').' '.yii::t('app','Empleado'),'url'=>array('admin')),
 );
 ?>
 
-<h1>Create Empleado</h1>
+<h1> <?php echo yii::t('app','Create');?> <?php echo yii::t('app','Empleado'); ?></h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

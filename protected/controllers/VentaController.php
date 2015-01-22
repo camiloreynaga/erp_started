@@ -31,12 +31,12 @@
             'users'=>array('@'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-            'actions'=>array('create','update','lineaCredito','admin'),
+            'actions'=>array('create','update','lineaCredito','GenerarFactura','admin','print','createVenta','Search'),
             'users'=>array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
-            'actions'=>array('admin','delete'),
-            'users'=>array('admin'),
+            'actions'=>array('admin','delete','anularVenta'),
+            'users'=>array('admin','deysi','mayra'),
             ),
             array('deny',  // deny all users
             'users'=>array('*'),
@@ -50,9 +50,10 @@
         */
         public function actionView($id)
         {
-        $this->render('view',array(
-        'model'=>$this->loadModel($id),
-        ));
+            //$this->layout='//layouts/print';
+            $this->render('view',array(
+            'model'=>$this->loadModel($id)
+            ));
         }
 
         /**
@@ -70,6 +71,8 @@
             {
                 $model->attributes=$_POST['Venta'];
                 $model->estado='0';
+                $model->estado_comprobante='0';
+                $model->estado_pago='0';
                 if($model->save())
                 $this->redirect(array('/DetalleVenta/create','pid'=>$model->id));
             }
@@ -78,7 +81,7 @@
             'model'=>$model,
             ));
         }
-
+            
         /**
         * Updates a particular model.
         * If update is successful, the browser will be redirected to the 'view' page.
@@ -86,23 +89,58 @@
         */
         public function actionUpdate($id)
         {
-        $model=$this->loadModel($id);
+            $model=$this->loadModel($id);
 
-        // Uncomment the following line if AJAX validation is needed
-        // $this->performAjaxValidation($model);
+            // Uncomment the following line if AJAX validation is needed
+            // $this->performAjaxValidation($model);
 
-        if(isset($_POST['Venta']))
+            if(isset($_POST['Venta']))
+            {
+                $model->attributes=$_POST['Venta'];
+                if($model->save())
+                $this->redirect(array('view','id'=>$model->id));
+            }
+
+            $this->render('update',array(
+            'model'=>$model,
+            ));
+        }
+        
+        /**
+         * Generar la factura para la venta
+         * @param type $id
+         */
+        public function actionGenerarFactura($id)
         {
-        $model->attributes=$_POST['Venta'];
-        if($model->save())
-        $this->redirect(array('view','id'=>$model->id));
+             $model=$this->loadModel($id); // obteniendo modelo venta
+             $comprobante = new ComprobanteVenta();
+             $comprobante->venta_id=$id;
+             $comprobante->tipo_comprobante_id=1;
+             $comprobante->fecha_emision=date('Y-m-d');//$model->fecha_venta;
+             $comprobante->serie=101;
+             $comprobante->numero= SerieNumero::model()->getNroFactura()['numero']+1;        
+             
+             $comprobante->estado=0; //estado de comprobaten pendiente de pago
+             $model->estado_comprobante=1; // comprobante registrado
+             if($comprobante->save())
+             {
+                 //actualiza el numero de comprobante
+                 SerieNumero::model()->updateByPk(1,array('numero'=>$comprobante->numero)); 
+                         
+                 $model->save();
+                 
+             }
+             //$this->createUrl($route, $params)
+             
+             //crea una factura cada 30 items
         }
-
-        $this->render('update',array(
-        'model'=>$model,
-        ));
+        
+        public function actionPrint()
+        {
+            $this->layout='//layouts/print';
+            $this->renderPartial('_ticket',array(),false,true);
         }
-
+        
         /**
         * Deletes a particular model.
         * If deletion is successful, the browser will be redirected to the 'admin' page.
@@ -110,17 +148,45 @@
         */
         public function actionDelete($id)
         {
-        if(Yii::app()->request->isPostRequest)
-        {
-        // we only allow deletion via POST request
-        $this->loadModel($id)->delete();
+            if(Yii::app()->request->isPostRequest)
+            {
+            // we only allow deletion via POST request
+                $model=  $this->loadModel($id);
+                $model->deleteDetaills();
+                $model->delete();
 
-        // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-        if(!isset($_GET['ajax']))
-        $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+           // $this->loadModel($id)->delete();
+
+            // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+            if(!isset($_GET['ajax']))
+            $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+            }
+            else
+            throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
         }
-        else
-        throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+        
+        /**
+         *Anula una venta y actualiza los stock del almacen. 
+         */
+        public function actionAnularVenta($id)
+        {
+//             if(Yii::app()->request->isPostRequest)
+//            {
+            // we only allow deletion via POST request
+                $model= $this->loadModel($id);
+                $model->anularDetaills();
+                $model->estado=3; // cambiar estado a anulado
+                //$model->deleteDetaills();
+                $model->save();
+                
+                $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+                // $this->loadModel($id)->delete();
+
+                 // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+                
+//            }
+//            else
+//            throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
         }
 
         /**
@@ -128,10 +194,10 @@
         */
         public function actionIndex()
         {
-        $dataProvider=new CActiveDataProvider('Venta');
-        $this->render('index',array(
-        'dataProvider'=>$dataProvider,
-        ));
+            $dataProvider=new CActiveDataProvider('Venta');
+            $this->render('index',array(
+            'dataProvider'=>$dataProvider,
+            ));
         }
 
         /**
@@ -200,6 +266,50 @@
             }
         }
         
+        #metodos para punto de venta
         
-        
+        /**
+        * Creates a new model to point of sale.
+        * If creation is successful, the browser will be redirected to the 'view' page.
+        */
+        public function actionCreateVenta()
+        {
+            $model=new Venta;
+            $model->fecha_venta=date('Y-m-d');
+            // Uncomment the following line if AJAX validation is needed
+            // $this->performAjaxValidation($model);
+
+//            if(isset($_POST['Venta']))
+//            {
+                //$model->attributes=$_POST['Venta'];
+                //$model->id= yii::app()->;
+                $model->cliente_id=1;// cliente por default para ventas pendientes
+                $model->vendedor_id=yii::app()->user->id ;
+                $model->forma_pago_id=2; // forma de pago por deafult contado
+                $model->estado='0'; // estado de venta pendiente
+                $model->estado_comprobante='0'; //estado de registro de comprabante pendiente
+                $model->estado_pago='0'; //estado de pago pendiente
+                 
+                
+                
+                if($model->save())
+                //$model->save();
+                $this->redirect(array('/DetalleVenta/create','pid'=>$model->id));
+//            }
+                else
+            $this->render('create',array('model'=>$model,));
+        }
+        /**
+         * permite realizar un busqueda en el modleo venta.
+         */
+        public function actionSearch()
+	{
+                $venta=new Venta('search');
+                $venta->estado=4; // filtra a los venta con estado = despachado 
+                $venta->estado_pago=0; //filtra las ventas con estado pago= pendiente
+                $venta->estado_comprobante=1; // filtra las ventas con comprobante emitidos; estado comprobante =1
+                $this->renderPartial('_gridSearch',array(
+                        'venta'=>$venta,
+                ));
+	}
     }

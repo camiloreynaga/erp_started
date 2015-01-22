@@ -52,6 +52,8 @@ class ProductoAlmacen extends Erp_startedActiveRecord//CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+                    'r_almacen' => array(self::BELONGS_TO, 'Almacen', 'almacen_id'),
+                    'r_producto'=> array(self::BELONGS_TO, 'Producto','producto_id'),
 		);
 	}
 
@@ -92,10 +94,10 @@ class ProductoAlmacen extends Erp_startedActiveRecord//CActiveRecord
 		// @todo Please modify the following code to remove attributes that should not be searched.
 
 		$criteria=new CDbCriteria;
-
-		$criteria->compare('id',$this->id);
+                $criteria->with=array('r_producto');
+		$criteria->compare('t.id',$this->id);
 		$criteria->compare('almacen_id',$this->almacen_id);
-		$criteria->compare('producto_id',$this->producto_id);
+		$criteria->compare('r_producto.nombre',$this->producto_id,true);
 		$criteria->compare('lote',$this->lote,true);
 		$criteria->compare('fecha_vencimiento',$this->fecha_vencimiento,true);
 		$criteria->compare('cantidad_disponible',$this->cantidad_disponible);
@@ -136,8 +138,33 @@ class ProductoAlmacen extends Erp_startedActiveRecord//CActiveRecord
         }
         
         /**
-         * devuelve la cantidad disponible para un producto por lote
+         * Devuelve la cantidad disponible para un producto por lote
+         * @param type $_producto
+         * @return type
          */
+        public function cantidad_producto($_producto)
+        {
+            if(empty($_producto)!=true)
+            {
+                $criteria = new CDbCriteria();
+                $criteria->condition = 'producto_id='.$_producto;
+                $cantidad_producto=0;
+                $tmp= $this->findAll($criteria);
+                foreach($tmp as $r)
+                {
+                    $cantidad_producto+=$r->cantidad_disponible;
+                }
+                return $cantidad_producto;
+            }
+            
+        }
+        
+       /**
+         * devuelve la cantidad disponible para un producto por lote
+        * @param type $_producto
+        * @param type $_lote
+        * @return type
+        */
         public function cantidad_lote2($_producto,$_lote)
         {
             if(empty($_producto)!=true && empty($_lote)!=true)

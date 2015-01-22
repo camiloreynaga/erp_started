@@ -62,7 +62,7 @@ class Empleado extends Erp_startedActiveRecord//CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'r_cargo' => array(self::BELONGS_TO, 'Cargo', 'cargo_id'),
-			'r_usuarios' => array(self::HAS_MANY, 'Usuario', 'empleado_id'),
+			'r_usuario' => array(self::HAS_MANY, 'User', 'empleado_id'),
 		);
 	}
 
@@ -107,7 +107,7 @@ class Empleado extends Erp_startedActiveRecord//CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
+		$criteria->compare('t.id',$this->id);
 		$criteria->compare('nombre',$this->nombre,true);
 		$criteria->compare('ap_paterno',$this->ap_paterno,true);
 		$criteria->compare('ap_materno',$this->ap_materno,true);
@@ -121,7 +121,7 @@ class Empleado extends Erp_startedActiveRecord//CActiveRecord
 		$criteria->compare('create_user_id',$this->create_user_id);
 		$criteria->compare('update_time',$this->update_time,true);
 		$criteria->compare('update_user_id',$this->update_user_id);
-                $criteria->condition='id>1';
+                //$criteria->condition='id>1';
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
@@ -138,11 +138,38 @@ class Empleado extends Erp_startedActiveRecord//CActiveRecord
 		return parent::model($className);
 	}
         
+        /**
+         * Devuelve una lista de empleados que tenga el cargo de Preventista
+         * 
+         * @return string
+         */
         public function getVendedores()
         {
             $criteria= new CDbCriteria();
             $criteria->condition='cargo_id=4'; //Cargo de preventista
    
+            
+            $lista= $this->model()->findAll($criteria); 
+              $resultados = array();
+              foreach ($lista as $list){
+                $resultados[] = array(
+                         'id'=>$list->id,
+                         'text'=> $list->nombre.' '.$list->ap_paterno
+              ); 
+            
+              }
+              return $resultados;
+        }
+        
+        /**
+         * return lista de empleados sin usuario asignado
+         * @return string
+         */
+        public function getEmpleados_sin_usuario()
+        {
+            $criteria= new CDbCriteria();
+            //$criteria->condition='cargo_id=4'; //Cargo de preventista
+            $criteria->condition='t.id not in (SELECT empleado_id FROM tbl_user WHERE 1 )';
             
             $lista= $this->model()->findAll($criteria); 
               $resultados = array();

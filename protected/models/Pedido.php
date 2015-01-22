@@ -98,7 +98,7 @@ class Pedido extends Erp_startedActiveRecord//CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
+		$criteria->compare('t.id',$this->id);
 		$criteria->compare('fecha_pedido',$this->fecha_pedido,true);
 		$criteria->compare('cliente_id',$this->cliente_id);
 		$criteria->compare('vendedor_id',$this->vendedor_id);

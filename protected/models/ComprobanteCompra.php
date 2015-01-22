@@ -110,7 +110,7 @@ class ComprobanteCompra extends Erp_startedActiveRecord//CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
+		$criteria->compare('t.id',$this->id);
 		$criteria->compare('compra_id',$this->compra_id);
 		$criteria->compare('tipo_comprobante_id',$this->tipo_comprobante_id);
 		$criteria->compare('fecha_emision',$this->fecha_emision,true);

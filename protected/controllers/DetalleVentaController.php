@@ -2,11 +2,11 @@
 
 class DetalleVentaController extends Controller
 {
+        private $_venta=null;
         /**
         * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
         * using two-column layout. See 'protected/views/layouts/column2.php'.
         */
-        private $_venta=null;
         public $layout='//layouts/column1';
 
         /**
@@ -33,7 +33,7 @@ class DetalleVentaController extends Controller
             'users'=>array('@'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-            'actions'=>array('create','update','lotes','precios','editCantidad','editPrecioUnitario','batchDelete','finalizar'),
+            'actions'=>array('create','update','lotes','precios','editCantidad','editPrecioUnitario','batchDelete','finalizar','create_venta2'),
             'users'=>array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -63,19 +63,111 @@ class DetalleVentaController extends Controller
         */
         public function actionCreate()
         {
-            $model=new DetalleVenta('create');
+            //$model=new DetalleVenta('create');
+            $model=new DetalleVenta('create_venta2');
             $model->venta_id=$this->_venta->id;
             // Uncomment the following line if AJAX validation is needed
             // $this->performAjaxValidation($model);
-
             if(isset($_POST['DetalleVenta']))
             {
                 $model->attributes=$_POST['DetalleVenta'];
                 $model->fecha_vencimiento= ProductoAlmacen::model()->getFecha_vencimiento($model->producto_id,$model->lote);
-                
+                //$model->lote='000000';
+                //obteniendo el precio de venta.
+                $model->precio_unitario= Producto::model()->findByPk($model->producto_id)->precio_venta;
+                $model->estado= 0; // estado pendiente de despacho
+                $model->total= $model->precio_unitario * $model->cantidad;
+                $model->subtotal= $_subtotal= Producto::model()->getSubtotal($model->total); //round($model->total/((int)Yii::app()->params['impuesto']*0.01+1),2);
+                $model->impuesto= round($model->total-$model->subtotal,2);
+                //cantidad disponible para el producto almacen
+//                $_cantidad_alm= ProductoAlmacen::model()->cantidad_lote2($model->producto_id,$model->lote);
+//                if($_cantidad_alm>=$model->cantidad)
+//                {
+                    if($model->save())
+                    {
+                        
+                        //actualizar la cantidad disponible en ProductoAlmacen - almacen principal por default
+                        ProductoAlmacen::model()->actualizarCantidadDisponible($model,1); 
+                        //actualizar credito disponible
+                        Cliente::model()->actualizarCreditoDisponible($model, 1);
+                        echo CJSON::encode(array(
+                        'status'=>'success', 
+                        ));
+                        Yii::app()->end();// exit;
+                    }
+                    else
+                    {
+                        $error = CActiveForm::validate($model);
+                        if($error!='[]')
+                            echo $error;
+                        Yii::app()->end();
+                    }
+//                }
+//                else{
+//                    echo CJSON::encode(array(
+//                                'val' =>'La Cantidad ingresada excede a la cantidad disponible de '.$_cantidad_alm
+//                            ));
+//                           Yii::app()->end();// exit;
+//                    //$model->addError('cantidad','La cantidad seleccionada excede el total disponible.');
+//                }
+            }
+            else
+            {
+                $this->render('create',array(
+                'model'=>$model,
+                ));
+            }
+        }
+        
+        
+        /**
+         * retorna un arreglo de cantidad de lotes por producto
+         * @param type $producto
+         * @param type $cantidad
+         * @return type
+         */
+        public function cantidad_lote($producto,$cantidad)
+        {
+            if(empty($_producto)!=true)
+            {
+                $criteria = new CDbCriteria();
+                $criteria->condition = 'cantidad_disponible > 0 and producto_id='.$_producto;
+                $criteria->order='fecha_vencimiento ASC';
+                $cantidad_producto=array();
+                $tmp= ProductoAlmacen::model()->findAll($criteria);
+                foreach($tmp as $r)
+                {
+                    
+                    $cantidad_producto[]=array('cantidad'=>$r->cantidad_disponible,'lote'=>$r->lote);
+                }
+                return $cantidad_producto;
+            }
+        }
+            
+            
+               
+        
+        /**
+        * Creates a new model.
+        * If creation is successful, the browser will be redirected to the 'view' page.
+        */
+        public function actionCreate_venta2()
+        {
+            $model=new DetalleVenta('create_venta2');
+            $model->venta_id= $_GET['pid'];// $this->_venta->id;
+            // Uncomment the following line if AJAX validation is needed
+            // $this->performAjaxValidation($model);
+            
+            if(isset($_POST['DetalleVenta']))
+            {
+                $model->attributes=$_POST['DetalleVenta'];
+                $model->fecha_vencimiento= ProductoAlmacen::model()->getFecha_vencimiento($model->producto_id,$model->lote);
+                //$model->lote='000000';
+                //obteniendo el precio de venta.
+                $model->precio_unitario=Producto::model()->findByPk($model->producto_id)->precio_venta;
                 $model->estado=0; // estado pendiente de despacho
                 $model->total=$model->precio_unitario*$model->cantidad;
-                $model->subtotal= $_subtotal= Producto::model()->getSubtotal($_total); //round($model->total/((int)Yii::app()->params['impuesto']*0.01+1),2);
+                $model->subtotal= $_subtotal= Producto::model()->getSubtotal($model->total); //round($model->total/((int)Yii::app()->params['impuesto']*0.01+1),2);
                 $model->impuesto= round($model->total-$model->subtotal,2);
                 //cantidad disponible para el producto almacen
 //                $_cantidad_alm= ProductoAlmacen::model()->cantidad_lote2($model->producto_id,$model->lote);
@@ -116,7 +208,7 @@ class DetalleVentaController extends Controller
                 ));
             }
         }
-
+        
         protected function updateProductoAlmacen() {
            // ProductoAlmacen::model()->
         }
@@ -132,12 +224,11 @@ class DetalleVentaController extends Controller
 
             // Uncomment the following line if AJAX validation is needed
             // $this->performAjaxValidation($model);
-
             if(isset($_POST['DetalleVenta']))
             {
-            $model->attributes=$_POST['DetalleVenta'];
-            if($model->save())
-            $this->redirect(array('view','id'=>$model->id));
+                $model->attributes=$_POST['DetalleVenta'];
+                if($model->save())
+                $this->redirect(array('view','id'=>$model->id));
             }
 
             $this->render('update',array(
@@ -263,8 +354,25 @@ class DetalleVentaController extends Controller
                         ProductoAlmacen::model()->actualizarCantidadDisponible($model,0); 
                         //actualizando el credito disponible
                         Cliente::model()->actualizarCreditoDisponible($model,0);
+                        
+                        //actualizar importe, subtotal, impuesto.
+                        //obtiendo venta
+                        $_venta= Venta::model()->findByPk($model->venta_id);
+                        
                         ($model->delete() == true) ? $successCount++ : $failureCount++;
+                        
+                        //actualizando el total, base imponible e impuesto de la venta
+                        $_total=$model->SumaTotal();
+                        $_bi=  Producto::model()->getSubtotal($_total);
+                        $_venta->importe_total=$_total;//$this->SumaTotal()['total'];
+                        $_venta->base_imponible=$_bi; 
+                        $_venta->impuesto=$_total-$_bi;
+                        $_venta->save();
+                        
                     }
+                    
+                    
+                    
 //                    echo CJSON::encode(array('status' => 'success',
 //                        'data' => array(
 //                            'successCount' => $successCount,
@@ -432,6 +540,8 @@ class DetalleVentaController extends Controller
         {
             return $this->_venta;
         }
+                
+        
         /**
         * Protected method to load the associated Project model class
         * @project_id the primary identifier of the associated Project
@@ -445,7 +555,7 @@ class DetalleVentaController extends Controller
                 $this->_venta= Venta::model()->findByPk($venta_id);
                 if ($this->_venta===null)
                 {
-                throw new CHttpException(404,'The requested detalle venta does not exist.');
+                    throw new CHttpException(404,'The requested detalle venta does not exist.');
                 }
             }
             

@@ -65,7 +65,7 @@ class m140614_190124_create_rbac_tables extends CDbMigration
             "fk_auth_assignment_itemname","tbl_auth_assignment","itemname","tbl_auth_item","name","CASCADE","CASCADE");
             
             //the tbl_auth_assignment.userid is a reference to tbl_user.id
-            $this->addForeignKey("fk_auth_assignment_userid","tbl_auth_assignment","userid","tbl_usuario","id","CASCADE","CASCADE");
+            $this->addForeignKey("fk_auth_assignment_userid","tbl_auth_assignment","userid","tbl_user","id","CASCADE","CASCADE");
             
 	}
 

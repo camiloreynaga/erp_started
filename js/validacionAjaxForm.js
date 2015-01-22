@@ -8,8 +8,9 @@
         //muestra errores del form luego de la validación
         function formErrors(data,form){
         var summary = '';
-        summary="<p>Please solve following errors:</p>";
-
+        //summary="<p> <?php echo yii::t('app','Please solve following errors:') ?></p>";
+        
+                
         $.each(data, function(key, val) {
         $(form+" #"+key+"_em_").html(val.toString());
         $(form+" #"+key+"_em_").show();

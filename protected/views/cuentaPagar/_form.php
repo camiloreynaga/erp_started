@@ -17,7 +17,7 @@
 
 	<?php echo $form->datepickerGroup($model,'fecha_vencimiento',array('options'=>array(),'htmlOptions'=>array('class'=>'span5')),array('prepend'=>'<i class="icon-calendar"></i>','append'=>'Click on Month/Year at top to select a different year or type in (mm/dd/yyyy).')); ?>
 
-	<?php echo $form->textFieldGroup($model,'interes',array('class'=>'span5','maxlength'=>10)); ?>
+	<?php echo $form->textFieldGroup($model,'descuento',array('class'=>'span5','maxlength'=>10)); ?>
 
 	
 
@@ -25,7 +25,7 @@
 	<?php $this->widget('booster.widgets.TbButton', array(
 			'buttonType'=>'submit',
 			'context'=>'primary',
-			'label'=>$model->isNewRecord ? 'Create' : 'Save',
+			'label'=>$model->isNewRecord ? yii::t('app','Create') : yii::t('app','Save'),
 		)); ?>
 </div>
 

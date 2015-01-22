@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="language" content="en" />
+	<meta name="language" content="es" />
 
 	<!-- blueprint CSS framework -->
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/screen.css" media="screen, projection" />
@@ -27,7 +27,10 @@
 	</div><!-- header -->
 
 	<div id="mainMbmenu">
-		<?php $this->widget('application.extensions.mbmenu.MbMenu',array(
+		<?php 
+                
+                //$this->widget('zii.widgets.CMenu',array(
+                $this->widget('application.extensions.mbmenu.MbMenu',array(
 			'items'=>array(
 				array('label'=>'Home', 'url'=>array('/site/index')),
 				//array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
@@ -37,17 +40,17 @@
                                         array('label'=>'Presentaciones','url'=>array('/presentacion/admin')),
                                         array('label'=>'Tipos de producto','url'=>array('/tipoProducto/admin')),
                                         array('label'=>'Fabricantes','url'=>array('/fabricante/admin')),
-                                        array('label'=>'Caracteristica','url'=>array('/caracteristica/admin')),
+                                        //array('label'=>'Caracteristica','url'=>array('/caracteristica/admin')),
                                         array('label'=>'Unidades de Medida','url'=>array('/unidadMedida/admin')),
                                         array('label'=>'Productos','url'=>array('/producto/admin')),
                                     
                                 
                                         ),
-                                    ),
+                                     ),
                                 array('label'=>'Almacen',
                                     'items'=>array(
-                                        array('label'=>'Ubicaciones','url'=>array('/ubicacion/admin')),
-                                        array('label'=>'Almacenes','url'=>array('/almacen/admin')),
+                                       // array('label'=>'Ubicaciones','url'=>array('/ubicacion/admin')),
+                                        //array('label'=>'Almacenes','url'=>array('/almacen/admin')),
                                         array('label'=>'Motivos de movimiento','url'=>array('/motivoMovimiento/admin')),
                                         array('label'=>'Ingreso/Salida','url'=>array('/movimientoAlmacen/admin')),
                                         array('label'=>'Productos x almacen','url'=>array('/productoAlmacen/admin')),
@@ -65,7 +68,7 @@
                                     'items'=>array(
                                         array('label'=>'Cargos','url'=>array('/cargo/admin')),
                                         array('label'=>'Empleados','url'=>array('/empleado/admin')),
-                                        array('label'=>'Usuarios','url'=>array('/usuario/admin')),
+                                     //   array('label'=>'Usuarios','url'=>array('/usuario/admin')),
                                     )
                                     ),    
                                 array('label'=>'Sistema',
@@ -85,16 +88,24 @@
                                     ),
                                 array('label'=>'Cuentas',
                                     'items'=>array(
-                                        array('label'=>'Cuentas por Cobrar','url'=>array('/cuentaCobrar/admin')),
+                                        array('label'=>'Cuentas por Cobrar','url'=>array('/cuentaCobrar/Create')),
                                         array('label'=>'Cuentas por Pagar','url'=>array('/cuentaPagar/admin')),
                                     )
                                     ), 
+                                array('label'=>'Reportes',
+                                    'items'=>array(
+                                        array('label'=>'reportes','url'=>array('/reportes/index')),
+                                        //array('label'=>'Cuentas por Pagar','url'=>array('/cuentaPagar/admin')),
+                                    )
+                                    ),
                                    
 				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
 				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
 			),
                         
-		)); ?>
+		)); 
+                
+                ?>
 	</div><!-- mainmenu -->
 	<?php if(isset($this->breadcrumbs)):?>
 		<?php $this->widget('zii.widgets.CBreadcrumbs', array(
@@ -107,7 +118,7 @@
 	<div class="clear"></div>
 
 	<div id="footer">
-		Copyright &copy; <?php echo date('Y'); ?> by My Company.<br/>
+		Copyright &copy; <?php echo date('Y'); ?> by Kiwi Soluciones.<br/>
 		All Rights Reserved.<br/>
 		<?php echo Yii::powered(); ?>
 	</div><!-- footer -->

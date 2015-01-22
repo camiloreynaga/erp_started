@@ -60,7 +60,7 @@ class MovimientoAlmacen extends Erp_startedActiveRecord//CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('producto_id, cantidad, motivo_movimiento_id,_lote', 'required'),
+			array('producto_id, cantidad, motivo_movimiento_id,_lote,_fecha_vencimiento', 'required'),
                         //array('producto_id, cantidad , motivo_movimiento_id','required'),
 			array('producto_id, cantidad, motivo_movimiento_id, detalle_compra_id, detalle_venta_id, almacen_id, saldo_stock, operacion, create_user_id, update_user_id', 'numerical', 'integerOnly'=>true),
 			array('fecha_movimiento, observacion, create_time, update_time,_lote', 'safe'),

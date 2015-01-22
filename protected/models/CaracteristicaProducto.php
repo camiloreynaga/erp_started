@@ -87,7 +87,7 @@ class CaracteristicaProducto extends Erp_startedActiveRecord//CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
+		$criteria->compare('t.id',$this->id);
 		$criteria->compare('producto_id',$this->producto_id);
 		$criteria->compare('caracteristica_id',$this->caracteristica_id);
 		$criteria->compare('valor',$this->valor,true);

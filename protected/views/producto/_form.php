@@ -1,6 +1,6 @@
 <?php $form=$this->beginWidget('booster.widgets.TbActiveForm',array(
 	'id'=>'producto-form',
-	'enableAjaxValidation'=>true,
+	'enableAjaxValidation'=>false,
 )); ?>
 
 <p class="help-block"><?php echo yii::t('app','Fields with') ;?> <span class="required">*</span> <?php echo yii::t('app','are required.') ;?></p>
@@ -128,10 +128,10 @@
 	<?php $this->widget('booster.widgets.TbButton', array(
 			'buttonType'=>'submit',
 			'context'=>'primary',
-			'label'=>$model->isNewRecord ? 'Create' : 'Save',
+			'label'=>$model->isNewRecord ? yii::t('app','Create') : yii::t('app','Save'),
 		)); ?>
 </div>
 
 <?php $this->endWidget(); ?>
 
-<?php $this->renderPartial('//CaracteristicaProducto/_form',array('model'=>CaracteristicaProducto::model())) ?>    
+<?php //$this->renderPartial('//CaracteristicaProducto/_form',array('model'=>CaracteristicaProducto::model())) ?>    

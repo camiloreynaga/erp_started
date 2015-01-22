@@ -75,7 +75,7 @@ class Compra extends Erp_startedActiveRecord//CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'r_proveedor' => array(self::BELONGS_TO, 'Proveedor', 'proveedor_id'),
-			'r_comprobanteCompras' => array(self::HAS_MANY, 'ComprobanteCompra', 'compra_id'),
+			'r_comprobante_compra' => array(self::HAS_MANY, 'ComprobanteCompra', 'compra_id'),
 			'r_cuentaPagars' => array(self::HAS_MANY, 'CuentaPagar', 'compra_id'),
 			'r_detalleCompras' => array(self::HAS_MANY, 'DetalleCompra', 'compra_id'),
 		);
@@ -121,7 +121,7 @@ class Compra extends Erp_startedActiveRecord//CActiveRecord
 
 		$criteria=new CDbCriteria;
                 $criteria->with=array('r_proveedor');
-		$criteria->compare('id',$this->id);
+		$criteria->compare('t.id',$this->id);
 		$criteria->compare('fecha_compra',$this->fecha_compra,true);
 		$criteria->compare('r_proveedor.nombre_rz',$this->proveedor_id,true);
 		$criteria->compare('base_imponible',$this->base_imponible,true);

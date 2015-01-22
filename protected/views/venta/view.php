@@ -1,3 +1,4 @@
+	
 <?php
 $this->breadcrumbs=array(
         Yii::t('app', 'Sale')=>array('admin'),
@@ -7,7 +8,7 @@ $this->breadcrumbs=array(
 $this->menu=array(
 //array('label'=>'List Venta','url'=>array('index')),
 array('label'=>yii::t('app','Create').' '.yii::t('app','Sale'),'url'=>array('create')),
-array('label'=>yii::t('app','Update').' '.yii::t('app','Sale'),'url'=>array('//detalleVenta/create','pid'=>$model->id)),
+array('label'=>yii::t('app','Update').' '.yii::t('app','Sale'),'url'=>array('//detalleVenta/create','pid'=>$model->id),'visible'=>$model->estado<2&&$model->estado_comprobante==0),
 //array('label'=>yii::t('app','Delete').' '.yii::t('app','Sale'),'url'=>'#','linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
 array('label'=>yii::t('app','Manage').' '.yii::t('app','Sale'),'url'=>array('admin')),
 );
@@ -48,8 +49,50 @@ array('label'=>yii::t('app','Manage').' '.yii::t('app','Sale'),'url'=>array('adm
 		//'update_user_id',
 ),
 )); ?>
+<strong>DETALLE</strong>
 <?php
-$this->renderPartial('//DetalleVenta/_viewDetalleVenta',array('model'=>DetalleVenta::model(),'pid'=>$model->id));
-
+//$this->renderPartial('//DetalleVenta/_viewDetalleVenta',array('model'=>DetalleVenta::model(),'pid'=>$model->id));
+$this->renderPartial('_viewDetalleVenta',array('model'=>DetalleVenta::model(),'pid'=>$model->id));
 ?>
-<a href="facturacion2/factura.php?id_venta=<?php echo $model->id; ?>" target="blank" >Facturar</a></p>
+<strong>COMPROBANTE</strong>
+    <?php
+//$this->renderPartial('//ComprobanteVenta/_viewComprobante',array('model'=>  ComprobanteVenta::model(),'pid'=>$model->id));
+$this->renderPartial('_viewComprobante',array('model'=>  ComprobanteVenta::model(),'pid'=>$model->id));
+?>
+
+<?php 
+  if( $model->countItems()>0){
+  
+    if ($model->estado_comprobante==0 ) { 
+                echo "siguiente factura: ";
+                echo SerieNumero::model()->getNroFactura()['numero']+1;
+        ?>
+
+        <?php        
+        echo CHtml::ajaxButton('Facturar',array('venta/generarFactura','id'=>$model->id, ),
+                 array(
+                      'type' => 'post',
+                      'success'=>'function(data){ window.open("facturacion2/factura.php?id_venta='.$model->id.'"); window.location.reload();}'
+                     //'success'=>'function(data){ window.open("'.CController::createUrl('facturacion2/factura.php?id_venta='.$model->id).'")}'
+                ),
+                array(
+                'confirm'=>'Esta seguro de Generar la factura?',
+             )); 
+        ?>
+        <?php   
+            }// end if
+            else
+            {
+        ?>
+        <?php
+
+        ?>
+        <br>
+        <a href="facturacion2/factura.php?id_venta=<?php  echo $model->id; ?>" target="blank" >Ver Factura</a>
+            <?php } // end else
+            }// end if
+            ?>
+<!--setenado el nombre de la impresora-->
+        <?php echo CHtml::link('Print',array('print','id'=>$model->id),array('class'=>'btnPrint', 'style'=>'margin-left: 10px;')); ?>
+
+<?php //$this->renderPartial('_ticket',array('model'=>  ComprobanteVenta::model(),'pid'=>$model->id));?>

@@ -87,10 +87,10 @@ class DetalleOrdenCompraController extends Controller
                 if($tmp==0)
                 {
                     //$model->orden_compra_id=$id;
-                    $model->total= round($model->precio_unitario*$model->cantidad,2);
+                    $model->subtotal= round($model->precio_unitario*$model->cantidad,2);
                     //$compraItem->cantidad_disponible=$compraItem->cantidad;//agregando la cantidad disponible
-                    $model->subtotal= round($model->total/((int)Yii::app()->params['impuesto']*0.01 + 1),2);
-                    $model->impuesto= round($model->total-$model->subtotal,2);
+                    $model->impuesto= Producto::model()->getImpuesto($model->subtotal); //  round($model->total/((int)Yii::app()->params['impuesto']*0.01 + 1),2);
+                    $model->total= round($model->impuesto+$model->subtotal,2);
                     if($model->save())
                     {
                         echo CJSON::encode(array(
@@ -138,6 +138,12 @@ class DetalleOrdenCompraController extends Controller
             if(isset($_POST['DetalleOrdenCompra']))
             {
                 $model->attributes=$_POST['DetalleOrdenCompra'];
+                
+                $model->subtotal= round($model->precio_unitario*$model->cantidad,2);
+                //$compraItem->cantidad_disponible=$compraItem->cantidad;//agregando la cantidad disponible
+                $model->impuesto= Producto::model()->getImpuesto($model->subtotal); //  round($model->total/((int)Yii::app()->params['impuesto']*0.01 + 1),2);
+                $model->total= round($model->impuesto+$model->subtotal,2);
+                
                 if($model->save())
                 {
                     echo CJSON::encode(array(
@@ -154,6 +160,7 @@ class DetalleOrdenCompraController extends Controller
             ));
 
         }
+        
         public function actionUpdateItem($id)
         {
             $model=$this->loadModel($id);
@@ -163,6 +170,7 @@ class DetalleOrdenCompraController extends Controller
             }
             echo CJSON::encode();
         }
+        
         /*
          * edita la una celda de la grilla
          */
@@ -393,7 +401,6 @@ class DetalleOrdenCompraController extends Controller
                 throw new CHttpException(404,'The requested orden compra does not exist.');
                 }
             }
-            
             return $this->_ordenCompra;
         }
         

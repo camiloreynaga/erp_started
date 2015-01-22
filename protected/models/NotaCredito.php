@@ -105,7 +105,7 @@ class NotaCredito extends Erp_startedActiveRecord//CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
+		$criteria->compare('t.id',$this->id);
 		$criteria->compare('comprobante_venta_id',$this->comprobante_venta_id);
 		$criteria->compare('fecha_emision',$this->fecha_emision,true);
 		$criteria->compare('serie',$this->serie,true);

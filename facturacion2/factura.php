@@ -9,8 +9,10 @@ $idVenta= $_GET['id_venta'];//2;//prueba local
 //-----------------consulta tabla cliente------------------------------//
 
 $consultaVenta = mysql_query("SELECT cliente_id, fecha_venta,forma_pago_id FROM tbl_venta WHERE id ='$idVenta' ",$link);
+$consultaComprobante=mysql_query("SELECT fecha_emision FROM tbl_comprobante_venta WHERE estado!=2 AND venta_id ='$idVenta' ",$link);
 $venta= mysql_fetch_array($consultaVenta);
 
+$comprobante= mysql_fetch_array($consultaComprobante);
 
 //-----------------consulta tabla cliente------------------------------//
 $consultaCliente = mysql_query("SELECT id, nombre_rz, ruc, direccion FROM tbl_cliente WHERE id ='$venta[0]' ",$link);
@@ -156,7 +158,8 @@ $titles = array('cod'=>'<b></b>','cantidad'=>'<b></b>','unidad'=>'<b></b>','desc
 
 
 //fecha de venta de los productos
-$fecha=strftime('%d/%m/%y', strtotime($venta[1])); 
+//$fecha=strftime('%d/%m/%y', strtotime($venta[1])); 
+$fecha=strftime('%d/%m/%y', strtotime($comprobante[0])); 
 
 //sumando 25 dÃ­as a la fecha de venta
 $datearray= explode("/",$fecha);

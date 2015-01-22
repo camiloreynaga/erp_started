@@ -31,7 +31,11 @@ $("#delete").click(function(){
                 $.ajax({
                         data:{ids:checked},
                         url:"'.CController::createUrl('detalleVenta/batchDelete').'",
-                        success:function(data){$("#detalle-venta-grid").yiiGridView("update",{});},              
+                        
+                        success:function(data){
+                            window.location.reload();
+                        //$("#detalle-venta-grid").yiiGridView("update",{});
+                        },              
                 });
         }
         });
@@ -52,10 +56,10 @@ $("#delete").click(function(){
 )); ?>
 
 <p class="help-block"><?php echo yii::t('app','Fields with') ;?> <span class="required">*</span> <?php echo yii::t('app','are required.') ;?>
-<?php echo ' -  Forma de pago: <span class="required" >'. $model->r_venta->r_forma_pago->forma_pago .'</span>';?>
+<?php // echo ' -  Forma de pago: <span class="required" >'. $model->r_venta->r_forma_pago->forma_pago .'</span>';?>
       <?php 
-      $_cred_disp= $model->r_venta->forma_pago_id==1 ? ' <span class="required" > - monto disponible: '.$model->r_venta->r_cliente->credito_disponible.'</span>' : ""; 
-      echo $_cred_disp;
+//      $_cred_disp= $model->r_venta->forma_pago_id==1 ? ' <span class="required" > - monto disponible: '.$model->r_venta->r_cliente->credito_disponible.'</span>' : ""; 
+//      echo $_cred_disp;
       ?>  
 </p>
 
@@ -145,7 +149,11 @@ $("#delete").click(function(){
         
         <?php echo $form->textFieldGroup($model,'cantidad',array('class'=>'span5')); ?>
         <div id="precio"></div>
-        <?php echo $form->textFieldGroup($model,'precio_unitario',array('class'=>'span5','maxlength'=>10)); ?>  
+        <?php echo $form->textFieldGroup($model,'precio_unitario',
+                array(
+                    
+                    'class'=>'span5',
+                    'maxlength'=>10)); ?>  
 	<?php 
 //        echo $form->datepickerGroup(
 //                $model,
@@ -178,7 +186,7 @@ $("#delete").click(function(){
                         'url'=>CController::createUrl('detalleVenta/create',
                                 array('pid'=>$model->venta_id)
                                 ),
-			'label'=> 'Add Item',//$orden_compra->isNewRecord ? 'Create' : 'Save',
+			'label'=> yii::t('app', 'Add Item') ,//$orden_compra->isNewRecord ? 'Create' : 'Save',
                         'id'=>'update',
                         'ajaxOptions'=>array(
                             'dataType'=>'json',
@@ -294,7 +302,7 @@ $("#delete").click(function(){
 <div >
     
     <?php  $this->widget('booster.widgets.TbButton',array( // Button to delete
-            'label' => 'Delete Selected Items',
+            'label' => yii::t('app','Delete Selected Items'),
             'context' => 'danger',
             'size' => 'small',
             'id' => 'delete',
@@ -314,13 +322,27 @@ $("#delete").click(function(){
              );
 ?>
 <?php
+// evaluando que estado de venta = 0 (pendiente) y estado_comprobante=0 (pendiente de facturacion)
+if ($model->r_venta->estado==0 && $model->r_venta->estado_comprobante==0) 
+    {
+    
+
     echo CHtml::Button('Cancelar venta',
              array(
-                 'submit'=>array('detalleVenta/finalizar',
+                 'submit'=>array('Venta/delete',
                      'id'=>$model->venta_id,
-                     
                      ),
-                     'confirm'=>'Esta seguro de cancelar con la venta?',
+                     'confirm'=>'Esta seguro de cancelar la venta?',
                  )
              );
+    }
 ?>
+<?php // echo CHtml::ajaxButton('Cancelar venta',array('//venta/delete','id'=>$model->venta_id, ),
+//                 array(
+//                      'type' => 'post',
+//                      'success'=>'function(data){location.href="'.CController::createUrl('/venta/admin').'"}'
+//                ),
+//                array(
+//                 'confirm'=>'Esta seguro de eliminar/cancelar la venta en proceso?',
+//             ));
+         ?>

@@ -89,7 +89,7 @@ class TipoProducto extends Erp_startedActiveRecord//CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
+		$criteria->compare('t.id',$this->id);
 		$criteria->compare('tipo_producto',$this->tipo_producto,true);
 		$criteria->compare('activo',$this->activo);
 		$criteria->compare('create_time',$this->create_time,true);

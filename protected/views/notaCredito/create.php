@@ -1,15 +1,15 @@
 <?php
 $this->breadcrumbs=array(
-	'Nota Creditos'=>array('index'),
-	'Create',
+        yii::t('app','Nota Creditos')=>array('index'),
+	yii::t('app','Create'),
 );
 
 $this->menu=array(
-array('label'=>'List NotaCredito','url'=>array('index')),
-array('label'=>'Manage NotaCredito','url'=>array('admin')),
+array('label'=>yii::t('app','List').' '.yii::t('app','NotaCredito'),'url'=>array('index')),
+array('label'=>yii::t('app','Manage').' '.yii::t('app','NotaCredito'),'url'=>array('admin')),
 );
 ?>
 
-<h1>Create NotaCredito</h1>
+<h1> <?php echo yii::t('app','Create');?> <?php echo yii::t('app','NotaCredito'); ?></h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

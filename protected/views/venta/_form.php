@@ -34,7 +34,7 @@
 				'widgetOptions' => array(
                                     
                                     'asDropDownList' => true,
-                                    'data'      => CHtml::listData (Cliente::model()->getClientes(), "id","nombre_rz"),
+                                    'data'      => CHtml::listData (Cliente::model()->getClientes(), "id","text"),
 					'options' => array(
 						'placeholder' =>'Seleccione Cliente', 
                                                 //'width' => '40%', 

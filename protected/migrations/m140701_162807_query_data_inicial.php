@@ -20,8 +20,10 @@ class m140701_162807_query_data_inicial extends CDbMigration
            // $this->delete('tbl_unidad_medida');
             $this->insert('tbl_unidad_medida', array(
                 'id'=>1,
-                'unidad_medida'=>'Unidad',
-                'nonmenclatura'=>'und',
+                'unidad_medida'=>'UNIDAD',
+                'nonmenclatura'=>'UND',
+                'cantidad_equivalente'=>1,
+                'unidad_equivalente'=>1,
                 //
                 'create_time'=>date("Y-m-d H:i:s"),
                 'create_user_id'=> '1',

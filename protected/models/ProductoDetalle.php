@@ -82,7 +82,7 @@ class ProductoDetalle extends Erp_startedActiveRecord//CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
+		$criteria->compare('t.id',$this->id);
 		$criteria->compare('producto_grupo_id',$this->producto_grupo_id);
 		$criteria->compare('producto_id',$this->producto_id);
 		$criteria->compare('cantidad',$this->cantidad);

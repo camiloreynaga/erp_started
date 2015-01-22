@@ -24,8 +24,8 @@
 	<?php echo CHtml::encode($data->fecha_vencimiento); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('interes')); ?>:</b>
-	<?php echo CHtml::encode($data->interes); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('descuento')); ?>:</b>
+	<?php echo CHtml::encode($data->descuento); ?>
 	<br />
 
 	<?php /*

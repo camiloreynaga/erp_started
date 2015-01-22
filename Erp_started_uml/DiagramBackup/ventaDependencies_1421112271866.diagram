@@ -1,0 +1,29 @@
+<XMI xmi.version="1.2"  xmlns:UML="org.omg.xmi.namespace.UML"  timestamp="12 de enero de 2015 08:24:32 PM COT" >
+<XMI.content>
+<UML:Diagram isVisible="false"  zoom="1.0"  name="ventaDependencies"  xmi.id="DCE.94E07E3D-AAF3-9020-EDDF-3FB38992792C" >
+<UML:GraphElement.position>
+     <XMI.field>0</XMI.field>
+     <XMI.field>0</XMI.field>
+</UML:GraphElement.position>
+<UML:GraphNode.size>
+     <XMI.field>478</XMI.field>
+     <XMI.field>573</XMI.field>
+</UML:GraphNode.size>
+<UML:Diagram.viewport>
+     <XMI.field>0</XMI.field>
+     <XMI.field>0</XMI.field>
+</UML:Diagram.viewport>
+<UML:DiagramElement.property>
+<UML:Property value="DCE.4454EB7A-5645-9103-995C-1F1382A720DB"  key="netbeans-diagram-namespace" />
+<UML:Property value="DCE.55093318-F09E-6D18-6360-E8745C51CD9F"  xmi.id="Property2_PEID"  key="netbeans-diagram-projectID" />
+</UML:DiagramElement.property>
+<UML:GraphElement.semanticModel>
+<UML:SimpleSemanticModelElement presentation=""  xmi.id="DCE.94E07E3D-AAF3-9020-EDDF-3FB38992792C"  typeinfo="Class Diagram" />
+</UML:GraphElement.semanticModel>
+<UML:GraphElement.contained>
+</UML:GraphElement.contained>
+<UML:Diagram.owner>
+</UML:Diagram.owner>
+</UML:Diagram>
+</XMI.content>
+</XMI>

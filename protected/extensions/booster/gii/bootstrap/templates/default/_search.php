@@ -16,14 +16,14 @@
 		continue;
 	}
 	?>
-	<?php echo "<?php echo " . $this->generateActiveRow($this->modelClass, $column) . "; ?>\n"; ?>
+	<?php echo "<?php echo " . $this->generateActiveGroup($this->modelClass, $column) . "; ?>\n"; ?>
 
 <?php endforeach; ?>
 	<div class="form-actions">
 		<?php echo "<?php \$this->widget('booster.widgets.TbButton', array(
 			'buttonType' => 'submit',
 			'context'=>'primary',
-			'label'=>'Search',
+			'label'=>yii::t('app','Search'),
 		)); ?>\n"; ?>
 	</div>
 

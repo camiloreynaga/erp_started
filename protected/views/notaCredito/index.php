@@ -1,15 +1,15 @@
 <?php
 $this->breadcrumbs=array(
-	'Nota Creditos',
+        yii::t('app','Nota Creditos'),
 );
 
 $this->menu=array(
-array('label'=>'Create NotaCredito','url'=>array('create')),
-array('label'=>'Manage NotaCredito','url'=>array('admin')),
+array('label'=>yii::t('app','Create').' '.yii::t('app','NotaCredito'),'url'=>array('create')),
+array('label'=>yii::t('app','Manage').' '.yii::t('app','NotaCredito'),'url'=>array('admin')),
 );
 ?>
 
-<h1>Nota Creditos</h1>
+<h1><?php echo yii::t('app','Nota Creditos'); ?></h1>
 
 <?php $this->widget('booster.widgets.TbListView',array(
 'dataProvider'=>$dataProvider,

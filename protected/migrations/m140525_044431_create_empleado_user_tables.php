@@ -48,7 +48,7 @@ class m140525_044431_create_empleado_user_tables extends CDbMigration
             ) ,'ENGINE=InnoDB');
             
             //tabla usuario
-           $this->createTable('tbl_usuario',array(
+           $this->createTable('tbl_user',array(
                 'id'=>'pk',
                 'username' => 'string NOT NULL',
                 'email' => 'string ',
@@ -64,17 +64,17 @@ class m140525_044431_create_empleado_user_tables extends CDbMigration
            //relacion empleado cargo
            $this->addForeignKey('fk_empleado_cargo', 'tbl_empleado', 'cargo_id', 'tbl_cargo', 'id','CASCADE','RESTRICT');
            //Relación de empleado con usuario
-            $this->addForeignKey('fk_empleado_usuario', 'tbl_usuario', 'empleado_id', 'tbl_empleado', 'id','CASCADE','RESTRICT');
+            $this->addForeignKey('fk_empleado_user', 'tbl_user', 'empleado_id', 'tbl_empleado', 'id','CASCADE','RESTRICT');
 	}
 
 	public function safeDown()
 	{
             $this->dropForeignKey('fk_empleado_cargo', 'tbl_empleado');
-            $this->dropForeignKey('fk_empleado_usuario', 'tbl_usuario');
+            $this->dropForeignKey('fk_empleado_user', 'tbl_user');
             
             $this->dropTable('tbl_cargo');
             $this->dropTable('tbl_empleado');
-            $this->dropTable('tbl_usuario');
+            $this->dropTable('tbl_user');
 	}
 	
 }

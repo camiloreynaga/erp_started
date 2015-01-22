@@ -15,8 +15,8 @@
  * @property string $importe_total
  * @property string $observacion
  * @property integer $estado
- * @property integer $estado_comprobante
- * @property integer $estado_pago
+ * @property integer $estado_comprobante :0=pendiente ; 1=emitido
+ * @property integer $estado_pago :0=pendiente;1=pagado
  * @property string $create_time
  * @property integer $create_user_id
  * @property string $update_time
@@ -38,7 +38,7 @@ class Venta extends Erp_startedActiveRecord//CActiveRecord
             '0'=>'PENDIENTE', // VENTA EN PROCESO  (PENDIENTE) 
             '1'=>'CONFIRMADO', // VENTA CONFIRMADO( SUCEPTIBLE A DESPACHO Y FACTURACION)
             '2'=>'FACTURADO', // VENTA FACTURADA
-            //'3'=>'ANULADO', // VENTA ANULADA
+            '3'=>'ANULADO', // VENTA ANULADA
             '4'=>'DESPACHADO' //VENTA DESPACHADA
          );
     
@@ -71,7 +71,7 @@ class Venta extends Erp_startedActiveRecord//CActiveRecord
         
         
         /**
-         * validación para cantidad_bueno y cantidad_malo 
+         * validación para linea de credito, y credito disponible  
          * @param type $attribute
          * @param type $params
          */
@@ -94,10 +94,7 @@ class Venta extends Erp_startedActiveRecord//CActiveRecord
                     {
                         $this->addError ($attribute, yii::t('app',"This Client do not have Credit line.")); //
                     }
-                        
-                        
                 }
-           
             }
         }
         
@@ -136,13 +133,14 @@ class Venta extends Erp_startedActiveRecord//CActiveRecord
 			'importe_total' => 'Importe Total',
 			'observacion' => 'Observacion',
                         'estado' => 'Estado',
+                        'estado_pago'=> 'Estado pago',
+                        'estado_comprobante'=>'Estado comprobante',
 			'create_time' => 'Create Time',
 			'create_user_id' => 'Create User',
 			'update_time' => 'Update Time',
 			'update_user_id' => 'Update User',
 		);
 	}
-
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 *
@@ -158,10 +156,10 @@ class Venta extends Erp_startedActiveRecord//CActiveRecord
 	public function search()
 	{
 		// @todo Please modify the following code to remove attributes that should not be searched.
-
 		$criteria=new CDbCriteria;
+                $criteria->alias='venta';
                 $criteria->with= array('r_cliente','r_forma_pago','r_empleado');
-		$criteria->compare('id',$this->id);
+		$criteria->compare('t.id',$this->id);
 		$criteria->compare('fecha_venta',$this->fecha_venta,true);
 		$criteria->compare('r_cliente.nombre_rz',$this->cliente_id,true);
 		$criteria->compare('r_empleado.nombre',$this->vendedor_id,true);
@@ -178,8 +176,7 @@ class Venta extends Erp_startedActiveRecord//CActiveRecord
 		$criteria->compare('create_user_id',$this->create_user_id);
 		$criteria->compare('update_time',$this->update_time,true);
 		$criteria->compare('update_user_id',$this->update_user_id);
-                
-                $criteria->order='t.id DESC';
+                //$criteria->order='t.id DESC';
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
@@ -219,4 +216,51 @@ class Venta extends Erp_startedActiveRecord//CActiveRecord
               }
               return $resultados;   
         }
+        
+        /**
+         * Elimina todos los items del detalle de venta
+         */
+        public function deleteDetaills()
+        {
+            $detalles = $this->r_detalle_venta;
+            foreach($detalles as $detalle_venta)
+            {
+                  //actualizar la cantidad disponible en ProductoAlmacen
+                ProductoAlmacen::model()->actualizarCantidadDisponible($detalle_venta,0); 
+                //actualizando credito disponible en cliente si el medio de pago es credito (1)
+                Cliente::model()->actualizarCreditoDisponible($detalle_venta,0);
+            }
+            DetalleVenta::model()->deleteAll('venta_id=:venta_id',array(':venta_id'=>  $this->id));
+        }
+        
+        /**
+         * anula todos los items del detalle de venta
+         * actualiza el credito disponible del cliente
+         */
+        public function anularDetaills()
+        {
+            $detalles = $this->r_detalle_venta;
+            foreach($detalles as $detalle_venta)
+            {
+                //actualizar la cantidad disponible en ProductoAlmacen
+                ProductoAlmacen::model()->actualizarCantidadDisponible($detalle_venta,0); 
+                
+                //actualizando credito disponible en cliente
+                Cliente::model()->actualizarCreditoDisponible($detalle_venta,0);
+            }
+            
+            //DetalleVenta::model()->deleteAll('venta_id=:venta_id',array(':venta_id'=>  $this->id));
+        }
+        
+        /**
+         * obtiene el numero de item en el detalle de la venta
+         * @return type string
+         */
+        public function countItems()
+        {
+            return DetalleVenta::model()->count('venta_id=:venta_id',array(':venta_id'=>  $this->id));
+                    
+        }
+        
+        
 }

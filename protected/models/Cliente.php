@@ -23,7 +23,13 @@
  * @property Venta[] $ventas
  */
 class Cliente extends Erp_startedActiveRecord//CActiveRecord
-{
+{   
+        //estado activo
+        public $_estado=array(
+            '0'=>'SI',
+            '1'=>'NO'
+        );
+    
 	/**
 	 * @return string the associated database table name
 	 */
@@ -40,6 +46,7 @@ class Cliente extends Erp_startedActiveRecord//CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
+                        array('linea_credito','validarLineaCredito','on'=>'update'),
 			array('ruc', 'required'),
 			array('activo, create_user_id, update_user_id', 'numerical', 'integerOnly'=>true),
 			array('nombre_rz, contacto, direccion', 'length', 'max'=>100),
@@ -52,6 +59,27 @@ class Cliente extends Erp_startedActiveRecord//CActiveRecord
 			array('id, nombre_rz, ruc, contacto, direccion, ciudad, telefono, activo, linea_credito, credito_disponible, create_time, create_user_id, update_time, update_user_id', 'safe', 'on'=>'search'),
 		);
 	}
+        
+        /**
+         * Valida que el monto de linea de credito sea mayor al monto de credtio usado
+         * @param type $attribute
+         * @param type $params
+         */
+        public function validarLineaCredito($attribute,$params){
+            if($this->linea_credito >0) // si linea de credito > 0
+                    {
+                        $_credito_usado= $this->linea_credito-$this->credito_disponible;    
+
+                        if($_credito_usado>$this->linea_credito)
+                        {
+                            $this->addError ($attribute, yii::t('app',"This credit line amount is minus that credit used, credit used ").$_credito_usado);
+                        }
+                    }
+//                    else
+//                    {
+//                        $this->addError ($attribute, yii::t('app',"This Client do not have Credit line.")); //
+//                    }
+        }
 
 	/**
 	 * @return array relational rules.
@@ -106,7 +134,7 @@ class Cliente extends Erp_startedActiveRecord//CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
+		$criteria->compare('t.id',$this->id);
 		$criteria->compare('nombre_rz',$this->nombre_rz,true);
 		$criteria->compare('ruc',$this->ruc,true);
 		$criteria->compare('contacto',$this->contacto,true);
@@ -146,10 +174,20 @@ class Cliente extends Erp_startedActiveRecord//CActiveRecord
             $criteria= new CDbCriteria();
             $criteria->condition='activo=0';
             
-            return $this->findAll($criteria);
+            //return $this->findAll($criteria);
+            $lista= $this->model()->findAll($criteria); 
+            $resultados = array();
+              foreach ($lista as $list){
+                $resultados[] = array(
+                         'id'=>$list->id,
+                         'text'=> $list->nombre_rz.' - '.$list->ciudad,
+              ); 
+            
+              }
+              return $resultados;  
         }
         /**
-         * Actualiza la cantidad disponible
+         * Actualiza el monto de linea de credito usado , valida que la forma de pago sea credito =1
          * @param type $model= modelo de detalle de venta
          * @param type $operacion = 0 para sumar otro valor para restar
          */
@@ -165,4 +203,26 @@ class Cliente extends Erp_startedActiveRecord//CActiveRecord
             }
             
         }
+        
+        
+        /**
+         * Acrtualizar el credito usado de un cliente
+         * @param type $venta_id: id de la venta
+         * @param type $operacion: 0=suma; 1=resta
+         * @param type $monto_pago: monto a considerar
+         */
+        public function actualizarCreditoDisponible_2($venta_id,$operacion,$monto_pago)
+        {
+            $model=Venta::model()->findByPk($venta_id);
+            if($model->forma_pago_id==1){
+                $_monto = $operacion==0 ? $monto_pago : 
+                $monto_pago*(-1);
+                $_cliente = $this->findByPk($model->cliente_id);
+                $_cliente->credito_disponible+=$_monto;
+                $_cliente->save();
+
+            }
+            
+        }
+        
 }
