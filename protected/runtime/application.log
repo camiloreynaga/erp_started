@@ -3439,19 +3439,4 @@ Stack trace:
 #6 D:\xampp\htdocs\yii\framework\web\CController.php(782): CController->renderPartial('_compraForm', Array, true)
 #7 D:\xampp\htdocs\erp_started\protected\controllers\MovimientoAlmacenController.php(161): CController->render('_compraForm', Array)
 #8 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): MovimientoAlmacenController->actionIngresarCompra()
-#9 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
-#10 D:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
-#11 D:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
-#12 D:\xampp\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
-#13 D:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
-#14 D:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
-#15 D:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
-#16 D:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
-#17 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('ingresarCompra')
-#18 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('movimientoAlmac...')
-#19 D:\xampp\htdocs\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
-#20 D:\xampp\htdocs\erp_started\index.php(13): CApplication->run()
-#21 {main}
-REQUEST_URI=/erp_started/index.php?r=movimientoAlmacen/ingresarCompra
-HTTP_REFERER=http://localhost/erp_started/index.php?r=movimientoAlmacen/admin
 ---
