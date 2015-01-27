@@ -271,11 +271,4 @@ class ComprobanteVentaController extends Controller
             
             return $this->_venta;
         }
-        
-        //new fucntion for Rizo
-        
-        public function actionGetTipoComprobante()
-        {
-            echo CJSON::encode(TipoComprobante::model()->findAll(), 'id', 'comprobante'); 
-        }
 }

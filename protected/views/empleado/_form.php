@@ -72,6 +72,50 @@
                 ) ;
         
         ?>
+    <?php echo $form->datepickerGroup(
+                $model,
+                'fecha_ingreso',
+                array(
+                    'widgetOptions'=> array(
+                        'options'=>array(
+                            //'language' => 'es',
+                            //'format'=>'dd/mm/yyyy',
+                             'format'=>'yyyy-mm-dd',
+                             'autoclose'=>true,
+                             'todayHighlight'=>true,
+                            
+                        ),
+                       //'htmlOptions'=>array('class'=>'span5')
+                        ),
+                        'hint' => yii::t('app','Put date'),
+                        'prepend' => '<i class="glyphicon glyphicon-calendar"></i>'
+                    )
+                ) ;
+        
+        ?>
+        <?php 
+        if(!$model->isNewRecord) 
+        echo $form->datepickerGroup(
+                $model,
+                'fecha_salida',
+                array(
+                    'widgetOptions'=> array(
+                        'options'=>array(
+                            //'language' => 'es',
+                            //'format'=>'dd/mm/yyyy',
+                             'format'=>'yyyy-mm-dd',
+                             'autoclose'=>true,
+                             'todayHighlight'=>true,
+                            
+                        ),
+                       //'htmlOptions'=>array('class'=>'span5')
+                        ),
+                        'hint' => yii::t('app','Put date'),
+                        'prepend' => '<i class="glyphicon glyphicon-calendar"></i>'
+                    )
+                ) ;
+        
+        ?>
 
 <div class="form-actions">
 	<?php $this->widget('booster.widgets.TbButton', array(

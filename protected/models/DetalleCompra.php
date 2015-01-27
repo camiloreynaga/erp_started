@@ -15,6 +15,7 @@
  * @property integer $estado
  * @property string $observacion
  * @property string $precio_unitario
+ * @property string $porcentaje_descuento
  * @property string $subtotal
  * @property string $impuesto
  * @property string $total
@@ -63,14 +64,14 @@ class DetalleCompra extends Erp_startedActiveRecord//CActiveRecord
                        // array('fecha_vencimiento','date'),
                         array('cantidad_bueno,cantidad_malo','compare','compareAttribute'=>'cantidad','operator'=>'<='),
 			array('compra_id, producto_id, cantidad, cantidad_bueno, cantidad_malo, estado, create_user_id, update_user_id, comprobante_id', 'numerical', 'integerOnly'=>true),
-			array('precio_unitario','numerical'),
+			array('porcentaje_descuento,precio_unitario','numerical'),
                         array('compra_id,cantidad','required'),
                         array('lote', 'length', 'max'=>50),
 			array('precio_unitario, subtotal, impuesto, total', 'length', 'max'=>10),
 			array('fecha_vencimiento, observacion, create_time, update_time', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, compra_id, producto_id, cantidad, lote, fecha_vencimiento, cantidad_bueno, cantidad_malo, estado, observacion, precio_unitario, subtotal, impuesto, total, create_time, create_user_id, update_time, update_user_id, comprobante_id', 'safe', 'on'=>'search'),
+			array('id, compra_id, producto_id, cantidad, lote, fecha_vencimiento, cantidad_bueno, cantidad_malo, estado, observacion, precio_unitario,porcentaje_descuento, subtotal, impuesto, total, create_time, create_user_id, update_time, update_user_id, comprobante_id', 'safe', 'on'=>'search'),
 		);
 	}
         
@@ -117,6 +118,7 @@ class DetalleCompra extends Erp_startedActiveRecord//CActiveRecord
 			'estado' => 'Estado',
 			'observacion' => 'Observacion',
 			'precio_unitario' => 'Precio Unitario',
+                        'porcentaje_descuento'=>'% descuento',
 			'subtotal' => 'Subtotal',
 			'impuesto' => 'Impuesto',
 			'total' => 'Total',
@@ -157,6 +159,7 @@ class DetalleCompra extends Erp_startedActiveRecord//CActiveRecord
 		$criteria->compare('estado',$this->estado);
 		$criteria->compare('observacion',$this->observacion,true);
 		$criteria->compare('precio_unitario',$this->precio_unitario,true);
+                $criteria->compare('porcentaje_descuento',$this->porcentaje_descuento,true);
 		$criteria->compare('subtotal',$this->subtotal,true);
 		$criteria->compare('impuesto',$this->impuesto,true);
 		$criteria->compare('total',$this->total,true);
@@ -218,6 +221,7 @@ class DetalleCompra extends Erp_startedActiveRecord//CActiveRecord
               //return $resultados;  
         }
 
+        
 
         /**
          * verifica que los datos de registro de un item esten OK

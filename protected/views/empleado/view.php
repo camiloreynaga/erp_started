@@ -32,6 +32,8 @@ $this->breadcrumbs=array(
 		'telefono',
 		'movil',
 		'fecha_nacimiento',
+                'fecha_ingreso',
+                'fecha_salida',
 		'create_time',
                 array(
                   'name'=>'create_user_id',

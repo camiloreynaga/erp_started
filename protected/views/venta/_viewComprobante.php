@@ -15,22 +15,22 @@ $model->venta_id=$pid;
 'columns'=>array(
 		//'id',
 		//'venta_id',
-                array(
-                    'name'=>'tipo_comprobante_id',
-                    'value'=>'$data->r_tipo_comprobante->comprobante'
-                ),
 //                array(
 //                    'name'=>'tipo_comprobante_id',
-//                    'value'=>'$data->r_tipo_comprobante->comprobante',
-//                    'class'=>'booster.widgets.TbEditableColumn',
-//                        'editable'=>array(
-//                            'type'=>'select',
-//                            //'inputClass'=>'inline',
-//                            'url' => $this->createUrl('ComprobanteVenta/editItem'),
-//                            'source'=>$this->createUrl('ComprobanteVenta/getTipoComprobante'),
-//                            
-//                        )
-//                ),    
+//                    'value'=>'$data->r_tipo_comprobante->comprobante'
+//                ),
+                array(
+                    'name'=>'tipo_comprobante_id',
+                    'value'=>'$data->r_tipo_comprobante->comprobante',
+                    'class'=>'booster.widgets.TbEditableColumn',
+                        'editable'=>array(
+                            'type'=>'select',
+                            //'inputClass'=>'inline',
+                            'url' => $this->createUrl('ComprobanteVenta/editItem'),
+                           // 'source'=>$this->createUrl('ComprobanteVenta/getTipoComprobante'),
+                            'source'    => CHtml::listData(TipoComprobante::model()->findAll(), 'id', 'comprobante')
+                        )
+                ),    
     
 		'fecha_emision',
 		'fecha_cancelacion',

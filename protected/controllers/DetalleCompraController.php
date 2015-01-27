@@ -200,7 +200,8 @@ class DetalleCompraController extends Controller
         {
          Yii::import('booster.components.TbEditableSaver');
          $es = new TbEditableSaver('DetalleCompra');
-         //actualizando los calculos de precio unitario, subtotal y total
+         //actualizando los calculos de precio unitario, subtotal y 
+         //total
           $es->onBeforeUpdate= function($event) {
 
                    $model=$this->loadModel(yii::app()->request->getParam('pk')); //obteniendo el Model de detalleCompra

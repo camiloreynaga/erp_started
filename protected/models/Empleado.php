@@ -14,6 +14,8 @@
  * @property string $telefono
  * @property string $movil
  * @property integer $cargo_id
+ * @property string $fecha_ingreso
+ * @property string $fecha_salida
  * @property string $create_time
  * @property integer $create_user_id
  * @property string $update_time
@@ -46,10 +48,10 @@ class Empleado extends Erp_startedActiveRecord//CActiveRecord
 			array('nombre, ap_paterno, ap_materno, telefono, movil', 'length', 'max'=>50),
 			array('doc_identidad', 'length', 'max'=>10),
 			array('direccion', 'length', 'max'=>100),
-			array('fecha_nacimiento, create_time, update_time', 'safe'),
+			array('fecha_ingreso,fecha_salida,fecha_nacimiento, create_time, update_time', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, nombre, ap_paterno, ap_materno, fecha_nacimiento, doc_identidad, direccion, telefono, movil, cargo_id, create_time, create_user_id, update_time, update_user_id', 'safe', 'on'=>'search'),
+			array('id, nombre, ap_paterno, ap_materno, fecha_nacimiento, doc_identidad, direccion, telefono, movil, cargo_id,fecha_ingreso,fecha_salida, create_time, create_user_id, update_time, update_user_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -82,6 +84,8 @@ class Empleado extends Erp_startedActiveRecord//CActiveRecord
 			'telefono' => 'Telefono',
 			'movil' => 'Movil',
 			'cargo_id' => 'Cargo',
+                        'fecha_ingreso'=>'Fecha ingreso',
+                        'fecha_salida'=>'Fecha salida',
 			'create_time' => 'Create Time',
 			'create_user_id' => 'Create User',
 			'update_time' => 'Update Time',
@@ -117,6 +121,8 @@ class Empleado extends Erp_startedActiveRecord//CActiveRecord
 		$criteria->compare('telefono',$this->telefono,true);
 		$criteria->compare('movil',$this->movil,true);
 		$criteria->compare('cargo_id',$this->cargo_id);
+                $criteria->compare('fecha_ingreso', $this->fecha_ingreso);
+                $criteria->compare('fecha_salida', $this->fecha_salida);
 		$criteria->compare('create_time',$this->create_time,true);
 		$criteria->compare('create_user_id',$this->create_user_id);
 		$criteria->compare('update_time',$this->update_time,true);

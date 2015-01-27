@@ -40,6 +40,8 @@ class m140525_044431_create_empleado_user_tables extends CDbMigration
                 'telefono'=>'varchar(50)',
                 'movil'=>'varchar(50)',
                 'cargo_id'=>'int(11)',
+                'fecha_ingreso'=>'date',
+                'fecha_salida'=>'date',
                 //
                 'create_time'=>'datetime DEFAULT NULL',
                 'create_user_id'=> 'int(11) DEFAULT NULL',
