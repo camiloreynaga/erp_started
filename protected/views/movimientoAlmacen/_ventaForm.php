@@ -9,7 +9,7 @@
 
 <?php
     $venta= Venta::model();
-    //$venta->estado=1; // filtra a los venta con estado = confirmado /
+    $venta->estado=1; // filtra a los venta con estado = confirmado /
     $this->widget('booster.widgets.TbGridView',array(
     'id'=>'venta-grid',
     'dataProvider'=>$venta->search(),

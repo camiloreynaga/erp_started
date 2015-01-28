@@ -3498,3 +3498,7 @@ Stack trace:
 REQUEST_URI=/erp_started/index.php?r=Compra/Create&id=1
 HTTP_REFERER=http://localhost/erp_started/index.php?r=Compra/Create&id=1
 ---
+2015/01/28 19:50:44 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'erp_rizo.tbl_migration' doesn't exist. The SQL statement executed was: SHOW FULL COLUMNS FROM `tbl_migration`.
+2015/01/28 20:56:47 [warning] [application] Error al establecer unsafe al atributo "ventaUnd" de "Producto".
+in D:\xampp\htdocs\erp_started\protected\controllers\ProductoController.php (96)
+in D:\xampp\htdocs\erp_started\index.php (13)
