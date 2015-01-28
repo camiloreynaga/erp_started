@@ -12,8 +12,8 @@ return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'ERP APP',
         'language'=>'es',
-        //'theme'=>'rizo', 
-        'theme'=>'kiwi',
+        'theme'=>'rizo', 
+        //'theme'=>'kiwi',
         //  'theme'=>'fardisur',
 	// preloading 'log' component
 	'preload'=>array('log','booster'),
@@ -60,16 +60,13 @@ return array(
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
 			),
 		),
-		
 		'db'=>array(
 			'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',
 		),*/
-            
 		// uncomment the following to use a MySQL database
-	
 		'db'=>array(
-			'connectionString' => 'mysql:host=localhost;dbname=erp_plastiplas',
-                        //'connectionString' => 'mysql:host=localhost;dbname=erp_rizo',
+			//'connectionString' => 'mysql:host=localhost;dbname=erp_plastiplas',
+                        'connectionString' => 'mysql:host=localhost;dbname=erp_rizo',
                         //'connectionString' => 'mysql:host=localhost;dbname=erp_started2',
 			'emulatePrepare' => true,
 			'username' => 'root',

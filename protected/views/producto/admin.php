@@ -72,11 +72,11 @@ return false;
 //                            )
 //                    ),
                 ),
-                array(
-                    'name'=>'presentacion_id',
-                    'header'=>'Presentación',
-                    'value'=>'isset($data->r_presentacion->presentacion)?$data->r_presentacion->presentacion:null'
-                ),
+//                array(
+//                    'name'=>'presentacion_id',
+//                    'header'=>'Presentación',
+//                    'value'=>'isset($data->r_presentacion->presentacion)?$data->r_presentacion->presentacion:null'
+//                ),
                 array(
                     'name'=>'unidad_medida_id',
                     'header'=>'Medida',
@@ -112,9 +112,6 @@ return false;
 		/*
 		'fabricante_id',
 		'minimo_stock',
-		
-		
-		
 		'ventaUnd',
 		'observacion',
 		'create_time',

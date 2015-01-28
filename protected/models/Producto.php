@@ -113,7 +113,7 @@ class Producto extends Erp_startedActiveRecord// CActiveRecord
 			'tipo_producto_id' => 'Tipo Producto',
 			'presentacion_id' => 'Presentacion',
 			'unidad_medida_id' => 'Unidad Medida',
-			'fabricante_id' => 'Laboratorio',
+			'fabricante_id' => 'Marca',
 			'minimo_stock' => 'Minimo Stock',
 			'stock' => 'Stock',
 			'descontinuado' => 'Descontinuado',
@@ -235,10 +235,8 @@ class Producto extends Erp_startedActiveRecord// CActiveRecord
             $criteria->with=array('r_fabricante');
             //$criteria->together=true;
             $_lab= Fabricante::model()->tablename();
-           
            // $criteria->select='t.id,lab.fabricante as lab,t.nombre,t.stock';
             $criteria->join='inner join '.$_lab.' lab on lab.id = t.fabricante_id ';
-           
             $lista= $this->model()->findAll($criteria); 
               $resultados = array();
               foreach ($lista as $list){
