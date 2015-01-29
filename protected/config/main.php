@@ -12,7 +12,7 @@ return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'ERP APP',
         'language'=>'es',
-        'theme'=>'kiwi',
+        'theme'=>'rizo',
 	// preloading 'log' component
 	'preload'=>array('log','booster'),
 
@@ -63,7 +63,7 @@ return array(
 		),*/
 		// uncomment the following to use a MySQL database
 		'db'=>array(
-                        'connectionString' => 'mysql:host=localhost;dbname=erp_started2',
+                        'connectionString' => 'mysql:host=localhost;dbname=erp_rizo',
 			'emulatePrepare' => true,
 			'username' => 'root',
 			'password' => 'adonde',
