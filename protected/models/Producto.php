@@ -113,7 +113,7 @@ class Producto extends Erp_startedActiveRecord// CActiveRecord
 		return array(
 			'id' => 'ID',
                         'codigo'=>'Código',
-			'nombre' => 'Nombre',
+			'nombre' => 'Nombre Producto',
 			'descripcion' => 'Descripcion',
 			'tipo_producto_id' => 'Tipo Producto',
 			'presentacion_id' => 'Presentacion',

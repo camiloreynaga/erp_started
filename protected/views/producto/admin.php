@@ -50,7 +50,7 @@ return false;
                 ),    
                 array(
                     'name'=>'nombre',
-                    'header'=>'Producto',
+                    //'header'=>'Producto',
                     //'value'=>'$data->r_Producto'
                 ),
 		'descripcion',
@@ -72,11 +72,11 @@ return false;
 //                            )
 //                    ),
                 ),
-//                array(
-//                    'name'=>'presentacion_id',
-//                    'header'=>'Presentación',
-//                    'value'=>'isset($data->r_presentacion->presentacion)?$data->r_presentacion->presentacion:null'
-//                ),
+                array(
+                    'name'=>'presentacion_id',
+                    'header'=>'Presentación',
+                    'value'=>'isset($data->r_presentacion->presentacion)?$data->r_presentacion->presentacion:null'
+                ),
                 array(
                     'name'=>'unidad_medida_id',
                     'header'=>'Medida',
@@ -84,7 +84,7 @@ return false;
                 ),
                 array(
                     'name'=>'fabricante_id',
-                    'header'=>'Laboratorio',
+                    //'header'=>'Laboratorio',
                     'value'=>'isset($data->r_fabricante->fabricante)?$data->r_fabricante->fabricante:null'
                 ),
                 'stock',
