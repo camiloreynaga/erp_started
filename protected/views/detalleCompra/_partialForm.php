@@ -88,6 +88,8 @@
 	<?php echo $form->textFieldGroup($model,'cantidad_malo',array('class'=>'span5')); ?>
 
 	<?php //echo $form->textFieldGroup($model,'estado',array('class'=>'span5')); ?>
+        
+        <?php echo $form->textFieldGroup($model,'porcentaje_descuento',array('class'=>'span5','maxlength'=>10)); ?>
 
 	<?php echo $form->textFieldGroup($model,'precio_unitario',array('class'=>'span5','maxlength'=>10)); ?>
         

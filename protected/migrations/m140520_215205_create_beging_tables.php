@@ -94,6 +94,7 @@ class m140520_215205_create_beging_tables extends CDbMigration
             
              $this->createTable('tbl_producto',array(
                 'id'=>'pk',
+                'codigo'=>'varchar(50) DEFAULT NULL',
                 'nombre'=>'varchar(100) NOT NULL',
                 'descripcion'=>'text DEFAULT NULL',
                 'tipo_producto_id'=>'int(11) DEFAULT NULL',

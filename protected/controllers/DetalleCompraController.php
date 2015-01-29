@@ -71,6 +71,39 @@ class DetalleCompraController extends Controller
         }
         
         /**
+         * Calcula el total, subtoal e impuesto diferenciando si incluye o no igv 
+         * @param type $model 
+         * @return type
+         */
+        protected  function CalculaTotal($model)
+        {
+            $_valor_descuento= round($model->precio_unitario*$model->cantidad * $model->porcentaje_descuento/100,2) ; // monto del descuento
+            $_valor_compra=round($model->precio_unitario*$model->cantidad,2); //monto de compra sin descuento
+            if ($model->_incluye_igv===false)
+            {
+                
+                //Precio SIN IGV Incluido
+                $model->subtotal= $_valor_compra - $_valor_descuento;
+                $model->impuesto= Producto::model()->getImpuesto($model->subtotal); //round($model->total/((int)Yii::app()->params['impuesto']*0.01 + 1),2);
+                $model->total= round($model->impuesto+$model->subtotal,2);
+            }
+            else
+            {
+                //$_valor_descuento= round($model->precio_unitario*$model->cantidad * $model->porcentaje_descuento/100,2) ; // monto del descuento
+                //$_valor_compra=round($model->precio_unitario*$model->cantidad,2); //monto de compra sin descuento
+                
+                //Precio IGV Incluido
+                $model->total= $_valor_compra - $_valor_descuento; //$model->precio_unitario * $model->cantidad;
+                $model->subtotal= $_subtotal= Producto::model()->getSubtotal($model->total); //round($model->total/((int)Yii::app()->params['impuesto']*0.01+1),2);
+                $model->impuesto= round($model->total-$model->subtotal,2);
+            }
+                
+            return $model;
+
+        }
+
+
+        /**
         * Creates a new model.
         * If creation is successful, the browser will be redirected to the 'view' page.
         */
@@ -84,15 +117,12 @@ class DetalleCompraController extends Controller
             if(isset($_POST['DetalleCompra']))
             {
                 $model->attributes=$_POST['DetalleCompra'];
-                /* calculo sin igv incluido
-                 $model->subtotal=$model->precio_unitario*$model->cantidad;
-                $model->impuesto=$model->subtotal*((int)Yii::app()->params['impuesto']*0.01);
-                $model->total=$model->subtotal+$model->impuesto;
-                 */
+                $model = $this->CalculaTotal($model);
+                
                 //Precio SIN IGV Incluido
-                $model->subtotal= round($model->precio_unitario*$model->cantidad,2);
-                $model->impuesto= Producto::model()->getImpuesto($model->subtotal); //  round($model->total/((int)Yii::app()->params['impuesto']*0.01 + 1),2);
-                $model->total= round($model->impuesto+$model->subtotal,2);
+                //$model->subtotal= $_valor_compra - $_valor_descuento;
+                //$model->impuesto= Producto::model()->getImpuesto($model->subtotal); //round($model->total/((int)Yii::app()->params['impuesto']*0.01 + 1),2);
+                //$model->total= round($model->impuesto+$model->subtotal,2);
                 
                 if($model->save())
                 {
@@ -136,9 +166,11 @@ class DetalleCompraController extends Controller
                 $model->attributes=$_POST['DetalleCompra'];
                 
                 //Precio SIN IGV Incluido
-                $model->subtotal= round($model->precio_unitario*$model->cantidad,2);
-                $model->impuesto= Producto::model()->getImpuesto($model->subtotal); //  round($model->total/((int)Yii::app()->params['impuesto']*0.01 + 1),2);
-                $model->total= round($model->impuesto+$model->subtotal,2);
+//                $model->subtotal= round($model->precio_unitario*$model->cantidad,2);
+//                $model->impuesto= Producto::model()->getImpuesto($model->subtotal); //  round($model->total/((int)Yii::app()->params['impuesto']*0.01 + 1),2);
+//                $model->total= round($model->impuesto+$model->subtotal,2);
+                
+                $model = $this->CalculaTotal($model);
                 
                 if($model->save())
                 {
@@ -156,6 +188,43 @@ class DetalleCompraController extends Controller
                     'div'=>$this->renderPartial('_partialForm',array('model'=>$model),true)
             ));
         }
+        /**
+         * Edita la cantidad de la columna 
+         * además actualiza los calculos de subtotal,impuesto y total
+         */
+//        public function actionEditCantidad()
+//        {
+//                    Yii::import('booster.components.TbEditableSaver');
+//                    $es = new TbEditableSaver('DetalleCompra');
+//           //         /$_cantidad= $es->value;
+//                    $es->onBeforeUpdate= function($event) {
+//
+//                   $model=$this->loadModel(yii::app()->request->getParam('pk')); //obteniendo el Model de detalleCompra
+//                   
+//                   $_cantidad=  yii::app()->request->getParam('value');
+//                   
+//                   //$this->PuConIGV($model);
+//                   // IGV INCLUIDO
+//                   $_total=round($model->precio_unitario*$_cantidad,2);//calculando el total
+//                   $_subtotal= round($_total/((int)Yii::app()->params['impuesto']*0.01 + 1),2); //calculando subtotal
+//                   $_impuesto= round($_total-$_subtotal,2); //calculando subtotal
+//                    
+//                   
+//                   $event->sender->setAttribute('subtotal', $_subtotal);//Actualizando Cantidad
+//                   $event->sender->setAttribute('impuesto', $_impuesto);//Actualizando impuesto
+//                   $event->sender->setAttribute('total', $_total); //actualizando total
+//            
+//            };
+//            //actualiza el estado del item de detalle de compra
+//         $es->onAfterUpdate= function($event) {
+//
+//             $model=$this->loadModel(yii::app()->request->getParam('pk')); //obteniendo el Model de detalleCompra
+//             $model->actualizarEstado();    
+//            }; 
+//            
+//            $es->update();
+//        }
+        
         /**
          * Edita la cantidad de la columna 
          * además actualiza los calculos de subtotal,impuesto y total
@@ -191,7 +260,6 @@ class DetalleCompraController extends Controller
             }; 
             
             $es->update();
-//         
         }
         /*
          * Actualiza el precio unitario haciendo lo calculos de subtotal impuesto y total

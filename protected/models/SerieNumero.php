@@ -98,6 +98,21 @@ class SerieNumero extends CActiveRecord
             
             //$this->numero
         }
+        
+        /**
+         * 
+         * @param type $serie numero de serie
+         * @param type $tipo tipo de comprobante
+         * @return type
+         */
+        public function getNroComprobante($serie,$tipo)
+        {
+            $criteria=new CDbCriteria;
+            $criteria->select='numero';
+            $criteria->condition='serie='.$serie.' and comprobante_id='.$tipo;
+            return $this->find($criteria);
+        }
+        
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!

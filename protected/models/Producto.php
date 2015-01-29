@@ -5,6 +5,7 @@
  *
  * The followings are the available columns in table 'tbl_producto':
  * @property integer $id
+ * @property string $codigo
  * @property string $nombre
  * @property string $descripcion
  * @property integer $tipo_producto_id
@@ -39,6 +40,9 @@
 class Producto extends Erp_startedActiveRecord// CActiveRecord
 {
         
+        /*
+         * estado de descontinuidad del producto
+         */
         public $_estado=array(
             '0'=>'NO',
             '1'=>'SI'
@@ -74,10 +78,10 @@ class Producto extends Erp_startedActiveRecord// CActiveRecord
 			array('tipo_producto_id, presentacion_id, unidad_medida_id, fabricante_id, minimo_stock, stock, descontinuado, create_user_id, update_user_id', 'numerical', 'integerOnly'=>true),
 			array('precio_venta, precio_compra, porcentaje_ganancia', 'numerical'),
 			array('nombre', 'length', 'max'=>100),
-			array('descripcion, observacion, create_time, update_time', 'safe'),
+			array('codigo,descripcion, observacion, create_time, update_time', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, nombre, descripcion, tipo_producto_id, presentacion_id, unidad_medida_id, fabricante_id, minimo_stock, stock, descontinuado, precio_venta, observacion, create_time, create_user_id, update_time, update_user_id', 'safe', 'on'=>'search'),
+			array('id, nombre, codigo,descripcion, tipo_producto_id, presentacion_id, unidad_medida_id, fabricante_id, minimo_stock, stock, descontinuado, precio_venta, observacion, create_time, create_user_id, update_time, update_user_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -108,6 +112,7 @@ class Producto extends Erp_startedActiveRecord// CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
+                        'codigo'=>'Código',
 			'nombre' => 'Nombre',
 			'descripcion' => 'Descripcion',
 			'tipo_producto_id' => 'Tipo Producto',
@@ -144,6 +149,7 @@ class Producto extends Erp_startedActiveRecord// CActiveRecord
                // $criteria->join='inner join '.$_lab.' lab on lab.id = t.fabricante_id ';
                         
 		$criteria->compare('t.id',$this->id);
+                $criteria->compare('codigo',$this->codigo,true);
 		$criteria->compare('nombre',$this->nombre,true);
 		$criteria->compare('descripcion',$this->descripcion,true);
 		$criteria->compare('r_tipoProducto.tipo_producto',$this->tipo_producto_id,true);

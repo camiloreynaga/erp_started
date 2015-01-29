@@ -88,6 +88,7 @@ class m140520_224733_create_begining_compras_tables extends CDbMigration
                 'cantidad'=>'int(11)',
                 'observacion'=>'text DEFAULT NULL',
                 'precio_unitario'=>'decimal(10,2)',
+                'porcentaje_descuento'=>'decimal(10,2) DEFAULT 0', 
                 'subtotal'=>'decimal(10,2)',
                 'impuesto'=>'decimal(10,2)',
                 'total'=>'decimal(10,2)',

@@ -31,7 +31,12 @@
  */
 class DetalleCompra extends Erp_startedActiveRecord//CActiveRecord
 {
+        
+        
         public $_save=false;
+        
+        public $_incluye_igv=true;
+        
         /*estado de item detalle compra
          * 
          */

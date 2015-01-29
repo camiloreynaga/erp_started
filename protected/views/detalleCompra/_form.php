@@ -204,7 +204,7 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog', array( // the dialog
                                     'name'=>'estado',
                                     'value'=>'$data->_estado[$data->estado]'
                                 ),
-                                
+                                'porcentaje_descuento',
                                 array(
                                     'name'=>'precio_unitario',
                                     'header'=>'P.U.',
