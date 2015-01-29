@@ -1,4 +1,4 @@
-<?php
+ <?php
 //Yii::setPathOfAlias('bootstrap', dirname(__FILE__).'/../extensions/bootstrap');
 Yii::setPathOfAlias('booster', dirname(__FILE__).'/../extensions/booster');
 

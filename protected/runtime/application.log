@@ -3609,3 +3609,19 @@ HTTP_REFERER=http://localhost/erp_started/index.php?r=fabricante/admin
 2015/01/29 07:24:49 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '0' at line 1. The SQL statement executed was: 0.
 2015/01/29 07:25:21 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42000]: Syntax error or access violation: 1091 Can't DROP 'punto_venta_id'; check that column/key exists. The SQL statement executed was:  ALTER TABLE `tbl_almacen` DROP `punto_venta_id` ;.
 2015/01/29 07:25:44 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '0' at line 1. The SQL statement executed was: 0.
+2015/01/29 09:13:50 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'No es posible resolver la solicitud "serienumero"' in D:\xampp\htdocs\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('serienumero')
+#1 D:\xampp\htdocs\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\xampp\htdocs\erp_started\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/Erp_started/index.php?r=serienumero
+---
+2015/01/29 09:14:21 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'No es posible resolver la solicitud "serieNumero"' in D:\xampp\htdocs\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('serieNumero')
+#1 D:\xampp\htdocs\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\xampp\htdocs\erp_started\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/Erp_started/index.php?r=serieNumero
+---
