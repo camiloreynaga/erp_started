@@ -18,7 +18,7 @@ return array(
 		*/
 		'db'=>array(
                     
-			'connectionString' => 'mysql:host=localhost;dbname=erp_started',
+			'connectionString' => 'mysql:host=localhost;dbname=erp_rizo',
 			'emulatePrepare' => true,
 			//'username' => 'cr',
                         'username'=>'root',
