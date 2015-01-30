@@ -171,31 +171,31 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog', array( // the dialog
                                     'header'=>'Producto',
                                     'value'=>'$data->r_producto->nombre', 
                                 ),
-                                array(
-                                    'name'=>'presentacion_id',
-                                    'header'=>'Present.',
-                                    'value'=>'isset($data->r_producto->r_presentacion->presentacion)?$data->r_producto->r_presentacion->presentacion:null'
-                                ),
+//                                array(
+//                                    'name'=>'presentacion_id',
+//                                    'header'=>'Present.',
+//                                    'value'=>'isset($data->r_producto->r_presentacion->presentacion)?$data->r_producto->r_presentacion->presentacion:null'
+//                                ),
                                 array(
                                     'name' => 'cantidad',
                                     'header' => 'Cant.',
                                 ),
-                                array(
-                                    'name' => 'lote',
-                                    'header' => 'Lote',
-                                ),
+//                                array(
+//                                    'name' => 'lote',
+//                                    'header' => 'Lote',
+//                                ),
                                 array(
                                     'name' => 'fecha_vencimiento',
                                     'header' => 'F.V.',
                                 ),
-                                array(
-                                    'name' => 'cantidad_bueno',
-                                    'header' => 'B',
-                                ),
-                                array(
-                                    'name' => 'cantidad_malo',
-                                    'header' => 'M',
-                                ),
+//                                array(
+//                                    'name' => 'cantidad_bueno',
+//                                    'header' => 'B',
+//                                ),
+//                                array(
+//                                    'name' => 'cantidad_malo',
+//                                    'header' => 'M',
+//                                ),
                                 array(
                                     'name'=>'observacion',
                                     'header'=>'Obs.',

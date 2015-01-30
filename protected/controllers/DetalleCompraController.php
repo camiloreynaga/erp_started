@@ -117,6 +117,8 @@ class DetalleCompraController extends Controller
             if(isset($_POST['DetalleCompra']))
             {
                 $model->attributes=$_POST['DetalleCompra'];
+                $model->cantidad_bueno=$model->cantidad; //igualando la cantidad de item buenos con cantidad solicitada
+                $model->lote='LOTE'; //lote de default
                 $model = $this->CalculaTotal($model);
                 
                 //Precio SIN IGV Incluido
@@ -164,11 +166,8 @@ class DetalleCompraController extends Controller
             if(isset($_POST['DetalleCompra']))
             {
                 $model->attributes=$_POST['DetalleCompra'];
-                
-                //Precio SIN IGV Incluido
-//                $model->subtotal= round($model->precio_unitario*$model->cantidad,2);
-//                $model->impuesto= Producto::model()->getImpuesto($model->subtotal); //  round($model->total/((int)Yii::app()->params['impuesto']*0.01 + 1),2);
-//                $model->total= round($model->impuesto+$model->subtotal,2);
+                $model->cantidad_bueno=$model->cantidad; //igualando la cantidad de item buenos con cantidad solicitada
+                $model->lote='LOTE'; //lote de default
                 
                 $model = $this->CalculaTotal($model);
                 

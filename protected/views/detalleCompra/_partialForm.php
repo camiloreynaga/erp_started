@@ -40,7 +40,7 @@
 
 	<?php echo $form->textFieldGroup($model,'cantidad',array('class'=>'span5')); ?>
 
-	<?php echo $form->textFieldGroup($model,'lote',array('class'=>'span5','maxlength'=>50)); ?>
+	<?php //echo $form->textFieldGroup($model,'lote',array('class'=>'span5','maxlength'=>50)); ?>
 
 	<?php
         if($model->isNewRecord)
@@ -83,9 +83,9 @@
         
         ?>
 
-	<?php echo $form->textFieldGroup($model,'cantidad_bueno',array('class'=>'span5')); ?>
+	<?php // echo $form->textFieldGroup($model,'cantidad_bueno',array('class'=>'span5')); ?>
 
-	<?php echo $form->textFieldGroup($model,'cantidad_malo',array('class'=>'span5')); ?>
+	<?php // echo $form->textFieldGroup($model,'cantidad_malo',array('class'=>'span5')); ?>
 
 	<?php //echo $form->textFieldGroup($model,'estado',array('class'=>'span5')); ?>
         
