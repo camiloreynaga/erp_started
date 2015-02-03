@@ -15,6 +15,42 @@
 
 	<?php echo $form->textFieldGroup($model,'doc_identidad',array('class'=>'span5','maxlength'=>10)); ?>
         
+        <?php
+//        echo $form->select2Group(
+//			$model,
+//			'punto_venta_id',
+//                      
+//			array(
+//				'wrapperHtmlOptions' => array(
+//					'class' => 'col-sm-5',
+//				),
+//				'widgetOptions' => array(
+//                                    
+//                                    'asDropDownList' => true,
+//                                    'data'      => CHtml::listData (PuntoVenta::model()->getPunto_venta(), "id","text"),
+//					'options' => array(
+//						'placeholder' =>'Seleccione', 
+//					),
+//				)
+//			)
+//		);
+        ?>
+        
+        <?php echo $form->dropDownListGroup(
+			$model,
+			'punto_venta_id',
+			array(
+				'wrapperHtmlOptions' => array(
+					'class' => 'col-sm-5',
+				),
+				'widgetOptions' => array(
+					'data' => CHtml::listData (PuntoVenta::model()->getPunto_venta(), "id","text"),// array('Something ...', '1', '2', '3', '4', '5'),
+					'htmlOptions' => array(),
+				)
+			)
+		); 
+        ?>
+
          <?php
         echo $form->select2Group(
 			$model,

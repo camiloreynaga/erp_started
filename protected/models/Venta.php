@@ -5,6 +5,7 @@
  *
  * The followings are the available columns in table 'tbl_venta':
  * @property integer $id
+ * @property integer $punto_venta_id
  * @property string $fecha_venta
  * @property integer $cliente_id
  * @property integer $vendedor_id
@@ -60,12 +61,12 @@ class Venta extends Erp_startedActiveRecord//CActiveRecord
 		return array(
                         array('forma_pago','comprobarLineaCredito'),
 			array('cliente_id, vendedor_id, forma_pago_id', 'required'),
-			array('cliente_id, vendedor_id, forma_pago_id, pedido_id,estado, estado_comprobante, estado_pago, create_user_id, update_user_id', 'numerical', 'integerOnly'=>true),
+			array('punto_venta_id,cliente_id, vendedor_id, forma_pago_id, pedido_id,estado, estado_comprobante, estado_pago, create_user_id, update_user_id', 'numerical', 'integerOnly'=>true),
 			array('base_imponible, impuesto, importe_total', 'length', 'max'=>10),
 			array('fecha_venta, observacion, create_time, update_time', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, fecha_venta, cliente_id, vendedor_id, forma_pago_id, pedido_id, base_imponible, impuesto, importe_total, observacion,estado, estado_comprobante, estado_pago, create_time, create_user_id, update_time, update_user_id', 'safe', 'on'=>'search'),
+			array('id,punto_venta_id, fecha_venta, cliente_id, vendedor_id, forma_pago_id, pedido_id, base_imponible, impuesto, importe_total, observacion,estado, estado_comprobante, estado_pago, create_time, create_user_id, update_time, update_user_id', 'safe', 'on'=>'search'),
 		);
 	}
         
@@ -123,6 +124,7 @@ class Venta extends Erp_startedActiveRecord//CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
+                        'punto_venta_id'=>'Punto Venta',
 			'fecha_venta' => 'Fecha Venta',
 			'cliente_id' => 'Cliente',
 			'vendedor_id' => 'Vendedor',
@@ -160,6 +162,7 @@ class Venta extends Erp_startedActiveRecord//CActiveRecord
                 $criteria->alias='venta';
                 $criteria->with= array('r_cliente','r_forma_pago','r_empleado');
 		$criteria->compare('t.id',$this->id);
+                $criteria->compare('punto_venta_id', $this->punto_venta_id,TRUE);
 		$criteria->compare('fecha_venta',$this->fecha_venta,true);
 		$criteria->compare('r_cliente.nombre_rz',$this->cliente_id,true);
 		$criteria->compare('r_empleado.nombre',$this->vendedor_id,true);

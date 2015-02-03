@@ -7,6 +7,8 @@
  * @property integer $id
  * @property string $serie
  * @property string $numero
+ * @property int $comprobante_id
+ * @property int $punto_venta_id
  */
 class SerieNumero extends CActiveRecord
 {
@@ -26,10 +28,11 @@ class SerieNumero extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
+                        array('comprobante_id, punto_venta_id', 'numerical', 'integerOnly'=>true),
 			array('serie, numero', 'length', 'max'=>10),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, serie, numero', 'safe', 'on'=>'search'),
+			array('id, serie, numero,comprobante_id, punto_venta_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -53,6 +56,8 @@ class SerieNumero extends CActiveRecord
 			'id' => 'ID',
 			'serie' => 'Serie',
 			'numero' => 'Numero',
+                        'comprobante_id' => yii::t('app','Tipo Comprobante'),
+			'punto_venta_id' => yii::t('app','Punto Venta'),
 		);
 	}
 
@@ -77,6 +82,8 @@ class SerieNumero extends CActiveRecord
 		$criteria->compare('t.id',$this->id);
 		$criteria->compare('serie',$this->serie,true);
 		$criteria->compare('numero',$this->numero,true);
+                $criteria->compare('comprobante_id',$this->comprobante_id);
+		$criteria->compare('punto_venta_id',$this->punto_venta_id);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -100,7 +107,7 @@ class SerieNumero extends CActiveRecord
         }
         
         /**
-         * 
+         * obtiene el numero de comprobante por serie y tipo
          * @param type $serie numero de serie
          * @param type $tipo tipo de comprobante
          * @return type

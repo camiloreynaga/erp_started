@@ -5,6 +5,7 @@
  *
  * The followings are the available columns in table 'tbl_empleado':
  * @property integer $id
+ * @property integer $punto_venta_id
  * @property string $nombre
  * @property string $ap_paterno
  * @property string $ap_materno
@@ -44,7 +45,7 @@ class Empleado extends Erp_startedActiveRecord//CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('nombre, ap_paterno, doc_identidad, cargo_id', 'required'),
-			array('cargo_id, create_user_id, update_user_id', 'numerical', 'integerOnly'=>true),
+			array('punto_venta_id,cargo_id, create_user_id, update_user_id', 'numerical', 'integerOnly'=>true),
 			array('nombre, ap_paterno, ap_materno, telefono, movil', 'length', 'max'=>50),
 			array('doc_identidad', 'length', 'max'=>10),
 			array('direccion', 'length', 'max'=>100),
@@ -65,6 +66,7 @@ class Empleado extends Erp_startedActiveRecord//CActiveRecord
 		return array(
 			'r_cargo' => array(self::BELONGS_TO, 'Cargo', 'cargo_id'),
 			'r_usuario' => array(self::HAS_MANY, 'User', 'empleado_id'),
+                        'r_punto_venta'=>array(self::BELONGS_TO,'PuntoVenta','punto_venta_id')
 		);
 	}
 
@@ -75,6 +77,7 @@ class Empleado extends Erp_startedActiveRecord//CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
+                        'punto_venta_id'=>'Punto Venta',
 			'nombre' => 'Nombre',
 			'ap_paterno' => 'Ap Paterno',
 			'ap_materno' => 'Ap Materno',
@@ -112,6 +115,7 @@ class Empleado extends Erp_startedActiveRecord//CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('t.id',$this->id);
+                $criteria->compare('punto_venta_id', $this->punto_venta_id,TRUE);   
 		$criteria->compare('nombre',$this->nombre,true);
 		$criteria->compare('ap_paterno',$this->ap_paterno,true);
 		$criteria->compare('ap_materno',$this->ap_materno,true);

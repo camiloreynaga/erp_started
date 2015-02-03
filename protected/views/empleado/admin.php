@@ -52,6 +52,11 @@ return false;
                     'value'=>'$data->r_cargo->cargo'
                 ),
                 'movil',
+                array(
+                    'name'=>'punto_venta_id',
+                    'value'=>'$data->r_punto_venta->punto_venta'
+                ),
+                //'punto_venta_id',
 		//'direccion',
 		/*
 		'telefono',

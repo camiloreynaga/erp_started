@@ -17,6 +17,14 @@
  */
 class PuntoVenta extends CActiveRecord
 {
+    
+        /*estado de compra
+         * 
+         */
+         public $_tipo=array(
+            '0'=>'MOVIL', // Puntos de venta movil  
+            '1'=>'FIJO', // Punto de venta fijo
+         );
 	/**
 	 * @return string the associated database table name
 	 */
@@ -117,4 +125,48 @@ class PuntoVenta extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+        
+        
+         /**
+         * return lista de puntos de ventas sin almacen
+         * @return string
+         */
+        public function getPunto_venta_almacen()
+        {
+            $criteria= new CDbCriteria();
+            $criteria->condition='activo=0 and t.id not in (SELECT punto_venta_id FROM tbl_almacen WHERE 1 )';
+            
+            $lista= $this->model()->findAll($criteria); 
+              $resultados = array();
+              foreach ($lista as $list){
+                $resultados[] = array(
+                         'id'=>$list->id,
+                         'text'=> $list->punto_venta .' ('.$this->_tipo[$list->tipo].')' 
+              ); 
+            
+              }
+              return $resultados;
+        }
+        
+        /**
+         * return lista de puntos de ventas activos
+         * @return string
+         */
+        public function getPunto_venta()
+        {
+            $criteria= new CDbCriteria();
+            $criteria->condition='activo=0'; //Cargo de preventista
+            //$criteria->condition='t.id not in (SELECT empleado_id FROM tbl_user WHERE 1 )';
+            
+            $lista= $this->model()->findAll($criteria); 
+              $resultados = array();
+              foreach ($lista as $list){
+                $resultados[] = array(
+                         'id'=>$list->id,
+                         'text'=> $list->punto_venta .' ('.$this->_tipo[$list->tipo].')' 
+              ); 
+            
+              }
+              return $resultados;
+        }
 }

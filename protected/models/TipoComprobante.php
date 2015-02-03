@@ -123,6 +123,7 @@ class TipoComprobante extends Erp_startedActiveRecord//CActiveRecord
             
             
             $criteria=new CDbCriteria();
+            $criteria->select="id,comprobante";
             //$criteria->order='caracteristica';
             //$criteria->condition='activo=0';
             return $this->findAll($criteria);

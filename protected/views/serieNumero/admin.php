@@ -1,12 +1,12 @@
 <?php
 $this->breadcrumbs=array(
-	yii::t('app','Almacens')=>array('index'),
+	yii::t('app','Serie Numeros')=>array('index'),
 	yii::t('app','Manage'),
 );
 
 $this->menu=array(
-array('label'=>yii::t('app','List').' '.yii::t('app','Almacen'),'url'=>array('index')),
-array('label'=>yii::t('app','Create').' '.yii::t('app','Almacen'),'url'=>array('create')),
+array('label'=>yii::t('app','List').' '.yii::t('app','SerieNumero'),'url'=>array('index')),
+array('label'=>yii::t('app','Create').' '.yii::t('app','SerieNumero'),'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript( yii::t('app','search'), "
@@ -15,7 +15,7 @@ $('.search-form').toggle();
 return false;
 });
 $('.search-form form').submit(function(){
-$.fn.yiiGridView.update('almacen-grid', {
+$.fn.yiiGridView.update('serie-numero-grid', {
 data: $(this).serialize()
 });
 return false;
@@ -23,7 +23,7 @@ return false;
 ");
 ?>
 
-<h1><?php echo yii::t('app','Manage');?>  <?php echo yii::t('app','Almacens'); ?></h1>
+<h1><?php echo yii::t('app','Manage');?>  <?php echo yii::t('app','Serie Numeros'); ?></h1>
 
 <p>
 	<?php echo yii::t('app','You may optionally enter a comparison operator');?> (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>
@@ -38,22 +38,15 @@ return false;
 </div><!-- search-form -->
 
 <?php $this->widget('booster.widgets.TbGridView',array(
-'id'=>'almacen-grid',
+'id'=>'serie-numero-grid',
 'dataProvider'=>$model->search(),
 'filter'=>$model,
 'columns'=>array(
 		'id',
-		'almacen',
-		'direccion',
-		'ubicacion_id',
+		'serie',
+		'numero',
+		'comprobante_id',
 		'punto_venta_id',
-		'activo',
-		/*
-		'create_time',
-		'create_user_id',
-		'update_time',
-		'update_user_id',
-		*/
 array(
 'class'=>'booster.widgets.TbButtonColumn',
 ),

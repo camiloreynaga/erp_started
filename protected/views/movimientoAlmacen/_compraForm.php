@@ -8,6 +8,8 @@
 <h1><?php echo yii::t('app', 'Store purchase') ?></h1>
 
 <?php
+    
+
     $compra= Compra::model();
     $compra->estado=1; // filtra a los compra con estado = Revisado 
     $this->widget('booster.widgets.TbGridView',array(

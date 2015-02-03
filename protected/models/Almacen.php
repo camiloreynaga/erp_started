@@ -8,6 +8,7 @@
  * @property string $almacen
  * @property string $direccion
  * @property integer $ubicacion_id
+ * @property integer $punto_venta_id
  * @property integer $activo
  * @property string $create_time
  * @property integer $create_user_id
@@ -15,6 +16,7 @@
  * @property integer $update_user_id
  *
  * The followings are the available model relations:
+ * @property Ubicacion $ubicacion
  * @property MovimientoAlmacen[] $movimientoAlmacens
  */
 class Almacen extends Erp_startedActiveRecord//CActiveRecord
@@ -36,12 +38,12 @@ class Almacen extends Erp_startedActiveRecord//CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('almacen', 'required'),
-			array('ubicacion_id, activo, create_user_id, update_user_id', 'numerical', 'integerOnly'=>true),
+			array('ubicacion_id,punto_venta_id, activo, create_user_id, update_user_id', 'numerical', 'integerOnly'=>true),
 			array('almacen, direccion', 'length', 'max'=>50),
 			array('create_time, update_time', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, almacen, direccion, ubicacion_id, activo, create_time, create_user_id, update_time, update_user_id', 'safe', 'on'=>'search'),
+			array('id, almacen, direccion, ubicacion_id,punto_venta_id, activo, create_time, create_user_id, update_time, update_user_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -68,6 +70,7 @@ class Almacen extends Erp_startedActiveRecord//CActiveRecord
 			'almacen' => 'Almacen',
 			'direccion' => 'Direccion',
 			'ubicacion_id' => 'Ubicacion',
+                        'punto_venta_id' => yii::t('app','Punto Venta'),
 			'activo' => 'Activo',
 			'create_time' => 'Create Time',
 			'create_user_id' => 'Create User',
@@ -98,6 +101,7 @@ class Almacen extends Erp_startedActiveRecord//CActiveRecord
 		$criteria->compare('almacen',$this->almacen,true);
 		$criteria->compare('direccion',$this->direccion,true);
 		$criteria->compare('ubicacion_id',$this->ubicacion_id);
+                $criteria->compare('punto_venta_id',$this->punto_venta_id);
 		$criteria->compare('activo',$this->activo);
 		$criteria->compare('create_time',$this->create_time,true);
 		$criteria->compare('create_user_id',$this->create_user_id);
