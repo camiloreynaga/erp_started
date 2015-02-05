@@ -31,7 +31,7 @@
             'users'=>array('@'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-            'actions'=>array('create','update','lineaCredito','GenerarFactura','admin','print','createVenta','Search'),
+            'actions'=>array('create','update','lineaCredito','GenerarBoleta','GenerarFactura','admin','print','createVenta','Search','Ticket','EditItem'),
             'users'=>array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -116,12 +116,13 @@
         {
              $model=$this->loadModel($id); // obteniendo modelo venta
              $comprobante = new ComprobanteVenta();
-             $_punto_venta= $comprobante->r_venta->punto_venta_id;
+             $_punto_venta= $model->punto_venta_id;
              $comprobante->venta_id=$id;
              $comprobante->tipo_comprobante_id=1;
              $comprobante->fecha_emision=date('Y-m-d');//$model->fecha_venta;
              //--
              $_serie=SerieNumero::model()->getSerieComprobante($_punto_venta,1);
+             $_id_serie_numero=SerieNumero::model()->getSerie_id($_punto_venta,1);
              $comprobante->serie= $_serie;
              $comprobante->numero= SerieNumero::model()->getNroComprobante($_serie,1)['numero']+1;        
              //--
@@ -130,10 +131,10 @@
              if($comprobante->save())
              {
                  //actualiza el numero de comprobante
-                 SerieNumero::model()->updateByPk(1,array('numero'=>$comprobante->numero)); 
+                 SerieNumero::model()->updateByPk($_id_serie_numero,array('numero'=>$comprobante->numero)); 
                          
                  $model->save();
-                 
+                 //$this->render('_ticket',array('id'=>$id));
              }
              //$this->createUrl($route, $params)
              
@@ -148,12 +149,13 @@
         {
              $model=$this->loadModel($id); // obteniendo modelo venta
              $comprobante = new ComprobanteVenta();
-             $_punto_venta= $comprobante->r_venta->punto_venta_id;
+             $_punto_venta= $model->punto_venta_id;
              $comprobante->venta_id=$id;
              $comprobante->tipo_comprobante_id=2;
              $comprobante->fecha_emision=date('Y-m-d');//$model->fecha_venta;
              //--
              $_serie=SerieNumero::model()->getSerieComprobante($_punto_venta,2);
+             $_id_serie_numero=SerieNumero::model()->getSerie_id($_punto_venta,2);
              $comprobante->serie= $_serie;
              $comprobante->numero= SerieNumero::model()->getNroComprobante($_serie,2)['numero']+1;        
              //--
@@ -162,7 +164,7 @@
              if($comprobante->save())
              {
                  //actualiza el numero de comprobante
-                 SerieNumero::model()->updateByPk(1,array('numero'=>$comprobante->numero)); 
+                 SerieNumero::model()->updateByPk($_id_serie_numero,array('numero'=>$comprobante->numero)); 
                          
                  $model->save();
                  
@@ -178,6 +180,11 @@
             $this->renderPartial('_ticket',array(),false,true);
         }
         
+        public function actionTicket($id)
+        {
+            $this->layout='//layouts/print';
+            $this->render('_ticket',array('id'=>$id));
+        }
         /**
         * Deletes a particular model.
         * If deletion is successful, the browser will be redirected to the 'admin' page.
@@ -347,4 +354,13 @@
                         'venta'=>$venta,
                 ));
 	}
+        /**
+         * Actualiza la edicion de cviewlist
+         */
+        public function actionEditItem()
+        {
+            Yii::import('booster.components.TbEditableSaver'); //or you can add import 'ext.editable.*' to config
+            $es = new TbEditableSaver('Venta');  // 'User' is classname of model to be updated
+            $es->update();
+        }
     }

@@ -155,6 +155,19 @@ class ComprobanteVenta extends Erp_startedActiveRecord//CActiveRecord
             return isset($id)? $this->findByAttributes(array('venta_id'=>$id)) : yii::t('app','NULL');
         }
         
+        /**
+         * devuleve el último comprobante no anulado
+         * @param type $id
+         * @return type
+         */
+        public function getUltimo_comprobante($id)
+        {
+            $criteria=new CDbCriteria;
+            //$criteria->select='id';
+            $criteria->condition='estado=0 and venta_id='.$id;
+            return $this->find($criteria); //devuelve la serie
+        }
+        
         
         
 }
