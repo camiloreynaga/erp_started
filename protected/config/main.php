@@ -63,7 +63,7 @@ return array(
 		),*/
 		// uncomment the following to use a MySQL database
 		'db'=>array(
-                        'connectionString' => 'mysql:host=localhost;dbname=erp_started',
+                        'connectionString' => 'mysql:host=localhost;dbname=erp_plastiplas',
 			'emulatePrepare' => true,
 			'username' => 'root',
 			'password' => 'adonde',
