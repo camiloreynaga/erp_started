@@ -115,8 +115,8 @@ $this->renderPartial('_viewComprobante',array('model'=>  ComprobanteVenta::model
   if( $model->countItems()>0){
   
     if ($model->estado_comprobante==0 ) { 
-                echo "siguiente factura: ";
-                echo SerieNumero::model()->getNroFactura()['numero']+1;
+                //echo "siguiente factura: ";
+                //echo SerieNumero::model()->getNroFactura()['numero']+1;
         ?>
 
         <?php        
