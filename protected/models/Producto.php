@@ -283,7 +283,7 @@ class Producto extends Erp_startedActiveRecord// CActiveRecord
         /**
          * Recuperar los productos con cantidad Disponible de venta.
          */
-        public function getProductosStockDisponible()
+        public function getProductosStockDisponible($_almacen=1)
         {
             $criteria= new CDbCriteria();
             $criteria->condition='descontinuado=0 and stock>0';

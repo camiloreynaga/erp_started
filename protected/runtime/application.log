@@ -4735,3 +4735,30 @@ Stack trace:
 REQUEST_URI=/erp_started/index.php?r=ubicacion/view&id=1
 HTTP_REFERER=http://localhost/erp_started/index.php?r=ubicacion/admin
 ---
+2015/02/05 07:29:49 [error] [system.db.CDbCommand] CDbCommand::execute() falló: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`erp_started`.`tbl_movimiento_almacen`, CONSTRAINT `fk_movimiento_almacen` FOREIGN KEY (`almacen_id`) REFERENCES `tbl_almacen` (`id`) ON DELETE CASCADE). La sentencia SQL ejecutada fue: INSERT INTO `tbl_movimiento_almacen` (`fecha_movimiento`, `producto_id`, `cantidad`, `motivo_movimiento_id`, `detalle_compra_id`, `observacion`, `almacen_id`, `operacion`, `create_user_id`, `update_user_id`, `create_time`, `update_time`) VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6, :yp7, :yp8, :yp9, NOW(), NOW()).
+in D:\xampp\htdocs\erp_started\protected\controllers\MovimientoAlmacenController.php (95)
+in D:\xampp\htdocs\erp_started\index.php (13)
+2015/02/05 07:29:49 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falló al ejecutar la sentencia SQL: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`erp_started`.`tbl_movimiento_almacen`, CONSTRAINT `fk_movimiento_almacen` FOREIGN KEY (`almacen_id`) REFERENCES `tbl_almacen` (`id`) ON DELETE CASCADE). The SQL statement executed was: INSERT INTO `tbl_movimiento_almacen` (`fecha_movimiento`, `producto_id`, `cantidad`, `motivo_movimiento_id`, `detalle_compra_id`, `observacion`, `almacen_id`, `operacion`, `create_user_id`, `update_user_id`, `create_time`, `update_time`) VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6, :yp7, :yp8, :yp9, NOW(), NOW())' in D:\xampp\htdocs\yii\framework\db\CDbCommand.php:358
+Stack trace:
+#0 D:\xampp\htdocs\yii\framework\db\ar\CActiveRecord.php(1077): CDbCommand->execute()
+#1 D:\xampp\htdocs\yii\framework\db\ar\CActiveRecord.php(806): CActiveRecord->insert(NULL)
+#2 D:\xampp\htdocs\erp_started\protected\controllers\MovimientoAlmacenController.php(95): CActiveRecord->save()
+#3 [internal function]: MovimientoAlmacenController->actionRegistrarCompra('4')
+#4 D:\xampp\htdocs\yii\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs(Object(MovimientoAlmacenController), Array)
+#5 D:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(MovimientoAlmacenController), Object(ReflectionMethod), Array)
+#6 D:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#7 D:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#8 D:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#9 D:\xampp\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#10 D:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#11 D:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#12 D:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#13 D:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#14 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('RegistrarCompra')
+#15 D:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('movimientoAlmac...')
+#16 D:\xampp\htdocs\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#17 D:\xampp\htdocs\erp_started\index.php(13): CApplication->run()
+#18 {main}
+REQUEST_URI=/erp_started/index.php?ajax=detalle-orden-compra-grid&id=4&r=movimientoAlmacen%2FRegistrarCompra
+HTTP_REFERER=http://localhost/erp_started/index.php?r=MovimientoAlmacen/ingresarCompra&id=4
+---

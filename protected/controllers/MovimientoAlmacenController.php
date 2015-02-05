@@ -86,7 +86,7 @@
             $model->motivo_movimiento_id=1; //*requerido
             $model->detalle_compra_id=$id;
             $model->observacion= $_detalle->observacion;
-            $model->almacen_id =1; // almacen principal
+            $model->almacen_id =1;//1; // almacen principal
             $model->_lote=$_detalle->lote;
             $model->_fecha_vencimiento=$_detalle->fecha_vencimiento;
             $model->operacion=0; // 0= ingreso 
