@@ -9,3 +9,4 @@ protected/config/main.php
 protected/runtime/application.log
 protected/config/console.php
 protected/config/console.php
+protected/runtime/application.log
