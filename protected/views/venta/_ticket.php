@@ -1,10 +1,13 @@
 
 
 <?php
+$empresa = Empresa::model()->findByPk(1);
+
 $_header="\x1B\x40 \x1B\x21\x08";
-$rz="PLASTIPLAS S.R.L.";
-$ruc="RUC: 20491097176";
-$direccion="DIREC: AV. MARISCAL CASTILLA NRO. 100 CUSCO - URUBAMBA - URUBAMBA";
+
+$rz=$empresa->razon_social; //"PLASTIPLAS S.R.L.";
+$ruc='RUC: '.$empresa->ruc;//"RUC: 20491097176";
+$direccion= $empresa->direccion;  //"DIREC: AV. MARISCAL CASTILLA NRO. 100 CUSCO - URUBAMBA - URUBAMBA";
 $_asterik=" *************************************** \r\n";
 $_line=" ---------------------------------------\r\n ";
 $footer=" \r\n \r\n \x1D\x56\x41 \x1B\x40";
@@ -13,6 +16,11 @@ $footer=" \r\n \r\n \x1D\x56\x41 \x1B\x40";
 $pid=$_GET['id'];
 $lista = DetalleVenta::model()->findAll('venta_id=:venta_id',array(':venta_id'=>$pid));
 $venta = Venta::model()->findByPk($pid);
+$_comprobante= ComprobanteVenta::model()->getUltimo_comprobante($pid);
+$_tipo_comprobante=$_comprobante->r_tipo_comprobante->comprobante;//"FActura";//$venta->r_comprobante_venta->r_tipo_comprobante->comprobante;
+
+$_serie= $_comprobante->serie;//'001';//
+$_numero=$_comprobante->numero; //$venta->r_comprobante_venta->numero;
 $detalle=array();
 foreach($lista as $list){
     $detalle[]= $list->r_producto->nombre.'\r\n'.$list->cantidad.'               '.$list->precio_unitario.'     '.$list->total // producto_id,
@@ -495,6 +503,9 @@ $_pu=null;
         function print() {
         
         //
+        var _tipo_comprobante="<?php echo $_tipo_comprobante;?>";
+        var _serie="<?php echo 'Serie: '. $_serie;?>";
+        var _numero="<?php echo 'Nro: '. $_numero;?>";
         var _header= "<?php echo $_header;?>";
         var _rz="<?php echo $rz;?>";
         var _direccion = "<?php echo $direccion;?>"
@@ -519,6 +530,12 @@ $_pu=null;
          // Hint:  Carriage Return = \r, New Line = \n, Escape Double Quotes= \"
             qz.append("\x1B\x40"); // 1
             qz.append("\x1B\x21\x08"); // 2
+            qz.append(_tipo_comprobante);
+            qz.append(_salto); // salto linea
+            qz.append(_serie);
+            qz.append(" - "); // salto linea
+            qz.append(_numero);
+            qz.append(_salto);
             qz.append(_rz); //razon social
             qz.append(_salto); // salto linea
             qz.append(_ruc); // ruc
@@ -573,6 +590,6 @@ $_pu=null;
 <!--setenado el nombre de la impresora-->
         <input id="printer" type="hidden" value="factura" size="15"><br />
         
-        <input type=button onClick="print()" value="Print Test Cr"><br><br>
+        <input type=button onClick="print()" value="IMPRIMIR COMPROBANTE"><br><br>
 
         

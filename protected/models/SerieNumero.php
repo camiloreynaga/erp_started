@@ -133,7 +133,20 @@ class SerieNumero extends CActiveRecord
             $criteria=new CDbCriteria;
             $criteria->select='serie';
             $criteria->condition='punto_venta_id='.$punto_venta.' and comprobante_id='.$tipo;
-            return $this->find($criteria);
+            return $this->find($criteria)->serie; //devuelve la serie
+        }
+        /**
+         * obtiene el id para SerieNumero
+         * @param type $punto_venta
+         * @param type $tipo
+         * @return type
+         */
+        public function getSerie_id($punto_venta,$tipo)
+        {
+            $criteria=new CDbCriteria;
+            $criteria->select='id';
+            $criteria->condition='punto_venta_id='.$punto_venta.' and comprobante_id='.$tipo;
+            return $this->find($criteria)->serie; //devuelve la serie
         }
         
 	/**

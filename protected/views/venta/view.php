@@ -16,15 +16,66 @@ array('label'=>yii::t('app','Manage').' '.yii::t('app','Sale'),'url'=>array('adm
 
 <h1><?php echo Yii::t('app','View').' '. Yii::t('app', 'Sale').' # '. $model->id; ?></h1>
 
+
+<?php
+//$this->widget('booster.widgets.TbEditableField', array(
+//    'type'      => 'select2',
+//    'model'     => TipoComprobante::model(),// $model,
+//    'attribute' => 'cliente_id',
+//    'url'       => $this->createUrl('venta/editItem'),
+//    'source' => CHtml::listData (Cliente::model()->getClientes(), "id","text"),
+//));
+?>
+
+
+<?php $this->widget('booster.widgets.TbEditableDetailView',array(
+'data'=>$model,
+'url' => $this->createUrl('venta/editItem'),
+'attributes'=>array(
+		//'id',
+		//'fecha_venta',
+                array(
+                    'name'=>'cliente_id',
+                    //'value'=>$model->r_cliente->nombre_rz
+                    'editable' => array(
+                        'type' => 'select2',
+                        'source' => CHtml::listData (Cliente::model()->getClientes(), "id","text"),//CHtml::listData(Cliente::model()->findAll(), 'group_id', 'group_name')
+                        
+             )
+                ),
+//		array(
+//                    'name'=>'vendedor_id',
+//                    'value'=>$model->r_empleado->nombre.' '.$model->r_empleado->ap_paterno
+//                ),
+//		array(
+//                    'name'=>'forma_pago_id',
+//                    'value'=>$model->r_forma_pago->forma_pago
+//                ),
+//		
+//		//'pedido_id',
+//		'base_imponible',
+//		'impuesto',
+//		'importe_total',
+//		'observacion',
+//                array(
+//                    'name'=>'estado',
+//                    'value'=>$model->_estado[$model->estado]
+//                ),
+		//'create_time',
+		//'create_user_id',
+		//'update_time',
+		//'update_user_id',
+),
+)); ?>
 <?php $this->widget('booster.widgets.TbDetailView',array(
 'data'=>$model,
 'attributes'=>array(
 		//'id',
 		'fecha_venta',
-                array(
-                    'name'=>'cliente_id',
-                    'value'=>$model->r_cliente->nombre_rz
-                ),
+//                array(
+//                    'name'=>'cliente_id',
+//                    'value'=>$model->r_cliente->nombre_rz
+//                ),
 		array(
                     'name'=>'vendedor_id',
                     'value'=>$model->r_empleado->nombre.' '.$model->r_empleado->ap_paterno
@@ -64,21 +115,38 @@ $this->renderPartial('_viewComprobante',array('model'=>  ComprobanteVenta::model
   if( $model->countItems()>0){
   
     if ($model->estado_comprobante==0 ) { 
-                echo "siguiente factura: ";
-                echo SerieNumero::model()->getNroFactura()['numero']+1;
+                //echo "siguiente factura: ";
+                //echo SerieNumero::model()->getNroFactura()['numero']+1;
         ?>
 
         <?php        
-        echo CHtml::ajaxButton('Facturar',array('venta/generarFactura','id'=>$model->id, ),
+        echo CHtml::ajaxButton('FACTURA',array('venta/generarFactura','id'=>$model->id, ),
                  array(
                       'type' => 'post',
-                      'success'=>'function(data){ window.open("facturacion2/factura.php?id_venta='.$model->id.'"); window.location.reload();}'
-                     //'success'=>'function(data){ window.open("'.CController::createUrl('facturacion2/factura.php?id_venta='.$model->id).'")}'
+                      //'success'=>'function(data){ window.open("facturacion2/factura.php?id_venta='.$model->id.'"); window.location.reload();}'
+                      //'success'=>'function(data){ window.open("'.CController::createUrl('venta/ticket,array(id=>$model->id)').'"); window.location.reload();}'
+                    //'success'=>'function(data){ window.open("'.CController::createUrl('venta/ticket&id='.$model->id).'");window.location.reload();}'
+                     'success'=>'function(data){ window.open("'.CController::createUrl('venta/print&id='.$model->id).'");window.location.reload();}'
                 ),
                 array(
                 'confirm'=>'Esta seguro de Generar la factura?',
              )); 
         ?>
+
+        <?php        
+        echo CHtml::ajaxButton('BOLETA',array('venta/generarBoleta','id'=>$model->id, ),
+                 array(
+                      'type' => 'post',
+                      //'success'=>'function(data){ window.open("facturacion2/factura.php?id_venta='.$model->id.'"); window.location.reload();}'
+                      //'success'=>'function(data){ window.open("'.CController::createUrl('venta/ticket,array(id=>$model->id)').'"); window.location.reload();}'
+                    //'success'=>'function(data){ window.open("'.CController::createUrl('venta/ticket&id='.$model->id).'");window.location.reload();}'
+                     'success'=>'function(data){ window.open("'.CController::createUrl('venta/print&id='.$model->id).'");window.location.reload();}'
+                ),
+                array(
+                'confirm'=>'Esta seguro de Generar la Boleta?',
+             )); 
+        ?>
+
         <?php   
             }// end if
             else
@@ -88,11 +156,12 @@ $this->renderPartial('_viewComprobante',array('model'=>  ComprobanteVenta::model
 
         ?>
         <br>
-        <a href="facturacion2/factura.php?id_venta=<?php  echo $model->id; ?>" target="blank" >Ver Factura</a>
+        <?php echo CHtml::link('Comprobante',array('print','id'=>$model->id),array('class'=>'btnPrint', 'style'=>'margin-left: 10px;')); ?>
+<!--        <a href="facturacion2/factura.php?id_venta=<?php //  echo $model->id; ?>" target="blank" >Ver Factura</a>-->
             <?php } // end else
             }// end if
             ?>
 <!--setenado el nombre de la impresora-->
-        <?php echo CHtml::link('Print',array('print','id'=>$model->id),array('class'=>'btnPrint', 'style'=>'margin-left: 10px;')); ?>
+        <?php //echo CHtml::link('Print',array('print','id'=>$model->id),array('class'=>'btnPrint', 'style'=>'margin-left: 10px;')); ?>
 
 <?php //$this->renderPartial('_ticket',array('model'=>  ComprobanteVenta::model(),'pid'=>$model->id));?>
