@@ -56,6 +56,7 @@
                                         array('label'=>yii::t('app','Colors'),'url'=>array('/color/admin')),
                                         array('label'=>yii::t('app', 'Products'),'url'=>array('/producto/admin')),
                                         '---',
+                                        array('label'=>yii::t('app','Stores'),'url'=>array('/puntoVenta/admin')),
                                         array('label'=>yii::t('app','Providers'),'url'=>array('/proveedor/admin')),
                                         array('label'=>yii::t('app','Clients'),'url'=>array('/cliente/admin')),
                                         '---',
@@ -68,8 +69,8 @@
                             array('label' => yii::t('app','Storage'), 'url' => '#',
                                 'items'=>array(
                                        // array('label'=>'Ubicaciones','url'=>array('/ubicacion/admin')),
-                                        //array('label'=>'Almacenes','url'=>array('/almacen/admin')),
-                                        array('label'=>'Motivos de movimiento','url'=>array('/motivoMovimiento/admin')),
+                                        array('label'=>yii::t('app','Storages'),'url'=>array('/almacen/admin')),
+                                        array('label'=>yii::t('app','Motion Reasons'),'url'=>array('/motivoMovimiento/admin')),
                                         array('label'=>yii::t('app','In/Out'),'url'=>array('/movimientoAlmacen/admin')),
                                         array('label'=>yii::t('app','Products for storage'),'url'=>array('/productoAlmacen/admin')),
                                          
@@ -78,6 +79,7 @@
                             array('label'=>yii::t('app','Documents'),
                                     'items'=>array(
                                         array('label'=>yii::t('app','Types of receipts'),'url'=>array('/tipoComprobante/admin')),
+                                        array('label'=>yii::t('app','Asign serie and number'),'url'=>array('/SerieNumero/admin')),
                                         array('label'=>yii::t('app','Referral guide'),'url'=>array('/guiaRemision/admin')),
                                         array('label'=>yii::t('app','Credit notes'),'url'=>array('/notaCredito/admin')),
                                     )

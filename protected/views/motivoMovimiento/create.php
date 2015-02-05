@@ -1,15 +1,15 @@
 <?php
 $this->breadcrumbs=array(
-	'Motivo Movimientos'=>array('index'),
-	'Create',
+        yii::t('app','Motivo Movimientos')=>array('index'),
+	yii::t('app','Create'),
 );
 
 $this->menu=array(
-array('label'=>'List MotivoMovimiento','url'=>array('index')),
-array('label'=>'Manage MotivoMovimiento','url'=>array('admin')),
+array('label'=>yii::t('app','List').' '.yii::t('app','MotivoMovimiento'),'url'=>array('index')),
+array('label'=>yii::t('app','Manage').' '.yii::t('app','MotivoMovimiento'),'url'=>array('admin')),
 );
 ?>
 
-<h1>Create MotivoMovimiento</h1>
+<h1> <?php echo yii::t('app','Create');?> <?php echo yii::t('app','MotivoMovimiento'); ?></h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

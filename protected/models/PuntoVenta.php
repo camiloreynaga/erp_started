@@ -17,6 +17,11 @@
  */
 class PuntoVenta extends CActiveRecord
 {
+        
+        public $_estado=array(
+            '0'=>'SI',
+            '1'=>'NO'
+        );
     
         /*estado de compra
          * 

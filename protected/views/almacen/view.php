@@ -18,15 +18,31 @@ $this->breadcrumbs=array(
     <?php $this->widget('booster.widgets.TbDetailView',array(
         'data'=>$model,
         'attributes'=>array(
-        		'id',
+        	'id',
 		'almacen',
 		'direccion',
-		'ubicacion_id',
-		'punto_venta_id',
-		'activo',
+                array(
+                    'name'=>'ubicacion_id',
+                    'value'=>$model->r_ubicacion->ubicacion
+                ),
+                array(
+                    'name'=>'punto_venta_id',
+                    'value'=>$model->r_punto_venta->punto_venta
+                ),
+                array(
+                    'name'=>'activo',
+                    'value'=>$model->_estado[$model->activo]
+                ),
+		
 		'create_time',
-		'create_user_id',
+                array(
+                  'name'=>'create_user_id',
+                  'value'=>User::model()->getUsuario($model->create_user_id),
+                ),
 		'update_time',
-		'update_user_id',
+                array(
+                    'name'=>'update_user_id',
+                    'value'=>User::model()->getUsuario($model->update_user_id),
+                ),
         ),
 )); ?>

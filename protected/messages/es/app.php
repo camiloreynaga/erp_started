@@ -17,6 +17,7 @@ return array(
     'Products'=>'Productos',
     
     'Storage'=>'Almacén',
+    'Storages'=>'Almacenes',
     'In/Out'=>'Ingreso/Salida',
     'Products for storage'=>'Productos por almacén',
     
@@ -32,6 +33,11 @@ return array(
     'System maintance'=>'Mantenimiento',
     'Providers'=>'Proveedores',
     'Clients'=>'Clientes',
+    'Stores'=>'Puntos de Venta',
+    'Colors'=>'Colores',
+    'Taxes'=>'Impuestos',
+    'Offers'=>'Ofertas',
+    'Motion Reasons'=>'Motivos de movimiento',
     
     'Purchase orders'=>'Ordenes de compra',
     'Purchases'=>'Compras',
@@ -41,6 +47,7 @@ return array(
     'Accounts'=>'Cuentas',
     'Accounts receivable'=>'Cuentas por cobrar',
     'Accounts payable'=>'Cuentas por pagar',
+    
     
     'Reports'=>'Reportes',
     //Operations menu 

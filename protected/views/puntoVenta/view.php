@@ -20,13 +20,26 @@ $this->breadcrumbs=array(
         'attributes'=>array(
         		'id',
 		'punto_venta',
-		'tipo',
+                array(
+                    'name'=>'tipo',
+                    'value'=>$model->_tipo[$model->tipo]
+                ),
+		
 		'observacion',
 		'direccion',
-		'activo',
-		'create_time',
-		'create_user_id',
+		array(
+                    'name'=>'activo',
+                    'value'=>$model->_estado[$model->activo]    
+                ),
+                'create_time',
+                array(
+                  'name'=>'create_user_id',
+                  'value'=>User::model()->getUsuario($model->create_user_id),
+                ),
 		'update_time',
-		'update_user_id',
+                array(
+                    'name'=>'update_user_id',
+                    'value'=>User::model()->getUsuario($model->update_user_id),
+                ),
         ),
 )); ?>

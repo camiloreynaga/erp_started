@@ -45,9 +45,9 @@ return false;
 		'id',
 		'comprobante',
 		'codigo_comprobante',
-		'create_time',
-		'create_user_id',
-		'update_time',
+//		'create_time',
+//		'create_user_id',
+//		'update_time',
 		/*
 		'update_user_id',
 		*/

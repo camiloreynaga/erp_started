@@ -13,11 +13,11 @@
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('comprobante_id')); ?>:</b>
-	<?php echo CHtml::encode($data->comprobante_id); ?>
+	<?php echo CHtml::encode($data->r_comprobante->comprobante); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('punto_venta_id')); ?>:</b>
-	<?php echo CHtml::encode($data->punto_venta_id); ?>
+	<?php echo CHtml::encode($data->r_punto_venta->punto_venta); ?>
 	<br />
 
 

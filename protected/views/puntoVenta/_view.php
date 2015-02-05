@@ -9,7 +9,7 @@
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('tipo')); ?>:</b>
-	<?php echo CHtml::encode($data->tipo); ?>
+	<?php echo CHtml::encode($data->_tipo[$data->tipo]); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('observacion')); ?>:</b>
@@ -21,7 +21,7 @@
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('activo')); ?>:</b>
-	<?php echo CHtml::encode($data->activo); ?>
+	<?php echo CHtml::encode($data->_estado[$data->activo]); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('create_time')); ?>:</b>

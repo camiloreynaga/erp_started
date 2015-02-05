@@ -18,6 +18,10 @@
  */
 class Presentacion extends Erp_startedActiveRecord//CActiveRecord
 {
+        public $_estado=array(
+            '0'=>'SI',
+            '1'=>'NO'
+        );
 	/**
 	 * @return string the associated database table name
 	 */

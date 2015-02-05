@@ -17,6 +17,10 @@
  */
 class Ubicacion extends Erp_startedActiveRecord//CActiveRecord
 {
+        public $_estado=array(
+            '0'=>'SI',
+            '1'=>'NO'
+        );
 	/**
 	 * @return string the associated database table name
 	 */
@@ -114,6 +118,34 @@ class Ubicacion extends Erp_startedActiveRecord//CActiveRecord
 		return parent::model($className);
 	}
         
+        /**
+         * return lista de ubicaciones activos
+         * @return string
+         */
+        public function get_ubicaciones()
+        {
+            $criteria= new CDbCriteria();
+            $criteria->condition='activo=0'; //Cargo de preventista
+            //$criteria->condition='t.id not in (SELECT empleado_id FROM tbl_user WHERE 1 )';
+            
+            $lista= $this->model()->findAll($criteria); 
+              $resultados = array();
+              foreach ($lista as $list){
+                $resultados[] = array(
+                         'id'=>$list->id,
+                         'text'=> $list->ubicacion
+                        //.' ('.$this->_tipo[$list->tipo].')' 
+              ); 
+            
+              }
+              return $resultados;
+        }
+        
+        /**
+         * devuelve el nombre de la ubicación a partir del id
+         * @param type $id
+         * @return type
+         */
         public function getUbicacion($id)
         {
            return isset($id) ?$this->findByPk($id)->ubicacion : 'Unknow';

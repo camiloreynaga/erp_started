@@ -28,7 +28,7 @@ $this->breadcrumbs=array(
 		'linea_credito',
                 array(
                     'name'=>'activo',
-                    'value'=>$model->activo==0?'SI':'NO'
+                    'value'=>$model->_estado[$model->activo]    
                 ),
                 'create_time',
                 array(

@@ -45,9 +45,21 @@ return false;
 		'id',
 		'almacen',
 		'direccion',
-		'ubicacion_id',
-		'punto_venta_id',
-		'activo',
+                array(
+                    'name'=>'ubicacion_id',
+                    'value'=>'$data->r_ubicacion->ubicacion'
+
+                ),
+		array(
+                    'name'=>'punto_venta_id',
+                    'value'=>'$data->r_punto_venta->punto_venta'
+                ),
+                array(
+                    'name'=>'activo',
+                    'value'=>'$data->_estado[$data->activo]',
+                    'filter'=>  array_merge(array(''=>yii::t('app','ALL')),$model->_estado)
+                    //'value'=>'$data->descontinuado'
+                ),
 		/*
 		'create_time',
 		'create_user_id',

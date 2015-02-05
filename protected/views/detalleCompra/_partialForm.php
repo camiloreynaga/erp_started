@@ -1,3 +1,11 @@
+<?php
+// llamando al script que hace la validación del form via ajax
+$baseUrl = Yii::app()->baseUrl;
+$cs = Yii::app()->getClientScript();
+$cs->registerScriptFile($baseUrl.'/js/validacionAjaxForm.js',CClientScript::POS_HEAD);
+//$cs->registerCssFile($baseUrl.'/css/style.css');
+?>
+
 <?php $form=$this->beginWidget('booster.widgets.TbActiveForm',array(
 	'id'=>$model->isNewRecord?'detalle-compra-form':'detalle-form',
 	'enableAjaxValidation'=>true,
@@ -114,11 +122,13 @@
                             'success'=>'function(data){
                             if(data.status=="success")
                             {      
-                                    updateGrilla(data);
-                                    hideFormErrors(form="#detalle-compra-form");
+                                    window.location.reload();
+                                    //updateGrilla(data);
+                                    //hideFormErrors(form="#detalle-compra-form");
                                     //callback(status=data.status);
                                     
                             }else{
+                            
                                     formErrors(data,form="#detalle-compra-form");
                             }
                             }',

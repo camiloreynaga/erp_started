@@ -18,7 +18,7 @@
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('activo')); ?>:</b>
-	<?php echo CHtml::encode($data->activo); ?>
+	<?php echo CHtml::encode($data->_estado[$data->activo]); ?>
 	<br />
 
 	<b><?php 

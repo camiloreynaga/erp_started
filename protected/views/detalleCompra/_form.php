@@ -63,13 +63,7 @@
 </script>
 
 
-<?php
-// llamando al script que hace la validación del form via ajax
-$baseUrl = Yii::app()->baseUrl;
-$cs = Yii::app()->getClientScript();
-$cs->registerScriptFile($baseUrl.'/js/validacionAjaxForm.js',CClientScript::POS_HEAD);
-//$cs->registerCssFile($baseUrl.'/css/style.css');
-?>
+
 
 <?php
 

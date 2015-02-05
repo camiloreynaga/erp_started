@@ -44,6 +44,8 @@ class SerieNumero extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+                    'r_comprobante'=>array(self::BELONGS_TO,'TipoComprobante','comprobante_id'),
+                    'r_punto_venta'=>array(self::BELONGS_TO,'PuntoVenta','punto_venta_id'),
 		);
 	}
 
@@ -117,6 +119,20 @@ class SerieNumero extends CActiveRecord
             $criteria=new CDbCriteria;
             $criteria->select='numero';
             $criteria->condition='serie='.$serie.' and comprobante_id='.$tipo;
+            return $this->find($criteria);
+        }
+        
+        /**
+         * obtiene el numero de comprobante por serie y tipo
+         * @param type $serie numero de serie
+         * @param type $tipo tipo de comprobante
+         * @return type
+         */
+        public function getSerieComprobante($punto_venta,$tipo)
+        {
+            $criteria=new CDbCriteria;
+            $criteria->select='serie';
+            $criteria->condition='punto_venta_id='.$punto_venta.' and comprobante_id='.$tipo;
             return $this->find($criteria);
         }
         

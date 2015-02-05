@@ -21,6 +21,11 @@
  */
 class Almacen extends Erp_startedActiveRecord//CActiveRecord
 {
+        public $_estado=array(
+            '0'=>'SI',
+            '1'=>'NO'
+        );
+    
 	/**
 	 * @return string the associated database table name
 	 */
@@ -37,7 +42,7 @@ class Almacen extends Erp_startedActiveRecord//CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('almacen', 'required'),
+			array('almacen,punto_venta_id', 'required'),
 			array('ubicacion_id,punto_venta_id, activo, create_user_id, update_user_id', 'numerical', 'integerOnly'=>true),
 			array('almacen, direccion', 'length', 'max'=>50),
 			array('create_time, update_time', 'safe'),
@@ -55,8 +60,9 @@ class Almacen extends Erp_startedActiveRecord//CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'r_movimientoAlmacens' => array(self::HAS_MANY, 'MovimientoAlmacen', 'almacen_id'),
+			'r_movimiento_almacen' => array(self::HAS_MANY, 'MovimientoAlmacen', 'almacen_id'),
                         'r_ubicacion'=>array(self::BELONGS_TO,'Ubicacion','ubicacion_id'),
+                        'r_punto_venta'=>array(self::BELONGS_TO,'PuntoVenta','punto_venta_id'),
 		);
 	}
 

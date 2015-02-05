@@ -1,18 +1,18 @@
 <?php
 $this->breadcrumbs=array(
-	'Motivo Movimientos'=>array('index'),
+	yii::t('app','Motivo Movimientos')=>array('index'),
 	$model->id=>array('view','id'=>$model->id),
-	'Update',
+	yii::t('app','Update'),
 );
 
 	$this->menu=array(
-	array('label'=>'List MotivoMovimiento','url'=>array('index')),
-	array('label'=>'Create MotivoMovimiento','url'=>array('create')),
-	array('label'=>'View MotivoMovimiento','url'=>array('view','id'=>$model->id)),
-	array('label'=>'Manage MotivoMovimiento','url'=>array('admin')),
+        array('label'=>yii::t('app','List').' '.yii::t('app','MotivoMovimiento'),'url'=>array('index')),
+	array('label'=>yii::t('app','Create').' '.yii::t('app','MotivoMovimiento'),'url'=>array('create')),
+        array('label'=>yii::t('app','View').' '.yii::t('app','MotivoMovimiento'),'url'=>array('view','id'=>$model->id)),
+        array('label'=>yii::t('app','Manage').' '.yii::t('app','MotivoMovimiento'),'url'=>array('admin')),
 	);
 	?>
 
-	<h1>Update MotivoMovimiento <?php echo $model->id; ?></h1>
+	<h1> <?php echo yii::t('app','Update');?> <?php echo yii::t('app','MotivoMovimiento');?> <?php echo $model->id; ?></h1>
 
 <?php echo $this->renderPartial('_form',array('model'=>$model)); ?>

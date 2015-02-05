@@ -73,6 +73,8 @@
                 $model->estado='0';
                 $model->estado_comprobante='0';
                 $model->estado_pago='0';
+                $_empleado_id=User::model()->findByPk(yii::app()->user->id)->empleado_id;
+                $model->punto_venta_id=  Empleado::model()->findByPk($_empleado_id)->punto_venta_id;
                 if($model->save())
                 $this->redirect(array('/DetalleVenta/create','pid'=>$model->id));
             }
@@ -114,12 +116,47 @@
         {
              $model=$this->loadModel($id); // obteniendo modelo venta
              $comprobante = new ComprobanteVenta();
+             $_punto_venta= $comprobante->r_venta->punto_venta_id;
              $comprobante->venta_id=$id;
              $comprobante->tipo_comprobante_id=1;
              $comprobante->fecha_emision=date('Y-m-d');//$model->fecha_venta;
-             $comprobante->serie=101;
-             $comprobante->numero= SerieNumero::model()->getNroFactura()['numero']+1;        
+             //--
+             $_serie=SerieNumero::model()->getSerieComprobante($_punto_venta,1);
+             $comprobante->serie= $_serie;
+             $comprobante->numero= SerieNumero::model()->getNroComprobante($_serie,1)['numero']+1;        
+             //--
+             $comprobante->estado=0; //estado de comprobaten pendiente de pago
+             $model->estado_comprobante=1; // comprobante registrado
+             if($comprobante->save())
+             {
+                 //actualiza el numero de comprobante
+                 SerieNumero::model()->updateByPk(1,array('numero'=>$comprobante->numero)); 
+                         
+                 $model->save();
+                 
+             }
+             //$this->createUrl($route, $params)
              
+             //crea una factura cada 30 items
+        }
+        
+         /**
+         * Generar la boleta para la venta
+         * @param type $id
+         */
+        public function actionGenerarBoleta($id)
+        {
+             $model=$this->loadModel($id); // obteniendo modelo venta
+             $comprobante = new ComprobanteVenta();
+             $_punto_venta= $comprobante->r_venta->punto_venta_id;
+             $comprobante->venta_id=$id;
+             $comprobante->tipo_comprobante_id=2;
+             $comprobante->fecha_emision=date('Y-m-d');//$model->fecha_venta;
+             //--
+             $_serie=SerieNumero::model()->getSerieComprobante($_punto_venta,2);
+             $comprobante->serie= $_serie;
+             $comprobante->numero= SerieNumero::model()->getNroComprobante($_serie,2)['numero']+1;        
+             //--
              $comprobante->estado=0; //estado de comprobaten pendiente de pago
              $model->estado_comprobante=1; // comprobante registrado
              if($comprobante->save())
@@ -278,20 +315,18 @@
             $model->fecha_venta=date('Y-m-d');
             // Uncomment the following line if AJAX validation is needed
             // $this->performAjaxValidation($model);
-
 //            if(isset($_POST['Venta']))
 //            {
                 //$model->attributes=$_POST['Venta'];
                 //$model->id= yii::app()->;
+                $_empleado_id=User::model()->findByPk(yii::app()->user->id)->empleado_id;
+                $model->punto_venta_id=  Empleado::model()->findByPk($_empleado_id)->punto_venta_id;
                 $model->cliente_id=1;// cliente por default para ventas pendientes
                 $model->vendedor_id=yii::app()->user->id ;
                 $model->forma_pago_id=2; // forma de pago por deafult contado
                 $model->estado='0'; // estado de venta pendiente
                 $model->estado_comprobante='0'; //estado de registro de comprabante pendiente
                 $model->estado_pago='0'; //estado de pago pendiente
-                 
-                
-                
                 if($model->save())
                 //$model->save();
                 $this->redirect(array('/DetalleVenta/create','pid'=>$model->id));

@@ -45,8 +45,15 @@ return false;
 		'id',
 		'serie',
 		'numero',
-		'comprobante_id',
-		'punto_venta_id',
+                array(
+                    'name'=>'comprobante_id',
+                    'value'=>'$data->r_comprobante->comprobante'
+                ),
+		array(
+                    'name'=>'punto_venta_id',
+                    'value'=>'$data->r_punto_venta->punto_venta'
+                ),
+		
 array(
 'class'=>'booster.widgets.TbButtonColumn',
 ),

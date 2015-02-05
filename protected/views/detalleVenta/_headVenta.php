@@ -20,6 +20,10 @@ $this->widget('booster.widgets.TbDetailView',array(
                     //'class'=>
 
                 ),
+                array(
+                    'name'=>$_labels['punto_venta_id'],
+                    'value'=>$model->r_venta->r_punto_venta->punto_venta,
+                )
     
 //		'importe_total',
 //		'observacion',

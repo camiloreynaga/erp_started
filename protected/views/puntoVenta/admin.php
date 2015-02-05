@@ -44,10 +44,18 @@ return false;
 'columns'=>array(
 		'id',
 		'punto_venta',
-		'tipo',
+                array(
+                    'name'=>'tipo',
+                    'value'=>'$data->_tipo[$data->tipo]'
+                ),
 		'observacion',
 		'direccion',
-		'activo',
+		array(
+                    'name'=>'activo',
+                    'value'=>'$data->_estado[$data->activo]',
+                    'filter'=>  array_merge(array(''=>yii::t('app','ALL')),$model->_estado)
+                    //'value'=>'$data->descontinuado'
+                ),
 		/*
 		'create_time',
 		'create_user_id',

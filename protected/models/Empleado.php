@@ -25,6 +25,7 @@
  * The followings are the available model relations:
  * @property Cargo $cargo
  * @property Usuario[] $usuarios
+ * @property PuntoVenta
  */
 class Empleado extends Erp_startedActiveRecord//CActiveRecord
 {

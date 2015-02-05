@@ -29,6 +29,7 @@
  * @property DetalleVenta[] $detalleVentas
  * @property Cliente $cliente
  * @property FormaPago $formaPago
+ * @property PuntoVenta $puntoVenta
  */
 class Venta extends Erp_startedActiveRecord//CActiveRecord
 {
@@ -114,7 +115,8 @@ class Venta extends Erp_startedActiveRecord//CActiveRecord
 			'r_cliente' => array(self::BELONGS_TO, 'Cliente', 'cliente_id'),
                         'r_forma_pago' => array(self::BELONGS_TO, 'FormaPago', 'forma_pago_id'),
                         'r_empleado'=>array(self::BELONGS_TO,'Empleado','vendedor_id'),
-		);
+                        'r_punto_venta'=>array(self::BELONGS_TO,'PuntoVenta','punto_venta_id'),
+                    );
 	}
 
 	/**

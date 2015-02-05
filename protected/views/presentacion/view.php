@@ -21,7 +21,10 @@ $this->breadcrumbs=array(
         		'id',
 		'presentacion',
 		'abreviatura',
-		'activo',
+		array(
+                    'name'=>'activo',
+                    'value'=>$model->_estado[$model->activo]
+                ),
 		'create_time',
                 array(
                   'name'=>'create_user_id',

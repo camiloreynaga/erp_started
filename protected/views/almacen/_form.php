@@ -29,10 +29,39 @@
 
 	<?php echo $form->textFieldGroup($model,'direccion',array('class'=>'span5','maxlength'=>50)); ?>
 
-	<?php echo $form->textFieldGroup($model,'ubicacion_id',array('class'=>'span5')); ?>
-
-	<?php echo $form->textFieldGroup($model,'activo',array('class'=>'span5')); ?>
-
+        
+        <?php 
+         
+         //if($model->isNewRecord)
+            echo $form->dropDownListGroup(
+                           $model,
+                           'ubicacion_id',
+                           array(
+                                   'wrapperHtmlOptions' => array(
+                                           'class' => 'col-sm-5',
+                                   ),
+                                   'widgetOptions' => array(
+                                           'data' => CHtml::listData(Ubicacion::model()->get_ubicaciones(), "id","text") ,// array('Something ...', '1', '2', '3', '4', '5'),
+                                           'htmlOptions' => array(),
+                                   )
+                           )
+                   ); 
+        ?>
+        
+        <?php echo $form->switchGroup($model,'activo',
+                array('class'=>'span5',
+                        'widgetOptions'=>array(
+                            'options'=>array(
+                                'size'=>'small',
+                                'onText'=>'NO',
+                                'offText'=>'SI',
+                                'onColor' => 'danger',
+                                'offColor' => 'primary', 
+                                )
+                    )
+                )
+                
+                );?>
 	
 
 <div class="form-actions">

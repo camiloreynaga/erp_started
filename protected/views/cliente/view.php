@@ -25,7 +25,6 @@ $this->breadcrumbs=array(
 		'direccion',
 		'ciudad',
 		'telefono',
-		'activo',
 		'linea_credito',
                 'credito_disponible',
                 array(

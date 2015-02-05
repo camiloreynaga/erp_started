@@ -18,10 +18,17 @@ $this->breadcrumbs=array(
     <?php $this->widget('booster.widgets.TbDetailView',array(
         'data'=>$model,
         'attributes'=>array(
-        		'id',
-		'serie',
-		'numero',
-		'comprobante_id',
-		'punto_venta_id',
+            'id',
+            'serie',
+            'numero',
+            array(
+                'name'=>'comprobante_id',
+                'value'=>$model->r_comprobante->comprobante
+            ),
+            array(
+                'name'=>'punto_venta_id',
+                'value'=>$model->r_punto_venta->punto_venta
+            )
+            
         ),
 )); ?>
