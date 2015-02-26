@@ -19,6 +19,23 @@ $venta = Venta::model()->findByPk($pid);
 $_comprobante= ComprobanteVenta::model()->getUltimo_comprobante($pid);
 $_tipo_comprobante=$_comprobante->r_tipo_comprobante->comprobante;//"FActura";//$venta->r_comprobante_venta->r_tipo_comprobante->comprobante;
 
+//obtener datos de cliente
+   $_cliente="";
+   $_cliente_ruc="";
+   $_cliente_direccion="";
+    if ($_comprobante->tipo_Comprobante==1)
+    {
+        $_cliente=$venta->r_cliente->nombre_rz;
+        $_cliente_ruc=$venta->r_cliente->ruc;
+        $_cliente_direccion=$venta->r_cliente->direccion;
+    }
+//else
+//{
+//   
+//}
+
+
+
 $_serie= $_comprobante->serie;//'001';//
 $_numero=$_comprobante->numero; //$venta->r_comprobante_venta->numero;
 $detalle=array();
@@ -141,7 +158,7 @@ $_pu=null;
 		}
 		
 		// Alert success message
-		alert('Successfully sent print data to "' + qz.getPrinter() + '" queue.');
+		alert('Impresion exitosa en impresora "' + qz.getPrinter() + '".');
 	}
 	
 	/***************************************************************************
@@ -508,8 +525,11 @@ $_pu=null;
         var _numero="<?php echo 'Nro: '. $_numero;?>";
         var _header= "<?php echo $_header;?>";
         var _rz="<?php echo $rz;?>";
-        var _direccion = "<?php echo $direccion;?>"
-        var _ruc="<?php echo $ruc;?>"
+        var _direccion = "<?php echo $direccion;?>";
+        var _ruc="<?php echo $ruc;?>";
+        var _cliente="<?php echo $_cliente;?>";
+        var _cliente_ruc="<?php echo $_cliente_ruc;?>";
+        var _cliente_direccion="<?php echo $_cliente_direccion;?>";
         var _salto=" \r\n";
         var _date="<?php echo date('d/m/Y').' '.date('H:i:s');?>"
         
@@ -543,6 +563,13 @@ $_pu=null;
             qz.append(_direccion); // direccion
             qz.append(_salto); // saldo linea
             qz.append(" --------------------------------\r\n ");
+            qz.append(_cliente);//cliente
+            qz.append(_salto); 
+            qz.append(_cliente_ruc);//Ruc cliente
+            qz.append(_salto); 
+            qz.append(_cliente_direccion)//Direccion cliente
+            qz.append(_salto); 
+            qz.append(" --------------------------------\r\n ");
             qz.append(_salto); 
             qz.append("\x1B\x50");
             qz.append("Cant.  Descripcion  P.U.  Importe");
@@ -563,6 +590,10 @@ $_pu=null;
             qz.append(_salto);
             qz.append("TOTAL: ");
             qz.append(_total);
+            qz.append(_salto);
+            qz.append(_salto);
+            qz.append("Muchas Gracias por su compra.");
+            qz.append("Regrese pronto!");
             qz.append(_salto);
             qz.append("\x1B\x21\x01"); // 3
             //qz.append(_cant);

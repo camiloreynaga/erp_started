@@ -48,7 +48,14 @@ return array(
     'Accounts receivable'=>'Cuentas por cobrar',
     'Accounts payable'=>'Cuentas por pagar',
     
-    
+    //login
+    'Login'=>'Iniciar sesión',
+    'username'=>'usuario',
+    'password'=>'contraseña',
+    'Remember me next time'=>'Recuerdame la siguiente vez',
+    'Please fill out the following form with your login credentials:'=>'Por favor llene los siguientes campos con sus credenciales de ingreso:',
+    //Index
+    'Welcome to'=>'Bienvenido a',
     'Reports'=>'Reportes',
     //Operations menu 
     'Operations'=>'Operaciones',

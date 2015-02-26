@@ -156,9 +156,9 @@ class ComprobanteVenta extends Erp_startedActiveRecord//CActiveRecord
         }
         
         /**
-         * devuleve el último comprobante no anulado
+         * devuleve el último comprobante de venta no anulado
          * @param type $id
-         * @return type
+         * @return type ComprobanteVenta
          */
         public function getUltimo_comprobante($id)
         {
