@@ -5,11 +5,18 @@
 
 <p class="help-block"><?php echo yii::t('app','Fields with') ;?> <span class="required">*</span> <?php echo yii::t('app','are required.') ;?></p>
 
-<?php echo $form->errorSummary($model); ?>
+<?php echo $form->errorSummary($model);
+
+echo $model->getNextId(); ?>
+
 
 	<?php echo $form->textFieldGroup($model,'nombre',array('class'=>'span5','maxlength'=>100)); ?>
 
-	<?php echo $form->textAreaGroup($model,'descripcion',array('rows'=>6, 'cols'=>50, 'class'=>'span8')); ?>
+	<?php echo $form->textFieldGroup($model,'codigo',array('class'=>'span5','maxlength'=>100)); ?>
+        
+        <?php echo $form->textFieldGroup($model,'codigo_barra',array('class'=>'span5','maxlength'=>100)); ?>
+        
+        <?php echo $form->textAreaGroup($model,'descripcion',array('rows'=>6, 'cols'=>50, 'class'=>'span8')); ?>
 
 	<?php 
          echo $form->select2Group(
@@ -101,17 +108,17 @@
 
 	<?php //echo $form->textFieldGroup($model,'stock',array('class'=>'span5')); ?>
 
-	<?php echo $form->switchGroup($model,'descontinuado',
+	<?php echo $form->CheckboxGroup($model,'descontinuado',
                 array('class'=>'span5',
-                        'widgetOptions'=>array(
-                            'options'=>array(
-                                'size'=>'small',
-                                'onText'=>'SI',
-                                'offText'=>'NO',
-                                'onColor' => 'danger',
-                                'offColor' => 'primary', 
-                                )
-                    )
+//                        'widgetOptions'=>array(
+//                            'options'=>array(
+//                                'size'=>'small',
+//                                'onText'=>'SI',
+//                                'offText'=>'NO',
+//                                'onColor' => 'danger',
+//                                'offColor' => 'primary', 
+//                                )
+//                    )
                 )
                 
                 ); ?>

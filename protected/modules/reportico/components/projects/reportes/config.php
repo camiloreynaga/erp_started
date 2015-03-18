@@ -58,7 +58,7 @@ define('SW_DB_DRIVER', SW_DB_TYPE);
 define('SW_DB_USER', 'root');
 define('SW_DB_PASSWORD', 'adonde');
 define('SW_DB_HOST', 'localhost');
-define('SW_DB_DATABASE', 'erp_started2');
+define('SW_DB_DATABASE', 'erp_plastiplas');
 }
 define('SW_DB_CONNECT_FROM_CONFIG', true);
 define('SW_DB_DATEFORMAT', 'Y-m-d');

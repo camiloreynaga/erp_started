@@ -76,7 +76,7 @@ class Producto extends Erp_startedActiveRecord// CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('nombre,tipo_producto_id, presentacion_id, unidad_medida_id, fabricante_id', 'required'),
-                        array('codigo,codigo_barra','unique'),
+                        array('codigo','unique'),
 			array('tipo_producto_id, presentacion_id, unidad_medida_id, fabricante_id, minimo_stock, stock, descontinuado, create_user_id, update_user_id', 'numerical', 'integerOnly'=>true),
 			array('precio_venta, precio_compra, porcentaje_ganancia', 'numerical'),
 			array('nombre', 'length', 'max'=>100),
@@ -324,5 +324,18 @@ class Producto extends Erp_startedActiveRecord// CActiveRecord
          */
         public function getImpuesto($monto){
             return round($monto * ((int)Yii::app()->params['impuesto']*0.01),2);
+        }
+        
+        /**
+         * Return next Id Value
+         * @return type Int
+         */        
+        public function getNextId()
+        {
+             $criteria= new CDbCriteria();
+            $criteria->select='t.id';
+            $criteria->order='t.id DESC';
+            //$criteria->condition='max(id)';
+            return ($this->model()->find($criteria)->id) +1;
         }
 }

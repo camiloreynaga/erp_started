@@ -70,6 +70,9 @@ public $layout='//layouts/column2';
             if(isset($_POST['Producto']))
             {
                 $model->attributes=$_POST['Producto'];
+                if($model->codigo=='')
+                    $model->codigo= substr($model->nombre,0,2).substr($model->r_fabricante->fabricante,0,2).$model->getNextId() ;
+                    
                 if($model->save())
                 $this->redirect(array('view','id'=>$model->id));
             }
@@ -94,6 +97,9 @@ public $layout='//layouts/column2';
             if(isset($_POST['Producto']))
             {
                 $model->attributes=$_POST['Producto'];
+                if($model->codigo=='')
+                    $model->codigo= substr($model->nombre,0,2).substr($model->r_fabricante->fabricante,0,2).$model->id;
+                
                 if($model->save())
                 $this->redirect(array('view','id'=>$model->id));
             }
@@ -264,5 +270,11 @@ public $layout='//layouts/column2';
             echo CActiveForm::validate($model);
             Yii::app()->end();
             }
+        }
+        
+        ///return 
+        protected function generateCodigoValue()
+        {
+            
         }
 }

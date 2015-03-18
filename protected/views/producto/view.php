@@ -23,6 +23,8 @@ $this->breadcrumbs=array(
                     'name'=>'nombre',
                     'value'=>$model->nombre
                 ),
+                'codigo',
+                'codigo_barra',
                 array(
                     'name'=>'descripcion',
                     'value'=>$model->descripcion
