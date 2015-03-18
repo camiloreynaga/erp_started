@@ -32,5 +32,5 @@ $this->pageTitle=Yii::app()->name;
 //
 //if(yii::app()->authManager->checkAccess("root",yii::app()->user->id ))
 //        echo "hola admin desde authManager";
-    ?>
+?>
 

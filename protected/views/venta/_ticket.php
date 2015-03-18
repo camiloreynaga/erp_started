@@ -23,7 +23,7 @@ $_tipo_comprobante=$_comprobante->r_tipo_comprobante->comprobante;//"FActura";//
    $_cliente="";
    $_cliente_ruc="";
    $_cliente_direccion="";
-    if ($_comprobante->tipo_Comprobante==1)
+    if ($_comprobante->tipo_comprobante_id==1)
     {
         $_cliente=$venta->r_cliente->nombre_rz;
         $_cliente_ruc=$venta->r_cliente->ruc;
