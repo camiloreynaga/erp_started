@@ -10,6 +10,7 @@
  * @property integer $estado
  * @property string $fecha_pago
  * @property string $fecha_vencimiento
+ * @property string $descuento
  * @property string $interes
  * @property string $create_time
  * @property integer $create_user_id
@@ -40,10 +41,10 @@ class CuentaPagar extends Erp_startedActiveRecord//CActiveRecord
 			array('compra_id', 'required'),
 			array('compra_id, estado, create_user_id, update_user_id', 'numerical', 'integerOnly'=>true),
 			array('monto, interes', 'length', 'max'=>10),
-			array('fecha_pago, fecha_vencimiento, create_time, update_time', 'safe'),
+			array('fecha_pago, fecha_vencimiento,descuento, create_time, update_time', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, compra_id, monto, estado, fecha_pago, fecha_vencimiento, interes, create_time, create_user_id, update_time, update_user_id', 'safe', 'on'=>'search'),
+			array('id, compra_id, monto, estado, fecha_pago, fecha_vencimiento, descuento, interes, create_time, create_user_id, update_time, update_user_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -71,6 +72,7 @@ class CuentaPagar extends Erp_startedActiveRecord//CActiveRecord
 			'estado' => 'Estado',
 			'fecha_pago' => 'Fecha Pago',
 			'fecha_vencimiento' => 'Fecha Vencimiento',
+                        'descuento'=>'Descuento',
 			'interes' => 'Interes',
 			'create_time' => 'Create Time',
 			'create_user_id' => 'Create User',
@@ -103,6 +105,7 @@ class CuentaPagar extends Erp_startedActiveRecord//CActiveRecord
 		$criteria->compare('estado',$this->estado);
 		$criteria->compare('fecha_pago',$this->fecha_pago,true);
 		$criteria->compare('fecha_vencimiento',$this->fecha_vencimiento,true);
+                $criteria->compare('descuento',  $this->descuento);
 		$criteria->compare('interes',$this->interes,true);
 		$criteria->compare('create_time',$this->create_time,true);
 		$criteria->compare('create_user_id',$this->create_user_id);
