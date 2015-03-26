@@ -15,7 +15,7 @@
  * @property string $update_time
  * @property integer $update_user_id
  */
-class PuntoVenta extends CActiveRecord
+class PuntoVenta extends Erp_startedActiveRecord
 {
         
         public $_estado=array(

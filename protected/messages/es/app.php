@@ -111,8 +111,8 @@ return array(
     'ALL'=>'TODO',
     
     //Stock
-   'Movement'=>'Movimiento', 
-   'Stock movements'=>'Movimientos en Almacén',
+    'Movement'=>'Movimiento', 
+    'Stock movements'=>'Movimientos en Almacén',
     
     //Sales
     'Sale'=>'Venta',

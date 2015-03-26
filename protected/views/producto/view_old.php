@@ -15,18 +15,16 @@ $this->breadcrumbs=array(
 
     <h1><?php echo yii::t('app','View');?> <?php echo yii::t('app','Producto');?> #<?php echo $model->id; ?></h1>
 
-    <?php $this->widget('ext.widgets.DetailView4Col',array(
+    <?php $this->widget('booster.widgets.TbDetailView',array(
     'data'=>$model,
     'attributes'=>array(
-                array(
-                    'header'=>'Datos de producto',
-                ),
 		'id',
 		array(
                     'name'=>'nombre',
                     'value'=>$model->nombre
-                ),'codigo','codigo_barra',
-                
+                ),
+                'codigo',
+                'codigo_barra',
                 array(
                     'name'=>'descripcion',
                     'value'=>$model->descripcion
@@ -73,8 +71,3 @@ $this->breadcrumbs=array(
                 ),
     ),
 )); ?>
-<h2><?php echo "Rango de precios" ?></h2>
- <?php
- $_rango_precio= RangoPrecio::model();
- echo $this->renderPartial('_formRangoPrecio', array('model'=>$_rango_precio,'product_id'=>$model->id));
- ?>

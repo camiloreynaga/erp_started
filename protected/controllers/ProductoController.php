@@ -72,7 +72,8 @@ public $layout='//layouts/column2';
                 $model->attributes=$_POST['Producto'];
                 if($model->codigo=='')
                     $model->codigo= substr($model->nombre,0,2).substr($model->r_fabricante->fabricante,0,2).$model->getNextId() ;
-                    
+                $model->precio_venta= $this->calcularPrecioVenta($model->precio_compra,$model->porcentaje_ganancia);
+                
                 if($model->save())
                 $this->redirect(array('view','id'=>$model->id));
             }
@@ -99,7 +100,7 @@ public $layout='//layouts/column2';
                 $model->attributes=$_POST['Producto'];
                 if($model->codigo=='')
                     $model->codigo= substr($model->nombre,0,2).substr($model->r_fabricante->fabricante,0,2).$model->id;
-                
+                $model->precio_venta= $this->calcularPrecioVenta($model->precio_compra,$model->porcentaje_ganancia);
                 if($model->save())
                 $this->redirect(array('view','id'=>$model->id));
             }
@@ -276,5 +277,19 @@ public $layout='//layouts/column2';
         protected function generateCodigoValue()
         {
             
+        }
+        
+        /**
+         * Calcula el precio de venta a partir de un % de ganancia del precio de compra
+         */
+        protected function calcularPrecioVenta($precio_compra, $porcentaje_ganancia)
+        {
+            $precio_venta=0;
+            if (isset($precio_compra)&& isset($porcentaje_ganancia))
+            {
+                
+                $precio_venta= $precio_compra*(1+$porcentaje_ganancia/100); 
+            }
+            return $precio_venta;
         }
 }
