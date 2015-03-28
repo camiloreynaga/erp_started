@@ -21,7 +21,7 @@ class m150319_222350_tbl_rango_precios extends CDbMigration
                 'producto_id'=>'int(11) NOT NULL',
                 'unidad_medida_id'=>'int(11) NOT NULL',
                 'cantidad_inicial'=>'int(11) NOT NULL', //0=MOVIL / 1=FIJO
-                'cantidad_final'=>'int(11) ',
+                'cantidad_final'=>'int(11) DEFAULT 0 ',
                 'precio'=>'decimal (10,2) NOT NULL',
                 //registro para el sistema
                 'create_time'=>'datetime DEFAULT NULL',
