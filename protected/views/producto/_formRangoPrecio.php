@@ -22,7 +22,7 @@ $cs = Yii::app()->getClientScript();
 $cs->registerScriptFile($baseUrl.'/js/validacionAjaxForm.js',CClientScript::POS_HEAD);
 //$cs->registerCssFile($baseUrl.'/css/style.css');
 ?>
-
+ 
 <?php $form=$this->beginWidget('booster.widgets.TbActiveForm',array(
 	'id'=>'rango-precio-form',
 	'enableAjaxValidation'=>true,
