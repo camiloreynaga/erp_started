@@ -164,8 +164,7 @@ class DetalleVentaController extends Controller
                 $model->fecha_vencimiento= ProductoAlmacen::model()->getFecha_vencimiento($model->producto_id,$model->lote);
                 //$model->lote='000000';
                 //obteniendo el precio de venta.
-                $model->precio_unitario= Producto::model()->getPrecioUnitario($model->producto_id,$model->cantidad);
-                        //Producto::model()->findByPk($model->producto_id)->precio_venta;
+                $model->precio_unitario=Producto::model()->findByPk($model->producto_id)->precio_venta;
                 $model->estado=0; // estado pendiente de despacho
                 $model->total=$model->precio_unitario*$model->cantidad;
                 $model->subtotal= $_subtotal= Producto::model()->getSubtotal($model->total); //round($model->total/((int)Yii::app()->params['impuesto']*0.01+1),2);
@@ -262,14 +261,12 @@ class DetalleVentaController extends Controller
                    //incrementando el credito disponible para para el cliente
                    Cliente::model()->actualizarCreditoDisponible($model, 0);
                    
-                   
                    $_cantidad=  yii::app()->request->getParam('value');
-                   $_precio_unitario=Producto::model()->getPrecioUnitario($model->producto_id, $_cantidad);
-                   $_total= round($_precio_unitario*$_cantidad,2);//calculando el total
+                   
+                   $_total= round($model->precio_unitario*$_cantidad,2);//calculando el total
                    $_subtotal= Producto::model()->getSubtotal($_total);// round($_total/((int)Yii::app()->params['impuesto']*0.01+1),2); //calculando subtotal
                    $_impuesto=round($_total-$_subtotal,2); //calculando subtotal
-                   
-                   $event->sender->setAttribute('precio_unitario',$_precio_unitario);
+                    
                    $event->sender->setAttribute('subtotal', $_subtotal);//Actualizando Cantidad
                    $event->sender->setAttribute('impuesto', $_impuesto);//Actualizando impuesto
                    $event->sender->setAttribute('total', $_total); //actualizando total
@@ -290,6 +287,10 @@ class DetalleVentaController extends Controller
 //        {
 //            $es->error('La cantidad seleccionada excede el total disponible de '.$_cantidad_alm);
 //        }
+                
+        
+         
+         
         }
         
         /**
@@ -317,12 +318,14 @@ class DetalleVentaController extends Controller
                    $event->sender->setAttribute('subtotal', $_subtotal);//Actualizando Cantidad
                    $event->sender->setAttribute('impuesto', $_impuesto);//Actualizando impuesto
                    $event->sender->setAttribute('total', $_total); //actualizando total
+            
             };
           $es->onAfterUpdate=function($event){
                 $model=$this->loadModel(yii::app()->request->getParam('pk'));
                 //actualizando el credito disponible para el cliente.
                 Cliente::model()->actualizarCreditoDisponible($model, 1);
             };
+            
             $es->update();
         }
         
@@ -508,7 +511,7 @@ class DetalleVentaController extends Controller
                 // $_venta_id= $this->getVenta();
                 //$lista= DetalleVenta::model()->getListLote($id_producto);
                 $_precio_regular= Producto::model()->findByPk($id_producto)->precio_venta;
-                echo CHtml::encode("Precio Unitario: ".$_precio_regular );
+                echo CHtml::encode("Precio regular: ".$_precio_regular );
             }
         }
         

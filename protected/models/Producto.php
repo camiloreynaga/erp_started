@@ -332,43 +332,10 @@ class Producto extends Erp_startedActiveRecord// CActiveRecord
          */        
         public function getNextId()
         {
-            $criteria= new CDbCriteria();
+             $criteria= new CDbCriteria();
             $criteria->select='t.id';
             $criteria->order='t.id DESC';
             //$criteria->condition='max(id)';
             return ($this->model()->find($criteria)->id) +1;
-        }
-        
-        /**
-         * retorna el precio unitario basado en el rango de precios 
-         * @param type $producto_id 
-         * @param type $cantidad
-         * @return type decimal 
-         */
-        public function getPrecioUnitario($producto_id,$cantidad)
-        {
-            $criteria = new CDbCriteria();
-            $criteria->condition="producto_id=".$producto_id;
-            $count= RangoPrecio::model()->count($criteria);
-            $lista = RangoPrecio::model()->findAll($criteria);
-            $resultado = Producto::model()->findByPk($producto_id)->precio_venta;
-            if ($count >0)
-            {
-                foreach ($lista as $list){
-                    if($list->cantidad_final==0)//0 = al infito. entonces no existe una cantidad maxima de venta solo una mínima para aplicar el nuevo precio
-                    {
-                        if($cantidad>=$list->cantidad_inicial)
-                            $resultado=$list->precio;
-                    }
-                    else
-                    {
-                        if($cantidad>=$list->cantidad_inicial && $cantidad<=$list->cantidad_final)
-                            $resultado=$list->precio;
-                    }
-                }
-            }
-            
-            return $resultado;
-            
         }
 }

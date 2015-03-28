@@ -45,7 +45,6 @@ $("#delete").click(function(){
 
 <?php $form=$this->beginWidget('booster.widgets.TbActiveForm',array(
 	'id'=>'detalle-venta-form',
-        'type' => 'inline',
 	'enableAjaxValidation'=>true,
         'clientOptions' =>array(
             'validateOnSubmit' => true,
@@ -66,6 +65,7 @@ $("#delete").click(function(){
 
 <?php echo $form->errorSummary($model); ?>
 
+	<?php //echo $form->textFieldGroup($model,'venta_id',array('class'=>'span5')); ?>
 
 	<?php 
         $htmlOptions=array(
@@ -77,10 +77,7 @@ $("#delete").click(function(){
               //'update'=>'#precio',
           ),  
         );
-        ?>
-<!--<div style="width: 100%">-->
-    <!--<div style="float: left">-->
-        <?php
+        
         echo $form->select2Group(
 			$model,
 			'producto_id',
@@ -117,23 +114,17 @@ $("#delete").click(function(){
 				)
 			)
 		);
-        ?>
-    <!--</div>-->
-    <!--<div style="width: 2.5%; float: left">&nbsp;</div>-->
-    <!--<div style="width: 15%;float: left">-->
-    <?php 
         
-        echo $form->textFieldGroup($model,'cantidad',array('class'=>'span5')); 
-        
-        ?>
-    
-        <?php 
+        //echo $form->textFieldGroup($model,'producto_id',array('class'=>'span5')); ?>
+	
+
+	<?php 
         
         echo $form->DropDownListGroup($model,'lote',
                 array(
                     'widgetOptions'=>array(
                         'htmlOptions'=>array(
-                              //                            'ajax'=>array(
+//                            'ajax'=>array(
 //                            'url'=>CController::createUrl('detalleVenta/precios'),
 //                            'type'=>'POST',
 //                            'update'=>'#precio',
@@ -159,14 +150,13 @@ $("#delete").click(function(){
          
          
         ?>
-    <!--</div>-->
-    <!--<div style="width: 2.5%;float: left">&nbsp;</div>-->
-    <!--<div style="width: 25%; float: left">-->
         
-    <!--</div>-->
-<!--</div>-->
+        <?php 
         
-
+        echo $form->textFieldGroup($model,'cantidad',array('class'=>'span5')); 
+        
+        ?>
+        <div id="precio"></div>
         
         <?php 
 //        echo $form->textFieldGroup($model,'precio_unitario',
@@ -200,7 +190,7 @@ $("#delete").click(function(){
 
 	
 
-<!--<div class="form-actions">-->
+<div class="form-actions">
 	<?php 
         
         $this->widget('booster.widgets.TbButton', array(
@@ -209,7 +199,7 @@ $("#delete").click(function(){
                         'url'=>CController::createUrl('detalleVenta/create_venta2',
                                 array('pid'=>$model->venta_id)
                                 ),
-			'label'=> yii::t('app', 'Add') ,//$orden_compra->isNewRecord ? 'Create' : 'Save',
+			'label'=> yii::t('app', 'Add Item') ,//$orden_compra->isNewRecord ? 'Create' : 'Save',
                         'id'=>'update',
                         'ajaxOptions'=>array(
                             'dataType'=>'json',
@@ -231,10 +221,10 @@ $("#delete").click(function(){
 		)); 
         
         ?>
-<!--</div>-->
+</div>
 
 <?php $this->endWidget(); ?>
-<div id="precio" style="float: left"></div>
+
 <div id="Items"></div>
 
 <?php 
@@ -362,3 +352,12 @@ if ($model->r_venta->estado==0 && $model->r_venta->estado_comprobante==0)
              );
     }
 ?>
+<?php // echo CHtml::ajaxButton('Cancelar venta',array('//venta/delete','id'=>$model->venta_id, ),
+//                 array(
+//                      'type' => 'post',
+//                      'success'=>'function(data){location.href="'.CController::createUrl('/venta/admin').'"}'
+//                ),
+//                array(
+//                 'confirm'=>'Esta seguro de eliminar/cancelar la venta en proceso?',
+//             ));
+         ?>

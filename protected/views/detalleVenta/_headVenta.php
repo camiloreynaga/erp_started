@@ -2,7 +2,7 @@
 
 $_labels=Venta::model()->attributeLabels();
 
-$this->widget('ext.widgets.DetailView4Col',array(
+$this->widget('booster.widgets.TbDetailView',array(
 'data'=>$model,
 'attributes'=>array(
                 //'fecha_venta',
